@@ -29,6 +29,7 @@
 		30088,
 		31080,
 		31088,
+		31433,
 		32000,
 		32080,
 		32088
@@ -38,6 +39,7 @@
 	"portsAttributes": {
 		"30000": { "label": "Prometheus" },
 		"30080": { "label": "App" },
+		"31433": { "label": "SQL Server"},
 		"32000": { "label": "Grafana" }
 	},
 
@@ -51,7 +53,8 @@
 		"mutantdino.resourcemonitor",
 		"humao.rest-client",
 		"timonwong.shellcheck",
-		"golang.go"
+		"golang.go",
+		"ms-mssql.mssql"
 	],
 
 	"waitFor": "postCreateCommand",

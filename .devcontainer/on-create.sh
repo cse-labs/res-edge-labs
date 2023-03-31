@@ -10,6 +10,7 @@ sudo chsh --shell /bin/zsh vscode
 
 export PATH="$PATH:$HOME/bin"
 export GOPATH="$HOME/go"
+export MSSQL_SA_PASSWORD=Res-Edge23
 
 # restore the file to avoid errors
 dotnet restore labs/advanced-labs/cli/myapp/src
@@ -71,6 +72,10 @@ curl -i https://aka.ms/pib-cs-postinstall
 echo "dowloading kic and flt CLI"
 .devcontainer/cli-update.sh
 
+echo "downloading kustomize"
+cd /usr/local/bin || exit
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | sudo bash
+
 # can remove once incorporated in base image
 echo "Updating k3d to 5.4.6"
 wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | TAG=v5.4.6 bash
@@ -81,6 +86,7 @@ flt completion zsh > "$HOME/.oh-my-zsh/completions/_flt"
 gh completion -s zsh > ~/.oh-my-zsh/completions/_gh
 kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
 k3d completion zsh > "$HOME/.oh-my-zsh/completions/_k3d"
+kustomize completion zsh > "$HOME/.oh-my-zsh/completions/_kustomize"
 
 echo "installing dotnet 6"
 sudo apt-get install -y dotnet-sdk-6.0
@@ -97,6 +103,18 @@ echo "Pulling docker images"
 docker pull mcr.microsoft.com/dotnet/sdk:6.0
 docker pull mcr.microsoft.com/dotnet/aspnet:6.0-alpine
 docker pull ghcr.io/cse-labs/pib-webv:latest
+docker pull mcr.microsoft.com/mssql/server:2022-latest
+
+echo "start SQL Server in container"
+docker run \
+    -e "ACCEPT_EULA=Y" \
+    -e "MSSQL_SA_PASSWORD=$MSSQL_SA_PASSWORD" \
+    -p 31433:1433 \
+    --name mssql \
+    --hostname mssql \
+    --restart always \
+    -d \
+    mcr.microsoft.com/mssql/server:2022-latest
 
 # only run apt upgrade on pre-build
 if [ "$CODESPACE_NAME" = "null" ]
