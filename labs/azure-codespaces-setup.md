@@ -82,13 +82,17 @@ gh secret list -u
 export mi=pib_mi
 
 # create MI
-az identity create --name $mi --resource-group $rg --query id -o tsv
+mi_id=$(az identity create --name $mi --resource-group $rg --query id -o tsv)
 
 # add CS secret
 gh secret set PIB_MI -u --body $(az identity list -g tld --query "[].id" -o tsv)
 
 # list secrets
 gh secret list -u
+
+# grant MI Reader access to itself in order to be able to do az login --identity from the CLI on the VM it is assigned to
+mi_pid=$(az identity show -n $mi -g $rg --query "principalId" -o tsv)
+az role assignment create --assignee $mi_pid --role 'Reader' --scope $mi_id
 
 ```
 
