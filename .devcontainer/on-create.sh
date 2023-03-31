@@ -11,6 +11,7 @@ sudo chsh --shell /bin/zsh vscode
 export PATH="$PATH:$HOME/bin"
 export GOPATH="$HOME/go"
 export MSSQL_SA_PASSWORD=Res-Edge23
+export PATH="$PATH:$HOME/bin:/opt/mssql-tools/bin"
 
 # restore the file to avoid errors
 dotnet restore labs/advanced-labs/cli/myapp/src
@@ -115,6 +116,9 @@ docker run \
     --restart always \
     -d \
     mcr.microsoft.com/mssql/server:2022-latest
+
+# create ist database
+sqlcmd -S localhost -U sa -P $MSSQL_SA_PASSWORD -Q "create database ist;"
 
 # only run apt upgrade on pre-build
 if [ "$CODESPACE_NAME" = "null" ]
