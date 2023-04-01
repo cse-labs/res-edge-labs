@@ -30,6 +30,7 @@ mkdir -p "$HOME/.oh-my-zsh/completions"
     echo "export PATH=\$PATH:$HOME/bin"
     echo "export GOPATH=\$HOME/go"
     echo "export PIB_BASE=$PWD"
+    echo "export PATH=\$PATH:$HOME/bin:/opt/mssql-tools/bin"
     echo ""
 
     echo "if [ \"\$PIB_PAT\" != \"\" ]"
@@ -72,6 +73,12 @@ curl -i https://aka.ms/pib-cs-postinstall
 
 echo "dowloading kic and flt CLI"
 .devcontainer/cli-update.sh
+
+echo "dowloading sqlcmd"
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+sudo apt-get update
+sudo ACCEPT_EULA=y apt-get install -y mssql-tools unixodbc-dev
 
 echo "downloading kustomize"
 cd /usr/local/bin || exit
@@ -116,9 +123,6 @@ docker run \
     --restart always \
     -d \
     mcr.microsoft.com/mssql/server:2022-latest
-
-# create ist database
-sqlcmd -S localhost -U sa -P $MSSQL_SA_PASSWORD -Q "create database ist;"
 
 # only run apt upgrade on pre-build
 if [ "$CODESPACE_NAME" = "null" ]
