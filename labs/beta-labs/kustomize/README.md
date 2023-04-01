@@ -4,7 +4,30 @@
 
 ## Quick Start
 
-- Watch the internal only demo video [here](https://microsoft-my.sharepoint.com/:v:/p/bartr/EXFzHEAZvg1IhF-Sfs_HywwBB1CYOvBpTBPzy70a2FaUCw?e=zU3AYG)
+> Watch the internal only demo video [here](https://microsoft-my.sharepoint.com/:v:/p/bartr/EXFzHEAZvg1IhF-Sfs_HywwBB1CYOvBpTBPzy70a2FaUCw?e=zU3AYG)
+
+- Make sure you are in this directory
+
+```bash
+
+kic overlay 1.0.1
+
+# change clusters: none to clusters: beta
+
+kic cicd
+
+# check the changes
+git status
+
+```
+
+- Expected output
+
+```text
+
+
+
+```
 
 ## Support
 
