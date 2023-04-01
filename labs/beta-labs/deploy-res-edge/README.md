@@ -19,7 +19,7 @@ sed -i -e "s/{{pib-pat}}/$PIB_PAT/g" "$HOME/bin/.kic/registries.yaml"
 k3d cluster create \
   --registry-use k3d-registry.localhost:5500 \
   --registry-config "$HOME/bin/.kic/registries.yaml" \
-  --config "/workspaces/res-edge-labs/vm/setup/k3d.yaml" \
+  --config ".kic/k3d.yaml" \
   --k3s-arg "--disable=servicelb@server:0" \
   --k3s-arg "--disable=traefik@server:0"
 
