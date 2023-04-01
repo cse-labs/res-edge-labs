@@ -74,7 +74,7 @@ k logs -n api api<tab>
 ```bash
 
 # curl the version endpoint
-http localhost:30080/version
+http localhost:32080/version
 
 # run kic test
 kic test integration
