@@ -1,5 +1,5 @@
 {
-	"name": "Pilot-in-a-Box",
+	"name": "Res-Edge-Labs",
 	"dockerFile": "Dockerfile",
 
 	// do not change these if you want Docker in Docker support
@@ -10,12 +10,30 @@
 	// some base images require a specific user name
 	"remoteUser": "vscode",
 
-	// Set container specific settings
-	"settings": {
-		"terminal.integrated.defaultProfile.linux": "zsh",
-		"files.trimTrailingWhitespace": true,
-		"files.trimFinalNewlines": true,
-		"files.insertFinalNewline": true
+	"customizations": {
+		"vscode": {
+			// Set container specific settings
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "zsh",
+				"files.trimTrailingWhitespace": true,
+				"files.trimFinalNewlines": true,
+				"files.insertFinalNewline": true
+			},
+
+			// Install extensions
+			"extensions": [
+				"ms-dotnettools.csharp",
+				"ms-azuretools.vscode-docker",
+				"ms-kubernetes-tools.vscode-kubernetes-tools",
+				"davidanson.vscode-markdownlint",
+				"gruntfuggly.todo-tree",
+				"mutantdino.resourcemonitor",
+				"humao.rest-client",
+				"timonwong.shellcheck",
+				"golang.go",
+				"ms-mssql.mssql"
+			]
+		}
 	},
 
 	"hostRequirements": {
@@ -26,36 +44,17 @@
 	"forwardPorts": [
 		30000,
 		30080,
-		30088,
-		31080,
-		31088,
-		31433,
 		32000,
-		32080,
-		32088
+		32080
 	],
 
 	// add labels
 	"portsAttributes": {
 		"30000": { "label": "Prometheus" },
 		"30080": { "label": "App" },
-		"31433": { "label": "SQL Server"},
-		"32000": { "label": "Grafana" }
+		"32000": { "label": "Grafana" },
+		"32080": { "label": "Res-Edge" }
 	},
-
-	// Install extensions
-	"extensions": [
-		"ms-dotnettools.csharp",
-		"ms-azuretools.vscode-docker",
-		"ms-kubernetes-tools.vscode-kubernetes-tools",
-		"davidanson.vscode-markdownlint",
-		"gruntfuggly.todo-tree",
-		"mutantdino.resourcemonitor",
-		"humao.rest-client",
-		"timonwong.shellcheck",
-		"golang.go",
-		"ms-mssql.mssql"
-	],
 
 	"waitFor": "postCreateCommand",
 
