@@ -125,6 +125,7 @@ code ~/.zshrc
 > These labs are work in progress and may not be fully documented
 
 - [Deploy ResEdge Data Service](./labs/beta-labs/deploy-res-edge/README.md#deploy-res-edge-to-codespaces): Deploy Resilient Edge data service to Codespaces
+- [Ring Deployment](./labs/beta-labs/kustomize/README.md#ring-deployment): Ring deployment using Res Edge and Kustomize
 
 ## Support
 

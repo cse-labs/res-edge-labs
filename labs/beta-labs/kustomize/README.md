@@ -1,6 +1,6 @@
-# Res-Edge Demos
+# Ring Deployment
 
-- Resilient Edge Kustomize demo
+- Resilient Edge ring deployment with Kustomize demo
 
 ## Quick Start
 
