@@ -12,14 +12,14 @@
 kic cluster delete
 
 # add github token for private registry
-cp ../vm/setup/registries.templ "$HOME/bin/.kic/registries.yaml"
+cp ../../../vm/setup/registries.templ "$HOME/bin/.kic/registries.yaml"
 sed -i -e "s/{{pib-pat}}/$PIB_PAT/g" "$HOME/bin/.kic/registries.yaml"
 
 # create the cluster
 k3d cluster create \
   --registry-use k3d-registry.localhost:5500 \
   --registry-config "$HOME/bin/.kic/registries.yaml" \
-  --config "$HOME/bin/.kic/k3d.yaml" \
+  --config "/workspaces/res-edge-labs/vm/setup/k3d.yaml" \
   --k3s-arg "--disable=servicelb@server:0" \
   --k3s-arg "--disable=traefik@server:0"
 

@@ -30,6 +30,9 @@ ports:
 - nodeFilters:
   - server:0
   port: 80:80
+- nodeFilters:
+  - server:0
+  port: 31433:31433
 registries: {}
 servers: 1
 volumes:
