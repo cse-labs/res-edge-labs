@@ -67,6 +67,16 @@ dotnet restore labs/advanced-labs/cli/myapp/src
 } > "$HOME/bin/sql"
 chmod +x "$HOME/bin/sql"
 
+# configure git
+git config --global core.whitespace blank-at-eol,blank-at-eof,space-before-tab
+git config --global pull.rebase false
+git config --global init.defaultbranch main
+git config --global fetch.prune true
+git config --global core.pager more
+git config --global diff.colorMoved zebra
+git config --global devcontainers-theme.show-dirty 1
+git config --global core.editor "nano -w"
+
 echo "dowloading kic and flt CLI"
 .devcontainer/cli-update.sh
 
