@@ -8,9 +8,7 @@ echo "$(date +'%Y-%m-%d %H:%M:%S')    on-create start" >> "$HOME/status"
 # Change shell to zsh for vscode
 sudo chsh --shell /bin/zsh vscode
 
-export PATH="$PATH:$HOME/bin"
 export GOPATH="$HOME/go"
-export MSSQL_SA_PASSWORD=Res-Edge23
 export PATH="$PATH:$HOME/bin:/opt/mssql-tools/bin"
 
 # restore the file to avoid errors
@@ -27,7 +25,6 @@ mkdir -p "$HOME/.oh-my-zsh/completions"
     echo ""
 
     # add cli to path
-    echo "export PATH=\$PATH:$HOME/bin"
     echo "export GOPATH=\$HOME/go"
     echo "export PIB_BASE=$PWD"
     echo "export PATH=\$PATH:$HOME/bin:/opt/mssql-tools/bin"
@@ -81,8 +78,9 @@ sudo apt-get update
 sudo ACCEPT_EULA=y apt-get install -y mssql-tools unixodbc-dev
 
 echo "downloading kustomize"
-cd /usr/local/bin || exit
+pushd /usr/local/bin || exit
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | sudo bash
+popd || exit
 
 # can remove once incorporated in base image
 echo "Updating k3d to 5.4.6"
@@ -111,18 +109,6 @@ echo "Pulling docker images"
 docker pull mcr.microsoft.com/dotnet/sdk:6.0
 docker pull mcr.microsoft.com/dotnet/aspnet:6.0-alpine
 docker pull ghcr.io/cse-labs/pib-webv:latest
-docker pull mcr.microsoft.com/mssql/server:2022-latest
-
-echo "start SQL Server in container"
-docker run \
-    -e "ACCEPT_EULA=Y" \
-    -e "MSSQL_SA_PASSWORD=$MSSQL_SA_PASSWORD" \
-    -p 31433:1433 \
-    --name mssql \
-    --hostname mssql \
-    --restart always \
-    -d \
-    mcr.microsoft.com/mssql/server:2022-latest
 
 # only run apt upgrade on pre-build
 if [ "$CODESPACE_NAME" = "null" ]
