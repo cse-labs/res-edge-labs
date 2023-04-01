@@ -45,13 +45,7 @@ k apply -k mssql
 kic pods
 
 # wait 30 seconds after the container is running for the data to load
-sql
-
-# run a test query
-select id,name from groups
-go
-
-exit
+sql -Q "select id,name from clusters;"
 
 ```
 
