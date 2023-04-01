@@ -25,9 +25,24 @@ git status
 
 ```text
 
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   clusters/central-la-nola-2301/imdb/imdb.yaml
+        modified:   clusters/east-ga-atl-2301/imdb/imdb.yaml
+        modified:   clusters/west-ca-sd-2301/imdb/imdb.yaml
 
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        apps/imdb/kustomize/prod/overlays/1.0.1/
 
 ```
+
+## Reset clusters
+
+- Delete labs/beta-labs/kustomize/apps/imdb/kustomize/prod/overlays/1.0.2
+- Run `kic cicd`
+- `git status` should now be up to date
 
 ## Support
 
