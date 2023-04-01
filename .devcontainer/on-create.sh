@@ -22,7 +22,6 @@ dotnet restore labs/advanced-labs/cli/myapp/src
     echo "export PIB_BASE=$PWD"
     echo "export REPO_BASE=$PWD"
     echo "export MSSQL_SA_PASSWORD=Res-Edge23"
-    echo "export GOPATH=/home/vscode/go"
     echo ""
 
     echo "if [ \"\$PIB_PAT\" != \"\" ]"

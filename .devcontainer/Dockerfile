@@ -14,6 +14,7 @@ RUN echo "$(date +'%Y-%m-%d %H:%M:%S')    docker build start" >> "/home/${USERNA
     mkdir -p "/home/${USERNAME}/go/bin" && \
     mkdir -p "/home/${USERNAME}/.oh-my-zsh/completions" && \
     mkdir -p "/home/${USERNAME}/.config/vscode-dev-containers" && \
+    echo "export GOPATH=/home/${USERNAME}/go" >> /etc/zsh/zshrc && \
     wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | TAG=v5.4.6 bash && \
     curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
     curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/msprod.list && \

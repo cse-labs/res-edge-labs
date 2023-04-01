@@ -51,7 +51,7 @@
 	// add labels
 	"portsAttributes": {
 		"30000": { "label": "Prometheus" },
-		"30080": { "label": "App" },
+		"30080": { "label": "MyApp" },
 		"32000": { "label": "Grafana" },
 		"32080": { "label": "Res-Edge" }
 	},
