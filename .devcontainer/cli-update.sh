@@ -27,7 +27,4 @@ wget -O flt.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$
 tar -xvzf flt.tar.gz
 rm flt.tar.gz
 
-echo "aka.ms/pib-cs-postsetup"
-curl -i https://aka.ms/pib-cs-postsetup
-
 cd "$OLDPWD" || exit

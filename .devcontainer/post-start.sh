@@ -8,7 +8,7 @@ echo "$(date +'%Y-%m-%d %H:%M:%S')    post-start start" >> "$HOME/status"
 echo "Pulling docker images"
 docker pull mcr.microsoft.com/dotnet/sdk:6.0
 docker pull mcr.microsoft.com/dotnet/aspnet:6.0-alpine
-docker pull ghcr.io/cse-labs/pib-webv:latest
+docker pull ghcr.io/cse-labs/res-edge-webv:beta
 
 echo "post-start complete"
 echo "$(date +'%Y-%m-%d %H:%M:%S')    post-start complete" >> "$HOME/status"

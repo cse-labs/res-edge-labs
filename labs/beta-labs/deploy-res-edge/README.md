@@ -12,14 +12,14 @@
 kic cluster delete
 
 # add github token for private registry
-cp ../vm/setup/registries.templ "$HOME/bin/.kic/registries.yaml"
+cp ../../../vm/setup/registries.templ "$HOME/bin/.kic/registries.yaml"
 sed -i -e "s/{{pib-pat}}/$PIB_PAT/g" "$HOME/bin/.kic/registries.yaml"
 
 # create the cluster
 k3d cluster create \
   --registry-use k3d-registry.localhost:5500 \
   --registry-config "$HOME/bin/.kic/registries.yaml" \
-  --config "$HOME/bin/.kic/k3d.yaml" \
+  --config ".kic/k3d.yaml" \
   --k3s-arg "--disable=servicelb@server:0" \
   --k3s-arg "--disable=traefik@server:0"
 
@@ -44,8 +44,8 @@ k apply -k mssql
 # verify sql started
 kic pods
 
-# wait 30 seconds for the data load
-k exec -it -n api mssql<tab> -- sql
+# wait 30 seconds after the container is running for the data to load
+sql
 
 # run a test query
 select id,name from groups
@@ -74,11 +74,11 @@ k logs -n api api<tab>
 ```bash
 
 # curl the version endpoint
-http localhost:30080/version
+http localhost:32080/version
 
 # run kic test
 kic test integration
-kic test load
+kic test load --verbose --duration 5
 
 ```
 

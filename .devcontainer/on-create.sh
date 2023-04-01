@@ -8,14 +8,8 @@ echo "$(date +'%Y-%m-%d %H:%M:%S')    on-create start" >> "$HOME/status"
 # Change shell to zsh for vscode
 sudo chsh --shell /bin/zsh vscode
 
-export PATH="$PATH:$HOME/bin"
-export GOPATH="$HOME/go"
-
-# restore the file to avoid errors
+# restore the project to avoid errors
 dotnet restore labs/advanced-labs/cli/myapp/src
-
-mkdir -p "$HOME/.ssh"
-mkdir -p "$HOME/.oh-my-zsh/completions"
 
 {
     echo ""
@@ -25,9 +19,9 @@ mkdir -p "$HOME/.oh-my-zsh/completions"
     echo ""
 
     # add cli to path
-    echo "export PATH=\$PATH:$HOME/bin"
-    echo "export GOPATH=\$HOME/go"
     echo "export PIB_BASE=$PWD"
+    echo "export REPO_BASE=$PWD"
+    echo "export MSSQL_SA_PASSWORD=Res-Edge23"
     echo ""
 
     echo "if [ \"\$PIB_PAT\" != \"\" ]"
@@ -65,15 +59,16 @@ mkdir -p "$HOME/.oh-my-zsh/completions"
     echo "  - west-wa-seattle"
 } > "$HOME/.flt"
 
-echo "aka.ms/pib-cs-postinstall"
-curl -i https://aka.ms/pib-cs-postinstall
+# create sql helper command
+{
+    echo '#!/bin/zsh'
+    echo ""
+    echo '/opt/mssql-tools/bin/sqlcmd -d ist -S localhost,31433 -U sa -P $MSSQL_SA_PASSWORD "$@"'
+} > "$HOME/bin/sql"
+chmod +x "$HOME/bin/sql"
 
 echo "dowloading kic and flt CLI"
 .devcontainer/cli-update.sh
-
-# can remove once incorporated in base image
-echo "Updating k3d to 5.4.6"
-wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | TAG=v5.4.6 bash
 
 echo "generating completions"
 kic completion zsh > "$HOME/.oh-my-zsh/completions/_kic"
@@ -81,6 +76,7 @@ flt completion zsh > "$HOME/.oh-my-zsh/completions/_flt"
 gh completion -s zsh > ~/.oh-my-zsh/completions/_gh
 kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
 k3d completion zsh > "$HOME/.oh-my-zsh/completions/_k3d"
+kustomize completion zsh > "$HOME/.oh-my-zsh/completions/_kustomize"
 
 echo "installing dotnet 6"
 sudo apt-get install -y dotnet-sdk-6.0
@@ -96,13 +92,14 @@ kic cluster create
 echo "Pulling docker images"
 docker pull mcr.microsoft.com/dotnet/sdk:6.0
 docker pull mcr.microsoft.com/dotnet/aspnet:6.0-alpine
-docker pull ghcr.io/cse-labs/pib-webv:latest
+docker pull ghcr.io/cse-labs/res-edge-webv:beta
+
+sudo apt-get update
 
 # only run apt upgrade on pre-build
 if [ "$CODESPACE_NAME" = "null" ]
 then
     echo "$(date +'%Y-%m-%d %H:%M:%S')    upgrading" >> "$HOME/status"
-    sudo apt-get update
     sudo apt-get upgrade -y
 fi
 

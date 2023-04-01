@@ -9,6 +9,11 @@ if [ "$1" = "" ]; then
     exit 1;
 fi
 
+# change to the apps/imdb dir
+# todo - imdb shoud be a param
+if [ -d "apps/imdb" ]; then cd apps/imdb; fi
+
+# select the environment
 if [ -d "kustomize/dev" ]; then dir="kustomize/dev"; fi
 if [ -d "kustomize/test" ]; then dir="kustomize/test"; fi
 if [ -d "kustomize/prod" ]; then dir="kustomize/prod"; fi
@@ -36,6 +41,7 @@ metadata:
 resources:
 - ../../base
 
+# todo - read the image name from the base yaml
 images:
 - name: ghcr.io/bartr/imdb
   newTag: $1
