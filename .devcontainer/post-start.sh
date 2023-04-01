@@ -10,5 +10,7 @@ docker pull mcr.microsoft.com/dotnet/sdk:6.0
 docker pull mcr.microsoft.com/dotnet/aspnet:6.0-alpine
 docker pull ghcr.io/cse-labs/pib-webv:latest
 
+# todo - pull res-edge images
+
 echo "post-start complete"
 echo "$(date +'%Y-%m-%d %H:%M:%S')    post-start complete" >> "$HOME/status"

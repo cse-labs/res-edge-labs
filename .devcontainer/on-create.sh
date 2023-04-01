@@ -14,6 +14,7 @@ export PATH="$PATH:$HOME/bin:/opt/mssql-tools/bin"
 # restore the file to avoid errors
 dotnet restore labs/advanced-labs/cli/myapp/src
 
+mkdir -p "$HOME/bin"
 mkdir -p "$HOME/.ssh"
 mkdir -p "$HOME/.oh-my-zsh/completions"
 
@@ -28,6 +29,7 @@ mkdir -p "$HOME/.oh-my-zsh/completions"
     echo "export GOPATH=\$HOME/go"
     echo "export PIB_BASE=$PWD"
     echo "export PATH=\$PATH:$HOME/bin:/opt/mssql-tools/bin"
+    echo "export MSSQL_SA_PASSWORD=Res-Edge23"
     echo ""
 
     echo "if [ \"\$PIB_PAT\" != \"\" ]"
@@ -65,8 +67,13 @@ mkdir -p "$HOME/.oh-my-zsh/completions"
     echo "  - west-wa-seattle"
 } > "$HOME/.flt"
 
-echo "aka.ms/pib-cs-postinstall"
-curl -i https://aka.ms/pib-cs-postinstall
+# create sql helper command
+{
+    echo '#!/bin/zsh'
+    echo ""
+    echo '/opt/mssql-tools/bin/sqlcmd -d ist -S localhost,31433 -U sa -P $MSSQL_SA_PASSWORD "$@"'
+} > "$HOME/bin/sql"
+chmod +x "$HOME/bin/sql"
 
 echo "dowloading kic and flt CLI"
 .devcontainer/cli-update.sh
@@ -109,6 +116,8 @@ echo "Pulling docker images"
 docker pull mcr.microsoft.com/dotnet/sdk:6.0
 docker pull mcr.microsoft.com/dotnet/aspnet:6.0-alpine
 docker pull ghcr.io/cse-labs/pib-webv:latest
+
+# todo - pull res-edge images
 
 # only run apt upgrade on pre-build
 if [ "$CODESPACE_NAME" = "null" ]
