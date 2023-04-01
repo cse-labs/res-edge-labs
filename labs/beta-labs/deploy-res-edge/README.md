@@ -44,8 +44,8 @@ k apply -k mssql
 # verify sql started
 kic pods
 
-# wait 30 seconds for the data load
-k exec -it -n api mssql<tab> -- sql
+# wait 30 seconds after the container is running for the data to load
+sql
 
 # run a test query
 select id,name from groups
@@ -78,7 +78,7 @@ http localhost:30080/version
 
 # run kic test
 kic test integration
-kic test load
+kic test load --verbose --duration 5
 
 ```
 

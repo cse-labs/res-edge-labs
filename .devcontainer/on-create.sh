@@ -115,9 +115,7 @@ kic cluster create
 echo "Pulling docker images"
 docker pull mcr.microsoft.com/dotnet/sdk:6.0
 docker pull mcr.microsoft.com/dotnet/aspnet:6.0-alpine
-docker pull ghcr.io/cse-labs/pib-webv:latest
-
-# todo - pull res-edge images
+docker pull ghcr.io/cse-labs/res-edge-webv:beta
 
 # only run apt upgrade on pre-build
 if [ "$CODESPACE_NAME" = "null" ]
