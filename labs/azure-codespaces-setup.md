@@ -85,7 +85,7 @@ export mi=pib_mi
 mi_id=$(az identity create --name $mi --resource-group $rg --query id -o tsv)
 
 # add CS secret
-gh secret set PIB_MI -u --body $(az identity list -g tld --query "[].id" -o tsv)
+gh secret set PIB_MI -u --body $mi_id
 
 # list secrets
 gh secret list -u
