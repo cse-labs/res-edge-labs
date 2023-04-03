@@ -5,6 +5,10 @@
 
 ## Create cluster with access to private cse-labs registry
 
+- todo - need to add instructions for using an actual PAT instead of the temporary GITHUB_TOKEN
+  - the token expires (every 10 days I think)
+  - this will cause image pull errors
+
 ```bash
 
 # this will delete existing cluster
