@@ -27,7 +27,7 @@ kic pods
 # create the namespace
 kaf ns.yaml
 
-# deploy sql server
+# deploy sql server with sample data
 k apply -k mssql
 
 # verify sql started
@@ -47,10 +47,6 @@ k apply -k api
 
 kic pods
 
-# wait for listening on 8080 log
-# todo - should we use K9s for this?
-k logs -n api api<tab>
-
 ```
 
 ## Test the data service
@@ -60,7 +56,7 @@ k logs -n api api<tab>
 # curl the version endpoint
 http localhost:32080/version
 
-# run kic test
+# run tests
 kic test integration
 kic test load --verbose --duration 5
 
