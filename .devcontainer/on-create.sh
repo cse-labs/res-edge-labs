@@ -103,6 +103,7 @@ echo "Pulling docker images"
 docker pull mcr.microsoft.com/dotnet/sdk:6.0
 docker pull mcr.microsoft.com/dotnet/aspnet:6.0-alpine
 docker pull ghcr.io/cse-labs/res-edge-webv:beta
+docker pull ghcr.io/cse-labs/res-edge-automation:0.8.5
 
 sudo apt-get update
 
