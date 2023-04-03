@@ -67,6 +67,16 @@ dotnet restore labs/advanced-labs/cli/myapp/src
 } > "$HOME/bin/sql"
 chmod +x "$HOME/bin/sql"
 
+# configure git
+git config --global core.whitespace blank-at-eol,blank-at-eof,space-before-tab
+git config --global pull.rebase false
+git config --global init.defaultbranch main
+git config --global fetch.prune true
+git config --global core.pager more
+git config --global diff.colorMoved zebra
+git config --global devcontainers-theme.show-dirty 1
+git config --global core.editor "nano -w"
+
 echo "dowloading kic and flt CLI"
 .devcontainer/cli-update.sh
 
@@ -93,6 +103,7 @@ echo "Pulling docker images"
 docker pull mcr.microsoft.com/dotnet/sdk:6.0
 docker pull mcr.microsoft.com/dotnet/aspnet:6.0-alpine
 docker pull ghcr.io/cse-labs/res-edge-webv:beta
+docker pull ghcr.io/cse-labs/res-edge-automation:0.8.5
 
 sudo apt-get update
 

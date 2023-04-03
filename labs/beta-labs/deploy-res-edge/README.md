@@ -5,26 +5,15 @@
 
 ## Create cluster with access to private cse-labs registry
 
+- todo - need to add instructions for using an actual PAT instead of the temporary GITHUB_TOKEN
+  - the token expires (every 10 days I think)
+  - this will cause image pull errors
+
 ```bash
 
-# delete existing cluster
+# this will delete existing cluster
 # ignore no-cluster error message
-kic cluster delete
-
-# add github token for private registry
-cp ../../../vm/setup/registries.templ "$HOME/bin/.kic/registries.yaml"
-sed -i -e "s/{{pib-pat}}/$PIB_PAT/g" "$HOME/bin/.kic/registries.yaml"
-
-# create the cluster
-k3d cluster create \
-  --registry-use k3d-registry.localhost:5500 \
-  --registry-config "$HOME/bin/.kic/registries.yaml" \
-  --config ".kic/k3d.yaml" \
-  --k3s-arg "--disable=servicelb@server:0" \
-  --k3s-arg "--disable=traefik@server:0"
-
-# delete registries.yaml
-rm -f "$HOME/bin/.kic/registries.yaml"
+kic cluster create
 
 # wait for pods to start
 kic pods
@@ -38,20 +27,14 @@ kic pods
 # create the namespace
 kaf ns.yaml
 
-# deploy sql server
+# deploy sql server with sample data
 k apply -k mssql
 
 # verify sql started
 kic pods
 
 # wait 30 seconds after the container is running for the data to load
-sql
-
-# run a test query
-select id,name from groups
-go
-
-exit
+sql -Q "select id,name from clusters;"
 
 ```
 
@@ -64,9 +47,6 @@ k apply -k api
 
 kic pods
 
-# wait for listening on 8080 log
-k logs -n api api<tab>
-
 ```
 
 ## Test the data service
@@ -76,7 +56,7 @@ k logs -n api api<tab>
 # curl the version endpoint
 http localhost:32080/version
 
-# run kic test
+# run tests
 kic test integration
 kic test load --verbose --duration 5
 
@@ -92,6 +72,7 @@ k apply -k webv
 kic pods
 
 # check the logs
+# todo - should we use K9s for this?
 k logs -n api webv<tab>
 k logs -n api api<tab>
 
@@ -123,3 +104,5 @@ kic test integration
 
 - use the ports tab to open Grafana
   - look at both dashboards
+
+- run `k9s` to check Fluent Bit log forwarding
