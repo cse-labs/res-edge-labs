@@ -7,24 +7,9 @@
 
 ```bash
 
-# delete existing cluster
+# this will delete existing cluster
 # ignore no-cluster error message
-kic cluster delete
-
-# add github token for private registry
-cp ../../../vm/setup/registries.templ "$HOME/bin/.kic/registries.yaml"
-sed -i -e "s/{{pib-pat}}/$PIB_PAT/g" "$HOME/bin/.kic/registries.yaml"
-
-# create the cluster
-k3d cluster create \
-  --registry-use k3d-registry.localhost:5500 \
-  --registry-config "$HOME/bin/.kic/registries.yaml" \
-  --config ".kic/k3d.yaml" \
-  --k3s-arg "--disable=servicelb@server:0" \
-  --k3s-arg "--disable=traefik@server:0"
-
-# delete registries.yaml
-rm -f "$HOME/bin/.kic/registries.yaml"
+kic cluster create
 
 # wait for pods to start
 kic pods
@@ -59,6 +44,7 @@ k apply -k api
 kic pods
 
 # wait for listening on 8080 log
+# todo - should we use K9s for this?
 k logs -n api api<tab>
 
 ```
@@ -86,6 +72,7 @@ k apply -k webv
 kic pods
 
 # check the logs
+# todo - should we use K9s for this?
 k logs -n api webv<tab>
 k logs -n api api<tab>
 
@@ -117,3 +104,5 @@ kic test integration
 
 - use the ports tab to open Grafana
   - look at both dashboards
+
+- run `k9s` to check Fluent Bit log forwarding
