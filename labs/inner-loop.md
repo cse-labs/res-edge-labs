@@ -14,7 +14,7 @@
 ## Verify Your Working Branch
 
 - Your prompt should end like this
-  - /workspaces/Pilot-in-a-Box (mybranch) $
+  - /workspaces/res-edge-labs (mybranch) $
 - If your prompt ends in `(main)` create a working branch per the instructions in the [readme](/README.md#create-a-working-branch)
 
 ## Verify k3d cluster

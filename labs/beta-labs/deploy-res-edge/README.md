@@ -1,7 +1,16 @@
-# Deploy Res-Edge to Codespaces
+# Inner-loop with Res-Edge
 
-- Start in this directory
-- `<tab>` means press the tab key for completion
+This lab will go over steps to run Res-Edge in codespaces.
+Res-Edge, which stands for Resilient Edge, helps deploy apps in a performant and scalable way to k8s clusters. If interested, please read over Res-Edge for more information [here](https://github.com/cse-labs/Project100k).
+
+This lab also builds on top of inner-loop lab. If you haven't already done so, please run through inner-loop lab [here](../../inner-loop.md) to get more familiarity on kic and other tools used in this lab.
+
+## Setup
+
+- Start in this directory.
+- [Create a PAT](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with repo access to cse-labs.
+
+>Note: `<tab>` means press the tab key for completion
 
 ## Create cluster with access to private cse-labs registry
 
