@@ -8,7 +8,7 @@ This lab also builds on top of inner-loop lab. If you haven't already done so, p
 ## Setup
 
 - Start in this directory.
-- [Create a PAT](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with repo access to cse-labs.
+- [Create a PAT](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with repo access and read package permission to cse-labs. Another option is to create a shared Github PAT as described [here](../../azure-codespaces-setup.md#shared-personal-access-token).
 
 >Note: `<tab>` means press the tab key for completion
 
