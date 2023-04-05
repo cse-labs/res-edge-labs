@@ -56,12 +56,7 @@ kic check mssql
 # deploy the data service
 k apply -k api
 
-# "watch" for the api pod to get to Running
-# ctl-c to exit
-kic pods --watch
-
-# check api version to verify data service is running
-kic check resedge
+kic pods
 
 # "watch" for the api pod to get to Running
 # ctl-c to exit
