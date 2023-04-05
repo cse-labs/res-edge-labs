@@ -1,0 +1,16 @@
+app: tesst
+containerArgs: []
+cpuLimit: 500m
+cpuRequest: 300m
+environment: dev
+image: ghcr.io/cse-labs/tesst:latest
+ingressPrefix: /
+livenessProbe: /healthz
+memoryLimit: 128Mi
+memoryRequest: 64Mi
+namespace: tesst
+nodePort: 30080
+port: 8080
+readinessProbe: /readyz
+targets: []
+template: pib-service
