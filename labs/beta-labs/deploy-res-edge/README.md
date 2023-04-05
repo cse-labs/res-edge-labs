@@ -3,7 +3,7 @@
 This lab will go over steps to run Res-Edge in codespaces.
 Res-Edge, which stands for Resilient Edge, helps deploy apps in a performant and scalable way to k8s clusters. If interested, please read over Res-Edge for more information [here](https://github.com/cse-labs/Project100k).
 
-This lab also builds on top of inner-loop lab. If you haven't already done so, please run through inner-loop lab [here](../../inner-loop.md) to get more familiarity on kic and other tools used in this lab.
+This lab also builds on top of inner-loop lab. If you haven't already done so, please run through inner-loop lab [here](../../inner-loop.md#) to get more familiarity on kic and other tools used in this lab.
 
 ## Setup
 
