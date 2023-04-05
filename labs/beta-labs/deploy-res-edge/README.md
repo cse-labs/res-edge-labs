@@ -73,11 +73,13 @@ kic check resedge
   - Default `--duration` is 30 sec
 
 ```bash
-# run tests
-kic test load --verbose --duration 5
 
-# you can also run the integration.json file mounted in res-edge-webv image one time
+
+# run test integration
 kic test integration
+
+# run load test
+kic test load --verbose --duration 5
 ```
 
 ## Deploy WebV to Cluster
