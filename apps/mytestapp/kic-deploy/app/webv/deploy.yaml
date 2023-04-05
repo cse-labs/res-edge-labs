@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webv
-  namespace: myapp
+  namespace: mytestapp
   labels:
     app.kubernetes.io/name: webv
 spec:
@@ -19,11 +19,11 @@ spec:
     metadata:
       labels:
         app: webv
-        version: v-2023-04-05-16-36-56
+        version: v-0-0-0
     spec:
       containers:
         - name: app
-          image: k3d-registry.localhost:5500/webv-myapp:local
+          image: k3d-registry.localhost:5500/webv-mytestapp:local
           imagePullPolicy: Always
 
           ports:
@@ -60,7 +60,7 @@ spec:
           - --log-format
           - Json
           - --server
-          - http://myapp:8080
+          - http://mytestapp:8080
           - --files
           - load.json
           - --zone
@@ -73,7 +73,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: webv
-  namespace: myapp
+  namespace: mytestapp
   labels:
     app: webv
 spec:
