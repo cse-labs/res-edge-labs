@@ -74,7 +74,7 @@ kic check resedge
 
 ```bash
 
-# run test integration
+# run integration test
 kic test integration
 
 # run load test
