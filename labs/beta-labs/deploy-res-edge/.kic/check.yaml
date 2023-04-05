@@ -15,3 +15,6 @@ commands:
     - name: prometheus
       short: Check prometheus
       path: check/prometheus
+    - name: grafana
+      short: Check grafana
+      path: check/grafana
