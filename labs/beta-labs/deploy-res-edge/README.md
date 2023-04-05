@@ -131,11 +131,7 @@ kic pods --watch
 kic test load &
 
 # run several integration tests
-kic test integration
-kic test integration
-kic test integration
-kic test integration
-kic test integration
+for i in {1..5}; kic test integration;
 
 ```
 
