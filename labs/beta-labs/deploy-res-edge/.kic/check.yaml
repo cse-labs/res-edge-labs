@@ -15,3 +15,6 @@ commands:
     - name: mssql
       short: Check mssql
       path: check/mssql
+    - name: fluentbit
+      short: Check fluentbit
+      path: check/fluentbit
