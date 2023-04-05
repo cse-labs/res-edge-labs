@@ -16,4 +16,4 @@ select 'GroupTags', count(GroupId) from GroupTags union
 select 'NamespaceTags', count(NamespaceId) from NamespaceTags union
 select 'Policies', count(Id) from Policies
 order by 1;
-go"
+"
