@@ -18,6 +18,8 @@ This lab also builds on top of inner-loop lab. If you have not already done so, 
 # ignore no-cluster error message
 kic cluster create
 
+kic pods
+
 # wait for pods to get to Running
 # Ctrl+C to exit
 kic pods --watch
@@ -36,6 +38,8 @@ kaf ns.yaml
 # deploy sql server with sample data
 k apply -k mssql
 
+kic pods
+
 # "watch" for the mssql pod to get to Running
 # ctl-c to exit
 kic pods --watch
@@ -51,6 +55,8 @@ sql -Q "select id,name from clusters;"
 
 # deploy the data service
 k apply -k api
+
+kic pods
 
 # "watch" for the api pod to get to Running
 # ctl-c to exit
@@ -83,6 +89,8 @@ kic test integration
 # deploy webv
 k apply -k webv
 
+kic pods
+
 # "watch" for the webv pod to get to Running
 # ctl-c to exit
 kic pods --watch
@@ -103,6 +111,8 @@ k logs -n api api<tab>
 
 # deploy observability
 k apply -k monitoring
+
+kic pods
 
 # "watch" for the prometheus, fluentbit, grafana pod to get to Running
 # ctl-c to exit
