@@ -1,26 +1,34 @@
-# Deploy Res-Edge to Codespaces
+# Inner-loop with Res-Edge
+
+This lab will go over steps to run Res-Edge in Codespaces.
+
+This lab also builds on top of inner-loop lab. If you have not already done so, please run through the inner-loop lab [here](../../inner-loop.md#inner-loop) to get more familiarity with kic and other tools used in this lab.
+
+## Create cluster in Codespaces
 
 - Start in this directory
-- `<tab>` means press the tab key for completion
 
-## Create cluster with access to private cse-labs registry
+> The k3d cluster will run `in` your Codespace - no need for an external cluster
 
-- todo - need to add instructions for using an actual PAT instead of the temporary GITHUB_TOKEN
-  - the token expires (every 10 days I think)
-  - this will cause image pull errors
+- Use `kic` to create and verify a new k3d cluster
 
 ```bash
 
-# this will delete existing cluster
+# delete and create a new cluster
 # ignore no-cluster error message
 kic cluster create
 
-# wait for pods to start
 kic pods
+
+# wait for pods to get to Running
+# Ctrl+C to exit
+kic pods --watch
 
 ```
 
 ## Deploy SQL
+
+- Now that we've created a new cluster, the next step is to deploy SQL Server database. Res-Edge data service requires a SQL Server database for start up. This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications.
 
 ```bash
 
@@ -30,8 +38,11 @@ kaf ns.yaml
 # deploy sql server with sample data
 k apply -k mssql
 
-# verify sql started
 kic pods
+
+# "watch" for the mssql pod to get to Running
+# ctl-c to exit
+kic pods --watch
 
 # wait 30 seconds after the container is running for the data to load
 sql -Q "select id,name from clusters;"
@@ -47,22 +58,33 @@ k apply -k api
 
 kic pods
 
+# "watch" for the api pod to get to Running
+# ctl-c to exit
+kic pods --watch
+
+# check api version to verify data service is running
+kic check resedge
+
 ```
 
-## Test the data service
+## Load Test the data service
+
+- Run a 5 second load test
+  - Default `--duration` is 30 sec
 
 ```bash
 
-# curl the version endpoint
-http localhost:32080/version
 
-# run tests
+# run test integration
 kic test integration
-kic test load --verbose --duration 5
 
+# run load test
+kic test load --verbose --duration 5
 ```
 
-## Deploy WebV
+## Deploy WebV to Cluster
+
+>Note: `<tab>` below means press the tab key for completion
 
 ```bash
 
@@ -70,6 +92,10 @@ kic test load --verbose --duration 5
 k apply -k webv
 
 kic pods
+
+# "watch" for the webv pod to get to Running
+# ctl-c to exit
+kic pods --watch
 
 # check the logs
 # todo - should we use K9s for this?
@@ -80,6 +106,9 @@ k logs -n api api<tab>
 
 ## Deploy Observability
 
+- Deploy the following observability stack in your cluster
+  - Fluent Bit, Prometheus, Grafana
+
 ```bash
 
 # deploy observability
@@ -87,13 +116,22 @@ k apply -k monitoring
 
 kic pods
 
-# generate some dashboard metrics
+# "watch" for the prometheus, fluentbit, grafana pod to get to Running
+# ctl-c to exit
+kic pods --watch
+```
+
+## Generate Requests for Observability
+
+- Generate some traffic for the dashboards
+
+```bash
+
+# run a load test in the background
 kic test load &
-kic test integration
-kic test integration
-kic test integration
-kic test integration
-kic test integration
+
+# run several integration tests
+for i in {1..5}; kic test integration;
 
 ```
 
