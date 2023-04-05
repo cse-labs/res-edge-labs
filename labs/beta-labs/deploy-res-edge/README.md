@@ -97,10 +97,6 @@ kic pods --watch
 # check to verify webv is running
 kic check webv
 
-# "watch" for the webv pod to get to Running
-# ctl-c to exit
-kic pods --watch
-
 # check the logs
 # todo - should we use K9s for this?
 k logs -n api webv<tab>
@@ -117,6 +113,8 @@ k logs -n api api<tab>
 
 # deploy observability
 k apply -k monitoring
+
+kic pods
 
 # "watch" for the prometheus, fluentbit, grafana pod to get to Running
 # ctl-c to exit
