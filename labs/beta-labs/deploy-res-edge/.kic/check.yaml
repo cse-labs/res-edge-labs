@@ -12,12 +12,6 @@ commands:
     - name: webv
       short: Check webv
       path: check/webv
-    - name: prometheus
-      short: Check prometheus
-      path: check/prometheus
-    - name: grafana
-      short: Check grafana
-      path: check/grafana
     - name: mssql
       short: Check mssql
       path: check/mssql
