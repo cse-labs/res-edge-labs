@@ -12,3 +12,6 @@ commands:
     - name: webv
       short: Check webv
       path: check/webv
+    - name: prometheus
+      short: Check prometheus
+      path: check/prometheus
