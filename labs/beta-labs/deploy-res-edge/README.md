@@ -2,15 +2,11 @@
 
 This lab will go over steps to run Res-Edge in Codespaces.
 
-This lab also builds on top of inner-loop lab. If you have not already done so, please run through the inner-loop lab [here](../../inner-loop.md#) to get more familiarity with kic and other tools used in this lab.
+This lab also builds on top of inner-loop lab. If you have not already done so, please run through the inner-loop lab [here](../../inner-loop.md#inner-loop) to get more familiarity with kic and other tools used in this lab.
 
-## Setup
+## Create cluster in Codespaces
 
-- Start in this directory.
-- [Create a PAT](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with repo access and read package permission to cse-labs. Another option is to create a shared Github PAT as described [here](../../azure-codespaces-setup.md#shared-personal-access-token).
-- Set the environment PIB_PAT to the PAT created above.
-
-## Create cluster with access to private cse-labs registry
+- Start in this directory
 
 > The k3d cluster will run `in` your Codespace - no need for an external cluster
 
@@ -22,6 +18,8 @@ This lab also builds on top of inner-loop lab. If you have not already done so, 
 # ignore no-cluster error message
 kic cluster create
 
+kic pods
+
 # wait for pods to get to Running
 # Ctrl+C to exit
 kic pods --watch
@@ -30,7 +28,7 @@ kic pods --watch
 
 ## Deploy SQL
 
-- Now that we've created a new cluster, the next step is to deploy sql server database. Res-Edge data service requires a sql server database for start up. This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications.
+- Now that we've created a new cluster, the next step is to deploy SQL Server database. Res-Edge data service requires a SQL Server database for start up. This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications.
 
 ```bash
 
@@ -39,6 +37,8 @@ kaf ns.yaml
 
 # deploy sql server with sample data
 k apply -k mssql
+
+kic pods
 
 # "watch" for the mssql pod to get to Running
 # ctl-c to exit
@@ -63,6 +63,13 @@ kic pods --watch
 # check api version to verify data service is running
 kic check resedge
 
+# "watch" for the api pod to get to Running
+# ctl-c to exit
+kic pods --watch
+
+# check api version to verify data service is running
+kic check resedge
+
 ```
 
 ## Load Test the data service
@@ -71,11 +78,12 @@ kic check resedge
   - Default `--duration` is 30 sec
 
 ```bash
-# run tests
-kic test load --verbose --duration 5
 
-# you can also run the integration.json file mounted in res-edge-webv image one time
+# run test integration
 kic test integration
+
+# run load test
+kic test load --verbose --duration 5
 ```
 
 ## Deploy WebV to Cluster
@@ -93,6 +101,10 @@ kic pods --watch
 
 # check to verify webv is running
 kic check webv
+
+# "watch" for the webv pod to get to Running
+# ctl-c to exit
+kic pods --watch
 
 # check the logs
 # todo - should we use K9s for this?
@@ -128,13 +140,12 @@ kic check grafana
 
 ```bash
 
-# copy and paste this fence into your terminal
-
 # run a load test in the background
 kic test load &
 
 # run several integration tests
 for i in {1..5}; kic test integration;
+
 ```
 
 ## Validate Observability
