@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sql -Q "select id,name from clusters;"
