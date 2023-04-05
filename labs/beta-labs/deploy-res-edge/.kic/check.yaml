@@ -9,3 +9,12 @@ commands:
     - name: resedge
       short: Check ResEdge
       path: check/app
+    - name: webv
+      short: Check webv
+      path: check/webv
+    - name: mssql
+      short: Check mssql
+      path: check/mssql
+    - name: fluentbit
+      short: Check fluentbit
+      path: check/fluentbit

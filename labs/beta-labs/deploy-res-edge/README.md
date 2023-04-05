@@ -45,7 +45,7 @@ kic pods
 kic pods --watch
 
 # wait 30 seconds after the container is running for the data to load
-sql -Q "select id,name from clusters;"
+kic check mssql
 
 ```
 
@@ -74,8 +74,7 @@ kic check resedge
 
 ```bash
 
-
-# run test integration
+# run integration test
 kic test integration
 
 # run load test
@@ -91,11 +90,12 @@ kic test load --verbose --duration 5
 # deploy webv
 k apply -k webv
 
-kic pods
-
 # "watch" for the webv pod to get to Running
 # ctl-c to exit
 kic pods --watch
+
+# check to verify webv is running
+kic check webv
 
 # check the logs
 # todo - should we use K9s for this?
@@ -119,6 +119,12 @@ kic pods
 # "watch" for the prometheus, fluentbit, grafana pod to get to Running
 # ctl-c to exit
 kic pods --watch
+
+# check to verify prometheus, fluentbit, grafana is running
+kic check prometheus
+kic check fluentbit
+kic check grafana
+
 ```
 
 ## Generate Requests for Observability
