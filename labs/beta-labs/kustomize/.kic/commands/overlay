@@ -3,15 +3,20 @@
 set -e
 
 dir=""
+app="apps/$1"
 
-if [ "$1" = "" ]; then
+if [ "$app" = "apps/" ]; then
+    echo "app directory not found";
+    exit 1;
+fi
+
+if [ "$2" = "" ]; then
     echo "Usage: kic overlay name"
     exit 1;
 fi
 
-# change to the apps/imdb dir
-# todo - imdb shoud be a param
-if [ -d "apps/imdb" ]; then cd apps/imdb; fi
+# change to the apps/myapp dir
+cd "$app";
 
 # select the environment
 if [ -d "kustomize/dev" ]; then dir="kustomize/dev"; fi
@@ -23,28 +28,26 @@ if [ "$dir" = "" ]; then
     exit 1;
 fi
 
-if [ -d "$dir/overlays/$1" ]; then
-    echo "Overlay $1 already exists";
+if [ -d "$dir/overlays/$2" ]; then
+    echo "Overlay $2 already exists";
     exit 1;
 fi
 
-mkdir -p "$dir/overlays/$1"
+mkdir -p "$dir/overlays/$2"
 
-cat <<EOF > "$dir/overlays/$1/kustomization.yaml"
+cat <<EOF > "$dir/overlays/$2/kustomization.yaml"
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   annotations:
-    version: $1
+    version: $2
     clusters: none
-
 resources:
 - ../../base
 
-# todo - read the image name from the base yaml
 images:
-- name: ghcr.io/bartr/imdb
-  newTag: $1
+- name: $(cat $dir/base/deployment.yaml|grep image: | cut -d ':' -f 2)
+  newTag: $2
 EOF
 
-code "$dir/overlays/$1/kustomization.yaml"
+code "$dir/overlays/$2/kustomization.yaml"
