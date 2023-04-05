@@ -127,8 +127,6 @@ kic pods --watch
 
 ```bash
 
-# copy and paste this fence into your terminal
-
 # run a load test in the background
 kic test load &
 
@@ -138,6 +136,7 @@ kic test integration
 kic test integration
 kic test integration
 kic test integration
+
 ```
 
 ## Validate Observability
