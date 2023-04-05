@@ -2,7 +2,7 @@
 
 This lab will go over steps to run Res-Edge in Codespaces.
 
-This lab also builds on top of inner-loop lab. If you have not already done so, please run through the inner-loop lab [here](../../inner-loop.md#) to get more familiarity with kic and other tools used in this lab.
+This lab also builds on top of inner-loop lab. If you have not already done so, please run through the inner-loop lab [here](../../inner-loop.md#inner-loop) to get more familiarity with kic and other tools used in this lab.
 
 ## Create cluster in Codespaces
 
