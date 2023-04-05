@@ -3,14 +3,14 @@
 set -e
 
 dir=""
-app="apps/$2"
+app="apps/$1"
 
 if [ "$app" = "apps/" ]; then
     echo "app directory not found";
     exit 1;
 fi
 
-if [ "$1" = "" ]; then
+if [ "$2" = "" ]; then
     echo "Usage: kic overlay name"
     exit 1;
 fi
@@ -28,13 +28,26 @@ if [ "$dir" = "" ]; then
     exit 1;
 fi
 
-if [ -d "$dir/overlays/$1" ]; then
-    echo "Overlay $1 already exists";
+if [ -d "$dir/overlays/$2" ]; then
+    echo "Overlay $2 already exists";
     exit 1;
 fi
 
-mkdir -p "$dir/overlays/$1"
+mkdir -p "$dir/overlays/$2"
 
-cp "$dir/base/kustomization.yaml" "$dir/overlays/$1/kustomization.yaml"
+cat <<EOF > "$dir/overlays/$2/kustomization.yaml"
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  annotations:
+    version: $2
+    clusters: none
+resources:
+- ../../base
 
-code "$dir/overlays/$1/kustomization.yaml"
+images:
+- name: $(cat $dir/base/deployment.yaml|grep image: | cut -d ':' -f 2)
+  newTag: $2
+EOF
+
+code "$dir/overlays/$2/kustomization.yaml"

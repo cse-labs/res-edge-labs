@@ -17,7 +17,7 @@ Overlays on applications allow to deploy different application versions to diffe
 Execute the kic command as presented below where `1.0.1` is the version number and `imdb` is your app name:
 
 ```bash
-kic overlay 1.0.1 imdb
+kic overlay imdb 1.0.1
 ```
 
 The `kic overlay` command creates a new `overlay/1.0.1` folder and a copies the `kustomization.yaml` file from `apps/imdb/kudtomize/prod/base` to the new overlay folder in the `apps/imdb/kustomize/prod/` folder. You can update the `kustomization.yaml` file and set "beta" as the clusters metadata annotation. After the update, your file should look like the yaml sample below:
@@ -35,6 +35,10 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
+
+images:
+- name: ghcr.io/bartr/imdb
+  newTag: 1.0.1
 ```
 
 ## Testing Local CICD
