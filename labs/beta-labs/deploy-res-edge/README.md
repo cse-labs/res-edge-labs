@@ -8,18 +8,25 @@ This lab also builds on top of inner-loop lab. If you have not already done so, 
 
 - Start in this directory
 
+> The k3d cluster will run `in` your Codespace - no need for an external cluster
+
+- Use `kic` to create and verify a new k3d cluster
+
 ```bash
 
-# this will delete existing cluster
+# delete and create a new cluster
 # ignore no-cluster error message
 kic cluster create
 
-# wait for pods to start
-kic pods
+# wait for pods to get to Running
+# Ctrl+C to exit
+kic pods --watch
 
 ```
 
 ## Deploy SQL
+
+- Now that we've created a new cluster, the next step is to deploy sql server database. Res-Edge data service requires a sql server database for start up. This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications.
 
 ```bash
 
@@ -29,8 +36,9 @@ kaf ns.yaml
 # deploy sql server with sample data
 k apply -k mssql
 
-# verify sql started
-kic pods
+# "watch" for the mssql pod to get to Running
+# ctl-c to exit
+kic pods --watch
 
 # wait 30 seconds after the container is running for the data to load
 sql -Q "select id,name from clusters;"
@@ -44,24 +52,29 @@ sql -Q "select id,name from clusters;"
 # deploy the data service
 k apply -k api
 
-kic pods
+# "watch" for the api pod to get to Running
+# ctl-c to exit
+kic pods --watch
+
+# check api version to verify data service is running
+kic check resedge
 
 ```
 
-## Test the data service
+## Load Test the data service
+
+- Run a 5 second load test
+  - Default `--duration` is 30 sec
 
 ```bash
-
-# curl the version endpoint
-http localhost:32080/version
-
 # run tests
-kic test integration
 kic test load --verbose --duration 5
 
+# you can also run the integration.json file mounted in res-edge-webv image one time
+kic test integration
 ```
 
-## Deploy WebV
+## Deploy WebV to Cluster
 
 >Note: `<tab>` below means press the tab key for completion
 
@@ -70,7 +83,9 @@ kic test load --verbose --duration 5
 # deploy webv
 k apply -k webv
 
-kic pods
+# "watch" for the webv pod to get to Running
+# ctl-c to exit
+kic pods --watch
 
 # check the logs
 # todo - should we use K9s for this?
@@ -81,21 +96,32 @@ k logs -n api api<tab>
 
 ## Deploy Observability
 
+- Deploy the following observability stack in your cluster
+  - Fluent Bit, Prometheus, Grafana
+
 ```bash
 
 # deploy observability
 k apply -k monitoring
 
-kic pods
+# "watch" for the prometheus, fluentbit, grafana pod to get to Running
+# ctl-c to exit
+kic pods --watch
+```
 
-# generate some dashboard metrics
+## Generate Requests for Observability
+
+- Generate some traffic for the dashboards
+
+```bash
+
+# copy and paste this fence into your terminal
+
+# run a load test in the background
 kic test load &
-kic test integration
-kic test integration
-kic test integration
-kic test integration
-kic test integration
 
+# run several integration tests
+for i in {1..5}; kic test integration;
 ```
 
 ## Validate Observability
