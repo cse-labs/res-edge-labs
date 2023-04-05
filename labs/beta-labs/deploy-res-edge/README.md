@@ -133,7 +133,11 @@ kic pods --watch
 kic test load &
 
 # run several integration tests
-for i in {1..5}; kic test integration;
+kic test integration
+kic test integration
+kic test integration
+kic test integration
+kic test integration
 ```
 
 ## Validate Observability
