@@ -26,7 +26,7 @@ kic pods --watch
 
 ## Deploy SQL
 
-- Now that we've created a new cluster, the next step is to deploy sql server database. Res-Edge data service requires a sql server database for start up. This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications.
+- Now that we've created a new cluster, the next step is to deploy SQL Server database. Res-Edge data service requires a SQL Server database for start up. This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications.
 
 ```bash
 
