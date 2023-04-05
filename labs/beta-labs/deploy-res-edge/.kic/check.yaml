@@ -9,3 +9,6 @@ commands:
     - name: resedge
       short: Check ResEdge
       path: check/app
+    - name: webv
+      short: Check webv
+      path: check/webv
