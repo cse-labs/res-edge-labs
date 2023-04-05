@@ -190,9 +190,6 @@ kic check grafana
 
 kic test load --duration 5 --verbose
 
-# you can also run load.json one time
-kic test integration -f load.json
-
 ```
 
 ## `kic test` WebV Configuration
