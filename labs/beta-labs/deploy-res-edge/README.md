@@ -44,7 +44,13 @@ kic pods
 # ctl-c to exit
 kic pods --watch
 
-# wait 30 seconds after the container is running for the data to load
+kic logs
+
+# "watch" for the mssql logs until data loads with log "# rows affected"
+# ctl-c to exit
+kic logs mssql --watch
+
+# Verify mssql is loaded with metadata
 kic check mssql
 
 ```
@@ -98,9 +104,8 @@ kic pods --watch
 kic check webv
 
 # check the logs
-# todo - should we use K9s for this?
-k logs -n api webv<tab>
-k logs -n api api<tab>
+kic logs webv
+kic logs api
 
 ```
 

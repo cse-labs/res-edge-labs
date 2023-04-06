@@ -1,0 +1,26 @@
+###
+# log commands
+###
+
+commands:
+- name: logs
+  short: View logs
+  scriptCommands:
+    - name: resedge
+      short: View ResEdge logs
+      path: logs/app
+    - name: webv
+      short: View webv logs
+      path: logs/webv
+    - name: mssql
+      short: View mssql logs
+      path: logs/mssql
+    - name: fluentbit
+      short: View fluentbit logs
+      path: logs/fluentbit
+    - name: grafana
+      short: View grafana logs
+      path: logs/grafana
+    - name: prometheus
+      short: View prometheus logs
+      path: logs/prometheus
