@@ -76,7 +76,7 @@ git branch --show-current
     ```
 
 - Validate user role on subscription
-  > Make sure your RoleDefinitionName is `Contributor` or `Owner` to create resources in this lab succssfully
+  > Make sure your RoleDefinitionName is `Contributor` or `Owner` to create resources in this lab successfully. If you need to set your role assignment, see [here](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal).
 
   ```bash
 
@@ -88,7 +88,8 @@ git branch --show-current
 
 ## Create a Dev Cluster
 
-- Running `flt create` creates the Azure VM that hosts the k3d cluster. It also triggers a [CI-CD Github Action](https://github.com/kubernetes101/pib-dev/actions) to generate deployment manifests.
+- Running `flt create` creates the Azure VM that hosts the k3d cluster
+- It also triggers a [CI-CD Github Action](https://github.com/kubernetes101/pib-dev/actions) to generate deployment manifests
 
 ```bash
 
@@ -103,7 +104,8 @@ flt create cluster -c $MY_CLUSTER
 
 ## Update Git Repo
 
-- Wait for the CI-CD Action to complete (around 30 seconds) before updating the repo. You can check in the Actions tab in your repo if it completed successfully.
+- Wait for the CI-CD Action to complete (around 30 seconds) before updating the repo
+- You can check in the Actions tab in your repo if it completed successfully
 
 ```bash
 
