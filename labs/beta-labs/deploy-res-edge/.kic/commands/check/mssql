@@ -1,19 +1,27 @@
 #!/bin/bash
 
-sql -Q \
-"select ' Applications' as Entity, count(Id) as Rows from Applications union
-select ' Clusters', count(Id) from Clusters union
-select ' Groups', count(Id) from Groups union
-select ' Namespaces', count(Id) from Namespaces union
-select ' GroupsClusters', count(ClusterId) from GroupsClusters union
-select 'ApplicationMetadata', count(ApplicationId) from ApplicationMetadata union
-select 'ClusterMetadata', count(ClusterId) from ClusterMetadata union
-select 'GroupMetadata', count(GroupId) from GroupMetadata union
-select 'NamespaceMetadata', count(NamespaceId) from NamespaceMetadata union
-select 'ApplicationTags', count(ApplicationId) from ApplicationTags union
-select 'ClusterTags', count(ClusterId) from ClusterTags union
-select 'GroupTags', count(GroupId) from GroupTags union
-select 'NamespaceTags', count(NamespaceId) from NamespaceTags union
-select 'Policies', count(Id) from Policies
-order by 1;
-"
+function sql_check {
+    sql -Q \
+    "select ' Applications' as Entity, count(Id) as Rows from Applications union
+    select ' Clusters', count(Id) from Clusters union
+    select ' Groups', count(Id) from Groups union
+    select ' Namespaces', count(Id) from Namespaces union
+    select ' GroupsClusters', count(ClusterId) from GroupsClusters union
+    select 'ApplicationMetadata', count(ApplicationId) from ApplicationMetadata union
+    select 'ClusterMetadata', count(ClusterId) from ClusterMetadata union
+    select 'GroupMetadata', count(GroupId) from GroupMetadata union
+    select 'NamespaceMetadata', count(NamespaceId) from NamespaceMetadata union
+    select 'ApplicationTags', count(ApplicationId) from ApplicationTags union
+    select 'ClusterTags', count(ClusterId) from ClusterTags union
+    select 'GroupTags', count(GroupId) from GroupTags union
+    select 'NamespaceTags', count(NamespaceId) from NamespaceTags union
+    select 'Policies', count(Id) from Policies
+    order by 1;
+    "
+}
+
+if ! sql_check; then
+    echo "MSSQL is not Running";
+else
+    echo "MSSQL is Running";
+fi

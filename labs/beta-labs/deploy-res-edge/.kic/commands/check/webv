@@ -1,4 +1,12 @@
 #!/bin/bash
 
-kubectl exec -it jumpbox -- http webv.api.svc.cluster.local:8080/version
+function webv_check {
+    kubectl exec -it jumpbox -- http webv.api.svc.cluster.local:8080/version
+}
 
+
+if ! webv_check; then
+    echo "WebV is not Running";
+else
+    echo "WebV is Running";
+fi
