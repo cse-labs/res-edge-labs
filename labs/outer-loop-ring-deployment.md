@@ -23,7 +23,7 @@ git branch --show-current
 
 ## Create 15 Clusters
 
-- Running `flt create` generates GitOps files for the clusters and triggers a [CI-CD Github Action](https://github.com/kubernetes101/pib-dev/actions) that will take about 30 seconds to complete
+- Running `flt create` generates GitOps files for the clusters and triggers a [CI-CD Github Action](https://github.com/cse-labs/res-edge-labs/actions) that will take about 30 seconds to complete
 
 > Note: we don't actually create the clusters, just the GitOps folders as the `--gitops-only` option is used here.
 
