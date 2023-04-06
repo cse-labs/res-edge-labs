@@ -88,6 +88,8 @@ git branch --show-current
 
 ## Create a Dev Cluster
 
+- Running `flt create` creates the Azure VM that hosts the k3d cluster. It also triggers a [CI-CD Github Action](https://github.com/kubernetes101/pib-dev/actions) to generate deployment manifests.
+
 ```bash
 
 # set MY_CLUSTER.
@@ -101,9 +103,7 @@ flt create cluster -c $MY_CLUSTER
 
 ## Update Git Repo
 
-- `flt create` generates GitOps files for the cluster
-- [CI-CD](https://github.com/kubernetes101/pib-dev/actions) generates the deployment manifests
-  - Wait for CI-CD to complete (usually about 30 seconds)
+- Wait for the CI-CD Action to complete (around 30 seconds) before updating the repo
 
 ```bash
 
@@ -121,10 +121,9 @@ git push
 
 > If you get an SSH error, just retry every few seconds for the SSHD server to configure and start
 
-- `flt create` creates the Azure VM that hosts the k3d cluster
-- Additional setup is done via the `cloud-init` script
-- We have to wait for the k3d setup to complete
+- Wait for k3d setup to complete
   - This usually takes 3-4 minutes after VM setup completes
+- Additional cluster setup is done via the `cloud-init` script, which is executed automatically
 
 ```bash
 
@@ -211,9 +210,9 @@ flt targets deploy
 
 ```
 
-## Wait for ci-cd to finish
+## Wait for CI-CD to finish
 
-- Check [ci-cd status](https://github.com/kubernetes101/pib-dev/actions)
+- Check [CI-CD status](https://github.com/kubernetes101/pib-dev/actions)
 
 ## Update Cluster
 

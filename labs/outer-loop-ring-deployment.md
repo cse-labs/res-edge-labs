@@ -24,7 +24,7 @@ git branch --show-current
 ## Create 15 Clusters
 
 Running `flt create` generates GitOps files for the clusters and triggers a [CI-CD Github Action](https://github.com/kubernetes101/pib-dev/actions) that will take about 30 seconds to complete.
-> Note: we don't actually create the clusters, just the GitOps folders
+> Note: we don't actually create the clusters, just the GitOps folders as the `--gitops-only` option is used here.
 
   ```bash
 
@@ -54,15 +54,15 @@ Running `flt create` generates GitOps files for the clusters and triggers a [CI-
 
 ## Cluster Metadata Files
 
-You can view the cluster metadata files here.
+- You can view the cluster metadata files here.
 
-  ```bash
+```bash
 
-  ls -alF clusters/*.yaml
+ls -alF clusters/*.yaml
 
-  cat clusters/central-tx-atx-101.yaml
+cat clusters/central-tx-atx-101.yaml
 
-  ```
+```
 
 ## Update Git Repo
 
