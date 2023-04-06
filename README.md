@@ -56,12 +56,11 @@ We use GitHub Codespaces for our `inner-loop` and `outer-loop` Developer Experie
 
 ## Create a Codespace
 
-> You can use the same Codespace for any of the labs
+> Create a Codespace from the repo you created. You can use the same Codespace for any of the labs. Note: make sure you create a codespace from the created repo, not the template repo.
 
-- From the repo created in the previous step
-  - Click the `<> Code` button
-    - Make sure the Codespaces tab is active
-  - Click `Create Codespace on main`
+- Click the `<> Code` button
+  - Make sure the Codespaces tab is active
+- Click `Create Codespace on main`
 - After about 1 minute, you will have a GitHub Codespace running with a complete Kubernetes Developer Experience!
 
 ## Environment variables
@@ -74,27 +73,16 @@ code ~/.zshrc
 
 ```
 
-## Create a working branch
+## Using a working branch
 
-- If the main branch has a branch protection rule, you can optionally create a working branch
-  - You can use the same branch for any of the labs or create a new branch per lab (add 1, 2, 3 ... to the branch name)
+- You can use the same branch for any of the labs or create a new branch per lab (add 1, 2, 3 ... to the branch name). The branch should have a remote URL set.
+- By default, the environment value MY_BRANCH is set to your lower case GitHub User Name. This can be overwritten if needed.
 
   ```bash
 
-  # by default, MY_BRANCH is set to your lower case GitHub User Name
-  # the value can be overwritten if needed
   echo $MY_BRANCH
 
-  # create a branch
-  git checkout -b $MY_BRANCH
-
-  # push the branch and set the remote
-  git push -u origin $MY_BRANCH
-
   ```
-
-- Your prompt should end like this
-  - /workspaces/res-dev (mybranch) $
 
 ## inner-loop Labs
 
