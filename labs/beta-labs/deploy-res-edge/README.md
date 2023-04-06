@@ -81,29 +81,6 @@ kic test integration
 kic test load --verbose --duration 5
 ```
 
-## Deploy WebV to Cluster
-
->Note: `<tab>` below means press the tab key for completion
-
-```bash
-
-# deploy webv
-k apply -k webv
-
-# "watch" for the webv pod to get to Running
-# ctl-c to exit
-kic pods --watch
-
-# check to verify webv is running
-kic check webv
-
-# check the logs
-# todo - should we use K9s for this?
-k logs -n api webv<tab>
-k logs -n api api<tab>
-
-```
-
 ## Deploy Observability
 
 - Deploy the following observability stack in your cluster
@@ -126,6 +103,30 @@ kic check fluentbit
 kic check grafana
 
 ```
+
+## Deploy WebV to Cluster
+
+>Note: `<tab>` below means press the tab key for completion
+
+```bash
+
+# deploy webv
+k apply -k webv
+
+# "watch" for the webv pod to get to Running
+# ctl-c to exit
+kic pods --watch
+
+# check to verify webv is running
+kic check webv
+
+# check the logs
+k logs -n api webv<tab>
+k logs -n api api<tab>
+
+```
+
+Alternatively, the logs can be checked using K9s, please see [View Fluent Bit Logs in K9s](#view-fluent-bit-logs-in-k9s) section to learn more of how to check logs for webv and api pods.
 
 ## Generate Requests for Observability
 
@@ -197,7 +198,7 @@ for i in {1..5}; kic test integration;
   ```
 
 - Press `0` to show all `namespaces`
-- Select `fluentbit` pod and press `enter`
+- Select `fluentbit` pod (or any other pod you would like to check logs for) and press `enter`
 - Press `enter` again to see the logs
 - Press `s` to Toggle AutoScroll
 - Press `w` to Toggle Wrap
