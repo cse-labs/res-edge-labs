@@ -89,7 +89,7 @@ git branch --show-current
 ## Create a Dev Cluster
 
 - Running `flt create` creates the Azure VM that hosts the k3d cluster
-- It also triggers a [CI-CD Github Action](https://github.com/kubernetes101/pib-dev/actions) to generate deployment manifests
+- It also triggers a [CI-CD Github Action](https://github.com/cse-labs/res-edge-labs/actions) to generate deployment manifests
 
 ```bash
 
@@ -214,7 +214,7 @@ flt targets deploy
 
 ## Wait for CI-CD to finish
 
-- Check [CI-CD status](https://github.com/kubernetes101/pib-dev/actions)
+- Check [CI-CD status](https://github.com/cse-labs/res-edge-labs/actions)
 
 ## Update Cluster
 
