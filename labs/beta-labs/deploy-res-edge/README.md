@@ -44,7 +44,7 @@ kic pods
 # ctl-c to exit
 kic pods --watch
 
-kic logs
+kic logs mssql
 
 # "watch" for the mssql logs until data loads with log "# rows affected"
 # ctl-c to exit
