@@ -103,7 +103,7 @@ flt create cluster -c $MY_CLUSTER
 
 ## Update Git Repo
 
-- Wait for the CI-CD Action to complete (around 30 seconds) before updating the repo
+- Wait for the CI-CD Action to complete (around 30 seconds) before updating the repo. You can check in the Actions tab in your repo if it completed successfully.
 
 ```bash
 

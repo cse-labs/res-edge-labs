@@ -66,7 +66,7 @@ cat clusters/central-tx-atx-101.yaml
 
 ## Update Git Repo
 
-- Wait for the CI-CD Action generating the deployment manifests to complete from the `flt create` step before updating the repo.
+- Wait for the CI-CD Action generating the deployment manifests to complete from the `flt create` step before updating the repo. You can check in the Actions tab in your repo if it completed successfully.
 
 ```bash
 
