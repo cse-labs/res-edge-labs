@@ -76,7 +76,7 @@ git branch --show-current
     ```
 
 - Validate user role on subscription
-  > Make sure your RoleDefinitionName is `Contributor` or `Owner` to create resources in this lab successfully. If you need to set your role assignment, see [here](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal).
+  > Make sure your RoleDefinitionName is `Contributor` or `Owner` to create resources in this lab successfully. If you need to set your role assignment, see [Assign Azure roles using the Azure portal](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal).
 
   ```bash
 
