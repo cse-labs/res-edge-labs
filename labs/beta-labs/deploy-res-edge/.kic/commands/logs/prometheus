@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [ "$1" != "--watch" ]; then
-        kubectl logs -l app=prometheus-server -n monitoring
-else
-        kubectl logs -l app=prometheus-server -n monitoring --follow
-fi

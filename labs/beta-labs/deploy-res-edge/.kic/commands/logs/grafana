@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [ "$1" != "--watch" ]; then
-        kubectl logs -l app=grafana -n monitoring
-else
-        kubectl logs -l app=grafana -n monitoring --follow
-fi

@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [ "$1" != "--watch" ]; then
-        kubectl logs -l app=webv -n api
-else
-        kubectl logs -l app=webv -n api --follow
-fi

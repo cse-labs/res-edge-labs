@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [ "$1" != "--watch" ]; then
-        kubectl logs -l app.kubernetes.io/name=fluentbit -n logging
-else
-        kubectl logs -l app.kubernetes.io/name=fluentbit -n logging --follow
-fi

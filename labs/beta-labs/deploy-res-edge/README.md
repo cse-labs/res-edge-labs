@@ -48,7 +48,7 @@ kic logs mssql
 
 # "watch" for the mssql logs until data loads with log "# rows affected"
 # ctl-c to exit
-kic logs mssql --watch
+kic logs mssql --follow
 
 # Verify mssql is loaded with metadata
 kic check mssql

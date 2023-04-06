@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [ "$1" != "--watch" ]; then
-        kubectl logs -l app=mssql -n api
-else
-        kubectl logs -l app=mssql -n api --follow
-fi
