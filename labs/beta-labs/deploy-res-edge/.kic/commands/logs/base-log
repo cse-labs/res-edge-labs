@@ -45,5 +45,5 @@ fi
 if [ "${FOLLOW}" = true ]; then
         kubectl logs -l "${LABEL}" -n "${NAMESPACE}" --follow
 else
-        kubectl logs -l "${LABEL}" -n "${NAMESPACE}" -n "${NAMESPACE}"
+        kubectl logs -l "${LABEL}" -n "${NAMESPACE}"
 fi
