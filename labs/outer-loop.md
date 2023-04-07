@@ -76,7 +76,7 @@ flt list
 ```bash
 # You can set FLT_CLUSTER_SUFFIX to $MY_BRANCH as well or anything else.
 # Avoids special characters that could not comply with Azure naming conventions such as https://aka.ms/ResourceGroupNamingRestrictions
-$FLT_CLUSTER_SUFFIX=$GITHUB_USER
+export FLT_CLUSTER_SUFFIX=$GITHUB_USER
 
 # set MY_CLUSTER.
 export MY_CLUSTER=central-tx-atx-$FLT_CLUSTER_SUFFIX

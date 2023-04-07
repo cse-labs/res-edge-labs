@@ -1,16 +1,10 @@
 # Outer-loop to AKS on Azure
 
-## Validate cluster identifier and working branch
+## Using working branch
 
 ```bash
 
-# by default, MY_BRANCH is set to your lower case GitHub User Name
-# the variable is used to uniquely name your clusters
-# the value can be overwritten if needed
-echo $MY_BRANCH
-
-# make sure your branch is set and pushed remotely
-# commands will fail if you are in main branch
+# make sure your branch is pushed remotely
 git branch --show-current
 
 ```
@@ -56,11 +50,15 @@ git branch --show-current
 
   ```bash
 
+  # You can set FLT_CLUSTER_SUFFIX to $MY_BRANCH as well or anything else.
+  # Avoids special characters that could not comply with Azure naming conventions such as https://aka.ms/ResourceGroupNamingRestrictions
+  export FLT_CLUSTER_SUFFIX=$GITHUB_USER
+
   # set MY_AKS_CLUSTER
-  export MY_AKS_CLUSTER=central-tx-atx-$MY_BRANCH-aks
+  export MY_AKS_CLUSTER=central-tx-atx-$FLT_CLUSTER_SUFFIX-aks
 
   # set MY_RG
-  export MY_RG=$MY_BRANCH-rg
+  export MY_RG=$FLT_CLUSTER_SUFFIX-rg
 
   ```
 

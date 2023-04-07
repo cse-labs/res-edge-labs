@@ -1,16 +1,10 @@
 # Outer-Loop Multi-Cluster
 
-## Validate cluster identifier and working branch
+## Using working branch
 
 ```bash
 
-# by default, MY_BRANCH is set to your lower case GitHub User Name
-# the variable is used to uniquely name your clusters
-# the value can be overwritten if needed
-echo $MY_BRANCH
-
-# make sure your branch is set and pushed remotely
-# commands will fail if you are in main branch
+# make sure your branch is pushed remotely
 git branch --show-current
 
 ```
@@ -61,14 +55,18 @@ git branch --show-current
 
     ```bash
 
+    # You can set FLT_CLUSTER_SUFFIX to $MY_BRANCH as well or anything else.
+    # Avoids special characters that could not comply with Azure naming conventions such as https://aka.ms/ResourceGroupNamingRestrictions
+    export FLT_CLUSTER_SUFFIX=$GITHUB_USER
+
     # start in the base of the repo
     cd $PIB_BASE
 
     flt create \
-        -g $MY_BRANCH-fleet \
-        -c central-tx-$MY_BRANCH-1001 \
-        -c east-ga-$MY_BRANCH-1001 \
-        -c west-wa-$MY_BRANCH-1001
+        -g $FLT_CLUSTER_SUFFIX-fleet \
+        -c central-tx-$FLT_CLUSTER_SUFFIX-1001 \
+        -c east-ga-$FLT_CLUSTER_SUFFIX-1001 \
+        -c west-wa-$FLT_CLUSTER_SUFFIX-1001
 
     ```
 
@@ -203,10 +201,10 @@ cd $PIB_BASE
 git pull
 
 # delete the Azure resources
-flt delete central-tx-$MY_BRANCH-1001
-flt delete east-ga-$MY_BRANCH-1001
-flt delete west-wa-$MY_BRANCH-1001
-flt delete $MY_BRANCH-fleet
+flt delete central-tx-$FLT_CLUSTER_SUFFIX-1001
+flt delete east-ga-$FLT_CLUSTER_SUFFIX-1001
+flt delete west-wa-$FLT_CLUSTER_SUFFIX-1001
+flt delete $FLT_CLUSTER_SUFFIX-fleet
 
 # remove ips file
 rm -f ips
