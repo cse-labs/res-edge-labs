@@ -76,7 +76,7 @@ git branch --show-current
     ```
 
 - Validate user role on subscription
-  > Make sure your RoleDefinitionName is `Contributor` or `Owner` to create resources in this lab succssfully
+  > Make sure your RoleDefinitionName is `Contributor` or `Owner` to create resources in this lab successfully. If you need to set your role assignment, see [Assign Azure roles using the Azure portal](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal).
 
   ```bash
 
@@ -87,6 +87,9 @@ git branch --show-current
   ```
 
 ## Create a Dev Cluster
+
+- Running `flt create` creates the Azure VM that hosts the k3d cluster
+- It also triggers a [CI-CD Github Action](https://github.com/cse-labs/res-edge-labs/actions) to generate deployment manifests
 
 ```bash
 
@@ -101,9 +104,8 @@ flt create cluster -c $MY_CLUSTER
 
 ## Update Git Repo
 
-- `flt create` generates GitOps files for the cluster
-- [CI-CD](https://github.com/kubernetes101/pib-dev/actions) generates the deployment manifests
-  - Wait for CI-CD to complete (usually about 30 seconds)
+- Wait for the CI-CD Action to complete (around 30 seconds) before updating the repo
+- You can check in the Actions tab in your repo if it completed successfully
 
 ```bash
 
@@ -121,10 +123,9 @@ git push
 
 > If you get an SSH error, just retry every few seconds for the SSHD server to configure and start
 
-- `flt create` creates the Azure VM that hosts the k3d cluster
-- Additional setup is done via the `cloud-init` script
-- We have to wait for the k3d setup to complete
+- Wait for k3d setup to complete
   - This usually takes 3-4 minutes after VM setup completes
+- Additional cluster setup is done via the `cloud-init` script, which is executed automatically
 
 ```bash
 
@@ -211,9 +212,9 @@ flt targets deploy
 
 ```
 
-## Wait for ci-cd to finish
+## Wait for CI-CD to finish
 
-- Check [ci-cd status](https://github.com/kubernetes101/pib-dev/actions)
+- Check [CI-CD status](https://github.com/cse-labs/res-edge-labs/actions)
 
 ## Update Cluster
 

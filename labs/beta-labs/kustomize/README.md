@@ -20,7 +20,7 @@ Execute the kic command as presented below where `1.0.1` is the version number a
 kic overlay imdb 1.0.1
 ```
 
-The `kic overlay` command creates a new `overlay/1.0.1` folder and a copies the `kustomization.yaml` file from `apps/imdb/kudtomize/prod/base` to the new overlay folder in the `apps/imdb/kustomize/prod/` folder. You can update the `kustomization.yaml` file and set "beta" as the clusters metadata annotation. After the update, your file should look like the yaml sample below:
+The `kic overlay` command creates a new `overlay/1.0.1` folder and a copies the `kustomization.yaml` file from `apps/imdb/kustomize/prod/base` to the new overlay folder in the `apps/imdb/kustomize/prod/` folder. You can update the `kustomization.yaml` file and set "beta" as the clusters metadata annotation. After the update, your file should look like the yaml sample below:
 
 ```yaml
 # change clusters: none to clusters: beta
