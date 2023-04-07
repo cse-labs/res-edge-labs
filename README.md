@@ -73,17 +73,6 @@ code ~/.zshrc
 
 ```
 
-## Using a working branch
-
-- You can use the same branch for any of the labs or create a new branch per lab (add 1, 2, 3 ... to the branch name). The branch should have a remote URL set.
-- By default, the environment value MY_BRANCH is set to your lower case GitHub User Name. This can be overwritten if needed.
-
-  ```bash
-
-  echo $MY_BRANCH
-
-  ```
-
 ## inner-loop Labs
 
 - [Lab 1](./labs/inner-loop.md#inner-loop): Create, build, deploy, and test a new dotnet application and observability stack on your local cluster

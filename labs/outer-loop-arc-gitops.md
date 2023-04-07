@@ -9,15 +9,6 @@
   - Deploy an application to the fleet (with GitOps)
   - Validate the deployment in the Azure Arc Portal
 
-## Using working branch
-
-```bash
-
-# make sure your branch is pushed remotely
-git branch --show-current
-
-```
-
 ## Login to Azure
 
 - Login to Azure using `az login --use-device-code`

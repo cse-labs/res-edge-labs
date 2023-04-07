@@ -6,15 +6,6 @@
   - Add `ring` metadata to each cluster
   - Add targets based on cluster metadata
 
-## Using working branch
-
-```bash
-
-# make sure your branch is pushed remotely
-git branch --show-current
-
-```
-
 ## Create 15 Clusters
 
 - Running `flt create` generates GitOps files for the clusters and triggers a [CI-CD Github Action](https://github.com/cse-labs/res-edge-labs/actions) that will take about 30 seconds to complete

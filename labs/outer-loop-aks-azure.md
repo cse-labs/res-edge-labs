@@ -1,14 +1,5 @@
 # Outer-loop to AKS on Azure
 
-## Using working branch
-
-```bash
-
-# make sure your branch is pushed remotely
-git branch --show-current
-
-```
-
 ## Login to Azure
 
 - Login to Azure using `az login --use-device-code`
