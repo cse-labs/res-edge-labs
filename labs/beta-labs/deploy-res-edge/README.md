@@ -44,7 +44,13 @@ kic pods
 # ctl-c to exit
 kic pods --watch
 
-# wait 30 seconds after the container is running for the data to load
+kic logs mssql
+
+# "follow" the mssql logs until data loads with log "# rows affected"
+# ctl-c to exit
+kic logs mssql --follow
+
+# Verify mssql is loaded with metadata
 kic check mssql
 
 ```
@@ -106,8 +112,6 @@ kic check grafana
 
 ## Deploy WebV to Cluster
 
->Note: `<tab>` below means press the tab key for completion
-
 ```bash
 
 # deploy webv
@@ -121,8 +125,8 @@ kic pods --watch
 kic check webv
 
 # check the logs
-k logs -n api webv<tab>
-k logs -n api api<tab>
+kic logs webv
+kic logs resedge
 
 ```
 
