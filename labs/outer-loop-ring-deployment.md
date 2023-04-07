@@ -17,7 +17,9 @@ git branch --show-current
 
 ## Create 15 Clusters
 
-> Note: we don't actually create the clusters, just the GitOps folders
+- Running `flt create` generates GitOps files for the clusters and triggers a [CI-CD Github Action](https://github.com/cse-labs/res-edge-labs/actions) that will take about 30 seconds to complete
+
+> Note: we don't actually create the clusters, just the GitOps folders as the `--gitops-only` option is used here.
 
   ```bash
 
@@ -51,26 +53,27 @@ git branch --show-current
 
 ## Cluster Metadata Files
 
-  ```bash
+- You can view the cluster metadata files here
 
-  ls -alF clusters/*.yaml
+```bash
 
-  cat clusters/central-tx-atx-101.yaml
+ls -alF clusters/*.yaml
 
-  ```
+cat clusters/central-tx-atx-101.yaml
+
+```
 
 ## Update Git Repo
 
-- `flt create` generates GitOps files for the cluster
-- [CI-CD](https://github.com/kubernetes101/pib-dev/actions) generates the deployment manifests
-  - Wait for CI-CD to complete (usually about 30 seconds)
+- Wait for the CI-CD Action generating the deployment manifests to complete from the `flt create` step before updating the repo
+- You can check in the Actions tab in your repo if it completed successfully.
 
-  ```bash
+```bash
 
-  # update the git repo after ci-cd completes
-  git pull
+# update the git repo after ci-cd completes
+git pull
 
-  ```
+```
 
 ## Add Metadata to Clusters
 

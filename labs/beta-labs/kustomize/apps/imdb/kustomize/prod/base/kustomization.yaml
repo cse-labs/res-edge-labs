@@ -9,3 +9,7 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
+
+images:
+- name: ghcr.io/bartr/imdb
+  newTag: 1.0.0
