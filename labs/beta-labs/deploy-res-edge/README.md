@@ -6,7 +6,13 @@ This lab also builds on top of inner-loop lab. If you have not already done so, 
 
 ## Create cluster in Codespaces
 
-- Start in this directory
+- Start in this lab directory
+
+```bash
+# cd to switch to deploy-res-edge directory
+cd -- "$(find "$REPO_BASE" -name deploy-res-edge)"
+
+```
 
 > The k3d cluster will run `in` your Codespace - no need for an external cluster
 
