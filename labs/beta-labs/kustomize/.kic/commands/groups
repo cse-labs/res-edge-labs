@@ -1,33 +1,7 @@
 #!/bin/bash
 
-cat <<EOF
-corporate
-  ist
-beta
-  central-la-nola-2301 east-ga-atl-2301 west-ca-sd-2301
-pilot
-  central-tx-atx-2301 east-nc-clt-2301 west-wa-sea-2301
-stores
-  central
-    la
-      nola
-        central-la-nola-2301 central-la-nola-2302 central-la-nola-2303
-    tx
-      atx
-        central-tx-atx-2301 central-tx-atx-2302 central-tx-atx-2303
-  east
-    ga
-      atl
-        east-ga-atl-2301 east-ga-atl-2302 east-ga-atl-2303
-    nc
-      clt
-        east-nc-clt-2301 east-nc-clt-2302 east-nc-clt-2303
-  west
-    ca
-      sd
-        west-ca-sd-2301 west-ca-sd-2302 west-ca-sd-2303
-    wa
-      sea
-        west-wa-sea-2301 west-wa-sea-2302 west-wa-sea-2303
+set -e
 
-EOF
+GROUPS_ENDPOINT="http://localhost:32080/api/v1/groups?select=id,namePath,clustersTree"
+
+curl -k "$GROUPS_ENDPOINT" | jq
