@@ -6,7 +6,11 @@
 
 > Watch the internal only demo video [here](https://microsoft-my.sharepoint.com/:v:/p/bartr/EXFzHEAZvg1IhF-Sfs_HywwBB1CYOvBpTBPzy70a2FaUCw?e=zU3AYG)
 
-- Make sure you are in this directory /workspaces/YOUR_REPO/labs/beta-labs/kustomize/README.md
+- Start in this lab directory
+
+```bash
+cd $REPO_BASE/labs/beta-labs/kustomize
+```
 
 ## Create application overlay
 
