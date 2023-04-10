@@ -6,7 +6,7 @@
 
 > Watch the internal only demo video [here](https://microsoft-my.sharepoint.com/:v:/p/bartr/EXFzHEAZvg1IhF-Sfs_HywwBB1CYOvBpTBPzy70a2FaUCw?e=zU3AYG)
 
-- Make sure you are in this directory /workspaces/wr-resedgelabstest/labs/beta-labs/kustomize/README.md
+- Make sure you are in this directory /workspaces/YOUR_REPO/labs/beta-labs/kustomize/README.md
 
 ## Create application overlay
 
