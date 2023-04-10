@@ -77,9 +77,9 @@ flt list
 - It also triggers a [CI-CD Github Action](https://github.com/cse-labs/res-edge-labs/actions) to generate deployment manifests
 
 ```bash
-# You can set FLT_CLUSTER_SUFFIX to $MY_BRANCH as well or anything else.
-# Avoids special characters that could not comply with Azure naming conventions such as https://aka.ms/ResourceGroupNamingRestrictions
-export FLT_CLUSTER_SUFFIX=$GITHUB_USER
+# You can set FLT_CLUSTER_SUFFIX to anything, provided it is unique within an Azure subscription and avoids special characters that could not comply with Azure naming conventions such as https://aka.ms/ResourceGroupNamingRestrictions.
+# Change it below if it is already being used within the Azure subscription.
+export FLT_CLUSTER_SUFFIX=101
 
 # set MY_CLUSTER.
 export MY_CLUSTER=central-tx-atx-$FLT_CLUSTER_SUFFIX
