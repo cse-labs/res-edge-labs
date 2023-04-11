@@ -57,7 +57,7 @@ To generate and deploy the manifests for the clusters you can use `kic cicd` com
 
 ```bash
 
-#Verify ResEdge is running
+# Verify ResEdge is running
 kic check resedge
 
 ```
