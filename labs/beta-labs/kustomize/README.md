@@ -52,7 +52,7 @@ To generate and deploy the manifests for the clusters you can use `kic cicd` com
 
 ### Verify ResEdge Data Service
 
-- `kic cicd` uses ResEdge data service deployed to localhost.
+- `kic cicd` uses ResEdge data service deployed to localhost
 - If you have not already done so, deploy ResEdge from the [deploy ResEdge lab](../deploy-res-edge/README.md#deploy-data-service)
 
 ```bash
