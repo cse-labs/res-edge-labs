@@ -24,7 +24,7 @@ An overlay is just another kustomization, referring to the base, and referring t
 
 In this example, we will use overlay on the IMDB application to define a different version to be deployed to a different set of clusters.
 
-You can use the  `kic overlay` command to create the overlay directory structure.
+You can use the  `kic overlay` command to create the overlay structure.
 
 Execute the kic command as presented below where `1.0.1` is the version number and `imdb` is your app name:
 
