@@ -34,7 +34,7 @@ kic pods --watch
 
 ## Deploy SQL
 
-- Now that we've created a new cluster, the next step is to deploy SQL Server database. Res-Edge data service requires a SQL Server database for start up. This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications.
+Now that we've created a new cluster, the next step is to deploy SQL Server database. Res-Edge data service requires a SQL Server database for start up. This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications.
 
 ```bash
 
@@ -63,6 +63,8 @@ kic check mssql
 
 ## Deploy data service
 
+We will now deploy the Res-Edge data service. This data service allows CRUD operations against the SQL Server database (Inventory storage) deployed from previous section.
+
 ```bash
 
 # deploy the data service
@@ -79,10 +81,20 @@ kic check resedge
 
 ```
 
+## Test data service
+
+To make sure the data service is working properly, we will use `kic test` to generate both successful and failing requests. `kic test` uses the WebV installed in Codespace at start up.
+
+```bash
+
+# run tests against ResEdge data service
+kic test all
+
+```
+
 ## Deploy Observability
 
-- Deploy the following observability stack in your cluster
-  - Fluent Bit, Prometheus, Grafana
+Next we will deploy the following observability stack in your cluster: Fluent Bit, Prometheus, Grafana.
 
 ```bash
 
@@ -102,75 +114,9 @@ kic check grafana
 
 ```
 
-## Observability: Fluent Bit
+## Deploy WebV
 
-- Fluent Bit is a de-facto standard for K8s log forwarding
-  - We have deployed a Fluent Bit instance with "in" your Codespace
-- K9s is a commonly used UI that reduces the complexity of `kubectl`
-  - KiC deploys k9s "in" your Codespace
-- This is a powerful inner-loop feature as you don't have external dependencies
-- See the [Fluent Bit documentation](https://docs.fluentbit.io/manual/) for more information on Fluent Bit
-- See the [K9s documentation](https://k9scli.io/topics/commands/) for more information on K9s
-
-### View Fluent Bit Logs in K9s
-
-- Fluent Bit is set to forward logs to stdout for debugging
-- Fluent Bit can be configured to forward to different services including Grafana Cloud or Azure Log Analytics
-
-- Start `k9s` from the Codespace terminal
-
-```bash
-
-# start k9s
-k9s
-
-```
-
-- Press `0` to show all `namespaces`
-- Select `fluentbit` pod (or any other pod you would like to check logs for) and press `enter`
-- Press `enter` again to see the logs
-- Press `s` to Toggle AutoScroll
-- Press `w` to Toggle Wrap
-- Review logs that will be sent to Grafana when configured
-
-> To exit K9s - `:q <enter>`
-
-## Observability: Prometheus
-
-- Prometheus is a de-facto standard for K8s metrics
-- We have deployed a Prometheus instance with `custom metrics` "in" your Codespace
-- This is a powerful inner-loop feature as you don't have external dependencies
-- See the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/) for more information
-
-### Open Prometheus in Your Browser
-
-- From the `PORTS` tab, open `Prometheus (30000)`
-- From the query window, enter `resedge`
-  - This will filter to your custom app metrics
-- From the query window, enter `webv`
-  - This will filter to the WebValidate metrics
-
-## Observability: Grafana
-
-- Grafana is a de-facto standard for K8s dashboards
-- We have deployed a Grafana instance with custom dashboards "in" your Codespace
-- This is a powerful inner-loop feature as you don't have external dependencies
-- Explore the [Grafana documentation](https://grafana.com/docs/) to learn about more data sources, visualizations, and capabilities
-
-### Open Grafana in Your Browser
-
-- From the `PORTS` tab, open `Grafana (32000)`
-  - Username: admin
-  - Password: cse-labs
-- Click on "General / Home" at the top of the screen and select "dotnet" to see ResEdge application health metrics
-- Click on "General / Home" at the top of the screen and select "Application Dashboard" to see ResEdge application requests metrics
-- Keep "Application Dashboard" open on browser tab to monitor ResEdge application requests metrics for the next section
-
-## Testing: WebV
-
-### Generate Requests for Observability using WebV
-
-- Deploying WebV to the cluster will continuously generate requests to ResEdge data service.
+To generate dashboard metrics we will deploy WebV to the cluster. This will continuously generate 10 requests per second.
 
 ```bash
 
@@ -191,7 +137,75 @@ kic logs resedge
 
 ```
 
-- After deploying WebV, you should see the Application Dashboard update both WebV and ResEdge to about 10 Requests per second.
+## Observability: K9s and Fluentbit
+
+- K9s is a commonly used UI that reduces the complexity of `kubectl`
+  - KiC deploys k9s "in" your Codespace
+- Fluent Bit is a de-facto standard for K8s log forwarding
+- Fluent Bit is set to forward logs to stdout for debugging
+- Fluent Bit can be configured to forward to different services including Grafana Cloud or Azure Log Analytics
+- This is a powerful inner-loop feature as you don't have external dependencies
+- See the [Fluent Bit documentation](https://docs.fluentbit.io/manual/) for more information on Fluent Bit
+- See the [K9s documentation](https://k9scli.io/topics/commands/) for more information on K9s
+
+### View Logs in K9s
+
+- Start `k9s` from the Codespace terminal
+
+```bash
+
+# start k9s
+k9s
+
+```
+
+- Press `0` to show all `namespaces`
+- Select `api` pod and press `l` to see the logs
+- Press `s` to Toggle AutoScroll
+- Press `w` to Toggle Wrap
+- Review ResEdge app logs
+- Press `esc` to return to Pod View
+- Select `webv` pod and press `l` to see the logs
+- Review WebV logs
+- Press `esc` to return to Pod View
+- Select `fluentbit` pod and press `l` to see the logs
+- Review Fluent Bit logs
+
+> To exit K9s - `:q <enter>`
+
+## Observability: Prometheus
+
+- Prometheus is a de-facto standard for K8s metrics
+- We have deployed a Prometheus instance with `custom metrics`
+- This is a powerful inner-loop feature as you don't have external dependencies
+- See the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/) for more information
+
+### Open Prometheus in Your Browser
+
+- From the `PORTS` tab, open `Prometheus (30000)`
+- From the query window, enter `resedge`
+  - This will filter to your custom app metrics
+- From the query window, enter `webv`
+  - This will filter to the WebValidate metrics
+
+## Observability: Grafana
+
+- Grafana is a de-facto standard for K8s dashboards
+- We have deployed a Grafana instance with custom dashboards
+- This is a powerful inner-loop feature as you don't have external dependencies
+- Explore the [Grafana documentation](https://grafana.com/docs/) to learn about more data sources, visualizations, and capabilities
+
+### Open Grafana in Your Browser
+
+- From the `PORTS` tab, open `Grafana (32000)`
+  - Username: admin
+  - Password: cse-labs
+- Click on "General / Home" at the top of the screen and select "dotnet" to see ResEdge application health metrics
+- Click on "General / Home" at the top of the screen and select "Application Dashboard" to see ResEdge application requests metrics
+- You should see the Application Dashboard with both WebV and ResEdge to about 10 Requests per second
+- Keep "Application Dashboard" open on browser tab to monitor ResEdge application requests metrics for the next section
+
+### Generate More Requests for Observability using WebV
 
 - Generate load test for 30 seconds
 
