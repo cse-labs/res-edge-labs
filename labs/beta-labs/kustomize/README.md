@@ -3,7 +3,7 @@
 - Resilient Edge ring deployment with Kustomize demo
 - Kustomize helps customizing config files without the need of templates
 - Kustomize provides a number of handy methods like generators to make customization easier
-- Kustomize uses patches to introduce environment specific changes on an already existing standard config file without disturbing it
+- Kustomize uses overlays to introduce environment specific changes on an already existing standard config file without disturbing it
 - Kustomize is like [make](https://www.gnu.org/software/make/), in that what it does is declared in a file
 - Kustomize is like [sed](https://www.gnu.org/software/sed/), in that it emits edited text
 - See the [Kustomize documentation](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/) for more information
@@ -63,7 +63,7 @@ resources:
 - ../../base
 
 images:
-- name: ghcr.io/bartr/imdb
+- name: ghcr.io/cse-labs/imdb
   newTag: 1.0.1
 ```
 
