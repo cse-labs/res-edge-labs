@@ -1,6 +1,12 @@
 # Ring Deployment
 
 - Resilient Edge ring deployment with Kustomize demo
+- Kustomize helps customizing config files without the need of templates
+- Kustomize provides a number of handy methods like generators to make customization easier
+- Kustomize uses overlays to introduce environment specific changes on an already existing standard config file without disturbing it
+- Kustomize is like [make](https://www.gnu.org/software/make/), in that what it does is declared in a file
+- Kustomize is like [sed](https://www.gnu.org/software/sed/), in that it emits edited text
+- See the [Kustomize documentation](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/) for more information
 
 ## Quick Start
 
@@ -12,36 +18,52 @@
 cd $REPO_BASE/labs/beta-labs/kustomize
 ```
 
+## Verify ResEdge Data Service
+
+- If you have not already done so, deploy ResEdge from the [deploy ResEdge lab](../deploy-res-edge/README.md#deploy-data-service)
+- ResEdge Data Service is needed for this lab
+
+```bash
+
+# Verify ResEdge is running
+kic check resedge
+
+```
+
 ## Create application overlay
 
-Overlays on applications allow to deploy different application versions to different set of clusters.  You can use the  `kic overlay` command to perform this operation.
+An overlay is just another kustomization, referring to the base, and referring to patches to apply to that base. It lets you manage traditional variants of a configuration - like development, staging and production.
 
-> Note: The implementation of `kic overlay` on this template uses the `imdb` application image as hardcoded image reference. In case you want to explore the template with your own applications, you need to manually update the image reference.
+In this example, we will use overlay on the IMDB application to define a different version to be deployed to a different set of clusters.
+
+You can use the  `kic overlay` command to create the overlay structure.
 
 Execute the kic command as presented below where `1.0.1` is the version number and `imdb` is your app name:
 
 ```bash
+
 kic overlay imdb 1.0.1
+
 ```
 
-The `kic overlay` command creates a new `overlay/1.0.1` folder and a copies the `kustomization.yaml` file from `apps/imdb/kustomize/prod/base` to the new overlay folder in the `apps/imdb/kustomize/prod/` folder. You can update the `kustomization.yaml` file and set "beta" as the clusters metadata annotation. After the update, your file should look like the yaml sample below:
+- The `kic overlay imdb 1.0.1` command creates a new `overlays/1.0.1` folder
+- It will also create and open a new kustomization overlay file that references the base kustomization file with the new version defined
+- Update the new `kustomization.yaml` file and set "beta" as the clusters metadata annotation
+- After the update, your file should look like the yaml sample below:
 
 ```yaml
 # change clusters: none to clusters: beta
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 metadata:
   annotations:
+    version: 1.0.1
     clusters: beta
-
 resources:
-  - deployment.yaml
-  - service.yaml
-  - ingress.yaml
+- ../../base
 
 images:
-- name: ghcr.io/bartr/imdb
+- name: ghcr.io/cse-labs/imdb
   newTag: 1.0.1
 ```
 
@@ -54,10 +76,13 @@ To generate and deploy the manifests for the clusters you can use `kic cicd` com
 > Note: kic is context aware so make sure you are running this in the folder where your `clusters` folder resides.
 
 ```bash
+
+# `kic cicd` uses ResEdge data service deployed to localhost
 kic cicd
 
 # check the changes
 git status
+
 ```
 
 - Expected output

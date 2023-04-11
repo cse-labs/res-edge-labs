@@ -8,7 +8,7 @@ commands:
   scriptCommands:
     - name: resedge
       short: Check ResEdge
-      path: check/app
+      path: check/resedge
     - name: webv
       short: Check webv
       path: check/webv

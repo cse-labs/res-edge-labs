@@ -40,7 +40,7 @@ spec:
         - west
         - --zone
         - west-wa
-        image: ghcr.io/bartr/imdb:1.0.0
+        image: ghcr.io/cse-labs/imdb:1.0.0
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 10
