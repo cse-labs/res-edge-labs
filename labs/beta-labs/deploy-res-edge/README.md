@@ -137,7 +137,7 @@ kic check grafana
 
 ### Generate Requests for Observability using WebV
 
-- Deploy WebV to the cluster will continuously generate 10 requests per second to ResEdge data service.
+- Deploy WebV to the cluster will continuously generate requests to ResEdge data service.
 
 ```bash
 
@@ -151,11 +151,12 @@ kic pods --watch
 # check to verify webv is running
 kic check webv
 
-# check the logs
+# check the logs, you should see requests logs
 kic logs webv
 kic logs resedge
-
 ```
+
+- After deploying WebV, you should see the Application Dashboard update both WebV and ResEdge to about 10 Requests per second.
 
 - Generate load test for 30 seconds
 
