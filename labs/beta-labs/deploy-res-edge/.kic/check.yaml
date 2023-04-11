@@ -18,3 +18,9 @@ commands:
     - name: fluentbit
       short: Check fluentbit
       path: check/fluentbit
+    - name: grafana
+      short: Check Grafana
+      path: check/grafana
+    - name: prometheus
+      short: Check Prometheus
+      path: check/prometheus

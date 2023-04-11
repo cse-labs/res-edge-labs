@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "Running tests on the cluster with both successful and failing requests"
+
+# Integration.json is executed 5 times for idempotent test and to generate more metrics for dashboard
+docker run --net host --rm ghcr.io/cse-labs/res-edge-webv:beta --server http://localhost:32080 --log-format TsvMin --timeout 30 --region Dev --zone Dev --tag Dev --max-errors 10 --summary Tsv --verbose --files load.json integration.json integration.json integration.json integration.json integration.json
