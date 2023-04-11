@@ -137,15 +137,10 @@ kic logs resedge
 
 ```
 
-## Observability: K9s and Fluentbit
+## Observability: K9s
 
 - K9s is a commonly used UI that reduces the complexity of `kubectl`
-  - KiC deploys k9s "in" your Codespace
-- Fluent Bit is a de-facto standard for K8s log forwarding
-- Fluent Bit is set to forward logs to stdout for debugging
-- Fluent Bit can be configured to forward to different services including Grafana Cloud or Azure Log Analytics
-- This is a powerful inner-loop feature as you don't have external dependencies
-- See the [Fluent Bit documentation](https://docs.fluentbit.io/manual/) for more information on Fluent Bit
+  - KiC deploys K9s "in" your Codespace
 - See the [K9s documentation](https://k9scli.io/topics/commands/) for more information on K9s
 
 ### View Logs in K9s
@@ -160,18 +155,22 @@ k9s
 ```
 
 - Press `0` to show all `namespaces`
-- Select `api` pod and press `l` to see the logs
+- Select `api` pod and press `l` to review the ResEdge app logs
 - Press `s` to Toggle AutoScroll
 - Press `w` to Toggle Wrap
-- Review ResEdge app logs
 - Press `esc` to return to Pod View
-- Select `webv` pod and press `l` to see the logs
-- Review WebV logs
+- Select `webv` pod and press `l` to review the WebV logs
 - Press `esc` to return to Pod View
-- Select `fluentbit` pod and press `l` to see the logs
-- Review Fluent Bit logs
+- Select `fluentbit` pod and press `l` to see the Fluent Bit logs
 
-> To exit K9s - `:q <enter>`
+> To exit K9s - `:q <enter>` or `ctl-c`
+
+## Observability: Fluent Bit
+
+- Fluent Bit is set to forward logs to stdout for debugging
+- Fluent Bit can be configured to forward to different services including [Loki](https://grafana.com/oss/loki/) or [Azure Log Analytics](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-overview)
+- This is a powerful inner-loop feature as you don't have external dependencies
+- See the [Fluent Bit documentation](https://docs.fluentbit.io/manual/) for more information on Fluent Bit
 
 ## Observability: Prometheus
 
