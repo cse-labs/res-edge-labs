@@ -23,11 +23,13 @@ You can use the  `kic overlay` command to perform this operation.
 Execute the kic command as presented below where `1.0.1` is the version number and `imdb` is your app name:
 
 ```bash
+
 kic overlay imdb 1.0.1
+
 ```
 
-- The `kic overlay` command creates a new `overlays/1.0.1` folder
-- It copies the `kustomization.yaml` file from `apps/imdb/kustomize/prod/base` to the new overlays folder
+- The `kic overlay imdb 1.0.1` command creates a new `overlays/1.0.1` folder
+- It will also create and open a new kustomization overlay file that references the base kustomization file with the new version defined
 - Update the new `kustomization.yaml` file and set "beta" as the clusters metadata annotation. After the update, your file should look like the yaml sample below:
 
 ```yaml
