@@ -2,6 +2,10 @@
 
 - Resilient Edge ring deployment with Kustomize demo
 - Kustomize helps customizing config files without the need of templates
+- Kustomize provides a number of handy methods like generators to make customization easier
+- Kustomize uses patches to introduce environment specific changes on an already existing standard config file without disturbing it
+- Kustomize is like [make](https://www.gnu.org/software/make/), in that what it does is declared in a file
+- Kustomize is like [sed](https://www.gnu.org/software/sed/), in that it emits edited text
 - See the [Kustomize documentation](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/) for more information
 
 ## Quick Start
@@ -16,9 +20,11 @@ cd $REPO_BASE/labs/beta-labs/kustomize
 
 ## Create application overlay
 
-Overlays on applications allow to deploy different application versions to different set of clusters.
+An overlay is just another kustomization, referring to the base, and referring to patches to apply to that base. It lets you manage traditional variants of a configuration - like development, staging and production.
 
-You can use the  `kic overlay` command to perform this operation.
+In this example, we will use overlay on the IMDB application to define a different version to be deployed to a different set of clusters.
+
+You can use the  `kic overlay` command to create the overlay structure.
 
 Execute the kic command as presented below where `1.0.1` is the version number and `imdb` is your app name:
 
