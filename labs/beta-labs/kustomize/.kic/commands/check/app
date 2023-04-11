@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function resedge_check {
+    http localhost:32080/version
+}
+
+if ! resedge_check; then
+    echo "ResEdge is not Running";
+else
+    echo "ResEdge is Running";
+fi
