@@ -102,6 +102,39 @@ kic check grafana
 
 ```
 
+## Observability: Fluent Bit
+
+- Fluent Bit is a de-facto standard for K8s log forwarding
+  - We have deployed a Fluent Bit instance with "in" your Codespace
+- K9s is a commonly used UI that reduces the complexity of `kubectl`
+  - KiC deploys k9s "in" your Codespace
+- This is a powerful inner-loop feature as you don't have external dependencies
+- See the [Fluent Bit documentation](https://docs.fluentbit.io/manual/) for more information on Fluent Bit
+- See the [K9s documentation](https://k9scli.io/topics/commands/) for more information on K9s
+
+### View Fluent Bit Logs in K9s
+
+- Fluent Bit is set to forward logs to stdout for debugging
+- Fluent Bit can be configured to forward to different services including Grafana Cloud or Azure Log Analytics
+
+- Start `k9s` from the Codespace terminal
+
+```bash
+
+# start k9s
+k9s
+
+```
+
+- Press `0` to show all `namespaces`
+- Select `fluentbit` pod (or any other pod you would like to check logs for) and press `enter`
+- Press `enter` again to see the logs
+- Press `s` to Toggle AutoScroll
+- Press `w` to Toggle Wrap
+- Review logs that will be sent to Grafana when configured
+
+> To exit K9s - `:q <enter>`
+
 ## Observability: Prometheus
 
 - Prometheus is a de-facto standard for K8s metrics
@@ -137,7 +170,7 @@ kic check grafana
 
 ### Generate Requests for Observability using WebV
 
-- Deploy WebV to the cluster will continuously generate requests to ResEdge data service.
+- Deploying WebV to the cluster will continuously generate requests to ResEdge data service.
 
 ```bash
 
@@ -152,8 +185,10 @@ kic pods --watch
 kic check webv
 
 # check the logs, you should see requests logs
+# alternatively, you can use k9s
 kic logs webv
 kic logs resedge
+
 ```
 
 - After deploying WebV, you should see the Application Dashboard update both WebV and ResEdge to about 10 Requests per second.
@@ -175,35 +210,3 @@ kic test load &
 kic test all
 
 ```
-
-## Observability: Fluent Bit
-
-- Fluent Bit is a de-facto standard for K8s log forwarding
-  - We have deployed a Fluent Bit instance with "in" your Codespace
-- K9s is a commonly used UI that reduces the complexity of `kubectl`
-  - KiC deploys k9s "in" your Codespace
-- This is a powerful inner-loop feature as you don't have external dependencies
-- See the [Fluent Bit documentation](https://docs.fluentbit.io/manual/) for more information on Fluent Bit
-- See the [K9s documentation](https://k9scli.io/topics/commands/) for more information on K9s
-
-### View Fluent Bit Logs in K9s
-
-- Fluent Bit is set to forward logs to stdout for debugging
-- Fluent Bit can be configured to forward to different services including Grafana Cloud or Azure Log Analytics
-
-- Start `k9s` from the Codespace terminal
-
-  ```bash
-
-  k9s
-
-  ```
-
-- Press `0` to show all `namespaces`
-- Select `fluentbit` pod (or any other pod you would like to check logs for) and press `enter`
-- Press `enter` again to see the logs
-- Press `s` to Toggle AutoScroll
-- Press `w` to Toggle Wrap
-- Review logs that will be sent to Grafana when configured
-
-> To exit K9s - `:q <enter>`
