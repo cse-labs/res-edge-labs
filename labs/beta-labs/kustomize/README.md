@@ -18,6 +18,18 @@
 cd $REPO_BASE/labs/beta-labs/kustomize
 ```
 
+## Verify ResEdge Data Service
+
+- If you have not already done so, deploy ResEdge from the [deploy ResEdge lab](../deploy-res-edge/README.md#deploy-data-service)
+- ResEdge Data Service is needed for this lab
+
+```bash
+
+# Verify ResEdge is running
+kic check resedge
+
+```
+
 ## Create application overlay
 
 An overlay is just another kustomization, referring to the base, and referring to patches to apply to that base. It lets you manage traditional variants of a configuration - like development, staging and production.
@@ -58,24 +70,13 @@ images:
 
 To generate and deploy the manifests for the clusters you can use `kic cicd` command.
 
-### Verify ResEdge Data Service
-
-- `kic cicd` uses ResEdge data service deployed to localhost
-- If you have not already done so, deploy ResEdge from the [deploy ResEdge lab](../deploy-res-edge/README.md#deploy-data-service)
-
-```bash
-
-# Verify ResEdge is running
-kic check resedge
-
-```
-
 ### Generate manifests
 
 > Note: kic is context aware so make sure you are running this in the folder where your `clusters` folder resides.
 
 ```bash
 
+# `kic cicd` uses ResEdge data service deployed to localhost
 kic cicd
 
 # check the changes
