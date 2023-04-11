@@ -48,7 +48,8 @@ kic overlay imdb 1.0.1
 
 - The `kic overlay imdb 1.0.1` command creates a new `overlays/1.0.1` folder
 - It will also create and open a new kustomization overlay file that references the base kustomization file with the new version defined
-- Update the new `kustomization.yaml` file and set "beta" as the clusters metadata annotation. After the update, your file should look like the yaml sample below:
+- Update the new `kustomization.yaml` file and set "beta" as the clusters metadata annotation
+- After the update, your file should look like the yaml sample below:
 
 ```yaml
 # change clusters: none to clusters: beta
