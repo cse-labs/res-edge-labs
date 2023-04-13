@@ -37,6 +37,7 @@ kic pods --watch
 Now that we've created a new cluster, the next step is to deploy SQL Server database. Res-Edge data service requires a SQL Server database for start up. This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications.
 
 > Note: `k` is an alias for `kubectl` and `kaf` is an alias for `kubectl apply -f`
+
 ```bash
 
 # create the namespace
