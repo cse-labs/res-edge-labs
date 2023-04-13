@@ -37,6 +37,13 @@ kic pods --watch
 
 - Res-Edge data service requires a SQL Server database for start up
 - This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications
+- When the container starts, it will populate the database with sample data
+  - 19 Applications
+  - 19 Clusters
+  - 20 Hierarchal groups
+  - 19 Namespaces
+  - 3 Policies
+  - All entities will have Metadata and Tags
 
 > Note: `k` is an alias for `kubectl` and `kaf` is an alias for `kubectl apply -f`
 
