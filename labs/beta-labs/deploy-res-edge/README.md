@@ -10,7 +10,7 @@ This lab also builds on top of inner-loop lab. If you have not already done so, 
 
 ```bash
 # cd to switch to deploy-res-edge directory
-cd -- "$(find "$REPO_BASE" -name deploy-res-edge)"
+cd $REPO_BASE/labs/beta-labs/deploy-res-edge
 
 ```
 
@@ -36,6 +36,7 @@ kic pods --watch
 
 Now that we've created a new cluster, the next step is to deploy SQL Server database. Res-Edge data service requires a SQL Server database for start up. This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications.
 
+> Note: `k` is an alias for `kubectl` and `kaf` is an alias for `kubectl apply -f`
 ```bash
 
 # create the namespace
