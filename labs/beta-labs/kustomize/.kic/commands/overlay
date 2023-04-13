@@ -27,6 +27,12 @@ if [ ! -d "apps/$1" ]; then
     exit 1;
 fi
 
+if [ ! -f "apps/$1/kustomize/dev/base/kustomization.yaml" ] && [ ! -f "apps/$1/kustomize/test/kustomization.yaml" ] && [ ! -f "apps/$1/kustomize/prod/base/kustomization.yaml" ]; then
+    echo "Base Kustomization file not found for $1.";
+    echo "apps/$1/kustomize/<env>/base/kustomization.yaml must exist where env is dev,test, or prod"
+    exit 1;
+fi
+
 # change to the apps/myapp dir
 cd "$app";
 
