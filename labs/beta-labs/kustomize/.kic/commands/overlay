@@ -5,13 +5,31 @@ set -e
 dir=""
 app="apps/$1"
 
-if [ "$app" = "apps/" ]; then
-    echo "app directory not found";
+function print_usage
+{
+    echo "Usage: kic overlay <name> <version>"
+}
+
+if [ "$1" = "" ]; then
+    echo "Application name is required."
+    print_usage
     exit 1;
 fi
 
 if [ "$2" = "" ]; then
-    echo "Usage: kic overlay name"
+    echo "Version is required."
+    print_usage
+    exit 1;
+fi
+
+if [ ! -d "apps/$1" ]; then
+    echo "App directory '$1' not found.";
+    exit 1;
+fi
+
+if [ ! -f "apps/$1/kustomize/dev/base/kustomization.yaml" ] && [ ! -f "apps/$1/kustomize/test/kustomization.yaml" ] && [ ! -f "apps/$1/kustomize/prod/base/kustomization.yaml" ]; then
+    echo "Base Kustomization file not found for $1.";
+    echo "apps/$1/kustomize/<env>/base/kustomization.yaml must exist where env is dev,test, or prod"
     exit 1;
 fi
 
