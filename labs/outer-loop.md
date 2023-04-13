@@ -255,7 +255,7 @@ flt check app imdb
   ```bash
 
   # export MY_IP
-  cd $PIB_BASE
+  cd $REPO_BASE
   export MY_IP=$(cat ips | cut -f2)
 
   http http://$MY_IP/version
@@ -271,7 +271,7 @@ flt check app imdb
   ```bash
 
   # start in the root of your repo
-  cd $PIB_BASE
+  cd $REPO_BASE
   git pull
   flt delete $MY_CLUSTER
   rm ips
