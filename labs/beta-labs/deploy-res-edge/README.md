@@ -1,20 +1,19 @@
 # Inner-loop with Res-Edge
 
-This lab will go over steps to run Res-Edge in Codespaces.
-
-This lab also builds on top of inner-loop lab. If you have not already done so, please run through the inner-loop lab [here](../../inner-loop.md#inner-loop) to get more familiarity with kic and other tools used in this lab.
+- ResEdge helps build a powerful system for automated deployment, update, management, and observability for thousands of Kubernetes clusters
+- This lab will go over steps to run Res-Edge data service with Observability in Codespaces
+- To get more familiarity with kic and other tools used in this lab, please run through the inner-loop lab [here](../../inner-loop.md#inner-loop)
 
 ## Create cluster in Codespaces
 
 - Start in this lab directory
 
 ```bash
+
 # cd to switch to deploy-res-edge directory
 cd $REPO_BASE/labs/beta-labs/deploy-res-edge
 
 ```
-
-> The k3d cluster will run `in` your Codespace - no need for an external cluster
 
 - Use `kic` to create and verify a new k3d cluster
 
@@ -32,9 +31,12 @@ kic pods --watch
 
 ```
 
+> The k3d cluster will run `in` your Codespace - no need for an external cluster
+
 ## Deploy SQL
 
-Now that we've created a new cluster, the next step is to deploy SQL Server database. Res-Edge data service requires a SQL Server database for start up. This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications.
+- Res-Edge data service requires a SQL Server database for start up
+- This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications
 
 > Note: `k` is an alias for `kubectl` and `kaf` is an alias for `kubectl apply -f`
 
@@ -65,7 +67,8 @@ kic check mssql
 
 ## Deploy data service
 
-We will now deploy the Res-Edge data service. This data service allows CRUD operations against the SQL Server database (Inventory storage) deployed from previous section.
+- We will now deploy the Res-Edge data service
+- This data service allows CRUD operations against the SQL Server database (Inventory storage) deployed from previous section
 
 ```bash
 
@@ -85,7 +88,8 @@ kic check resedge
 
 ## Test data service
 
-To make sure the data service is working properly, we will use `kic test` to generate both successful and failing requests. `kic test` uses the WebV installed in Codespace at start up.
+- To make sure the data service is working properly, we will use `kic test` to generate both successful and failing requests
+- `kic test` uses the WebV installed in Codespace at start up
 
 ```bash
 
@@ -96,7 +100,8 @@ kic test all
 
 ## Deploy Observability
 
-Next we will deploy the following observability stack in your cluster: Fluent Bit, Prometheus, Grafana.
+- Next we will deploy the following observability stack in your cluster
+  - Fluent Bit, Prometheus, Grafana.
 
 ```bash
 
@@ -118,7 +123,8 @@ kic check grafana
 
 ## Deploy WebV
 
-To generate dashboard metrics we will deploy WebV to the cluster. This will continuously generate 10 requests per second.
+- To generate dashboard metrics we will deploy WebV to the cluster
+- This will continuously generate 10 requests per second
 
 ```bash
 
