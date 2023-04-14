@@ -24,3 +24,9 @@ commands:
     - name: show
       short: Show policy metadata
       path: resedge/policies-show
+  - name: groups
+    short:  Groups commands
+    scriptCommands:
+    - name: show
+      short: Show group metadata
+      path: resedge/groups-show
