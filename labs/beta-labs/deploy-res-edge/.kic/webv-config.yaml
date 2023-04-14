@@ -2,7 +2,7 @@
 # webv config
 ###
 
-image: ghcr.io/cse-labs/res-edge-webv:beta
+image: "${KIC_RESEDGE_WEBV}"
 server:  http://localhost:32080
 logformat: TsvMin
 verbose: false

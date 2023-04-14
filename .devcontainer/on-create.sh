@@ -24,6 +24,30 @@ dotnet restore labs/advanced-labs/cli/myapp/src
     echo "export MSSQL_SA_PASSWORD=Res-Edge23"
     echo ""
 
+    echo "if [ -z \"\$KIC_DATA_SERVICE\" ]"
+    echo "then"
+    echo "    export KIC_DATA_SERVICE=ghcr.io/cse-labs/res-edge:beta"
+    echo "fi"
+    echo ""
+
+    echo "if [ -z \"\$KIC_MSSQL\" ]"
+    echo "then"
+    echo "    export KIC_MSSQL=ghcr.io/cse-labs/res-edge-sql:beta"
+    echo "fi"
+    echo ""
+
+    echo "if [ -z \"\$KIC_RESEDGE_WEBV\" ]"
+    echo "then"
+    echo "    export KIC_RESEDGE_WEBV=ghcr.io/cse-labs/res-edge-webv:beta"
+    echo "fi"
+    echo ""
+
+    echo "if [ -z \"\$KIC_GITOPS_AUTOMATION\" ]"
+    echo "then"
+    echo "    export KIC_GITOPS_AUTOMATION=ghcr.io/cse-labs/res-edge-automation:0.8.5"
+    echo "fi"
+    echo ""
+
     echo "if [ \"\$PIB_PAT\" != \"\" ]"
     echo "then"
     echo "    export GITHUB_TOKEN=\$PIB_PAT"
@@ -102,8 +126,19 @@ kic cluster create
 echo "Pulling docker images"
 docker pull mcr.microsoft.com/dotnet/sdk:6.0
 docker pull mcr.microsoft.com/dotnet/aspnet:6.0-alpine
-docker pull ghcr.io/cse-labs/res-edge-webv:beta
-docker pull ghcr.io/cse-labs/res-edge-automation:0.8.5
+
+if [ -z "$KIC_RESEDGE_WEBV" ]
+then
+    KIC_RESEDGE_WEBV=ghcr.io/cse-labs/res-edge-webv:beta
+fi
+
+if [ -z "$KIC_GITOPS_AUTOMATION" ]
+then
+    KIC_GITOPS_AUTOMATION=ghcr.io/cse-labs/res-edge-automation:0.8.5
+fi
+
+docker pull "${KIC_RESEDGE_WEBV}"
+docker pull "${KIC_GITOPS_AUTOMATION}"
 
 sudo apt-get update
 

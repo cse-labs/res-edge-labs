@@ -5,5 +5,5 @@ echo "Running ci-cd locally ..."
 docker run -it --rm \
   --net host \
   -v "$(pwd)":/goa \
-  ghcr.io/cse-labs/res-edge-automation:0.8.5 \
+  "${KIC_GITOPS_AUTOMATION}" \
   -s http://localhost:32080
