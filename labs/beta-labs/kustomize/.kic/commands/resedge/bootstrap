@@ -1,0 +1,24 @@
+#!/bin/bash
+
+function usage() {
+  echo "Usage: $0 --id [number]"
+  exit 1
+}
+
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+      --id)
+        id="$2"
+        shift
+        shift
+        ;;
+      *)
+        usage
+        ;;
+    esac
+  done
+
+  if [ -z "$id" ]; then
+    usage
+  fi
