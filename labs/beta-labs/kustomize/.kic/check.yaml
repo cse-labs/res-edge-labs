@@ -9,3 +9,6 @@ commands:
     - name: resedge
       short: Check ResEdge
       path: check/resedge
+    - name: mssql
+      short: Check mssql
+      path: check/mssql
