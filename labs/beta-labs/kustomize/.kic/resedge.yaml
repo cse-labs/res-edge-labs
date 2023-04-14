@@ -1,0 +1,20 @@
+###
+# resedge commands
+###
+
+commands:
+- name: resedge
+  short: ResEdge commands
+  commands:
+  - name: clusters
+    short:  Clusters commands
+    scriptCommands:
+    - name: list
+      short: Return clusters in filtered group
+      path: resedge/clusters-list
+  - name: applications
+    short:  Applications commands
+    scriptCommands:
+    - name: list
+      short: Return applications in filtered group
+      path: resedge/applications-list
