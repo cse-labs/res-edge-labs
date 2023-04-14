@@ -1,7 +1,6 @@
 #!/bin/bash
 
 KIC_RES_EDGE_URL="http://localhost:32080"
-KIC_RES_EDGE_URL="https://api.res-edge.net/"
 
 usage() {
   echo "Usage: $0 --id [number]"
