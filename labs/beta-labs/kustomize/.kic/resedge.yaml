@@ -1,0 +1,26 @@
+###
+# clusters commands
+###
+
+commands:
+- name: resedge
+  short: ResEdge commands
+  commands:
+  - name: clusters
+    short:  Clusters commands
+    scriptCommands:
+    - name: show
+      short: Show cluster metadata
+      path: resedge/clusters-show
+  - name: namespaces
+    short:  Namespaces commands
+    scriptCommands:
+    - name: show
+      short: Show namespace metadata
+      path: resedge/namespaces-show
+  - name: policies
+    short:  Policies commands
+    scriptCommands:
+    - name: show
+      short: Show policy metadata
+      path: resedge/policies-show

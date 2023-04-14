@@ -1,0 +1,35 @@
+#!/bin/bash
+
+KIC_RES_EDGE_URL="http://localhost:32080"
+KIC_RES_EDGE_URL="https://api.res-edge.net/"
+
+usage() {
+  echo "Usage: $0 --id [number]"
+  exit 1
+}
+
+if [ -z "${KIC_RES_EDGE_URL}" ]; then
+  echo "Error: KIC_RES_EDGE_URL environment variable is not set"
+  usage
+fi
+
+while [[ $# -gt 0 ]]; do
+  key="$1"
+  case $key in
+    --id)
+      id="$2"
+      shift
+      shift
+      ;;
+    *)
+      usage
+      ;;
+  esac
+done
+
+if [ -z "$id" ]; then
+  usage
+fi
+
+url="${KIC_RES_EDGE_URL}/api/v1/${KIC_RES_EDGE_ENTITYNAME}/${id}"
+curl --silent --show-error "$url" | jq
