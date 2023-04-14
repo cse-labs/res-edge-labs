@@ -1,0 +1,3 @@
+#!/bin/zsh
+# pull the latest git updates
+git -C "$HOME/pib" pull
