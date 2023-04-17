@@ -6,21 +6,6 @@
   - Add `ring` metadata to each cluster
   - Add targets based on cluster metadata
 
-## Validate cluster identifier and working branch
-
-```bash
-
-# by default, MY_BRANCH is set to your lower case GitHub User Name
-# the variable is used to uniquely name your clusters
-# the value can be overwritten if needed
-echo $MY_BRANCH
-
-# make sure your branch is set and pushed remotely
-# commands will fail if you are in main branch
-git branch --show-current
-
-```
-
 ## Create 15 Clusters
 
 - Running `flt create` generates GitOps files for the clusters and triggers a [CI-CD Github Action](https://github.com/cse-labs/res-edge-labs/actions) that will take about 30 seconds to complete
@@ -29,12 +14,16 @@ git branch --show-current
 
   ```bash
 
+  # You can set FLT_CLUSTER_SUFFIX to anything, provided it is unique within an Azure subscription and avoids special characters that could not comply with Azure naming conventions such as https://aka.ms/ResourceGroupNamingRestrictions.
+  # Change it below if it is already being used within the Azure subscription.
+  export FLT_CLUSTER_SUFFIX=101
+
   # start in the base of the repo
   cd $PIB_BASE
 
   flt create \
       --gitops-only \
-      -g $MY_BRANCH-fleet \
+      -g $FLT_CLUSTER_SUFFIX-fleet \
       -c central-tx-atx-101 \
       -c central-tx-dal-101 \
       -c central-tx-hou-101 \
