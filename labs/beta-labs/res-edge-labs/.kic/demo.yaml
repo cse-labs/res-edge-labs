@@ -14,16 +14,16 @@ commands:
 scriptCommands:
   - name: cicd
     short: Test ci-cd locally
-    path: demo/cicd
+    path: cicd
 
   - name: deploy
     short: Deploy your application
-    path: demo/deploy
+    path: deploy
 
   - name: groups
     short: List Res-Edge groups
-    path: demo/groups
+    path: groups
 
   - name: overlay
     short: Create new Kustomize overly
-    path: demo/overlay
+    path: overlay
