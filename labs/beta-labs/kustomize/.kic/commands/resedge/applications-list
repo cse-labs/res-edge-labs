@@ -1,0 +1,64 @@
+#!/bin/bash
+
+set -e
+
+SEARCH="";
+ORDERBY="";
+URL="http://localhost:32080/api/v1/applications";
+URL_FILTER="";
+URL_ORDER_BY="";
+
+function print_usage() {
+    echo "Usage: $0 -f [search term] -s [name/id]"
+    echo '   -f   search for application'
+    echo '   -s   order by name or id'
+}
+
+if [[ ${#} -eq 1 ]]; then
+   print_usage
+fi
+
+function get_applications {
+    curl -s "$URL"
+}
+
+while getopts ":f:s:" o; do
+    case "${o}" in
+        f)
+            SEARCH=$OPTARG
+            ;;
+        s)
+            ORDERBY=$OPTARG
+            ;;
+        *)
+            print_usage
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ "${SEARCH}" != "" ]; then
+    URL_FILTER="?filter=name%20eq%20%27"$SEARCH"%27"
+    APPS=$(get_applications | jq -r ' .value[] | [.id, .name]')
+fi
+
+if [ "${ORDERBY}" != "" ]; then
+    URL_ORDER_BY="?orderby=$ORDERBY"
+fi
+
+URL="${URL}${URL_FILTER}${URL_ORDER_BY}"
+echo "$URL"
+
+if [ "${SEARCH}" != "" ]; then
+  APPS=$(get_applications)
+  echo "$APPS" | jq -r ' .value[]'
+else
+  APPS=$(get_applications)
+  echo "$APPS" | jq -r ' .value[] | [.id, .name]'
+fi
+
+
+if [ "$APPS" = "" ]; then
+    echo "No applications found";
+    exit 1;
+fi
