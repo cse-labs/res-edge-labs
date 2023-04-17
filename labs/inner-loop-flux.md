@@ -37,6 +37,9 @@ kic new dotnet-webapi MyApp
 # Kustomization new breaking updates: https://github.com/fluxcd/flux2/issues/3564
 # Workaroun`kic new dotnet-webapi MyApp` needs update
 cp flux-system/.gitops/dev/controllers.yaml myapp/kic-deploy/flux/controllers.yaml
+git add ..
+git commit -m "updated flux controllers"
+git push
 
 # this is important as the CLI is "context aware"
 cd myapp
