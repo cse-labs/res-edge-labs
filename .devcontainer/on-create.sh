@@ -19,10 +19,8 @@ dotnet restore labs/advanced-labs/cli/myapp/src
     echo ""
 
     # add cli to path
-    # todo - remove this once fully tested
     echo "export PIB_BASE=$PWD"
-
-    echo "export PIB_BASE=$PWD"
+    echo "export REPO_BASE=$PWD"
     echo "export MSSQL_SA_PASSWORD=Res-Edge23"
     echo ""
 
