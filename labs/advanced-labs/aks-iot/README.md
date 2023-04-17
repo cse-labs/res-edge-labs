@@ -78,7 +78,7 @@
 
   cd
 
-  setx PIB_BASE <value from cd without CRLF>
+  setx REPO_BASE <value from cd without CRLF>
 
   ```
 
