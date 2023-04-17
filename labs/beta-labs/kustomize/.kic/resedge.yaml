@@ -11,10 +11,22 @@ commands:
     scriptCommands:
     - name: list
       short: Return clusters in filtered group
-      path: resedge/clusters-list
+      path: resedge/clusters/list
   - name: applications
     short:  Applications commands
     scriptCommands:
     - name: list
-      short: Return applications in filtered group
-      path: resedge/applications-list
+      short: Return applications
+      path: resedge/applications/list
+  - name: namespaces
+    short:  Namespaces commands
+    scriptCommands:
+    - name: list
+      short: Return namespaces
+      path: resedge/namespaces/list
+  - name: groups
+    short:  Groups commands
+    scriptCommands:
+    - name: list
+      short: Return groups
+      path: resedge/groups/list

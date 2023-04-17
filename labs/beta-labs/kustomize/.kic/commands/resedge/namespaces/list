@@ -1,0 +1,53 @@
+#!/bin/bash
+
+set -e
+
+SEARCH="";
+ORDERBY="";
+URL="http://localhost:32080/api/v1/namespaces";
+URL_FILTER="";
+URL_ORDER_BY="";
+
+function print_usage() {
+    echo "Usage: $0 -s [search term] -o [name/id]"
+    echo '   -s   search for application by name, metadata, tag'
+    echo '   -o   order by name or id'
+}
+
+function get_namespaces {
+    curl -s "$URL"
+}
+
+while getopts ":s:o:" f; do
+    case "${f}" in
+        s)
+            SEARCH=$OPTARG ;;
+        o)
+            ORDERBY=$OPTARG ;;
+        *)
+            print_usage ; exit 1 ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ "${SEARCH}" != "" ]; then
+    URL_FILTER="?filter=(name%20eq%20%27"$SEARCH"%27%20or%20tags/any(t:t%20eq%20%27"$SEARCH"%27)%20or%20metadata/any(m:m/value%20eq%20%27"$SEARCH"%27))"
+fi
+
+if [ "${ORDERBY}" != "" ]; then
+    URL_ORDER_BY="?orderby=$ORDERBY"
+fi
+
+URL="${URL}${URL_FILTER}${URL_ORDER_BY}"
+NAMESPACES=$(get_namespaces | jq -r ' .value[]')
+
+if [ "$NAMESPACES" = "" ]; then
+    echo "No namespaces found";
+    exit 1;
+fi
+
+if [ "${SEARCH}" != "" ]; then
+  echo "$NAMESPACES" | jq
+else
+  echo "$NAMESPACES" | jq -r ' .name'
+fi
