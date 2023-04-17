@@ -30,7 +30,7 @@ kic check resedge
 
 ```bash
 
-cd $REPO_BASE/labs/beta-labs/kustomize
+cd $REPO_BASE/labs/beta-labs/res-edge-labs/kustomize
 
 ```
 
