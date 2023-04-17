@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function resedge_check {
-    http localhost:32080/version
+    http "${KIC_DATA_SERVICE}"/version
 }
 
 if ! resedge_check; then
