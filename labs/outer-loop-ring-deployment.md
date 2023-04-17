@@ -19,7 +19,7 @@
   export FLT_CLUSTER_SUFFIX=101
 
   # start in the base of the repo
-  cd $REPO_BASE
+  cd $PIB_BASE
 
   flt create \
       --gitops-only \
@@ -94,7 +94,7 @@ git add clusters
 
 ```bash
 
-cd $REPO_BASE/apps/imdb
+cd $PIB_BASE/apps/imdb
 flt targets clear
 flt targets add ring:0
 flt targets deploy
@@ -108,7 +108,7 @@ git pull
 
 ```bash
 
-cd $REPO_BASE/apps/imdb
+cd $PIB_BASE/apps/imdb
 flt targets add ring:1
 flt targets deploy
 
@@ -121,7 +121,7 @@ git pull
 
 ```bash
 
-cd $REPO_BASE/apps/imdb
+cd $PIB_BASE/apps/imdb
 flt targets add region:central
 flt targets deploy
 
@@ -137,7 +137,7 @@ git pull
 ```bash
 
 # start in the base of the repo
-cd $REPO_BASE
+cd $PIB_BASE
 git pull
 
 # restore the clusters dir from main

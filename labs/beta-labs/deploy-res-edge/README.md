@@ -10,7 +10,7 @@ This lab also builds on top of inner-loop lab. If you have not already done so, 
 
 ```bash
 # cd to switch to deploy-res-edge directory
-cd -- "$(find "$REPO_BASE" -name deploy-res-edge)"
+cd -- "$(find "$PIB_BASE" -name deploy-res-edge)"
 
 ```
 

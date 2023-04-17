@@ -183,7 +183,7 @@ git pull
 az group delete -n $MY_RG
 
 # start in the base of the repo
-cd $REPO_BASE
+cd $PIB_BASE
 git pull
 
 # clear cluster metadata
