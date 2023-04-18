@@ -1,10 +1,10 @@
 #!/bin/bash
 
-K3D_CONFIG="../.kic/k3d.yaml"
+k3d_config="../.kic/k3d.yaml"
 
 # validate directory
-if [ ! -f "$K3D_CONFIG" ]; then
-  echo "File not found - $K3D_CONFIG"
+if [ ! -f "$k3d_config" ]; then
+  echo "File not found - $k3d_config"
   exit 1
 fi
 
@@ -23,7 +23,7 @@ echo "Creating cluster ..."
 k3d cluster create \
   --registry-use k3d-registry.localhost:5500 \
   --registry-config "$HOME/bin/.kic/registries.yaml" \
-  --config "${K3D_CONFIG}" \
+  --config "${k3d_config}" \
   --k3s-arg "--disable=servicelb@server:0" \
   --k3s-arg "--disable=traefik@server:0"
 
