@@ -24,7 +24,7 @@ echo $MY_CLUSTER
 ```bash
 
 # make sure you are in the root directory
-cd $PIB_BASE
+cd $REPO_BASE
 
 # copy flagger and flagger-grafana to apps directory
 cp -R ./labs/advanced-labs/canary/flagger apps
@@ -92,7 +92,7 @@ flt check app flagger-grafana
 
     ```bash
 
-    cd $PIB_BASE
+    cd $REPO_BASE
 
     # update imdb app.yaml with canary template
     sed -i 's,pib-service,pib-service-canary,g' apps/imdb/app.yaml
@@ -149,7 +149,7 @@ flt check app flagger-grafana
     ```bash
 
     # make sure you're in imdb dir
-    cd $PIB_BASE/apps/imdb
+    cd $REPO_BASE/apps/imdb
 
     # Update imdb app.yaml with image tag from latest to beta
     sed -i 's,ghcr.io/cse-labs/pib-imdb:latest,ghcr.io/cse-labs/pib-imdb:beta,g' app.yaml
@@ -211,7 +211,7 @@ flt check app flagger-grafana
     ```bash
 
     # make sure you're in imdb dir
-    cd $PIB_BASE/apps/imdb
+    cd $REPO_BASE/apps/imdb
 
     # update imdb app.yaml with image tag from beta to bad
     sed -i 's,ghcr.io/cse-labs/pib-imdb:beta,ghcr.io/cse-labs/pib-imdb:bad,g' app.yaml
@@ -266,7 +266,7 @@ flt check app flagger-grafana
 
   ```bash
 
-  cd $PIB_BASE
+  cd $REPO_BASE
   git checkout origin/main -- apps/imdb/app.yaml
 
   git add .

@@ -203,7 +203,7 @@ kic test integration --max-errors 5 --show
 
 ```bash
 
-code $PIB_BASE/apps/myapp/webv/integration.json
+code $REPO_BASE/apps/myapp/webv/integration.json
 
 ```
 

@@ -70,7 +70,7 @@ flt create -g $FLT_NAME-fleet -c monitoring-$FLT_NAME
 ```bash
 
 # make sure you are in the monitoring directory
-cd $PIB_BASE/labs/advanced-labs/monitoring
+cd $REPO_BASE/labs/advanced-labs/monitoring
 
 cp -aR ./webv ../../../apps
 
@@ -114,7 +114,7 @@ git push
 ```bash
 
 # make sure you are in the apps/webv directory
-cd $PIB_BASE/apps/webv
+cd $REPO_BASE/apps/webv
 
 # should be empty
 flt targets list
@@ -155,7 +155,7 @@ flt exec kic pods -f monitoring
 
 ```bash
 
-cd $PIB_BASE/labs/advanced-labs/monitoring
+cd $REPO_BASE/labs/advanced-labs/monitoring
 
 cp -aR ./fluent-bit ../../../apps
 
@@ -175,7 +175,7 @@ Follow the instructions [here](./fluent-bit/README.md#update-fluent-bit-config) 
 ```bash
 
 # make sure you are in the fluent-bit directory
-cd $PIB_BASE/apps/fluent-bit
+cd $REPO_BASE/apps/fluent-bit
 
 # should be empty
 flt targets list
@@ -216,7 +216,7 @@ flt exec kic pods -f monitoring
 
 ```bash
 
-cd $PIB_BASE/labs/advanced-labs/monitoring
+cd $REPO_BASE/labs/advanced-labs/monitoring
 
 cp -aR ./prometheus ../../../apps
 
@@ -236,7 +236,7 @@ Follow the instructions [here](./prometheus/README.md#update-prometheus-config) 
 ```bash
 
 # make sure you are in the prometheus directory
-cd $PIB_BASE/apps/prometheus
+cd $REPO_BASE/apps/prometheus
 
 # should be empty
 flt targets list
@@ -284,7 +284,7 @@ echo $PIB_SSL
 export GRAFANA_NAME=yourgrafanacloudaccountname
 
 # cd to this directory
-cd $PIB_BASE/labs/advanced-labs/monitoring
+cd $REPO_BASE/labs/advanced-labs/monitoring
 
 # generate json based on dashboard-template-dns
 cp dashboard-template-$DASHBOARD_TYPE.json dashboard.json
@@ -339,7 +339,7 @@ sed -i "s/%%GRAFANA_NAME%%/${GRAFANA_NAME}/g" dashboard.json
 
 ```bash
 
-cd $PIB_BASE/apps/imdb
+cd $REPO_BASE/apps/imdb
 
 # show current targets
 flt targets list

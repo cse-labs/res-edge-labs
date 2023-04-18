@@ -50,7 +50,7 @@
     export FLT_CLUSTER_SUFFIX=101
 
     # start in the base of the repo
-    cd $PIB_BASE
+    cd $REPO_BASE
 
     flt create \
         -g $FLT_CLUSTER_SUFFIX-fleet \
@@ -106,7 +106,7 @@
   ```bash
 
   # start in the apps/imdb directory
-  cd $PIB_BASE/apps/imdb
+  cd $REPO_BASE/apps/imdb
 
   # deploy to central and west regions
   flt targets add region:central region:west
@@ -156,7 +156,7 @@
 ```bash
 
 # start in the apps/imdb directory
-cd $PIB_BASE/apps/imdb
+cd $REPO_BASE/apps/imdb
 
 # deploy IMDb to the central region
 flt targets clear
@@ -187,7 +187,7 @@ flt curl /version
 ```bash
 
 # start in the base of the repo
-cd $PIB_BASE
+cd $REPO_BASE
 git pull
 
 # delete the Azure resources
