@@ -46,8 +46,7 @@
 
     ```bash
 
-    # You can set FLT_CLUSTER_SUFFIX to anything, provided it is unique within an Azure subscription and avoids special characters that could not comply with Azure naming conventions such as https://aka.ms/ResourceGroupNamingRestrictions.
-    # Change it below if it is already being used within the Azure subscription.
+    # You can set FLT_CLUSTER_SUFFIX to anything, provided the cluster name is unique within a resource group on an Azure subscription and avoids special characters that could not comply with Azure naming conventions such as https://aka.ms/ResourceGroupNamingRestrictions.
     export FLT_CLUSTER_SUFFIX=101
 
     # start in the base of the repo
