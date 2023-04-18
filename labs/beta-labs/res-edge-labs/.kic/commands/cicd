@@ -1,9 +1,38 @@
 #!/bin/bash
 
+KIC_GOA_DOCKER_IMAGE="ghcr.io/cse-labs/res-edge-automation:0.8.5"
+
+# Loop through the positional parameters
+for param in "$@"; do
+  # If the parameter is "--show", set a flag and break the loop
+  if [[ $param == "--show" ]]; then
+    show_flag=1
+    break
+  fi
+done
+
+# If the flag is set, show a message
+if [[ $show_flag -eq 1 ]]; then
+  echo "Default Script"
+  echo ""
+  echo "#!/bin/bash"
+  echo ""
+  echo "docker run -it --rm \\"
+  echo "     --net host \\"
+  echo "     -v \"\$(pwd)\":/goa \\"
+  echo "     ${KIC_GOA_DOCKER_IMAGE} \\"
+  echo "     -s \"${KIC_DATASERVICE_URL}\""
+  exit
+fi
+
 echo "Running ci-cd locally ..."
 
+# The following command will execute the ghcr.io/cse-labs/res-edge-automation image in docker
+# and will mount the current directory into the docker image /goa mount point
+# and then the image will retrieve all required information from the dataservice
+# and generate the kustomize files in /goa
 docker run -it --rm \
   --net host \
   -v "$(pwd)":/goa \
-  ghcr.io/cse-labs/res-edge-automation:0.8.5 \
+  ${KIC_GOA_DOCKER_IMAGE} \
   -s "${KIC_DATASERVICE_URL}"
