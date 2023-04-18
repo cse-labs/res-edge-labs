@@ -2,15 +2,16 @@
 
 set -e
 
+URL="http://localhost:32080/api/v1/namespaces";
 SEARCH="";
 ORDERBY="";
-URL="http://localhost:32080/api/v1/namespaces";
 URL_FILTER="";
 URL_ORDER_BY="";
+NAMESPACES="";
 
 function print_usage() {
     echo "Usage: $0 -s [search term] -o [name/id]"
-    echo '   -s   search for application by name, metadata, tag'
+    echo '   -s   search for namespaces by name, metadata, tag'
     echo '   -o   order by name or id'
 }
 
@@ -32,10 +33,14 @@ shift $((OPTIND-1))
 
 if [ "${SEARCH}" != "" ]; then
     URL_FILTER="?filter=(name%20eq%20%27$SEARCH%27%20or%20tags/any(t:t%20eq%20%27$SEARCH%27)%20or%20metadata/any(m:m/value%20eq%20%27$SEARCH%27))"
-fi
 
-if [ "${ORDERBY}" != "" ]; then
-    URL_ORDER_BY="?orderby=$ORDERBY"
+    if [ "${ORDERBY}" != "" ]; then
+        URL_ORDER_BY="&?orderby=name"
+    fi
+else
+    if [ "${ORDERBY}" != "" ]; then
+        URL_ORDER_BY="?orderby=name"
+    fi
 fi
 
 URL="${URL}${URL_FILTER}${URL_ORDER_BY}"

@@ -2,12 +2,11 @@
 
 set -e
 
+URL="http://localhost:32080/api/v1";
 SEARCH="";
 ORDERBY="";
-URL_GROUP="";
 URL_FILTER="";
 URL_ORDER_BY="";
-URL="http://localhost:32080/api/v1";
 GROUP="";
 CLUSTERS="";
 

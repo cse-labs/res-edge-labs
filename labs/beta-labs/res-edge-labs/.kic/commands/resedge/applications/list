@@ -2,11 +2,12 @@
 
 set -e
 
+URL="http://localhost:32080/api/v1/applications";
 SEARCH="";
 ORDERBY="";
-URL="http://localhost:32080/api/v1/applications";
 URL_FILTER="";
 URL_ORDER_BY="";
+APPS="";
 
 function print_usage() {
     echo "Usage: $0 -s [search term] -o [name/id]"
