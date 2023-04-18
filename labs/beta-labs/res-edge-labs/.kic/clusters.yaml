@@ -1,0 +1,11 @@
+###
+# Resedge clusters commands
+###
+
+commands:
+- name: clusters
+  short: ResEdge clusters commands
+  scriptCommands:
+  - name: show
+    short: Show cluster information
+    path: clusters/show
