@@ -4,11 +4,11 @@
 
 commands:
 - name: clusters
-  short: ResEdge clusters commands
+  short: ResEdge Clusters commands
   scriptCommands:
   - name: show
-    short: Show cluster information
+    short: Show Clusters information
     path: clusters/show
   - name: list
-    short: Search and list clusters
+    short: Search and list Clusters
     path: clusters/list

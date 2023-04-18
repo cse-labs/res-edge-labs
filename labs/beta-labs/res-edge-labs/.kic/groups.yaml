@@ -4,11 +4,11 @@
 
 commands:
 - name: groups
-  short: ResEdge groups commands
+  short: ResEdge Groups commands
   scriptCommands:
   - name: show
-    short: Show group metadata
+    short: Show Group information
     path: groups/show
   - name: list
-    short: Search and list groups
+    short: Search and list Groups
     path: groups/list

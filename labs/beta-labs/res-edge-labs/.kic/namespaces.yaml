@@ -4,11 +4,11 @@
 
 commands:
 - name: namespaces
-  short: ResEdge namespaces commands
+  short: ResEdge Namespaces commands
   scriptCommands:
   - name: show
-    short: Show namespace information
+    short: Show Namespaces information
     path: namespaces/show
   - name: list
-    short: Search and list namespaces
+    short: Search and list Namespaces
     path: namespaces/list

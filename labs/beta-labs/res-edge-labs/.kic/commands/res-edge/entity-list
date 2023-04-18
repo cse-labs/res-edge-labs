@@ -1,8 +1,4 @@
 #!/bin/bash
-
-KIC_RES_EDGE_URL="http://localhost:32080"
-KIC_RES_EDGE_URL="https://api.res-edge.net/"
-
 PARENT_COMMAND=$(ps -o comm= $PPID)
 
 usage() {
@@ -35,8 +31,8 @@ list_clusters() {
     for s in $(echo $CLUSTERS | sed "s/,/\n/g"); do echo $s | sed "s/\/api/localhost:32080\/api/g" | xargs curl -s | jq -r .name; done
 }
 
-if [ -z "${KIC_RES_EDGE_URL}" ]; then
-  echo "Error: KIC_RES_EDGE_URL environment variable is not set"
+if [ -z "${KIC_DATASERVICE_URL}" ]; then
+  echo "Error: KIC_DATASERVICE_URL environment variable is not set"
 fi
 
 for arg in "$@"; do
@@ -92,7 +88,7 @@ if [ -n "${GROUP}" ]; then
   KIC_RES_EDGE_ENTITYNAME="groups"
 fi
 
-KIC_BASE_URL="${KIC_RES_EDGE_URL}/api/v1/${KIC_RES_EDGE_ENTITYNAME}/"
+KIC_BASE_URL="${KIC_DATASERVICE_URL}/api/v1/${KIC_RES_EDGE_ENTITYNAME}/"
 
 # Implode the array with the separator "&" to create a single string
 URL_QUERY_STRING=$(printf "&%s" "${URL_PARAMS[@]}")
