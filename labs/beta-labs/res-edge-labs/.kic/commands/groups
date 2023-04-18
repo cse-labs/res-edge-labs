@@ -2,6 +2,6 @@
 
 set -e
 
-GROUPS_ENDPOINT="${KIC_DATA_SERVICE}/api/v1/groups?select=id,namePath,clustersTree"
+GROUPS_ENDPOINT="${KIC_DATASERVICE_URL}/api/v1/groups?select=id,namePath,clustersTree"
 
 curl -k "$GROUPS_ENDPOINT" | jq
