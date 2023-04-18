@@ -1,6 +1,6 @@
 #!/bin/bash
 
-k3d_config="../.kic/k3d.yaml"
+k3d_config="${CLI_BOA_DIR}/k3d.yaml"
 
 # validate directory
 if [ ! -f "$k3d_config" ]; then
