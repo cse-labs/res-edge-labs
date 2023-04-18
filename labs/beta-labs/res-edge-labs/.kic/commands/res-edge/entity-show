@@ -5,7 +5,7 @@ KIC_RES_EDGE_URL="http://localhost:32080"
 PARENT_COMMAND=$(ps -o comm= $PPID)
 
 usage() {
-  echo "Usage: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --id [number]"
+  echo "Usage: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} -i [id]"
   exit 1
 }
 
@@ -13,15 +13,12 @@ if [ -z "${KIC_RES_EDGE_URL}" ]; then
   echo "Error: KIC_RES_EDGE_URL environment variable is not set"
 fi
 
-while [[ $# -gt 0 ]]; do
-  key="$1"
-  case $key in
-    --id)
-      id="$2"
-      shift
-      shift
+while getopts ":i:" opt; do
+  case ${opt} in
+    i )
+      id="$OPTARG"
       ;;
-    *)
+    \? )
       usage
       ;;
   esac

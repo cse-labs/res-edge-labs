@@ -1,0 +1,11 @@
+###
+# Resedge applications commands
+###
+
+commands:
+- name: applications
+  short: ResEdge applications commands
+  scriptCommands:
+  - name: show
+    short: Show application metadata
+    path: applications/show

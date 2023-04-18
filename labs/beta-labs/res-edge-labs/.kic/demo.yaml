@@ -22,7 +22,7 @@ scriptCommands:
 
   - name: groups
     short: List Res-Edge groups
-    path: groups
+    path: groups-deprecated
 
   - name: overlay
     short: Create new Kustomize overly

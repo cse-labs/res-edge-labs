@@ -1,3 +1,0 @@
-#!/bin/bash
-
-KIC_RES_EDGE_ENTITYNAME="applications" "$SCRIPT_DIR/entity-show" --id "$id"
