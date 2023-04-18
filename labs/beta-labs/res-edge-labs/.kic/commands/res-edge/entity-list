@@ -39,6 +39,20 @@ if [ -z "${KIC_RES_EDGE_URL}" ]; then
   echo "Error: KIC_RES_EDGE_URL environment variable is not set"
 fi
 
+for arg in "$@"; do
+  case $arg in
+    --search)
+      set -- "${@/$arg/-s}"
+      ;;
+    --order-by)
+      set -- "${@/$arg/-o}"
+      ;;
+    --group)
+      set -- "${@/$arg/-g}"
+      ;;
+  esac
+done
+
 while getopts ":s:o:g:" f; do
     case "${f}" in
         s)
