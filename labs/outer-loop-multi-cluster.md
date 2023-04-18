@@ -46,17 +46,14 @@
 
     ```bash
 
-    # You can set FLT_CLUSTER_SUFFIX to anything, provided the cluster name is unique within a resource group on an Azure subscription and avoids special characters that could not comply with Azure naming conventions such as https://aka.ms/ResourceGroupNamingRestrictions.
-    export FLT_CLUSTER_SUFFIX=101
-
     # start in the base of the repo
     cd $REPO_BASE
 
     flt create \
-        -g $FLT_CLUSTER_SUFFIX-fleet \
-        -c central-tx-$FLT_CLUSTER_SUFFIX-1001 \
-        -c east-ga-$FLT_CLUSTER_SUFFIX-1001 \
-        -c west-wa-$FLT_CLUSTER_SUFFIX-1001
+        -g $GITHUB_USER-fleet \
+        -c central-tx-1001 \
+        -c east-ga-1001 \
+        -c west-wa-1001
 
     ```
 
@@ -191,10 +188,10 @@ cd $REPO_BASE
 git pull
 
 # delete the Azure resources
-flt delete central-tx-$FLT_CLUSTER_SUFFIX-1001
-flt delete east-ga-$FLT_CLUSTER_SUFFIX-1001
-flt delete west-wa-$FLT_CLUSTER_SUFFIX-1001
-flt delete $FLT_CLUSTER_SUFFIX-fleet
+flt delete central-tx-1001
+flt delete east-ga-1001
+flt delete west-wa-1001
+flt delete 1001-fleet
 
 # remove ips file
 rm -f ips

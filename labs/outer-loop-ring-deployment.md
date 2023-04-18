@@ -14,15 +14,12 @@
 
   ```bash
 
-  # You can set FLT_CLUSTER_SUFFIX to anything, provided the cluster name is unique within a resource group on an Azure subscription and avoids special characters that could not comply with Azure naming conventions such as https://aka.ms/ResourceGroupNamingRestrictions.
-  export FLT_CLUSTER_SUFFIX=101
-
   # start in the base of the repo
   cd $REPO_BASE
 
   flt create \
       --gitops-only \
-      -g $FLT_CLUSTER_SUFFIX-fleet \
+      -g $GITHUB_USER-fleet \
       -c central-tx-atx-101 \
       -c central-tx-dal-101 \
       -c central-tx-hou-101 \

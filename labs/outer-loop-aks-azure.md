@@ -41,14 +41,11 @@
 
   ```bash
 
-  # You can set FLT_CLUSTER_SUFFIX to anything, provided the cluster name is unique within a resource group on an Azure subscription and avoids special characters that could not comply with Azure naming conventions such as https://aka.ms/ResourceGroupNamingRestrictions.
-  export FLT_CLUSTER_SUFFIX=101
-
-  # set MY_AKS_CLUSTER
-  export MY_AKS_CLUSTER=central-tx-atx-$FLT_CLUSTER_SUFFIX-aks
+  # set MY_AKS_CLUSTER, making sure the cluster name is unique within a resource group on an Azure subscription and avoids special characters that could not comply with Azure naming conventions such as https:/aka.ms/ResourceGroupNamingRestrictions.
+  export MY_AKS_CLUSTER=central-tx-atx-aks
 
   # set MY_RG
-  export MY_RG=$FLT_CLUSTER_SUFFIX-rg
+  export MY_RG=$GITHUB_USER-rg
 
   ```
 

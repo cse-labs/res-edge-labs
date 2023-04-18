@@ -51,11 +51,8 @@
 
 ```bash
 
-# You can set FLT_CLUSTER_SUFFIX to anything, provided the cluster name is unique within a resource group on an Azure subscription and avoids special characters that could not comply with Azure naming conventions such as https:/aka.ms/ResourceGroupNamingRestrictions.
-export FLT_CLUSTER_SUFFIX=101
-
-# set MY_CLUSTER
-export MY_CLUSTER=central-tx-atx-$FLT_CLUSTER_SUFFIX
+# set MY_CLUSTER, making sure the cluster name is unique within a resource group on an Azure subscription and avoids special characters that could not comply with Azure naming conventions such as https:/aka.ms/ResourceGroupNamingRestrictions.
+export MY_CLUSTER=central-tx-atx-101
 
 # create an arc enabled cluster
 # it will take about 2 minutes to create the VM
