@@ -9,3 +9,6 @@ commands:
   - name: show
     short: Show application metadata
     path: applications/show
+  - name: list
+    short: Search and list applications
+    path: applications/list
