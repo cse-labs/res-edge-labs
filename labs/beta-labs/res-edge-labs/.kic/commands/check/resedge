@@ -1,5 +1,12 @@
 #!/bin/bash
 
+set -e
+
+if [ -z "${KIC_DATASERVICE_URL}" ]; then
+    echo "Error! Please set environment variable: KIC_DATASERVICE_URL";
+    exit 1;
+fi
+
 function resedge_check {
     http "${KIC_DATASERVICE_URL}"/version
 }
