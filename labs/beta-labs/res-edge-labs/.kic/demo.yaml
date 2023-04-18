@@ -18,10 +18,6 @@ scriptCommands:
     short: Deploy your application
     path: deploy
 
-  - name: groups
-    short: List Res-Edge groups
-    path: groups-deprecated
-
   - name: overlay
     short: Create new Kustomize overly
     path: overlay
