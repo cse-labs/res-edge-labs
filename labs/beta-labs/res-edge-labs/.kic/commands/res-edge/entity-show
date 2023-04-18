@@ -5,7 +5,7 @@ KIC_RES_EDGE_URL="http://localhost:32080"
 PARENT_COMMAND=$(ps -o comm= $PPID)
 
 usage() {
-  echo "Usage: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} -i [id]"
+  echo "Usage: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --id [id]"
   exit 1
 }
 
@@ -13,12 +13,16 @@ if [ -z "${KIC_RES_EDGE_URL}" ]; then
   echo "Error: KIC_RES_EDGE_URL environment variable is not set"
 fi
 
-while getopts ":i:" opt; do
-  case ${opt} in
-    i )
-      id="$OPTARG"
+
+while [[ $# -gt 0 ]]; do
+  key="$1"
+  case $key in
+    --id)
+      id="$2"
+      shift
+      shift
       ;;
-    \? )
+    *)
       usage
       ;;
   esac
@@ -29,4 +33,13 @@ if [ -z "$id" ]; then
 fi
 
 url="${KIC_RES_EDGE_URL}/api/v1/${KIC_RES_EDGE_ENTITYNAME}/${id}"
-curl --silent --show-error "$url" | jq
+
+response=$(curl --silent --show-error "$url")
+
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to retrieve data from $url"
+  echo "Please check that the res-edge server is up and running with: kic check resedge"
+  exit 1
+fi
+
+echo "$response" | jq
