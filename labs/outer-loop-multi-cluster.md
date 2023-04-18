@@ -191,7 +191,7 @@ git pull
 flt delete central-tx-1001
 flt delete east-ga-1001
 flt delete west-wa-1001
-flt delete 1001-fleet
+flt delete $GITHUB_USER-fleet
 
 # remove ips file
 rm -f ips
