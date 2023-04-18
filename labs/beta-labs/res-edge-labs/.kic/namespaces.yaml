@@ -9,3 +9,6 @@ commands:
   - name: show
     short: Show namespace information
     path: namespaces/show
+  - name: list
+    short: Search and list namespaces
+    path: namespaces/list

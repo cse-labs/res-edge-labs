@@ -9,3 +9,6 @@ commands:
   - name: show
     short: Show policies information
     path: policies/show
+  - name: list
+    short: Search and list policies
+    path: policies/list

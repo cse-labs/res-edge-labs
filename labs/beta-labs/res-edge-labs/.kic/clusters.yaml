@@ -9,3 +9,6 @@ commands:
   - name: show
     short: Show cluster information
     path: clusters/show
+  - name: list
+    short: Search and list clusters
+    path: clusters/list

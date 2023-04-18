@@ -1,0 +1,14 @@
+###
+# Resedge groups commands
+###
+
+commands:
+- name: groups
+  short: ResEdge groups commands
+  scriptCommands:
+  - name: show
+    short: Show group metadata
+    path: groups/show
+  - name: list
+    short: Search and list groups
+    path: groups/list
