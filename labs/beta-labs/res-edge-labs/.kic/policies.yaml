@@ -4,8 +4,8 @@
 
 commands:
 - name: policies
-  short: ResEdge policies commands
+  short: ResEdge Policies commands
   scriptCommands:
   - name: show
-    short: Show policies information
+    short: Show Policy information
     path: policies/show

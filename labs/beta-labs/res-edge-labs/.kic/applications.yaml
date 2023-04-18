@@ -4,8 +4,8 @@
 
 commands:
 - name: applications
-  short: ResEdge applications commands
+  short: ResEdge Applications commands
   scriptCommands:
   - name: show
-    short: Show application metadata
+    short: Show Application metadata
     path: applications/show
