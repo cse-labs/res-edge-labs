@@ -123,7 +123,7 @@ watch flt check setup
   ```bash
 
   # start in the apps/imdb directory
-  cd $PIB_BASE/apps/imdb
+  cd $REPO_BASE/apps/imdb
 
   # deploy to central and west regions
   flt targets add all
@@ -160,7 +160,7 @@ watch flt check setup
   ```bash
 
   # start in the root of your repo
-  cd $PIB_BASE
+  cd $REPO_BASE
   git pull
 
   # delete azure resource

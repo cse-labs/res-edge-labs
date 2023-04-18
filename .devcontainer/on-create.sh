@@ -24,6 +24,12 @@ dotnet restore labs/advanced-labs/cli/myapp/src
     echo "export MSSQL_SA_PASSWORD=Res-Edge23"
     echo ""
 
+    echo "if [ -z $KIC_DATASERVICE_URL ]"
+    echo "then"
+    echo "    export KIC_DATASERVICE_URL=http://localhost:32080"
+    echo "fi"
+    echo ""
+
     echo "if [ \"\$PIB_PAT\" != \"\" ]"
     echo "then"
     echo "    export GITHUB_TOKEN=\$PIB_PAT"
