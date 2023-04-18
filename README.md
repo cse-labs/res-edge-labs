@@ -56,7 +56,9 @@ We use GitHub Codespaces for our `inner-loop` and `outer-loop` Developer Experie
 
 ## Create a Codespace
 
-> Create a Codespace from the repo you created. You can use the same Codespace for any of the labs. Note: make sure you create a codespace from the created repo, not the template repo.
+- Create a Codespace from the repo you created. You can use the same Codespace for any of the labs.
+
+> Note: make sure you create a codespace from the created repo, not the template repo.
 
 - Click the `<> Code` button
   - Make sure the Codespaces tab is active
