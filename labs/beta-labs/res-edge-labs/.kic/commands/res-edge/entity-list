@@ -6,10 +6,10 @@ KIC_RES_EDGE_URL="https://api.res-edge.net/"
 PARENT_COMMAND=$(ps -o comm= $PPID)
 
 usage() {
-  if [ "${KIC_RES_EDGE_ENTITYNAME}" = "clusters" ]; then
+  if [ "${KIC_RES_EDGE_ENTITYNAME}" = "clusters" ] || [ "${KIC_RES_EDGE_ENTITYNAME}" = "groups" ]; then
     echo "Usage: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --search [search term] --order-by [name/id]"
     echo "   or: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --group [name]"
-    echo '   --group:  filter clusters by group'
+    echo "   --group:  filter ${KIC_RES_EDGE_ENTITYNAME} by group"
     echo "   --search: Search for ${KIC_RES_EDGE_ENTITYNAME} by name, metadata or tag. Optional."
     echo '   --order-by: Order by name or id. Optional. Default: id.'
     exit 1
