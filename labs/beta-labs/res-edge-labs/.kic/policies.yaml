@@ -1,0 +1,11 @@
+###
+# Resedge policies commands
+###
+
+commands:
+- name: policies
+  short: ResEdge policies commands
+  scriptCommands:
+  - name: show
+    short: Show policies information
+    path: policies/show

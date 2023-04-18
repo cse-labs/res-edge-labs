@@ -1,0 +1,11 @@
+###
+# Resedge namespaces commands
+###
+
+commands:
+- name: namespaces
+  short: ResEdge namespaces commands
+  scriptCommands:
+  - name: show
+    short: Show namespace information
+    path: namespaces/show
