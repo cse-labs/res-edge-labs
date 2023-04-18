@@ -4,8 +4,6 @@
 
 ### hide unused commands
 commands:
-  - name: cluster
-    hidden: true
   - name: new
     hidden: true
 
