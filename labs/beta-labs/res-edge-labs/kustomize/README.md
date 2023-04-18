@@ -10,7 +10,9 @@
 
 ## Prerequsite
 
-- [Deploy ResEdge lab](../deploy-res-edge/README.md#deploy-data-service)
+- [Deploy Res-Edge lab](../deploy-res-edge/README.md#deploy-data-service)
+
+> Note: Res-Edge Data Service also can be deployed by running `kic deploy resedge`, although we reccomend to run through a Deploy ResEdge lab to get the full context
 
 ```bash
 

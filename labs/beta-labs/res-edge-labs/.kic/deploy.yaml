@@ -1,0 +1,14 @@
+###
+# deploy commands
+###
+
+commands:
+- name: deploy
+  short: Deploy application
+  scriptCommands:
+    - name: imdb
+      short: Deploy IMDB application
+      path: deploy/imdb
+    - name: resedge
+      short: Deploy Res-Edge Data Service
+      path: deploy/resedge

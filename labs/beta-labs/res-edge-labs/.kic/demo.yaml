@@ -14,10 +14,6 @@ scriptCommands:
     short: Test ci-cd locally
     path: cicd
 
-  - name: deploy
-    short: Deploy your application
-    path: deploy
-
   - name: groups
     short: List Res-Edge groups
     path: groups

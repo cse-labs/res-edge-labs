@@ -1,0 +1,99 @@
+#!/bin/bash
+
+set -e
+
+function pod_is_ready {
+    POD_IS_READY="False"
+    while  [ "${POD_IS_READY}" != "True" ]
+    do
+        POD_IS_READY=$(kubectl get pods -l app=${APP_NAME} -n $NAMESPACE -o jsonpath='{..status.conditions[?(@.type=="Ready")].status}')
+    done
+}
+
+function sql_check {
+    sql -Q \
+    "select ' Applications' as Entity, count(Id) as Rows from Applications union
+    select ' Clusters', count(Id) from Clusters union
+    select ' Groups', count(Id) from Groups union
+    select ' Namespaces', count(Id) from Namespaces union
+    select ' GroupsClusters', count(ClusterId) from GroupsClusters union
+    select 'ApplicationMetadata', count(ApplicationId) from ApplicationMetadata union
+    select 'ClusterMetadata', count(ClusterId) from ClusterMetadata union
+    select 'GroupMetadata', count(GroupId) from GroupMetadata union
+    select 'NamespaceMetadata', count(NamespaceId) from NamespaceMetadata union
+    select 'ApplicationTags', count(ApplicationId) from ApplicationTags union
+    select 'ClusterTags', count(ClusterId) from ClusterTags union
+    select 'GroupTags', count(GroupId) from GroupTags union
+    select 'NamespaceTags', count(NamespaceId) from NamespaceTags union
+    select 'Policies', count(Id) from Policies
+    order by 1;
+    "
+}
+
+kic cluster create
+
+RES_EDGE_PATH="../deploy-res-edge"
+kubectl apply -f $RES_EDGE_PATH/ns.yaml
+
+# Deploying a database with a sample data
+printf "\n Waiting for a database with a sample data being deployed (it may take up to 2 minutes) \n"
+kubectl apply -k $RES_EDGE_PATH/mssql
+
+# Waiting for mssql pod to be Ready
+APP_NAME="mssql"
+NAMESPACE="api"
+pod_is_ready
+
+# Waiting for mssql pod to populate the data
+sleep 45;
+while ! sql_check
+do
+    echo "Waiting for a database to populate a data"
+    sleep 10;
+done
+
+# Verify mssql is loaded with data
+kic check mssql
+
+# Deploying Res-Edge data Service api
+printf "\n Waiting for Res-Edge Data Service being deployed \n"
+kubectl apply -k $RES_EDGE_PATH/api
+
+# Waiting for api pod to be Ready
+APP_NAME="api"
+NAMESPACE="api"
+pod_is_ready
+
+# check api version to verify data service is running
+kic check resedge
+
+# deploy observability
+printf "\n Waiting for observability stack being deployed \n"
+kubectl apply -k $RES_EDGE_PATH/monitoring
+
+# Waiting for prometheus to be Ready
+APP_NAME="prometheus-server"
+NAMESPACE="monitoring"
+pod_is_ready
+
+# Waiting for grafana to be Ready
+APP_NAME="grafana"
+NAMESPACE="monitoring"
+pod_is_ready
+
+# check to verify prometheus, fluentbit, grafana is running
+kic check prometheus
+kic check grafana
+kic check fluentbit
+
+# deploy webv
+printf "\n Waiting for WebV being deployed \n"
+kubectl apply -k $RES_EDGE_PATH/webv
+
+# Waiting for Grafana to be Ready
+APP_NAME="webv"
+NAMESPACE="api"
+pod_is_ready
+
+# check to verify webv is running
+kic check webv
