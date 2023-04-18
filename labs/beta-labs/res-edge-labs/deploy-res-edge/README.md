@@ -107,34 +107,16 @@ kic test all
 
 ## Query data service
 
-- Run `kic [entity-type] list` to query the data service and return a filtered list with the following options:
-> Note: All options for `list` are optional
-
+- Run `kic [entity-type] list` to query the data service and return all entities in the data service:
+> To dive deeper into these commands and learn more about filtering results, go to [Querying Specific Data](../querying-specific-data.md).
 ```bash
 
-# This option allows the user to perform an exact search on the entity name, tags, or metadata (eg. `imdb`, `west`)
---search [search-term]
-
-# This option allows the user to sort the results returned by the `list` by name or id. The default sort is by id.
---order-by [name/id]
-
-# example command
-kic applications list --search west --order-by name
-kic namespaces list --search imdb
-kic policies list --order-by id
-
-```
-
-- An additional option exists pecifically for groups and clusters. This option does not work with `--search` or `--order-by` and should be entered alone:
-
-```bash
-
-# Returns a list of clusters in the specified group (eg. `beta`)
---group [group-name]
-
-# example command
-kic clusters --group beta
-kic groups --group west
+# example commands
+kic applications list
+kic namespaces list
+kic clusters list
+kic groups list
+kic policies list
 
 ```
 
@@ -145,8 +127,12 @@ kic groups --group west
 # Returns entity information for the passed in id
 --id
 
-#example command
+#example commands
+kic applications show --id 2
+kic namespaces show --id 2
 kic clusters show --id 2
+kic groups show --id 2
+kic policies show --id 2
 
 ```
 
