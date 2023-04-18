@@ -2,16 +2,7 @@
 
 KiC ships two CLIs (kic and flt) to make learning and working with Kubernetes easier. Both CLIs can be customized on an organization, team, or app level. This workshop walks through the different customization options with examples.
 
-## Create Working Branch
-
-```bash
-
-git checkout -b $MY_BRANCH-cli
-git push -u origin $MY_BRANCH-cli
-
-```
-
-## CLI Customization
+## CLI Customization Overview
 
 - There are 3 options that allow customization of the CLI
   - Overriding built-in commands using bash scripts

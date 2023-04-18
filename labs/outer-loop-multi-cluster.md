@@ -1,20 +1,5 @@
 # Outer-Loop Multi-Cluster
 
-## Validate cluster identifier and working branch
-
-```bash
-
-# by default, MY_BRANCH is set to your lower case GitHub User Name
-# the variable is used to uniquely name your clusters
-# the value can be overwritten if needed
-echo $MY_BRANCH
-
-# make sure your branch is set and pushed remotely
-# commands will fail if you are in main branch
-git branch --show-current
-
-```
-
 ## Login to Azure
 
 - Login to Azure using `az login --use-device-code`
@@ -65,10 +50,10 @@ git branch --show-current
     cd $REPO_BASE
 
     flt create \
-        -g $MY_BRANCH-fleet \
-        -c central-tx-$MY_BRANCH-1001 \
-        -c east-ga-$MY_BRANCH-1001 \
-        -c west-wa-$MY_BRANCH-1001
+        -g $GITHUB_USER-fleet \
+        -c central-tx-1001 \
+        -c east-ga-1001 \
+        -c west-wa-1001
 
     ```
 
@@ -203,10 +188,10 @@ cd $REPO_BASE
 git pull
 
 # delete the Azure resources
-flt delete central-tx-$MY_BRANCH-1001
-flt delete east-ga-$MY_BRANCH-1001
-flt delete west-wa-$MY_BRANCH-1001
-flt delete $MY_BRANCH-fleet
+flt delete central-tx-1001
+flt delete east-ga-1001
+flt delete west-wa-1001
+flt delete $GITHUB_USER-fleet
 
 # remove ips file
 rm -f ips
