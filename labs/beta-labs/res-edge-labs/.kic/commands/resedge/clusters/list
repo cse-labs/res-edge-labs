@@ -7,12 +7,13 @@ ORDERBY="";
 URL_GROUP="";
 URL_FILTER="";
 URL_ORDER_BY="";
-URL="http://localhost:32080/api/v1/clusters";
+URL="http://localhost:32080/api/v1";
 GROUP="";
 CLUSTERS="";
 
 function print_usage {
-  echo "Usage:$0 -g [name] -s [search term] -o [name/id]"
+  echo "Usage:$0 -g [name]"
+  echo "   or:$0 -s [search term] -o [name/id]"
     echo '   -g  filter clusters by group'
     echo '   -s  search for clusters by name, metadata, tag'
     echo '   -o  order by name or id'
@@ -52,17 +53,33 @@ done
 shift $((OPTIND-1))
 
 if [ "${GROUP}" != "" ]; then
-    URL_GROUP="?filter=name%20eq%20%27"$GROUP"%27&select=clustersTree"
-    URL="http://localhost:32080/api/v1/groups";
-elif [ "${SEARCH}" != "" ]; then
-    URL_FILTER="?filter=(name%20eq%20%27"$SEARCH"%27%20or%20tags/any(t:t%20eq%20%27"$SEARCH"%27)%20or%20metadata/any(m:m/value%20eq%20%27"$SEARCH"%27))"
-fi
+    URL="${URL}/groups?filter=name%20eq%20%27${GROUP}%27&select=clustersTree";
+    CLUSTERS=$(list_clusters)
 
-if [ "${ORDERBY}" != "" ]; then
-    URL_ORDER_BY="?orderby=clustersTree"
-fi
+    if [ "${SEARCH}" != "" ] || [ "${ORDERBY}" != "" ]; then
+        print_usage;
+        exit 1;
+    fi
+else
+    if [ "${SEARCH}" != "" ]; then
+        URL_FILTER="?filter=(name%20eq%20%27$SEARCH%27%20or%20tags/any(t:t%20eq%20%27$SEARCH%27)%20or%20metadata/any(m:m/value%20eq%20%27$SEARCH%27))"
 
-URL="${URL}${URL_ORDER_BY}${URL_GROUP}${URL_FILTER}"
-CLUSTERS=$(list_clusters)
+        if [ "${ORDERBY}" != "" ]; then
+            URL_ORDER_BY="&?orderby=name"
+        fi
+    else
+        if [ "${ORDERBY}" != "" ]; then
+            URL_ORDER_BY="?orderby=name"
+        fi
+    fi
+
+    URL="${URL}/clusters${URL_FILTER}${URL_ORDER_BY}"
+    CLUSTERS=$(get_clusters | jq -r ' .value[] | .name')
+
+    if [ "$CLUSTERS" = "" ]; then
+        echo "No clusters found";
+        exit 1;
+    fi
+fi
 
 echo "$CLUSTERS"
