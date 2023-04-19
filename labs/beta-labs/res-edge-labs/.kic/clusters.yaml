@@ -1,10 +1,10 @@
 ###
-# Resedge clusters commands
+# Res-Edge clusters commands
 ###
 
 commands:
 - name: clusters
-  short: ResEdge Clusters commands
+  short: Res-Edge Clusters commands
   scriptCommands:
   - name: show
     short: Show Cluster information
