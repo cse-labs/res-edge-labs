@@ -4,7 +4,7 @@
 
 commands:
 - name: namespaces
-  short: ResEdge Namespaces commands
+  short: Res-Edge Namespaces commands
   scriptCommands:
   - name: show
     short: Show Namespaces information

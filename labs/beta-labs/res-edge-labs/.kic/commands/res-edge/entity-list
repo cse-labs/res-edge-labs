@@ -5,7 +5,7 @@ usage() {
   if [ "${KIC_RES_EDGE_ENTITYNAME}" = "clusters" ] || [ "${KIC_RES_EDGE_ENTITYNAME}" = "groups" ]; then
     echo "Usage: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --search [search term] --order-by [name/id]"
     echo "   or: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --group [name]"
-    echo "   --group:  filter ${KIC_RES_EDGE_ENTITYNAME} by group"
+    echo '   --group:  filter clusters by group'
     echo "   --search: Search for ${KIC_RES_EDGE_ENTITYNAME} by name, metadata or tag. Optional."
     echo '   --order-by: Order by name or id. Optional. Default: id.'
     exit 1
@@ -106,6 +106,6 @@ fi
 
 if [ $? -ne 0 ]; then
   echo "Error: Failed to retrieve data from $URL"
-  echo "Please check that the res-edge server is up and running with: kic check resedge"
+  echo "Please check that the Res-Edge server is up and running with: kic check resedge"
   exit 1
 fi

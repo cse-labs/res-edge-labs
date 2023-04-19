@@ -4,7 +4,7 @@
 
 commands:
 - name: clusters
-  short: ResEdge Clusters commands
+  short: Res-Edge Clusters commands
   scriptCommands:
   - name: show
     short: Show Clusters information

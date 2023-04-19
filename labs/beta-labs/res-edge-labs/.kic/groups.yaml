@@ -4,7 +4,7 @@
 
 commands:
 - name: groups
-  short: ResEdge Groups commands
+  short: Res-Edge Groups commands
   scriptCommands:
   - name: show
     short: Show Group information
