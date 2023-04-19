@@ -2,18 +2,16 @@
 PARENT_COMMAND=$(ps -o comm= $PPID)
 
 usage() {
+  echo "Usage: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} [--search search term] [--order-by name]"
+
   if [ "${KIC_RES_EDGE_ENTITYNAME}" = "clusters" ] || [ "${KIC_RES_EDGE_ENTITYNAME}" = "groups" ]; then
-    echo "Usage: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --search [search term] --order-by [name/id]"
     echo "   or: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --group [name]"
     echo '   --group:  filter clusters by group'
-    echo "   --search: Search for ${KIC_RES_EDGE_ENTITYNAME} by name, metadata or tag. Optional."
-    echo '   --order-by: Order by name or id. Optional. Default: id.'
-    exit 1
-  else
-    echo "Usage: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --search [search term] --order-by [name/id]"
-    echo "   --search: Search for ${KIC_RES_EDGE_ENTITYNAME} by name, metadata or tag. Optional."
-    echo '   --order-by: Order by name or id. Optional. Default: id.'
   fi
+
+  echo "   --search: Search for ${KIC_RES_EDGE_ENTITYNAME} by name, metadata or tag. Optional."
+  echo '   --order-by: Order by name. Optional. Default: id.'
+  exit 1
 }
 
 list_clusters() {
@@ -68,7 +66,7 @@ while getopts ":s:o:g:" f; do
         g)
             GROUP=$OPTARG ;;
         *)
-            usage ; exit 1 ;;
+            usage ;;
     esac
 done
 shift $((OPTIND-1))
@@ -81,7 +79,7 @@ fi
 URL_PARAMS=()
 
 if [ -n "${SEARCH}" ]; then
-  URL_PARAMS+=("filter=(name%20eq%20%27$SEARCH%27%20or%20tags/any(t:t%20eq%20%27$SEARCH%27)%20or%20metadata/any(m:m/value%20eq%20%27$SEARCH%27))")
+  URL_PARAMS+=("search=%22$SEARCH%22")
 fi
 
 if [ -n "${ORDERBY}" ]; then
@@ -91,7 +89,6 @@ fi
 if [ -n "${GROUP}" ]; then
   if [ -n "${SEARCH}" ] || [ -n "${ORDERBY}" ]; then
       usage;
-      exit 1;
   fi
 
   URL_PARAMS+=("filter=name%20eq%20%27${GROUP}%27&select=clustersTree")
