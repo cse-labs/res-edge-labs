@@ -117,15 +117,15 @@ code ~/.zshrc
 - [Arc enabled GitOps Lab](./labs/outer-loop-arc-gitops.md#outer-loop-with-arc-enabled-gitops): Deploy to dev cluster running on an Azure VM with Arc enabled GitOps
 - [Canary Deployment Lab](./labs/advanced-labs/canary/README.md#automated-canary-deployment-using-flagger): Use Flagger to experiment with canary deployments
 - [Centralized Observability Lab](./labs/advanced-labs/monitoring/README.md#centralized-monitoring): Deploy a centralized observability system with Fluent Bit, Prometheus, and Grafana to monitor fleet application deployments
-- [outer-loop with AKS-IoT](./labs/advanced-labs/aks-iot/README.md#outer-loop-to-aks-iot): Deploy to an AKS-IoT cluster running on an Azure VM with Arc enabled GitOps
+- [outer-loop with AKS-IoT Lab](./labs/advanced-labs/aks-iot/README.md#outer-loop-to-aks-iot): Deploy to an AKS-IoT cluster running on an Azure VM with Arc enabled GitOps
 - [outer-loop with AKS Lab](./labs/outer-loop-aks-azure.md#outer-loop-to-aks-on-azure): Deploy to an AKS cluster with Arc enabled GitOps
 
 ## Beta Labs
 
 > These labs are work in progress and may not be fully documented
 
-- [Deploy ResEdge Data Service](./labs/beta-labs/res-edge-labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge data service to Codespaces
-- [Ring Deployment](./labs/beta-labs/res-edge-labs/kustomize/README.md#ring-deployment): Ring deployment using ResEdge and Kustomize
+- [Deploy Res-Edge Data Service Lab](./labs/beta-labs/res-edge-labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge data service to Codespaces
+- [Ring Deployment Lab](./labs/beta-labs/res-edge-labs/kustomize/README.md#ring-deployment): Ring deployment using Res-Edge and Kustomize
 
 ## Support
 
