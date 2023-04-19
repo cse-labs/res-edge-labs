@@ -2,12 +2,19 @@
 
 RESEDGE_AUTOMATION_DOCKER_IMAGE="ghcr.io/cse-labs/res-edge-automation:0.8.5"
 
+usage() {
+  echo "Usage: kic cicd [--show]"
+  exit 1
+}
+
 # Loop through the positional parameters
 for param in "$@"; do
   # If the parameter is "--show", set a flag and break the loop
   if [[ $param == "--show" ]]; then
     show_flag=1
     break
+  else
+    usage
   fi
 done
 
