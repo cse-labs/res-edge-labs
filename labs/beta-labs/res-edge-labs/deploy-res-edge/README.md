@@ -1,7 +1,7 @@
 # Inner-loop with Res-Edge
 
-- ResEdge helps build a powerful system for automated deployment, update, management, and observability for thousands of Kubernetes clusters
-- This lab will go over steps to run Res-Edge data service with Observability in Codespaces
+- Res-Edge helps build a powerful system for automated deployment, update, management, and observability for thousands of Kubernetes clusters
+- This lab will go over steps to run Res-Edge Data Service with Observability in Codespaces
 - To get more familiarity with kic and other tools used in this lab, please run through the inner-loop lab [here](../../inner-loop.md#inner-loop)
 
 ## Create cluster in Codespaces
@@ -35,7 +35,7 @@ kic pods --watch
 
 ## Deploy SQL
 
-- Res-Edge data service requires a SQL Server database for start up
+- Res-Edge Data Service requires a SQL Server database for start up
 - This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications
 - When the container starts, it will populate the database with sample data
   - 19 Applications
@@ -74,7 +74,7 @@ kic check mssql
 
 ## Deploy data service
 
-- We will now deploy the Res-Edge data service
+- We will now deploy the Res-Edge Data Service
 - This data service allows CRUD operations against the SQL Server database (Inventory storage) deployed from previous section
 
 ```bash
@@ -100,10 +100,45 @@ kic check resedge
 
 ```bash
 
-# run tests against ResEdge data service
+# run tests against Res-Edge Data Service
 kic test all
 
 ```
+
+## Query data service
+
+- Run `kic [entity-type] list` to query the data service and return all entities in the data service:
+> To dive deeper into these commands and learn more about filtering results, go to [Query Res-Edge Data](../query-res-edge-data.md).
+```bash
+
+# example commands
+kic applications list
+kic namespaces list
+kic clusters list
+kic groups list
+kic policies list
+
+```
+
+- Run `kic [entity-type] show --id [entity-id]` to return a specific entity's information:
+
+```bash
+
+# To get the beta group id
+kic groups list --search beta
+
+# Insert the above id in [entity-id] to
+kic groups show --id 2
+
+# example commands
+kic applications show --id 2
+kic namespaces show --id 2
+kic clusters show --id 2
+kic groups show --id 2
+kic policies show --id 2
+
+```
+
 
 ## Deploy Observability
 
@@ -170,7 +205,7 @@ k9s
 ```
 
 - Press `0` to show all `namespaces`
-- Select `api` pod and press `l` to review the ResEdge app logs
+- Select `api` pod and press `l` to review the Res-Edge app logs
 - Press `s` to Toggle AutoScroll
 - Press `w` to Toggle Wrap
 - Press `esc` to return to Pod View
@@ -214,10 +249,12 @@ k9s
 - From the `PORTS` tab, open `Grafana (32000)`
   - Username: admin
   - Password: cse-labs
-- Click on "General / Home" at the top of the screen and select "dotnet" to see ResEdge application health metrics
-- Click on "General / Home" at the top of the screen and select "Application Dashboard" to see ResEdge application requests metrics
-- You should see the Application Dashboard with both WebV and ResEdge to about 10 Requests per second
-- Keep "Application Dashboard" open on browser tab to monitor ResEdge application requests metrics for the next section
+- Click on "General / Home" at the top of the screen and select "dotnet" to see Res-Edge application health metrics
+- Click on "General / Home" at the top of the screen and select "Application Dashboard" to see Res-Edge application requests metrics
+- You should see the Application Dashboard with both WebV and Res-Edge ("Application").
+  - WebV will have 10 requests per second.
+  - Application will have 10.2 requests per second. This comes from K8s calling /healthz every minute - Prom calls metrics every 5 seconds - in addition to 10 RPS from WebV.
+- Keep "Application Dashboard" open on browser tab to monitor Res-Edge application requests metrics for the next section. The version number of Res-Edge and WebV will appear below "Application" and "WebV" accordingly.
 
 ### Generate More Requests for Observability using WebV
 
