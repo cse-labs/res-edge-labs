@@ -28,7 +28,7 @@ kic policies list --order-by id
 
 # example command
 kic clusters list --group beta
-kic groups --group west
+kic groups list --group west
 
 ```
 
