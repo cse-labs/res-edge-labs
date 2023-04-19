@@ -1,0 +1,11 @@
+###
+# Res-Edge namespaces commands
+###
+
+commands:
+- name: namespaces
+  short: Res-Edge Namespaces commands
+  scriptCommands:
+  - name: show
+    short: Show Namespace information
+    path: namespaces/show

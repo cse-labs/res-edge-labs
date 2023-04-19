@@ -1,0 +1,11 @@
+###
+# Res-Edge applications commands
+###
+
+commands:
+- name: applications
+  short: Res-Edge Applications commands
+  scriptCommands:
+  - name: show
+    short: Show Application metadata
+    path: applications/show

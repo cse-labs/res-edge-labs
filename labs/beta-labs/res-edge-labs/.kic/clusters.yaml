@@ -1,0 +1,11 @@
+###
+# Res-Edge clusters commands
+###
+
+commands:
+- name: clusters
+  short: Res-Edge Clusters commands
+  scriptCommands:
+  - name: show
+    short: Show Cluster information
+    path: clusters/show

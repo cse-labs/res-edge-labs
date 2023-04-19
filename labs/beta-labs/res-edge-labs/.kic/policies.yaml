@@ -1,0 +1,11 @@
+###
+# Res-Edge policies commands
+###
+
+commands:
+- name: policies
+  short: Res-Edge Policies commands
+  scriptCommands:
+  - name: show
+    short: Show Policy information
+    path: policies/show
