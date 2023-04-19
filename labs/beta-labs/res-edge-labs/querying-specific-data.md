@@ -1,6 +1,7 @@
-# Querying Specific Data
+# Querying Specific Data using Res-Edge Data Service
 
-- Run `kic [entity-type] list` to query the data service and return a filtered list with the following options:
+- Run `kic [entity-type] list` to query the Res-Edge data service and return a filtered list with the following options:
+
 > Note: All options for `list` are optional
 
 ```bash
