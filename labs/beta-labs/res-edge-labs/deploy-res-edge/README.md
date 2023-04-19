@@ -1,6 +1,6 @@
 # Inner-loop with Res-Edge
 
-- ResEdge helps build a powerful system for automated deployment, update, management, and observability for thousands of Kubernetes clusters
+- Res-Edge helps build a powerful system for automated deployment, update, management, and observability for thousands of Kubernetes clusters
 - This lab will go over steps to run Res-Edge data service with Observability in Codespaces
 - To get more familiarity with kic and other tools used in this lab, please run through the inner-loop lab [here](../../inner-loop.md#inner-loop)
 
@@ -100,7 +100,7 @@ kic check resedge
 
 ```bash
 
-# run tests against ResEdge data service
+# run tests against Res-Edge data service
 kic test all
 
 ```
@@ -202,7 +202,7 @@ k9s
 ```
 
 - Press `0` to show all `namespaces`
-- Select `api` pod and press `l` to review the ResEdge app logs
+- Select `api` pod and press `l` to review the Res-Edge app logs
 - Press `s` to Toggle AutoScroll
 - Press `w` to Toggle Wrap
 - Press `esc` to return to Pod View
@@ -246,10 +246,10 @@ k9s
 - From the `PORTS` tab, open `Grafana (32000)`
   - Username: admin
   - Password: cse-labs
-- Click on "General / Home" at the top of the screen and select "dotnet" to see ResEdge application health metrics
-- Click on "General / Home" at the top of the screen and select "Application Dashboard" to see ResEdge application requests metrics
-- You should see the Application Dashboard with both WebV and ResEdge to about 10 Requests per second
-- Keep "Application Dashboard" open on browser tab to monitor ResEdge application requests metrics for the next section
+- Click on "General / Home" at the top of the screen and select "dotnet" to see Res-Edge application health metrics
+- Click on "General / Home" at the top of the screen and select "Application Dashboard" to see Res-Edge application requests metrics
+- You should see the Application Dashboard with both WebV and Res-Edge to about 10 Requests per second
+- Keep "Application Dashboard" open on browser tab to monitor Res-Edge application requests metrics for the next section
 
 ### Generate More Requests for Observability using WebV
 

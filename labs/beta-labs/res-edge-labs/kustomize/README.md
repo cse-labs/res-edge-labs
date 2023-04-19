@@ -1,6 +1,6 @@
 # Ring Deployment
 
-- Resilient Edge ring deployment with Kustomize demo
+- Res-Edge ring deployment with Kustomize demo
 - Kustomize helps customizing config files without the need of templates
 - Kustomize provides a number of handy methods like generators to make customization easier
 - Kustomize uses overlays to introduce environment specific changes on an already existing standard config file without disturbing it
@@ -10,11 +10,11 @@
 
 ## Prerequsite
 
-- [Deploy ResEdge lab](../deploy-res-edge/README.md#deploy-data-service)
+- [Deploy Res-Edge lab](../deploy-res-edge/README.md#deploy-data-service)
 
 ```bash
 
-#Verify ResEdge is running
+#Verify Res-Edge is running
 kic check resedge
 
 ```
@@ -71,7 +71,7 @@ images:
 
 ```bash
 
-# `kic cicd` uses ResEdge data service deployed to localhost
+# `kic cicd` uses Res-Edge data service deployed to localhost
 kic cicd
 
 # check the changes
