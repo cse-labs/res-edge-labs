@@ -108,7 +108,9 @@ kic test all
 ## Query data service
 
 - Run `kic [entity-type] list` to query the data service and return all entities in the data service:
+
 > To dive deeper into these commands and learn more about filtering results, go to [Query Res-Edge Data](../query-res-edge-data.md).
+
 ```bash
 
 # example commands
@@ -138,7 +140,6 @@ kic groups show --id 2
 kic policies show --id 2
 
 ```
-
 
 ## Deploy Observability
 
@@ -253,8 +254,11 @@ k9s
 - Click on "General / Home" at the top of the screen and select "Application Dashboard" to see Res-Edge application requests metrics
 - You should see the Application Dashboard with both WebV and Res-Edge ("Application").
   - WebV will have 10 requests per second.
-  - Application will have 10.2 requests per second. This comes from K8s calling /healthz every minute - Prom calls metrics every 5 seconds - in addition to 10 RPS from WebV.
-- Keep "Application Dashboard" open on browser tab to monitor Res-Edge application requests metrics for the next section. The version number of Res-Edge and WebV will appear below "Application" and "WebV" accordingly.
+  - Application will have 10.2 requests per second:
+    - K8s calls /healthz every minute
+    - Prometheus calls /metrics every 5 seconds
+    - WebV has 10 requests per second
+- Keep "Application Dashboard" open in a browser tab to monitor Res-Edge application requests metrics for the next section. The version number of Res-Edge and WebV will appear below "Application" and "WebV" accordingly.
 
 ### Generate More Requests for Observability using WebV
 

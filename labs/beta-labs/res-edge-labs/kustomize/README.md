@@ -1,6 +1,6 @@
 # Ring Deployment
 
-- Res-Edge ring deployment with Kustomize demo
+- Res-Edge ring deployment with Kustomize lab
 - Kustomize helps customizing config files without the need of templates
 - Kustomize provides a number of handy methods like generators to make customization easier
 - Kustomize uses overlays to introduce environment specific changes on an already existing standard config file without disturbing it
@@ -10,7 +10,8 @@
 
 ## Prerequsite
 
-- The Res-Edge Data Service needs to be deployed first for this lab. Go to [Deploy Res-Edge lab](../deploy-res-edge/README.md#deploy-data-service) for steps on how to deploy the data.
+- The Res-Edge Data Service needs to be deployed first for this lab.
+  - Go to [Deploy Res-Edge lab](../deploy-res-edge/README.md#deploy-data-service) for steps on how to deploy the data service.
 
 ```bash
 
@@ -82,7 +83,7 @@ images:
 
 ```bash
 
-# `kic cicd` uses Res-Edge Data Service deployed to localhost
+# `kic cicd` uses Res-Edge Data Service deployed to Codespaces
 kic cicd
 
 # check the changes

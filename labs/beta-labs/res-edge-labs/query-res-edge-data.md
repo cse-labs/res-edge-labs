@@ -7,11 +7,11 @@
 ```bash
 
 # This option allows the user to perform an exact search on the entity name, tags, or metadata (eg. `imdb`, `west`) and will return all the information for any matches.
---search [search-term]
+# --search [search-term]
 
 # This option allows the user to sort the results returned by the `list` by name or id.
 # If not passed in, the default sort will be by id.
---order-by [name]
+# --order-by [name]
 
 # example commands
 kic groups list --search west --order-by name
@@ -25,25 +25,32 @@ kic policies list --order-by name
 ```bash
 
 # Returns a list of the names of clusters in the specified group (eg. `beta`)
---group [group-name]
+# --group [group-name]
 
 # example commands
 kic clusters list --group beta
 kic groups list --group west
 
-# example output for kic clusters list --group beta
+```
+
+- example output for `kic clusters list --group beta`
+
+```text
+
 central-la-nola-2301
 east-ga-atl-2301
 west-ca-sd-2301
+
 ```
 
-- Run `kic [entity-type] show --id [entityId]` to return a specific entity's information:
+- Run `kic [entity-type] show --id [entityId]` to return a specific entity's details:
+
 > Note: `--id` is a required field
 
 ```bash
 
-# Returns entity information for the passed in id
---id
+# Returns entity details for the passed in id
+# --id
 
 # example commands
 kic applications show --id 2
@@ -52,7 +59,12 @@ kic clusters show --id 2
 kic groups show --id 2
 kic policies show --id 2
 
-# example output for kic applications show --id 2
+```
+
+- example output for `kic applications show --id 2`
+
+```json
+
 {
   "@odata.context": "http://localhost:32080/api/v1/$metadata#Applications(namespace())/$entity",
   "environment": "Prod",
@@ -97,4 +109,5 @@ kic policies show --id 2
     "metadata": []
   }
 }
+
 ```
