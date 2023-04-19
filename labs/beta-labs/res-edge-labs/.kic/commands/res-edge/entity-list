@@ -26,7 +26,7 @@ list_clusters() {
     CLUSTERS=${CLUSTERS:1}
     CLUSTERS=${CLUSTERS::-1}
 
-    for s in $(echo "{$CLUSTERS}" | sed "s/,/\n/g"); do echo "$s" | sed "s/\/api/localhost:32080\/api/g" | xargs curl -s | jq -r .name; done
+    for s in $(echo "{$CLUSTERS}" | sed "s/,/\n/g"); do echo "$s" | sed "s=\/api=${KIC_DATASERVICE_URL}\/api=g" | xargs curl -s | jq -r .name; done
 }
 
 list(){
