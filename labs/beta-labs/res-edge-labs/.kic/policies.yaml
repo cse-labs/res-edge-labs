@@ -1,5 +1,5 @@
 ###
-# Res-Edge policies commands
+# Res-Edge Policies commands
 ###
 
 commands:
@@ -9,3 +9,6 @@ commands:
   - name: show
     short: Show Policy information
     path: policies/show
+  - name: list
+    short: Search and list Policies
+    path: policies/list
