@@ -7,16 +7,20 @@ usage() {
   exit 1
 }
 
-# Loop through the positional parameters
-for param in "$@"; do
-  # If the parameter is "--show", set a flag and break the loop
-  if [[ $param == "--show" ]]; then
-    show_flag=1
-    break
-  else
-    usage
-  fi
-done
+# check the number of parameters
+if [ $# -ne 1 ]; then
+  usage
+fi
+
+# extract the first parameter into a variable
+param="$1"
+
+# check if the parameter is valid
+if [[ $param == "--show" ]]; then
+  show_flag=1
+else
+  usage
+fi
 
 # If the flag is set, show a message
 if [[ $show_flag -eq 1 ]]; then
