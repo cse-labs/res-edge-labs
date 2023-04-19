@@ -8,16 +8,12 @@
 
 - Complete outer-loop [Lab 1](../../outer-loop.md) and skip the [Delete Your Cluster](../../outer-loop.md#delete-your-cluster) section
 
-## Validate cluster identifier and working branch
+## Validate cluster identifier
 
 ```bash
 
 # make sure MY_CLUSTER is set from previous lab
 echo $MY_CLUSTER
-
-# make sure your branch is set and pushed remotely
-# commands will fail if you are in main branch
-git branch --show-current
 
 ```
 

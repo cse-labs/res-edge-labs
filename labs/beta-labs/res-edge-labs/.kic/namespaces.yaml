@@ -1,5 +1,5 @@
 ###
-# Resedge namespaces commands
+# Res-Edge Namespaces commands
 ###
 
 commands:
@@ -7,7 +7,7 @@ commands:
   short: ResEdge Namespaces commands
   scriptCommands:
   - name: show
-    short: Show Namespaces information
+    short: Show Namespace information
     path: namespaces/show
   - name: list
     short: Search and list Namespaces
