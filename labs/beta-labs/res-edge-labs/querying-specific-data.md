@@ -19,7 +19,7 @@ kic policies list --order-by id
 
 ```
 
-- An additional option exists pecifically for groups and clusters. This option does not work with `--search` or `--order-by` and should be entered alone:
+- An additional option exists specifically for groups and clusters. This option does not work with `--search` or `--order-by` and should be entered alone:
 
 ```bash
 
