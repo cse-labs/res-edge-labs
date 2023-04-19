@@ -7,7 +7,7 @@ commands:
   short: Deploy application
   scriptCommands:
     - name: imdb
-      short: Deploy IMDB application
+      short: Deploy IMDb application
       path: deploy/imdb
     - name: resedge
       short: Deploy Res-Edge Data Service
