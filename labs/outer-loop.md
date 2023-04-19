@@ -38,21 +38,6 @@ flt list
 
 ```
 
-## Validate cluster identifier and working branch
-
-```bash
-
-# by default, MY_BRANCH is set to your lower case GitHub User Name
-# the variable is used to uniquely name your clusters
-# the value can be overwritten if needed
-echo $MY_BRANCH
-
-# make sure your branch is set and pushed remotely
-# commands will fail if you are in main branch
-git branch --show-current
-
-```
-
 ## Login to Azure
 
 - Login to Azure using `az login --use-device-code`
@@ -93,8 +78,8 @@ git branch --show-current
 
 ```bash
 
-# set MY_CLUSTER.
-export MY_CLUSTER=central-tx-atx-$MY_BRANCH
+# set MY_CLUSTER, making sure the cluster name is unique within a resource group on an Azure subscription and avoids special characters that could not comply with Azure naming conventions such as https:/aka.ms/ResourceGroupNamingRestrictions.
+export MY_CLUSTER=central-tx-atx-101
 
 # create cluster
 # it will take about 2 minutes to create the VM

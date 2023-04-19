@@ -1,7 +1,5 @@
 #!/bin/bash
 
-KIC_RES_EDGE_URL="http://localhost:32080"
-
 PARENT_COMMAND=$(ps -o comm= $PPID)
 
 usage() {
@@ -9,8 +7,8 @@ usage() {
   exit 1
 }
 
-if [ -z "${KIC_RES_EDGE_URL}" ]; then
-  echo "Error: KIC_RES_EDGE_URL environment variable is not set"
+if [ -z "${KIC_DATASERVICE_URL}" ]; then
+  echo "Error: KIC_DATASERVICE_URL environment variable is not set"
 fi
 
 
@@ -32,7 +30,7 @@ if [ -z "$id" ]; then
   usage
 fi
 
-url="${KIC_RES_EDGE_URL}/api/v1/${KIC_RES_EDGE_ENTITYNAME}/${id}"
+url="${KIC_DATASERVICE_URL}/api/v1/${KIC_RES_EDGE_ENTITYNAME}/${id}"
 
 response=$(curl --silent --show-error "$url")
 

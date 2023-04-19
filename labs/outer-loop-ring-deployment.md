@@ -6,21 +6,6 @@
   - Add `ring` metadata to each cluster
   - Add targets based on cluster metadata
 
-## Validate cluster identifier and working branch
-
-```bash
-
-# by default, MY_BRANCH is set to your lower case GitHub User Name
-# the variable is used to uniquely name your clusters
-# the value can be overwritten if needed
-echo $MY_BRANCH
-
-# make sure your branch is set and pushed remotely
-# commands will fail if you are in main branch
-git branch --show-current
-
-```
-
 ## Create 15 Clusters
 
 - Running `flt create` generates GitOps files for the clusters and triggers a [CI-CD Github Action](https://github.com/cse-labs/res-edge-labs/actions) that will take about 30 seconds to complete
@@ -34,7 +19,7 @@ git branch --show-current
 
   flt create \
       --gitops-only \
-      -g $MY_BRANCH-fleet \
+      -g $GITHUB_USER-fleet \
       -c central-tx-atx-101 \
       -c central-tx-dal-101 \
       -c central-tx-hou-101 \

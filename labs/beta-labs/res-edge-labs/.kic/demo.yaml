@@ -19,5 +19,5 @@ scriptCommands:
     path: deploy
 
   - name: overlay
-    short: Create new Kustomize overly
+    short: Create new Kustomize overlay
     path: overlay
