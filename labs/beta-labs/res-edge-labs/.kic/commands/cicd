@@ -41,9 +41,10 @@ fi
 echo "Running ci-cd locally ..."
 
 # The following command will execute the ghcr.io/cse-labs/res-edge-automation image in docker
-# and will mount the current directory into the docker image /goa mount point
-# and then the image will retrieve all required information from the dataservice
-# and generate the kustomize files in /goa
+# and will mount the current directory into a working directory inside the container.
+# The container will retrieve all required information from the dataservice
+# and validate, create and/or update (as necessary) the clusters gitops manifest files 
+# in the working directory without pushing changes to remote repository.
 docker run -it --rm \
   --net host \
   -v "$(pwd)":/goa \
