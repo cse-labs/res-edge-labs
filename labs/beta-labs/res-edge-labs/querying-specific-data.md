@@ -23,7 +23,7 @@ kic policies list --order-by id
 
 ```bash
 
-# Returns a list of clusters in the specified group (eg. `beta`)
+# Returns a list of the names of clusters in the specified group (eg. `beta`)
 --group [group-name]
 
 # example command
