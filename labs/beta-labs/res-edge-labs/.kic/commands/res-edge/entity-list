@@ -26,16 +26,18 @@ list_clusters() {
     CLUSTERS=${CLUSTERS:1}
     CLUSTERS=${CLUSTERS::-1}
 
-    for s in $(echo "{$CLUSTERS}" | sed "s/,/\n/g"); do echo "$s" | sed "s=\/api=${KIC_DATASERVICE_URL}\/api=g" | xargs curl -s | jq -r .name; done
+    echo "ID      NAME"
+    echo "--      ------"
+    for s in $(echo "{$CLUSTERS}" | sed "s/,/\n/g"); do echo "$s" | sed "s=\/api=${KIC_DATASERVICE_URL}\/api=g" | xargs curl -s | jq -r '([.id, .name]) | @tsv'; done
 }
 
-list(){
+list() {
   if [ -n "${GROUP}" ]; then
     CLUSTERS=$(list_clusters)
     echo "$CLUSTERS"
   else
-    response=$(curl --silent --show-error "$URL")
-    echo "$response" | jq
+    response=$(curl --silent --show-error "$URL" | jq -r '["ID","NAME"], ["--","------"], (.value[] | [.id, .name]) | @tsv')
+    echo "$response"
   fi
 }
 
