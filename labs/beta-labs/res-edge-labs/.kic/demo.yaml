@@ -13,11 +13,7 @@ scriptCommands:
   - name: cicd
     short: Test ci-cd locally
     path: cicd
-
-  - name: groups
-    short: List Res-Edge groups
-    path: groups
-
+    
   - name: overlay
-    short: Create new Kustomize overly
+    short: Create new Kustomize overlay
     path: overlay
