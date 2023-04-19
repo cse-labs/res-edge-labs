@@ -16,10 +16,12 @@ fi
 param="$1"
 
 # check if the parameter is valid
-if [[ $param == "--show" ]]; then
-  show_flag=1
-else
-  usage
+if [ $# -eq 1 ]; then
+  if [[ $param == "--show" ]]; then
+    show_flag=1
+  else
+    usage
+  fi
 fi
 
 # If the flag is set, show a message
