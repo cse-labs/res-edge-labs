@@ -23,7 +23,7 @@ kic check resedge
 
 - An overlay is just another kustomization, referring to the base, and referring to patches to apply to that base
 - It lets you manage traditional variants of a configuration - like development, staging and production
-- In this example, we will use overlay on the IMDB application to define a different version to be deployed to a different set of clusters
+- In this example, we will use overlay on the IMDb application to define a different version to be deployed to a different set of clusters
 - You can use the  `kic overlay` command to create the overlay structure
 
 - Start in this lab directory
