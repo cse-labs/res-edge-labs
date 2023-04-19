@@ -120,7 +120,7 @@ kic policies list
 
 ```
 
-- Run `kic [entity-type] show` to return a specific entity's information:
+- Run `kic [entity-type] show --id [entity-id]` to return a specific entity's information:
 
 ```bash
 
