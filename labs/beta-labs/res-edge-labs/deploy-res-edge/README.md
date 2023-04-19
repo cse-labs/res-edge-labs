@@ -2,7 +2,7 @@
 
 - Res-Edge helps build a powerful system for automated deployment, update, management, and observability for thousands of Kubernetes clusters
 - This lab will go over steps to run Res-Edge Data Service with Observability in Codespaces
-- To get more familiarity with kic and other tools used in this lab, please run through the inner-loop lab [here](../../inner-loop.md#inner-loop)
+- To get more familiarity with kic and other tools used in this lab, please run through the inner-loop lab [here](../../../inner-loop.md#inner-loop)
 
 ## Create cluster in Codespaces
 
