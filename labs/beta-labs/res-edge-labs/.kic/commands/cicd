@@ -1,6 +1,6 @@
 #!/bin/bash
 
-KIC_GOA_DOCKER_IMAGE="ghcr.io/cse-labs/res-edge-automation:0.8.5"
+RESEDGE_AUTOMATION_DOCKER_IMAGE="ghcr.io/cse-labs/res-edge-automation:0.8.5"
 
 # Loop through the positional parameters
 for param in "$@"; do
@@ -20,7 +20,7 @@ if [[ $show_flag -eq 1 ]]; then
   echo "docker run -it --rm \\"
   echo "     --net host \\"
   echo "     -v \"\$(pwd)\":/goa \\"
-  echo "     ${KIC_GOA_DOCKER_IMAGE} \\"
+  echo "     ${RESEDGE_AUTOMATION_DOCKER_IMAGE} \\"
   echo "     -s \"${KIC_DATASERVICE_URL}\""
   exit
 fi
@@ -34,5 +34,5 @@ echo "Running ci-cd locally ..."
 docker run -it --rm \
   --net host \
   -v "$(pwd)":/goa \
-  ${KIC_GOA_DOCKER_IMAGE} \
+  ${RESEDGE_AUTOMATION_DOCKER_IMAGE} \
   -s "${KIC_DATASERVICE_URL}"
