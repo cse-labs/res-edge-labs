@@ -10,7 +10,7 @@
 
 ## Prerequsite
 
-- [Deploy Res-Edge lab](../deploy-res-edge/README.md#deploy-data-service)
+- The Res-Edge Data Service needs to be deployed first for this lab. Go to [Deploy Res-Edge lab](../deploy-res-edge/README.md#deploy-data-service) for steps on how to deploy the data.
 
 ```bash
 
@@ -23,7 +23,18 @@ kic check resedge
 
 - An overlay is just another kustomization, referring to the base, and referring to patches to apply to that base
 - It lets you manage traditional variants of a configuration - like development, staging and production
-- In this example, we will use overlay on the IMDb application to define a different version to be deployed to a different set of clusters
+- In this example, we will use an overlay on the IMDb application to define a different version to be deployed to a beta ring of clusters. To see which groups should get updated when this occurs run the following commands:
+
+```bash
+
+# To get the beta group id
+kic groups list --search beta
+
+# Insert the above group id in [betaId] to
+kic groups show --id 2
+
+```
+
 - You can use the  `kic overlay` command to create the overlay structure
 
 - Start in this lab directory
@@ -71,7 +82,7 @@ images:
 
 ```bash
 
-# `kic cicd` uses Res-Edge data service deployed to localhost
+# `kic cicd` uses Res-Edge Data Service deployed to localhost
 kic cicd
 
 # check the changes
