@@ -28,7 +28,17 @@ list_clusters() {
     CLUSTERS=${CLUSTERS:1}
     CLUSTERS=${CLUSTERS::-1}
 
-    for s in $(echo $CLUSTERS | sed "s/,/\n/g"); do echo $s | sed "s/\/api/localhost:32080\/api/g" | xargs curl -s | jq -r .name; done
+    for s in $(echo "{$CLUSTERS}" | sed "s/,/\n/g"); do echo "$s" | sed "s/\/api/localhost:32080\/api/g" | xargs curl -s | jq -r .name; done
+}
+
+list(){
+  if [ -n "${GROUP}" ]; then
+    CLUSTERS=$(list_clusters)
+    echo "$CLUSTERS"
+  else
+    response=$(curl --silent --show-error "$URL")
+    echo "$response" | jq
+  fi
 }
 
 if [ -z "${KIC_DATASERVICE_URL}" ]; then
@@ -96,15 +106,7 @@ URL_QUERY_STRING=${URL_QUERY_STRING:1}
 
 URL="${KIC_BASE_URL}?${URL_QUERY_STRING}"
 
-if [ -n "${GROUP}" ]; then
-  CLUSTERS=$(list_clusters)
-  echo "$CLUSTERS"
-else
-  response=$(curl --silent --show-error "$URL")
-  echo "$response" | jq
-fi
-
-if [ $? -ne 0 ]; then
+if ! list; then
   echo "Error: Failed to retrieve data from $URL"
   echo "Please check that the Res-Edge server is up and running with: kic check resedge"
   exit 1
