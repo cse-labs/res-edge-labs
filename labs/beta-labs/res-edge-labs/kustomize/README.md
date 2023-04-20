@@ -37,7 +37,7 @@ kic check resedge
 
 ```bash
 
-# List all clusters in beta group
+# List all clusters in a beta group
 kic clusters list --group beta
 
 ```
@@ -75,9 +75,9 @@ images:
 
 ## CICD Dry Run
 
-- To generate and deploy the manifests for the clusters you can use `kic cicd` command.
+- To generate and deploy the manifests for the clusters you can use `kic cicd` command
 
-> Note: kic is context aware so make sure you are running this in the folder where your `clusters` folder resides.
+> Note: kic is context aware so make sure you are running this in the folder where your `clusters` folder resides
 
 ```bash
 
@@ -102,6 +102,15 @@ Changes not staged for commit:
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
         apps/imdb/kustomize/prod/overlays/1.0.1/
+```
+
+- Verify that clusters from a beta group were affected by `kic cicd` run from the previous steps
+
+```bash
+
+# List all clusters in a beta group
+kic clusters list --group beta
+
 ```
 
 ## Reset clusters
