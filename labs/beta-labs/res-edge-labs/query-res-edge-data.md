@@ -6,10 +6,10 @@
 
 ```bash
 
-# To perform an exact search on the entity name, tags, or metadata (eg. `imdb`, `west`) and will return all the information for any matches
+# To perform an exact search on the entity name, tags, or metadata (eg. `imdb`, `west`) and return all the information for any matches, add the following option
 # --search [search-term]
 
-# To sort the results returned by the `list` by name or id
+# To sort the results returned by the `list` by name or id, add the following option
 # If not passed in, the default sort will be by id
 # --order-by [name]
 
@@ -24,7 +24,7 @@ kic policies list --order-by name
 
 ```bash
 
-# To return a list of the names of clusters in the specified group (eg. `beta`)
+# To return a list of the names of clusters in the specified group (eg. `beta`), add the following option
 # --group [group-name]
 
 # example commands
@@ -49,7 +49,7 @@ west-ca-sd-2301
 
 ```bash
 
-# To return entity details for the passed in id
+# To return entity details for the passed in id, add the following option
 # --id
 
 # example commands

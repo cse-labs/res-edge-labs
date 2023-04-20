@@ -1,7 +1,7 @@
 # Inner-loop with Res-Edge
 
 - Res-Edge helps build a powerful system for automated deployment, update, management, and observability for thousands of Kubernetes clusters
-- Res-Edge Data Service is a component of Res-Edge that enhances the experience of managing the complexity of application deployments to Kubernetes environments at scale by providing a centralized inventory system which supports complex hierarchies
+- Res-Edge Data Service is a component of Res-Edge that enhances the experience of managing the complexity of applications deployments to Kubernetes environments at scale by providing a centralized inventory system which supports complex hierarchies
 - This lab will go over steps to run Res-Edge Data Service with Observability in Codespaces
 - To get more familiarity with kic and other tools used in this lab, please run through the inner-loop lab [here](../../../inner-loop.md#inner-loop)
 
