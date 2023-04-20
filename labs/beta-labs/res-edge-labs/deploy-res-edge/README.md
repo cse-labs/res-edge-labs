@@ -1,6 +1,7 @@
 # Inner-loop with Res-Edge
 
 - Res-Edge helps build a powerful system for automated deployment, update, management, and observability for thousands of Kubernetes clusters
+- Res-Edge Data Service is a component of Res-Edge that enhances the experience of managing the complexity of applications deployments to Kubernetes environments at scale by providing a centralized inventory system which supports complex hierarchies
 - This lab will go over steps to run Res-Edge Data Service with Observability in Codespaces
 - To get more familiarity with kic and other tools used in this lab, please run through the inner-loop lab [here](../../../inner-loop.md#inner-loop)
 
@@ -26,7 +27,7 @@ kic cluster create
 kic pods
 
 # wait for pods to get to Running
-# Ctrl+C to exit
+# ctl-c to exit
 kic pods --watch
 
 ```
@@ -52,7 +53,7 @@ kic pods --watch
 # create the namespace
 kaf ns.yaml
 
-# deploy sql server with sample data
+# deploy SQL Server with sample data
 k apply -k mssql
 
 kic pods
@@ -72,14 +73,14 @@ kic check mssql
 
 ```
 
-## Deploy data service
+## Deploy Res-Edge Data Service
 
 - We will now deploy the Res-Edge Data Service
 - This data service allows CRUD operations against the SQL Server database (Inventory storage) deployed from previous section
 
 ```bash
 
-# deploy the data service
+# deploy the Res-Edge Data Service
 k apply -k api
 
 kic pods
@@ -88,14 +89,14 @@ kic pods
 # ctl-c to exit
 kic pods --watch
 
-# check api version to verify data service is running
+# check api version to verify Res-Edge Data Service is `Running`
 kic check resedge
 
 ```
 
-## Test data service
+## Test Res-Edge Data Service
 
-- To make sure the data service is working properly, we will use `kic test` to generate both successful and failing requests
+- To make sure the Res-Edge Data Service is working properly, we will use `kic test` to generate both successful and failing requests
 - `kic test` uses the WebV installed in Codespace at start up
 
 ```bash
@@ -105,11 +106,11 @@ kic test all
 
 ```
 
-## Query data service
+## Query Res-Edge Data Service
 
-- Run `kic [entity-type] list` to query the data service and return all entities in the data service:
+- Run `kic [entity-type] list` to query the Res-Edge Data Service and return all entities in this data service
 
-> To dive deeper into these commands and learn more about filtering results, go to [Query Res-Edge Data](../query-res-edge-data.md).
+> To dive deeper into these commands and learn more about filtering results, go to [Query Res-Edge Data Service](../query-res-edge-data.md)
 
 ```bash
 
@@ -122,7 +123,7 @@ kic policies list
 
 ```
 
-- Run `kic [entity-type] show --id [entity-id]` to return a specific entity's information:
+- Run `kic [entity-type] show --id [entity-id]` to return a specific entity's information
 
 ```bash
 
@@ -144,7 +145,7 @@ kic policies show --id 2
 ## Deploy Observability
 
 - Next we will deploy the following observability stack in your cluster
-  - Fluent Bit, Prometheus, Grafana.
+  - Fluent Bit, Prometheus, Grafana
 
 ```bash
 
@@ -206,7 +207,7 @@ k9s
 ```
 
 - Press `0` to show all `namespaces`
-- Select `api` pod and press `l` to review the Res-Edge app logs
+- Select `api` pod and press `l` to review the Res-Edge Data Service logs
 - Press `s` to Toggle AutoScroll
 - Press `w` to Toggle Wrap
 - Press `esc` to return to Pod View
@@ -250,15 +251,15 @@ k9s
 - From the `PORTS` tab, open `Grafana (32000)`
   - Username: admin
   - Password: cse-labs
-- Click on "General / Home" at the top of the screen and select "dotnet" to see Res-Edge application health metrics
-- Click on "General / Home" at the top of the screen and select "Application Dashboard" to see Res-Edge application requests metrics
-- You should see the Application Dashboard with both WebV and Res-Edge ("Application").
+- Click on "General / Home" at the top of the screen and select "dotnet" to see Res-Edge Data Service health metrics
+- Click on "General / Home" at the top of the screen and select "Application Dashboard" to see Res-Edge Data Service requests metrics
+- You should see the Application Dashboard with both WebV and Res-Edge Data Service ("Application").
   - WebV will have 10 requests per second.
-  - Application will have 10.2 requests per second:
+  - Application will have 10.2 requests per second
     - K8s calls /healthz every minute
     - Prometheus calls /metrics every 5 seconds
     - WebV has 10 requests per second
-- Keep "Application Dashboard" open in a browser tab to monitor Res-Edge application requests metrics for the next section. The version number of Res-Edge and WebV will appear below "Application" and "WebV" accordingly.
+- Keep "Application Dashboard" open in a browser tab to monitor Res-Edge Data Service requests metrics for the next section. The version number of Res-Edge Data Service and WebV will appear below "Application" and "WebV" accordingly.
 
 ### Generate More Requests for Observability using WebV
 

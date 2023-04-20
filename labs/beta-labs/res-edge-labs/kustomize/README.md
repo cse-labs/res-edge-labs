@@ -10,34 +10,8 @@
 
 ## Prerequsite
 
-- The Res-Edge Data Service needs to be deployed first for this lab.
-  - Go to [Deploy Res-Edge lab](../deploy-res-edge/README.md#deploy-data-service) for steps on how to deploy the data service.
-
-```bash
-
-#Verify Res-Edge is running
-kic check resedge
-
-```
-
-## Create application overlay
-
-- An overlay is just another kustomization, referring to the base, and referring to patches to apply to that base
-- It lets you manage traditional variants of a configuration - like development, staging and production
-- In this example, we will use an overlay on the IMDb application to define a different version to be deployed to a beta ring of clusters. To see which groups should get updated when this occurs run the following commands:
-
-```bash
-
-# To get the beta group id
-kic groups list --search beta
-
-# Insert the above group id in [betaId] to
-kic groups show --id 2
-
-```
-
-- You can use the  `kic overlay` command to create the overlay structure
-
+- The Res-Edge Data Service needs to be deployed first for this lab
+  - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge/README.md#inner-loop-with-res-edge) for steps on how to deploy the data service
 - Start in this lab directory
 
 ```bash
@@ -45,6 +19,30 @@ kic groups show --id 2
 cd $REPO_BASE/labs/beta-labs/res-edge-labs/kustomize
 
 ```
+
+- Verify that Res-Edge Data Service is up and running
+
+```bash
+
+# check api version to verify Res-Edge Data Service is `Running`
+kic check resedge
+
+```
+
+## Create application overlay
+
+- An overlay is a Kustomization that refers to the base and patches to transform the base when applied
+- Overlays allow you to manage multiple configurations - such as dev, test, staging and prod - by transforming a shared base
+- In this example, we will use an overlay on the IMDb application to define a different version to be deployed to a beta ring of clusters. To see which clusters should get updated when this occurs run the following command:
+
+```bash
+
+# List all clusters in the group beta
+kic clusters list --group beta
+
+```
+
+- You can use the  `kic overlay` command to create the overlay structure
 
 - Execute the kic command as presented below where `1.0.1` is the version number and `imdb` is your app name:
 
@@ -77,9 +75,9 @@ images:
 
 ## CICD Dry Run
 
-- To generate and deploy the manifests for the clusters you can use `kic cicd` command.
+- To generate and deploy the manifests for the clusters you can use `kic cicd` command
 
-> Note: kic is context aware so make sure you are running this in the folder where your `clusters` folder resides.
+> Note: kic is context aware so make sure you are running this in the folder where your `clusters` folder resides
 
 ```bash
 
@@ -104,6 +102,15 @@ Changes not staged for commit:
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
         apps/imdb/kustomize/prod/overlays/1.0.1/
+```
+
+- Verify that clusters from a beta group were affected by `kic cicd` execution from the previous steps
+
+```bash
+
+# List all clusters in the group beta
+kic clusters list --group beta
+
 ```
 
 ## Reset clusters
