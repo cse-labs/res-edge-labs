@@ -10,8 +10,17 @@
 
 ## Prerequsite
 
-- The Res-Edge Data Service needs to be deployed first for this lab.
-  - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge/README.md#deploy-res-edge-data-service) for steps on how to deploy the data service
+- The Res-Edge Data Service needs to be deployed first for this lab
+  - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge/README.md#inner-loop-with-res-edge) for steps on how to deploy the data service
+- Start in this lab directory
+
+```bash
+
+cd $REPO_BASE/labs/beta-labs/res-edge-labs/kustomize
+
+```
+
+- Verify that Res-Edge Data Service is up and running
 
 ```bash
 
@@ -37,14 +46,6 @@ kic groups show --id 2
 ```
 
 - You can use the  `kic overlay` command to create the overlay structure
-
-- Start in this lab directory
-
-```bash
-
-cd $REPO_BASE/labs/beta-labs/res-edge-labs/kustomize
-
-```
 
 - Execute the kic command as presented below where `1.0.1` is the version number and `imdb` is your app name:
 
