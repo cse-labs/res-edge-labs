@@ -27,7 +27,7 @@ kic cluster create
 kic pods
 
 # wait for pods to get to Running
-# Ctrl+C to exit
+# ctl-c to exit
 kic pods --watch
 
 ```
