@@ -33,15 +33,12 @@ kic check resedge
 
 - An overlay is just another kustomization, referring to the base, and referring to patches to apply to that base
 - It lets you manage traditional variants of a configuration - like development, staging and production
-- In this example, we will use an overlay on the IMDb application to define a different version to be deployed to a beta ring of clusters. To see which groups should get updated when this occurs run the following commands:
+- In this example, we will use an overlay on the IMDb application to define a different version to be deployed to a beta ring of clusters. To see which clusters should get updated when this occurs run the following command:
 
 ```bash
 
-# To get the beta group id
-kic groups list --search beta
-
-# Insert the above group id in [betaId] to
-kic groups show --id 2
+# List all clusters in beta group
+kic clusters list --group beta
 
 ```
 
