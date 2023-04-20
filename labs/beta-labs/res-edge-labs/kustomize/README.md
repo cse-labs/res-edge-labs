@@ -37,7 +37,7 @@ kic check resedge
 
 ```bash
 
-# List all clusters in a beta group
+# List all clusters in the group beta
 kic clusters list --group beta
 
 ```
