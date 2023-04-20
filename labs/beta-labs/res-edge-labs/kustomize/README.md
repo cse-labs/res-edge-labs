@@ -31,8 +31,8 @@ kic check resedge
 
 ## Create application overlay
 
-- An overlay is just another kustomization, referring to the base, and referring to patches to apply to that base
-- It lets you manage traditional variants of a configuration - like development, staging and production
+- An overlay is a Kustomization that refers to the base and patches to transform the base when applied
+- Overlays allow you to manage multiple configurations - such as dev, test, staging and prod - by transforming a shared base
 - In this example, we will use an overlay on the IMDb application to define a different version to be deployed to a beta ring of clusters. To see which clusters should get updated when this occurs run the following command:
 
 ```bash
@@ -104,7 +104,7 @@ Untracked files:
         apps/imdb/kustomize/prod/overlays/1.0.1/
 ```
 
-- Verify that clusters from a beta group were affected by `kic cicd` run from the previous steps
+- Verify that clusters from a beta group were affected by `kic cicd` execution from the previous steps
 
 ```bash
 

@@ -1,7 +1,7 @@
 # Inner-loop with Res-Edge
 
 - Res-Edge helps build a powerful system for automated deployment, update, management, and observability for thousands of Kubernetes clusters
-- Res-Edge Data Service is a component of Res-Edge which enhances the experience of managing the deployment hierarchy of complex kubernetes environments.
+- Res-Edge Data Service is a component of Res-Edge that enhances the experience of managing the complexity of application deployments to Kubernetes environments at scale by providing a centralized inventory system which supports complex hierarchies
 - This lab will go over steps to run Res-Edge Data Service with Observability in Codespaces
 - To get more familiarity with kic and other tools used in this lab, please run through the inner-loop lab [here](../../../inner-loop.md#inner-loop)
 
@@ -259,7 +259,7 @@ k9s
     - K8s calls /healthz every minute
     - Prometheus calls /metrics every 5 seconds
     - WebV has 10 requests per second
-- Keep "Application Dashboard" open in a browser tab to monitor Res-Edge Data Service requests metrics for the next section. The version number of Res-Edge and WebV will appear below "Application" and "WebV" accordingly.
+- Keep "Application Dashboard" open in a browser tab to monitor Res-Edge Data Service requests metrics for the next section. The version number of Res-Edge Data Service and WebV will appear below "Application" and "WebV" accordingly.
 
 ### Generate More Requests for Observability using WebV
 
