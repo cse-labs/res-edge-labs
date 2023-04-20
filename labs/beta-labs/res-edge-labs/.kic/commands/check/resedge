@@ -12,7 +12,7 @@ function resedge_check {
 }
 
 if ! resedge_check; then
-    echo "ResEdge is not Running";
+    echo "Res-Edge Data Service is not Running";
 else
-    echo "ResEdge is Running";
+    echo "Res-Edge Data Service is Running";
 fi
