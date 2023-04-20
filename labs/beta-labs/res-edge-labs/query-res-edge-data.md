@@ -1,4 +1,4 @@
-# Query Res-Edge Data
+# Query Res-Edge Data Service
 
 - Run `kic [entity-type] list` to query the Res-Edge Data Service and return a filtered list with the following options:
 
@@ -6,11 +6,11 @@
 
 ```bash
 
-# This option allows the user to perform an exact search on the entity name, tags, or metadata (eg. `imdb`, `west`) and will return all the information for any matches.
+# To perform an exact search on the entity name, tags, or metadata (eg. `imdb`, `west`) and will return all the information for any matches
 # --search [search-term]
 
-# This option allows the user to sort the results returned by the `list` by name or id.
-# If not passed in, the default sort will be by id.
+# To sort the results returned by the `list` by name or id
+# If not passed in, the default sort will be by id
 # --order-by [name]
 
 # example commands
@@ -20,11 +20,11 @@ kic policies list --order-by name
 
 ```
 
-- An additional option exists specifically for groups and clusters. This option does not work with `--search` or `--order-by` and should be entered alone:
+- An additional option exists specifically for groups and clusters. This option does not work with `--search` or `--order-by` and should be entered alone
 
 ```bash
 
-# Returns a list of the names of clusters in the specified group (eg. `beta`)
+# To return a list of the names of clusters in the specified group (eg. `beta`)
 # --group [group-name]
 
 # example commands
@@ -49,7 +49,7 @@ west-ca-sd-2301
 
 ```bash
 
-# Returns entity details for the passed in id
+# To return entity details for the passed in id
 # --id
 
 # example commands

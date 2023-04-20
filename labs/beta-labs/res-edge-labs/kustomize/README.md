@@ -11,11 +11,11 @@
 ## Prerequsite
 
 - The Res-Edge Data Service needs to be deployed first for this lab.
-  - Go to [Deploy Res-Edge lab](../deploy-res-edge/README.md#deploy-data-service) for steps on how to deploy the data service.
+  - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge/README.md#deploy-res-edge-data-service) for steps on how to deploy the data service
 
 ```bash
 
-#Verify Res-Edge is running
+# check api version to verify Res-Edge Data Service is `Running`
 kic check resedge
 
 ```
