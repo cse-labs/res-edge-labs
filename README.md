@@ -4,7 +4,7 @@
 
 Kubernetes is hard. Getting started and set up for the first time can take weeks to get right. Managing deployments on a fleet of Kubernetes clusters on the edge brings even more challenges.
 
-Kubernetes in Codespaces (KiC) is a `game-changer` for the end-to-end Kubernetes app development cycle from a local cluster to deployments on the edge. It reduces the initial friction and empowers the developer to get started and deployed to a dev/test environment within *minutes*. The pre-configured Codespaces environment includes a `Kubernetes` cluster and custom CLI's (`kic` and `flt`) that help streamline the initial learning curve to Kubernetes development commands.
+Kubernetes in Codespaces (KiC) is a `game-changer` for the end-to-end Kubernetes app development cycle from a local cluster to deployments on the edge. It reduces the initial friction and empowers the developer to get started and deployed to a dev/test environment within *minutes*. The pre-configured Codespaces environment includes a `Kubernetes` cluster and custom command line utilities (`kic` and `flt`) that help streamline the initial learning curve to Kubernetes development commands.
 
 This repo walks through the rich end-to-end developer experience in a series of labs. The labs start by walking you through creating, building, testing, and deploying an application on a local cluster ([inner-loop](./README.md#inner-loop)) with a complete CNCF observability stack. Then, the labs move on to the next step of deploying the application to a test cluster in the Cloud ([outer-loop](./README.md#outer-loop)). There are also several [advanced labs](./README.md#advanced-labs) that cover centralized monitoring, canary deployments, and targeting different devices.
 
@@ -63,7 +63,7 @@ We use GitHub Codespaces for our `inner-loop` and `outer-loop` Developer Experie
 - Click the `<> Code` button
   - Make sure the Codespaces tab is active
 - Click `Create Codespace on main`
-- After about 1 minute, you will have a GitHub Codespace running with a complete Kubernetes Developer Experience!
+- After about 5 minutes, you will have a GitHub Codespace running with a complete Kubernetes Developer Experience!
 
 ## Environment variables
 
