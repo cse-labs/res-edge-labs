@@ -46,7 +46,7 @@ kic pods --watch
   - 3 Policies
   - All entities will have Metadata and Tags
 
-> Note: `k` is an alias for `kubectl` and `kaf` is an alias for `kubectl apply -f`
+> Note: `kaf` is an alias for `kubectl apply -f`, where `f` is for the manifest file path. `kak` is an alias for `kubectl apply -k`, where `k` is directory path for the kustomization.yaml. Run `alias` to view all aliases defined.
 
 ```bash
 
@@ -54,7 +54,7 @@ kic pods --watch
 kaf ns.yaml
 
 # deploy SQL Server with sample data
-k apply -k mssql
+kak mssql
 
 kic pods
 
@@ -81,7 +81,7 @@ kic check mssql
 ```bash
 
 # deploy the Res-Edge Data Service
-k apply -k api
+kak api
 
 kic pods
 
@@ -150,7 +150,7 @@ kic policies show --id 2
 ```bash
 
 # deploy observability
-k apply -k monitoring
+kak monitoring
 
 kic pods
 
@@ -173,7 +173,7 @@ kic check grafana
 ```bash
 
 # deploy webv
-k apply -k webv
+kak webv
 
 # "watch" for the webv pod to get to Running
 # ctl-c to exit
