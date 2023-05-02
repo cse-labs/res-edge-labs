@@ -37,7 +37,7 @@ kic pods --watch
 ## Deploy SQL
 
 - Res-Edge Data Service requires a SQL Server database for start up
-- This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications
+- This database serves as an inventory storage for management of hierarchal groups, labels, clusters, namespaces, and applications
 - When the container starts, it will populate the database with sample data
   - 19 Applications
   - 19 Clusters
