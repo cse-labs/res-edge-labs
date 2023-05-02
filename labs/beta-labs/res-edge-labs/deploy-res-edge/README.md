@@ -16,7 +16,7 @@ cd $REPO_BASE/labs/beta-labs/res-edge-labs/deploy-res-edge
 
 ```
 
-- Use `kic` to create and verify a new k3d cluster
+- Use [`kic`](/docs/cli/kic/README.md) to create and verify a new k3d cluster
 
 ```bash
 
