@@ -37,14 +37,15 @@ kic pods --watch
 ## Deploy SQL
 
 - Res-Edge Data Service requires a SQL Server database for start up
-- This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications
+- This database serves as an inventory storage for management of hierarchical groups, labels, clusters, namespaces, and applications
 - When the container starts, it will populate the database with sample data
   - 19 Applications
   - 19 Clusters
-  - 20 Hierarchal groups
+  - 20 Hierarchical groups
   - 19 Namespaces
   - 3 Policies
-  - All entities will have Metadata and Tags
+
+> In the data store, there exists a hierarchical relationship between the entities, where an application is associated with a namespace. A namespace can accommodate multiple applications and be deployed to multiple hierarchical groups. A group can only have one parent. A group without children can be created to represent a label. Additionally, a cluster can be assigned to multiple groups. Each namespace is equipped with a policy that is specific to it. Therefore, a cluster can contain several namespaces and applications. Finally, all the entities in the data store are equipped with metadata and tags.
 
 > Note: `k` is an alias for `kubectl` and `kaf` is an alias for `kubectl apply -f`
 
