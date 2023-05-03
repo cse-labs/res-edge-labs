@@ -42,7 +42,7 @@ kic pods --watch
 - When the container starts, it will populate the database with sample data
   - 19 Applications
   - 19 Clusters
-  - 19 groups
+  - 19 Groups
   - 19 Namespaces
   - 3 Policies
   - All entities will have Metadata and Tags
