@@ -37,11 +37,11 @@ kic pods --watch
 ## Deploy SQL
 
 - Res-Edge Data Service requires a SQL Server database for start up
-- This database serves as an inventory storage for management of hierarchal groups, clusters, namespaces, and applications
+- This database serves as an inventory storage for management of hierarchical groups, clusters, namespaces, and applications
 - When the container starts, it will populate the database with sample data
   - 19 Applications
   - 19 Clusters
-  - 20 Hierarchal groups
+  - 20 Hierarchical groups
   - 19 Namespaces
   - 3 Policies
   - All entities will have Metadata and Tags
@@ -97,7 +97,7 @@ kic check resedge
 ## Test Res-Edge Data Service
 
 - To make sure the Res-Edge Data Service is working properly, we will use `kic test` to generate both successful and failing requests
-- `kic test` uses the WebV installed in Codespace at start up
+- `kic test` uses WebV installed in Codespace at start up
 
 ```bash
 
@@ -110,7 +110,7 @@ kic test all
 
 - Run `kic [entity-type] list` to query the Res-Edge Data Service and return all entities in this data service
 
-> To dive deeper into these commands and learn more about filtering results, go to [Query Res-Edge Data Service](../query-res-edge-data.md)
+> To dive deeper into these commands and learn more about filtering results, go to [Query Res-Edge Data Service](./query-res-edge-data.md)
 
 ```bash
 
@@ -237,7 +237,7 @@ k9s
 - From the query window, enter `resedge`
   - This will filter to your custom app metrics
 - From the query window, enter `webv`
-  - This will filter to the WebValidate metrics
+  - This will filter to the WebV metrics
 
 ## Observability: Grafana
 
