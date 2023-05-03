@@ -49,6 +49,7 @@ kic pods --watch
 - Run `alias` to view all aliases defined
   - `kaf` is an alias for `kubectl apply -f`, where `f` is for the manifest file path
   - `kak` is an alias for `kubectl apply -k`, where `k` is directory path for the kustomization.yaml
+  - To create a new alias for your current terminal session, run `alias [alias-name]='[command]'`
 
 ```bash
 
