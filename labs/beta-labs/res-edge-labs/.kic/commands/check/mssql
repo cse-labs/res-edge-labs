@@ -4,7 +4,7 @@ function sql_check {
     sql -Q \
     "select ' Applications' as Entity, count(Id) as Rows from Applications union
     select ' Clusters', count(Id) from Clusters union
-    select ' Groups', count(Id) from Groups union
+    select ' Groups', count(Id) from Groups where Id != 0 union
     select ' Namespaces', count(Id) from Namespaces union
     select ' GroupsClusters', count(ClusterId) from GroupsClusters union
     select 'ApplicationMetadata', count(ApplicationId) from ApplicationMetadata union
