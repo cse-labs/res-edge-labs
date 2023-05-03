@@ -33,7 +33,9 @@ kic check resedge
 
 - An overlay is a Kustomization that refers to the base and patches to transform the base when applied
 - Overlays allow you to manage multiple configurations - such as dev, test, staging and prod - by transforming a shared base
-- In this example, we will use an overlay on the IMDb application to define a different version to be deployed to a beta ring of clusters. To see which clusters should get updated when this occurs run the following command:
+- In this example, we will use an overlay on the IMDb application to define a different version to be deployed to a beta ring of clusters.
+- In this lab, the ResEdge Data Service is set up with a default set of data including 19 clusters where the IMDb application is deployed to.
+- To see which clusters should get updated when this occurs run the following command:
 
 ```bash
 
@@ -84,37 +86,68 @@ images:
 # `kic cicd` uses Res-Edge Data Service deployed to Codespaces
 kic cicd
 
-# check the changes
-git status
+# Verify that clusters from the beta group were affected by `kic cicd` execution from the previous steps
+git diff
 
 ```
 
 - Expected output
 
-```text
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-        modified:   clusters/central-la-nola-2301/imdb/imdb.yaml
-        modified:   clusters/east-ga-atl-2301/imdb/imdb.yaml
-        modified:   clusters/west-ca-sd-2301/imdb/imdb.yaml
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-        apps/imdb/kustomize/prod/overlays/1.0.1/
-```
-
-- Verify that clusters from a beta group were affected by `kic cicd` execution from the previous steps
-
-```bash
-
-# List all clusters in the group beta
-kic clusters list --group beta
-
+```diff
+diff --git a/labs/beta-labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml b/labs/beta-labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
+index 76073ba..4db8893 100644
+--- a/labs/beta-labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
++++ b/labs/beta-labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
+@@ -40,7 +40,7 @@ spec:
+         - central
+         - --zone
+         - central-la
+-        image: ghcr.io/cse-labs/imdb:1.0.0
++        image: ghcr.io/cse-labs/imdb:1.0.1
+         imagePullPolicy: Always
+         livenessProbe:
+           failureThreshold: 10
+diff --git a/labs/beta-labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml b/labs/beta-labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
+index 5547a84..405973e 100644
+--- a/labs/beta-labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
++++ b/labs/beta-labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
+@@ -40,7 +40,7 @@ spec:
+         - east
+         - --zone
+         - east-ga
+-        image: ghcr.io/cse-labs/imdb:1.0.0
++        image: ghcr.io/cse-labs/imdb:1.0.1
+         imagePullPolicy: Always
+         livenessProbe:
+           failureThreshold: 10
+diff --git a/labs/beta-labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml b/labs/beta-labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
+index 882d7b0..290195a 100644
+--- a/labs/beta-labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
++++ b/labs/beta-labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
+@@ -40,7 +40,7 @@ spec:
+         - west
+         - --zone
+         - west-ca
+-        image: ghcr.io/cse-labs/imdb:1.0.0
++        image: ghcr.io/cse-labs/imdb:1.0.1
+         imagePullPolicy: Always
+         livenessProbe:
+           failureThreshold: 10
 ```
 
 ## Reset clusters
 
-- Delete labs/beta-labs/kustomize/apps/imdb/kustomize/prod/overlays/1.0.1
-- Run `kic cicd`
-- `git status` should now be up to date
+- To reset the clusters back to the base kustomization, delete the overlay folder and run `kic cicd`
+
+```bash
+
+# delete the overlay version folder
+rm -rf ./apps/imdb/kustomize/prod/overlays/1.0.1
+
+# run cicd to reset the imdb.yaml files in the clusters
+kic cicd
+
+# should be up to date
+git status
+
+```
