@@ -1,7 +1,7 @@
 # Inner-loop with Res-Edge
 
-- Res-Edge helps build a powerful system for automated deployment, update, management, and observability for thousands of Kubernetes clusters
-- Res-Edge Data Service is a component of Res-Edge that enhances the experience of managing the complexity of applications deployments to Kubernetes environments at scale by providing a centralized inventory system which supports complex hierarchies
+- Res-Edge helps build a powerful system for automated deployment, update, management, and observability for thousands of Kubernetes (K8s) clusters
+- Res-Edge Data Service is a component of Res-Edge that enhances the experience of managing the complexity of applications deployments to K8s environments at scale by providing a centralized inventory system which supports complex hierarchies
 - This lab will go over steps to run Res-Edge Data Service with Observability in Codespaces
 - To get more familiarity with kic and other tools used in this lab, please run through the inner-loop lab [here](../../../inner-loop.md#inner-loop)
 
@@ -36,17 +36,19 @@ kic pods --watch
 
 ## Deploy SQL
 
+- In this section, we will deploy SQL Server to the local K8s cluster
 - Res-Edge Data Service requires a SQL Server database for start up
-- This database serves as an inventory storage for management of hierarchical groups, clusters, namespaces, and applications
+- This database serves as an inventory storage for management of groups, clusters, namespaces, and applications
 - When the container starts, it will populate the database with sample data
   - 19 Applications
   - 19 Clusters
-  - 20 Hierarchical groups
+  - 19 groups
   - 19 Namespaces
   - 3 Policies
   - All entities will have Metadata and Tags
-
-> Note: `kaf` is an alias for `kubectl apply -f`, where `f` is for the manifest file path. `kak` is an alias for `kubectl apply -k`, where `k` is directory path for the kustomization.yaml. Run `alias` to view all aliases defined.
+- Run `alias` to view all aliases defined
+  - `kaf` is an alias for `kubectl apply -f`, where `f` is for the manifest file path
+  - `kak` is an alias for `kubectl apply -k`, where `k` is directory path for the kustomization.yaml
 
 ```bash
 
@@ -65,6 +67,7 @@ kic pods --watch
 kic logs mssql
 
 # "follow" the mssql logs until data loads with log "# rows affected"
+# the output says 20 groups including the unusable root group
 # ctl-c to exit
 kic logs mssql --follow
 
@@ -76,7 +79,7 @@ kic check mssql
 ## Deploy Res-Edge Data Service
 
 - We will now deploy the Res-Edge Data Service
-- This data service allows CRUD operations against the SQL Server database (Inventory storage) deployed from previous section
+- This data service is the interface to the SQL Server database deployed in the previous section and uses a REST/OData API to perform CRUD operations
 
 ```bash
 
@@ -97,7 +100,9 @@ kic check resedge
 ## Test Res-Edge Data Service
 
 - To make sure the Res-Edge Data Service is working properly, we will use `kic test` to generate both successful and failing requests
-- `kic test` uses WebV installed in Codespace at start up
+- `kic test` uses WebValidate installed in Codespace at start up. For more information on WebV, see [here](https://github.com/microsoft/webvalidate)
+
+> Note: Failing 400 and 404 requests are run in `kic test all` by design. For the number of errors, refer to the summary at the bottom. "Errors 0" indicate all tests passed.
 
 ```bash
 
@@ -109,26 +114,36 @@ kic test all
 ## Query Res-Edge Data Service
 
 - Run `kic [entity-type] list` to query the Res-Edge Data Service and return all entities in this data service
+- Run `kic [entity-type] list --search [entity-name]` to get a specific entity id
 
 > To dive deeper into these commands and learn more about filtering results, go to [Query Res-Edge Data Service](./query-res-edge-data.md)
 
 ```bash
 
-# example commands
+# To list all applications or get the imdb application id
 kic applications list
+kic applications list --search imdb
+
+# To list all namespaces or get the imdb namespace id
 kic namespaces list
+kic namespaces list --search imdb
+
+# To list all clusters or get a specific cluster id
 kic clusters list
-kic groups list
+kic clusters list --search central-la-nola-2301
+
+# To list the available policies
 kic policies list
+
+# To list all groups or get the beta group id
+kic groups list
+kic groups list --search beta
 
 ```
 
 - Run `kic [entity-type] show --id [entity-id]` to return a specific entity's information
 
 ```bash
-
-# To get the beta group id
-kic groups list --search beta
 
 # Insert the above id in [entity-id] to
 kic groups show --id 2
@@ -169,6 +184,7 @@ kic check grafana
 
 - To generate dashboard metrics we will deploy WebV to the cluster
 - This will continuously generate 10 requests per second
+- Prometheus scrapes these logs every 5 seconds and exports them to the Grafana dashboard, which we will open later in the lab
 
 ```bash
 
@@ -191,8 +207,10 @@ kic logs resedge
 
 ## Observability: K9s
 
-- K9s is a commonly used UI that reduces the complexity of `kubectl`
-  - KiC deploys K9s "in" your Codespace
+- KiC deploys K9s "in" your Codespace
+- K9s is a commonly used UI that reduces the complexity of `kubectl` that:
+  - continually watches K8s for changes and has commands to interact with resources
+  - tracks cluster metrics and displays logs of deployed applications
 - See the [K9s documentation](https://k9scli.io/topics/commands/) for more information on K9s
 
 ### View Logs in K9s
@@ -208,12 +226,15 @@ k9s
 
 - Press `0` to show all `namespaces`
 - Select `api` pod and press `l` to review the Res-Edge Data Service logs
-- Press `s` to Toggle AutoScroll
-- Press `w` to Toggle Wrap
+  - We are watching for the K8s healthcheck every minute, Prometheus scrape to /metrics logs every 5 seconds, and the 10 GET requests from WebV every second
 - Press `esc` to return to Pod View
 - Select `webv` pod and press `l` to review the WebV logs
+  - We should see 10 successful 200 requests per second
 - Press `esc` to return to Pod View
 - Select `fluentbit` pod and press `l` to see the Fluent Bit logs
+- Advanced commands for log readability to try:
+  - Press `s` to toggle AutoScroll on/off
+  - Press `w` to toggle Wrap on/off
 
 > To exit K9s - `:q <enter>` or `ctl-c`
 
@@ -253,8 +274,8 @@ k9s
   - Password: cse-labs
 - Click on "General / Home" at the top of the screen and select "dotnet" to see Res-Edge Data Service health metrics
 - Click on "General / Home" at the top of the screen and select "Application Dashboard" to see Res-Edge Data Service requests metrics
-- You should see the Application Dashboard with both WebV and Res-Edge Data Service ("Application").
-  - WebV will have 10 requests per second.
+- You should see the Application Dashboard with both WebV and Res-Edge Data Service ("Application")
+  - WebV will have 10 requests per second
   - Application will have 10.2 requests per second
     - K8s calls /healthz every minute
     - Prometheus calls /metrics every 5 seconds
