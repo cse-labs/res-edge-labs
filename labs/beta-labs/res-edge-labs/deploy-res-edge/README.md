@@ -110,7 +110,7 @@ kic test all
 
 - Run `kic [entity-type] list` to query the Res-Edge Data Service and return all entities in this data service
 
-> To dive deeper into these commands and learn more about filtering results, go to [Query Res-Edge Data Service](../query-res-edge-data.md)
+> To dive deeper into these commands and learn more about filtering results, go to [Query Res-Edge Data Service](./query-res-edge-data.md)
 
 ```bash
 
