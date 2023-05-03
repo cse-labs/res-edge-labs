@@ -68,7 +68,6 @@ kic pods --watch
 kic logs mssql
 
 # "follow" the mssql logs until data loads with log "# rows affected"
-# the output says 20 groups including the unusable root group
 # ctl-c to exit
 kic logs mssql --follow
 
@@ -114,30 +113,43 @@ kic test all
 
 ## Query Res-Edge Data Service
 
-- Run `kic [entity-type] list` to query the Res-Edge Data Service and return all entities in this data service
-- Run `kic [entity-type] list --search [entity-name]` to get a specific entity id
-
 > To dive deeper into these commands and learn more about filtering results, go to [Query Res-Edge Data Service](./query-res-edge-data.md)
+
+- Run `kic [entity-type] list` to query the Res-Edge Data Service and return all entities in this data service
+- Run `kic [entity-type] list --search [entity-name]` to return a list of entities that have an exact match for the search term on the name, metadata, or tags fields.
+
 
 ```bash
 
-# To list all applications or get the imdb application id
+# To list all applications
 kic applications list
+
+# To list all applications where the name, tags, or metadata values match 'imdb'
 kic applications list --search imdb
 
-# To list all namespaces or get the imdb namespace id
+# To list all namespaces
 kic namespaces list
+
+# To list all namespaces where the name, tags, or metadata values match 'imdb'
 kic namespaces list --search imdb
 
-# To list all clusters or get a specific cluster id
+# To list all clusters
 kic clusters list
+
+# To list all clusters where the name, tags, or metadata values match 'central-la-nola-2301'
 kic clusters list --search central-la-nola-2301
 
 # To list the available policies
 kic policies list
 
-# To list all groups or get the beta group id
+# To list all policies where the name, tags, or metadata values match 'dns-ingress'
+kic policies list --search dns-ingress
+
+# To list all groups
 kic groups list
+
+# To list all groups where the name, tags, or metadata values match 'beta'
+# This will return the id we will use in the show command next
 kic groups list --search beta
 
 ```
