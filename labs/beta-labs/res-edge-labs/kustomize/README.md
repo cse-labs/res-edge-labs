@@ -137,9 +137,12 @@ index 882d7b0..290195a 100644
 
 ## Reset clusters
 
-- Delete labs/beta-labs/kustomize/apps/imdb/kustomize/prod/overlays/1.0.1
+- To reset the clusters back to the base kustomization, delete the overlay folder and run `kic cicd`
 
 ```bash
+
+# delete the overlay version folder
+rm -rf ./apps/imdb/kustomize/prod/overlays/1.0.1
 
 # run cicd to reset the imdb.yaml files in the clusters
 kic cicd
