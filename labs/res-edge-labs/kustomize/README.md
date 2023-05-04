@@ -16,7 +16,7 @@
 
   ```bash
 
-  cd $REPO_BASE/labs/beta-labs/res-edge-labs/kustomize
+  cd $REPO_BASE/labs/res-edge-labs/kustomize
 
   ```
 
@@ -95,10 +95,10 @@
 - Expected output
 
   ```diff
-  diff --git a/labs/beta-labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml b/labs/beta-labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
+  diff --git a/labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml b/labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
   index 76073ba..4db8893 100644
-  --- a/labs/beta-labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
-  +++ b/labs/beta-labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
+  --- a/labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
+  +++ b/labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
   @@ -40,7 +40,7 @@ spec:
           - central
           - --zone
@@ -108,10 +108,10 @@
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10
-  diff --git a/labs/beta-labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml b/labs/beta-labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
+  diff --git a/labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml b/labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
   index 5547a84..405973e 100644
-  --- a/labs/beta-labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
-  +++ b/labs/beta-labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
+  --- a/labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
+  +++ b/labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
   @@ -40,7 +40,7 @@ spec:
           - east
           - --zone
@@ -121,10 +121,10 @@
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10
-  diff --git a/labs/beta-labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml b/labs/beta-labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
+  diff --git a/labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml b/labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
   index 882d7b0..290195a 100644
-  --- a/labs/beta-labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
-  +++ b/labs/beta-labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
+  --- a/labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
+  +++ b/labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
   @@ -40,7 +40,7 @@ spec:
           - west
           - --zone

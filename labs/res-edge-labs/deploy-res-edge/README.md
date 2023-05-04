@@ -12,7 +12,7 @@
   ```bash
 
   # cd to switch to deploy-res-edge directory
-  cd $REPO_BASE/labs/beta-labs/res-edge-labs/deploy-res-edge
+  cd $REPO_BASE/labs/res-edge-labs/deploy-res-edge
 
   ```
 
