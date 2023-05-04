@@ -26,11 +26,12 @@ kic cluster create
 
 kic pods
 
-# wait for pods to get to Running
+# wait for pods to get to Running 1/1
 # ctl-c to exit
 kic pods --watch
 
 ```
+> The `--watch` flag will update the last line in the terminal output. Wait for the last line to read 'Running' after the 'ContainerCreating' status then `ctrl-c` to exit
 
 > The k3d cluster will run `in` your Codespace - no need for an external cluster
 
@@ -61,7 +62,7 @@ kak mssql
 
 kic pods
 
-# "watch" for the mssql pod to get to Running
+# "watch" for the mssql pod to get to Running 1/1
 # ctl-c to exit
 kic pods --watch
 
@@ -88,7 +89,7 @@ kak api
 
 kic pods
 
-# "watch" for the api pod to get to Running
+# "watch" for the api pod to get to Running 1/1
 # ctl-c to exit
 kic pods --watch
 
@@ -218,7 +219,9 @@ kic logs resedge
 
 ```
 
-## Observability: K9s
+## Observability
+
+### K9s
 
 - KiC deploys K9s "in" your Codespace
 - K9s is a commonly used UI that reduces the complexity of `kubectl` that:
@@ -226,7 +229,30 @@ kic logs resedge
   - tracks cluster metrics and displays logs of deployed applications
 - See the [K9s documentation](https://k9scli.io/topics/commands/) for more information on K9s
 
-### View Logs in K9s
+### Fluent Bit
+
+- Fluent Bit is set to forward logs to stdout for debugging
+- Fluent Bit can be configured to forward to different services including [Loki](https://grafana.com/oss/loki/) or [Azure Log Analytics](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-overview)
+- This is a powerful inner-loop feature as you don't have external dependencies
+- See the [Fluent Bit documentation](https://docs.fluentbit.io/manual/) for more information on Fluent Bit
+
+### Prometheus
+
+- Prometheus is a de-facto standard for K8s metrics
+- We have deployed a Prometheus instance with `custom metrics`
+- This is a powerful inner-loop feature as you don't have external dependencies
+- See the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/) for more information
+
+### Grafana
+
+- Grafana is a de-facto standard for K8s dashboards
+- We have deployed a Grafana instance with custom dashboards
+- This is a powerful inner-loop feature as you don't have external dependencies
+- Explore the [Grafana documentation](https://grafana.com/docs/) to learn about more data sources, visualizations, and capabilities
+
+### Observability in Action
+
+#### View Logs in K9s
 
 - Start `k9s` from the Codespace terminal
 
@@ -239,7 +265,10 @@ k9s
 
 - Press `0` to show all `namespaces`
 - Select `api` pod and press `l` to review the Res-Edge Data Service logs
-  - We are watching for the K8s healthcheck every minute, Prometheus scrape to /metrics logs every 5 seconds, and the 10 GET requests from WebV every second
+  - We should see the following successful (statusCode 200) logs:
+    - K8s healthcheck every minute
+    - Prometheus scrape to /metrics logs every 5 seconds
+    - 10 GET requests from WebV every second
 - Press `esc` to return to Pod View
 - Select `webv` pod and press `l` to review the WebV logs
   - We should see 10 successful 200 requests per second
@@ -251,20 +280,6 @@ k9s
 
 > To exit K9s - `:q <enter>` or `ctl-c`
 
-## Observability: Fluent Bit
-
-- Fluent Bit is set to forward logs to stdout for debugging
-- Fluent Bit can be configured to forward to different services including [Loki](https://grafana.com/oss/loki/) or [Azure Log Analytics](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-overview)
-- This is a powerful inner-loop feature as you don't have external dependencies
-- See the [Fluent Bit documentation](https://docs.fluentbit.io/manual/) for more information on Fluent Bit
-
-## Observability: Prometheus
-
-- Prometheus is a de-facto standard for K8s metrics
-- We have deployed a Prometheus instance with `custom metrics`
-- This is a powerful inner-loop feature as you don't have external dependencies
-- See the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/) for more information
-
 ### Open Prometheus in Your Browser
 
 - From the `PORTS` tab, open `Prometheus (30000)`
@@ -272,13 +287,6 @@ k9s
   - This will filter to your custom app metrics
 - From the query window, enter `webv`
   - This will filter to the WebV metrics
-
-## Observability: Grafana
-
-- Grafana is a de-facto standard for K8s dashboards
-- We have deployed a Grafana instance with custom dashboards
-- This is a powerful inner-loop feature as you don't have external dependencies
-- Explore the [Grafana documentation](https://grafana.com/docs/) to learn about more data sources, visualizations, and capabilities
 
 ### Open Grafana in Your Browser
 
