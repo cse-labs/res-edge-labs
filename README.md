@@ -79,6 +79,8 @@ code ~/.zshrc
 
 - [Lab 1](./labs/inner-loop.md#inner-loop): Create, build, deploy, and test a new dotnet application and observability stack on your local cluster
 - [Lab 2](./labs/inner-loop-flux.md#create-a-new-cluster): Configure flux to automate the deployment process from Lab 1
+- [Lab 3](./labs/res-edge-labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
+- [Lab 4](./labs/res-edge-labs/kustomize/README.md#ring-deployment): Ring deployment using Res-Edge and Kustomize
 
 ## outer-loop Labs
 
@@ -100,9 +102,6 @@ code ~/.zshrc
 ## Beta Labs
 
 > These labs are work in progress and may not be fully documented
-
-- [Deploy Res-Edge Data Service Lab](./labs/beta-labs/res-edge-labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
-- [Ring Deployment Lab](./labs/beta-labs/res-edge-labs/kustomize/README.md#ring-deployment): Ring deployment using Res-Edge and Kustomize
 
 ## Support
 

@@ -3,36 +3,37 @@
 - Res-Edge helps build a powerful system for automated deployment, update, management, and observability for thousands of Kubernetes (K8s) clusters
 - Res-Edge Data Service is a component of Res-Edge that enhances the experience of managing the complexity of applications deployments to K8s environments at scale by providing a centralized inventory system which supports complex hierarchies
 - This lab will go over steps to run Res-Edge Data Service with Observability in Codespaces
-- To get more familiarity with kic and other tools used in this lab, please run through the inner-loop lab [here](../../../inner-loop.md#inner-loop)
+- To get more familiarity with kic and other tools used in this lab, please run through the inner-loop lab [here](../../inner-loop.md#inner-loop)
 
 ## Create cluster in Codespaces
 
 - Start in this lab directory
 
-```bash
+  ```bash
 
-# cd to switch to deploy-res-edge directory
-cd $REPO_BASE/labs/beta-labs/res-edge-labs/deploy-res-edge
+  # cd to switch to deploy-res-edge directory
+  cd $REPO_BASE/labs/res-edge-labs/deploy-res-edge
 
-```
+  ```
 
 - Use `kic` to create and verify a new k3d cluster
 
-```bash
+  ```bash
 
-# delete and create a new cluster
-# ignore no-cluster error message
-kic cluster create
+  # delete and create a new cluster
+  # ignore no-cluster error message
+  kic cluster create
 
-kic pods
+  kic pods
 
-# wait for pods to get to 1/1 Running
-# ctl-c to exit
-kic pods --watch
+  # wait for pods to get to 1/1 Running
+  # ctl-c to exit
+  kic pods --watch
 
-```
+  ```
+
 > The `--watch` flag will update the last line in the terminal output. Wait for the last line to read 'Running' after the 'ContainerCreating' status then `ctrl-c` to exit
-
+>
 > The k3d cluster will run `in` your Codespace - no need for an external cluster
 
 ## Deploy SQL
@@ -52,147 +53,140 @@ kic pods --watch
   - `kak` is an alias for `kubectl apply -k`, where `k` is directory path for the kustomization.yaml
   - To create a new alias for your current terminal session, run `alias [alias-name]='[command]'`
 
-```bash
+    ```bash
 
-# create the namespace
-kaf ns.yaml
+    # create the namespace
+    kaf ns.yaml
 
-# deploy SQL Server with sample data
-kak mssql
+    # deploy SQL Server with sample data
+    kak mssql
 
-kic pods
+    kic pods
 
-# "watch" for the mssql pod to get to 1/1 Running
-# ctl-c to exit
-kic pods --watch
+    # "watch" for the mssql pod to get to 1/1 Running
+    # ctl-c to exit
+    kic pods --watch
 
-kic logs mssql
+    kic logs mssql
 
-# "follow" the mssql logs until data loads with log "# rows affected"
-# ctl-c to exit
-kic logs mssql --follow
+    # "follow" the mssql logs until data loads with log "# rows affected"
+    # ctl-c to exit
+    kic logs mssql --follow
 
-# Verify mssql is loaded with metadata
-kic check mssql
+    # Verify mssql is loaded with metadata
+    kic check mssql
 
-```
+    ```
 
 ## Deploy Res-Edge Data Service
 
 - We will now deploy the Res-Edge Data Service
 - This data service is the interface to the SQL Server database deployed in the previous section and uses a REST/OData API to perform CRUD operations
 
-```bash
+  ```bash
 
-# deploy the Res-Edge Data Service
-kak api
+  # deploy the Res-Edge Data Service
+  kak api
 
-kic pods
+  kic pods
 
-# "watch" for the api pod to get to 1/1 Running
-# ctl-c to exit
-kic pods --watch
+  # "watch" for the api pod to get to 1/1 Running
+  # ctl-c to exit
+  kic pods --watch
 
-# check api version to verify Res-Edge Data Service is `Running`
-kic check resedge
+  # check api version to verify Res-Edge Data Service is `Running`
+  kic check resedge
 
-```
+  ```
 
 ## Test Res-Edge Data Service
 
 - To make sure the Res-Edge Data Service is working properly, we will use `kic test` to generate both successful and failing requests
 - `kic test` uses WebValidate installed in Codespace at start up. For more information on WebV, see [here](https://github.com/microsoft/webvalidate)
 
-> Note: Failing 400 and 404 requests are run in `kic test all` by design. For the number of errors, refer to the summary at the bottom. "Errors 0" indicate all tests passed.
+  > Note: Failing 400 and 404 requests are run in `kic test all` by design. For the number of errors, refer to the summary at the bottom. "Errors 0" indicate all tests passed.
 
-```bash
+  ```bash
 
-# run tests against Res-Edge Data Service
-kic test all
+  # run tests against Res-Edge Data Service
+  kic test all
 
-```
+  ```
 
 ## Query Res-Edge Data Service
 
 > To dive deeper into these commands and learn more about filtering results, go to [Query Res-Edge Data Service](./query-res-edge-data.md)
 
 - Run `kic [entity-type] list` to query the Res-Edge Data Service and return all entities in this data service
+
+  ```bash
+
+  kic applications list
+
+  kic clusters list
+
+  kic groups list
+
+  kic namespaces list
+
+  kic policies list
+
+  ```
+
 - Run `kic [entity-type] list --search [entity-name]` to return a list of entities that have an exact match for the search term on the name, metadata, or tags fields.
 
+  ```bash
 
-```bash
+  kic applications list --search imdb
 
-# To list all applications
-kic applications list
+  kic clusters list --search central-la-nola-2301
 
-# To list all applications where the name, tags, or metadata values match 'imdb'
-kic applications list --search imdb
+  kic groups list --search beta
 
-# To list all namespaces
-kic namespaces list
+  kic namespaces list --search imdb
 
-# To list all namespaces where the name, tags, or metadata values match 'imdb'
-kic namespaces list --search imdb
+  kic policies list --search dns-ingress
 
-# To list all clusters
-kic clusters list
-
-# To list all clusters where the name, tags, or metadata values match 'central-la-nola-2301'
-kic clusters list --search central-la-nola-2301
-
-# To list the available policies
-kic policies list
-
-# To list all policies where the name, tags, or metadata values match 'dns-ingress'
-kic policies list --search dns-ingress
-
-# To list all groups
-kic groups list
-
-# To list all groups where the name, tags, or metadata values match 'beta'
-# This will return the id we will use in the show command next
-kic groups list --search beta
-
-```
+  ```
 
 - Run `kic [entity-type] show --id [entity-id]` to return a specific entity's information
 
-```bash
+  ```bash
 
-# Insert the above id in [entity-id] to
-kic groups show --id 2
+  kic applications show --id 2
 
-# example commands
-kic applications show --id 2
-kic namespaces show --id 2
-kic clusters show --id 2
-kic groups show --id 2
-kic policies show --id 2
+  kic clusters show --id 2
 
-```
+  kic groups show --id 2
+
+  kic namespaces show --id 2
+
+  kic policies show --id 2
+
+  ```
 
 ## Deploy Observability
 
 - Next we will deploy the following observability stack in your cluster
   - Fluent Bit, Prometheus, Grafana
 
-```bash
+  ```bash
 
-# deploy observability
-kak monitoring
+  # deploy observability
+  kak monitoring
 
-kic pods
+  kic pods
 
-# "watch" for the prometheus, fluentbit, grafana pod to get to Running
-# ctl-c to exit
-kic pods --watch
+  # "watch" for the prometheus, fluentbit, grafana pod to get to Running
+  # ctl-c to exit
+  kic pods --watch
 
-# check to verify prometheus, fluentbit, grafana is running
-kic check prometheus
-kic check fluentbit
-kic check grafana
+  # check to verify prometheus, fluentbit, grafana is running
+  kic check prometheus
+  kic check fluentbit
+  kic check grafana
 
-```
+  ```
 
 ## Deploy WebV
 
@@ -200,24 +194,24 @@ kic check grafana
 - This will continuously generate 10 requests per second
 - Prometheus scrapes these logs every 5 seconds and exports them to the Grafana dashboard, which we will open later in the lab
 
-```bash
+  ```bash
 
-# deploy webv
-kak webv
+  # deploy webv
+  kak webv
 
-# "watch" for the webv pod to get to Running
-# ctl-c to exit
-kic pods --watch
+  # "watch" for the webv pod to get to Running
+  # ctl-c to exit
+  kic pods --watch
 
-# check to verify webv is running
-kic check webv
+  # check to verify webv is running
+  kic check webv
 
-# check the logs, you should see requests logs
-# alternatively, you can use k9s
-kic logs webv
-kic logs resedge
+  # check the logs, you should see requests logs
+  # alternatively, you can use k9s
+  kic logs webv
+  kic logs resedge
 
-```
+  ```
 
 ## Observability
 
@@ -254,11 +248,9 @@ kic logs resedge
 
 #### View Logs in K9s
 
-- Start `k9s` from the Codespace terminal
-
 ```bash
 
-# start k9s
+# Start `k9s` from the Codespace terminal
 k9s
 
 ```
@@ -282,11 +274,13 @@ k9s
 
 ### Open Prometheus in Your Browser
 
+```qsharp
 - From the `PORTS` tab, open `Prometheus (30000)`
 - From the query window, enter `resedge`
   - This will filter to your custom app metrics
 - From the query window, enter `webv`
   - This will filter to the WebV metrics
+```
 
 ### Open Grafana in Your Browser
 
@@ -307,18 +301,18 @@ k9s
 
 - Generate load test for 30 seconds
 
-```bash
+  ```bash
 
-# run a load test in the background to see a spike of 60 requests/sec for the Application Requests section
-kic test load &
+  # run a load test in the background to see a spike of 60 requests/sec for the Application Requests section
+  kic test load &
 
-```
+  ```
 
 - Generate both successful and failing requests
 
-```bash
+  ```bash
 
-# run several integration tests to see a spike in Error Graph Section
-kic test all
+  # run several integration tests to see a spike in Error Graph Section
+  kic test all
 
-```
+  ```
