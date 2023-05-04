@@ -26,7 +26,7 @@ kic cluster create
 
 kic pods
 
-# wait for pods to get to Running 1/1
+# wait for pods to get to 1/1 Running
 # ctl-c to exit
 kic pods --watch
 
@@ -62,7 +62,7 @@ kak mssql
 
 kic pods
 
-# "watch" for the mssql pod to get to Running 1/1
+# "watch" for the mssql pod to get to 1/1 Running
 # ctl-c to exit
 kic pods --watch
 
@@ -89,7 +89,7 @@ kak api
 
 kic pods
 
-# "watch" for the api pod to get to Running 1/1
+# "watch" for the api pod to get to 1/1 Running
 # ctl-c to exit
 kic pods --watch
 
