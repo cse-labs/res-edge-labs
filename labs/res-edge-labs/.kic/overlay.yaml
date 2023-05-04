@@ -1,0 +1,14 @@
+###
+# Res-Edge Overlay commands
+###
+
+commands:
+  - name: overlay
+    short: Kustomize Overlay Commands
+    scriptCommands:
+    - name: create
+      short: Create new Kustomize overlay
+      path: overlay/create
+    - name: delete
+      short: Delete new Kustomize overlay
+      path: overlay/delete
