@@ -31,9 +31,10 @@
   kic pods --watch
 
   ```
-  > The `--watch` flag will update the last line in the terminal output. Wait for the last line to read 'Running' after the 'ContainerCreating' status then `ctrl-c` to exit
 
-  > The k3d cluster will run `in` your Codespace - no need for an external cluster
+> The `--watch` flag will update the last line in the terminal output. Wait for the last line to read 'Running' after the 'ContainerCreating' status then `ctrl-c` to exit
+>
+> The k3d cluster will run `in` your Codespace - no need for an external cluster
 
 ## Deploy SQL
 
@@ -52,30 +53,30 @@
   - `kak` is an alias for `kubectl apply -k`, where `k` is directory path for the kustomization.yaml
   - To create a new alias for your current terminal session, run `alias [alias-name]='[command]'`
 
-  ```bash
+    ```bash
 
-  # create the namespace
-  kaf ns.yaml
+    # create the namespace
+    kaf ns.yaml
 
-  # deploy SQL Server with sample data
-  kak mssql
+    # deploy SQL Server with sample data
+    kak mssql
 
-  kic pods
+    kic pods
 
-  # "watch" for the mssql pod to get to 1/1 Running
-  # ctl-c to exit
-  kic pods --watch
+    # "watch" for the mssql pod to get to 1/1 Running
+    # ctl-c to exit
+    kic pods --watch
 
-  kic logs mssql
+    kic logs mssql
 
-  # "follow" the mssql logs until data loads with log "# rows affected"
-  # ctl-c to exit
-  kic logs mssql --follow
+    # "follow" the mssql logs until data loads with log "# rows affected"
+    # ctl-c to exit
+    kic logs mssql --follow
 
-  # Verify mssql is loaded with metadata
-  kic check mssql
+    # Verify mssql is loaded with metadata
+    kic check mssql
 
-  ```
+    ```
 
 ## Deploy Res-Edge Data Service
 
@@ -117,40 +118,34 @@
 > To dive deeper into these commands and learn more about filtering results, go to [Query Res-Edge Data Service](./query-res-edge-data.md)
 
 - Run `kic [entity-type] list` to query the Res-Edge Data Service and return all entities in this data service
+
+  ```bash
+
+  kic applications list
+
+  kic clusters list
+
+  kic groups list
+
+  kic namespaces list
+
+  kic policies list
+
+  ```
+
 - Run `kic [entity-type] list --search [entity-name]` to return a list of entities that have an exact match for the search term on the name, metadata, or tags fields.
 
   ```bash
 
-  # To list all applications
-  kic applications list
-
-  # To list all applications where the name, tags, or metadata values match 'imdb'
   kic applications list --search imdb
 
-  # To list all namespaces
-  kic namespaces list
-
-  # To list all namespaces where the name, tags, or metadata values match 'imdb'
-  kic namespaces list --search imdb
-
-  # To list all clusters
-  kic clusters list
-
-  # To list all clusters where the name, tags, or metadata values match 'central-la-nola-2301'
   kic clusters list --search central-la-nola-2301
 
-  # To list the available policies
-  kic policies list
-
-  # To list all policies where the name, tags, or metadata values match 'dns-ingress'
-  kic policies list --search dns-ingress
-
-  # To list all groups
-  kic groups list
-
-  # To list all groups where the name, tags, or metadata values match 'beta'
-  # This will return the id we will use in the show command next
   kic groups list --search beta
+
+  kic namespaces list --search imdb
+
+  kic policies list --search dns-ingress
 
   ```
 
@@ -158,14 +153,14 @@
 
   ```bash
 
-  # Insert the above id in [entity-id] to
+  kic applications show --id 2
+
+  kic clusters show --id 2
+
   kic groups show --id 2
 
-  # example commands
-  kic applications show --id 2
   kic namespaces show --id 2
-  kic clusters show --id 2
-  kic groups show --id 2
+
   kic policies show --id 2
 
   ```
