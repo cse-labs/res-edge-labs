@@ -6,11 +6,11 @@
 
 ## Prerequisites
 
-- todo - rewrite - To get more familiarity with kic and other tools used in this lab, please run through the inner-loop lab [here](../../inner-loop.md#inner-loop)
+- To get more familiarity with Codespaces and other tools used in this lab, please complete the inner-loop lab [here](../../inner-loop.md#inner-loop)
 
 ## Create a new cluster
 
-> The k3d cluster will run `in` your Codespace - no need for an external cluster
+> The k3d cluster will run `in` the Codespace - no need for an external cluster
 
 - Start in this lab directory
 
@@ -70,7 +70,7 @@
     # view K8s logs
     kic logs mssql
 
-    # "follow" the mssql logs until the sample data loads with log "# rows affected"
+    # "follow" the mssql logs until the sample data loads with "# rows affected"
     # ctl-c to exit
     kic logs mssql --follow
 
@@ -81,9 +81,8 @@
 
 ## Deploy Res-Edge Data Service
 
-- We will now deploy the Res-Edge Data Service
-  - The data service is a REST/OData API to perform CRUD operations on the Res-Edge entities
-  - The data service uses the SQL Server deployed previously for storage
+- The data service is a REST/OData API to perform CRUD operations on the Res-Edge entities
+- The data service uses the SQL Server deployed previously for storage
 
   ```bash
 
@@ -114,7 +113,7 @@
 
 ## Query Res-Edge Data Service
 
-> To dive deeper into these commands and learn more about filtering results, go to [Sample Queries](./sample-queries.md)
+> To dive deeper into these commands and learn more about filtering results, go to [Sample Data Service Queries](./sample-queries.md)
 
 - Run `kic [entity-type] list` to query the Res-Edge Data Service and return all entities in this data service
 
@@ -191,30 +190,28 @@
 ### K9s
 
 - K9s is deployed in the Codespace
-- K9s is a commonly used UI that reduces the complexity of `kubectl` that:
-  - continually watches K8s for changes and has commands to interact with resources
-  - tracks cluster metrics and displays logs of deployed applications
+- K9s is a commonly used tool that reduces the complexity of `kubectl`
+  - Continually watches K8s for changes and has commands to interact with resources
+  - Tracks cluster metrics and displays logs of deployed applications
 - See the [K9s documentation](https://k9scli.io/topics/commands/) for more information on K9s
 
 ## Deploy Observability
 
-- Next we will deploy the CNCF observability stack in your cluster
+```bash
 
-  ```bash
+# deploy observability
+kak monitoring
 
-  # deploy observability
-  kak monitoring
+# "watch" for the prometheus, fluentbit, and grafana pods to get to 1/1 Running
+# ctl-c to exit
+kic pods --watch
 
-  # "watch" for the prometheus, fluentbit, and grafana pods to get to 1/1 Running
-  # ctl-c to exit
-  kic pods --watch
+# check to verify prometheus, fluentbit, and grafana are running
+kic check prometheus
+kic check fluentbit
+kic check grafana
 
-  # check to verify prometheus, fluentbit, and grafana are running
-  kic check prometheus
-  kic check fluentbit
-  kic check grafana
-
-  ```
+```
 
 ## Deploy WebV
 
@@ -273,30 +270,31 @@ k9s
 
 > To exit K9s - `:q <enter>` or `ctl-c`
 
-### Open Prometheus in Your Browser
+### Open Prometheus in the browser
 
 - From the `PORTS` tab, open `Prometheus (30000)`
 - From the query window, enter `resedge`
-  - This will filter to your custom app metrics
+  - This will filter to the custom app metrics
 - From the query window, enter `webv`
   - This will filter to the WebV metrics
 
-### Open Grafana in Your Browser
+### Open Grafana in the browser
 
 - From the `PORTS` tab, open `Grafana (32000)`
   - Username: admin
   - Password: cse-labs
-- Click on "General / Home" at the top of the screen and select "dotnet" to see Res-Edge Data Service health metrics
-- Click on "General / Home" at the top of the screen and select "Application Dashboard" to see Res-Edge Data Service requests metrics
+- Click on "General / Home" at the top of the screen and select "dotnet" to see a standard dotnet dashboard
+- Click on "General / Home" at the top of the screen and select "Application Dashboard" to see a custom application dashboard
 - You should see the Application Dashboard with both WebV and Res-Edge Data Service ("Application")
   - WebV will have 10 requests per second
   - Application will have 10.2 requests per second
     - K8s calls /healthz every minute
     - Prometheus calls /metrics every 5 seconds
-    - WebV has 10 requests per second
-- Keep "Application Dashboard" open in a browser tab to monitor Res-Edge Data Service requests metrics for the next section. The version number of Res-Edge Data Service and WebV will appear below "Application" and "WebV" accordingly.
+    - WebV generates 10 requests per second
+- Keep "Application Dashboard" open in a browser tab to monitor Res-Edge Data Service requests metrics for the next section
+  - The version number of Res-Edge Data Service and WebV will appear below "Application" and "WebV" accordingly
 
-### Generate More Requests for Observability using WebV
+### Generate more requests for the dashboards
 
 - Run a 30 second load test in the background to generate 60 req/sec
 
@@ -307,6 +305,7 @@ k9s
   ```
 
 - Generate 200, 300, 400, and 404 responses
+  - Can be run concurrently with the load test
 
   ```bash
 
