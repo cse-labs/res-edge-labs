@@ -1,6 +1,10 @@
 # Ring Deployment
 
-- Res-Edge ring deployment with Kustomize lab
+Application teams often want to deploy new versions of their app(s) to a growing subset of clusters. Res-Edge uses [Kustomize](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/), `Groups`, `Namespaces`, and `Applications` to provide `ring deployments`.
+
+The `Groups`, `Namespaces`, and `Applications` are entities in the Res-Edge Data Service. Res-Edge provides `GitOps Automation` to merge the entities via `GitOps` (Flux). Kustomize further transforms the manifests used by GitOps for deployment.
+
+## Kustomize Overview
 - Kustomize helps customizing config files without the need of templates
 - Kustomize provides a number of handy methods like generators to make customization easier
 - Kustomize uses overlays to introduce environment specific changes on an already existing standard config file without disturbing it
@@ -8,11 +12,12 @@
 - Kustomize is like [sed](https://www.gnu.org/software/sed/), in that it emits edited text
 - See the [Kustomize documentation](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/) for more information
 
-## Prerequsite
+## Prerequisites
 
-- The Res-Edge Data Service needs to be deployed first for this lab
-  - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge/README.md#inner-loop-with-res-edge) for steps on how to deploy the data service
-- Start in this lab directory
+- The Res-Edge Data Service needs to be deployed for this lab
+  - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge/README.md#inner-loop-with-res-edge) to deploy the data service to the cluster
+
+## Start in this lab directory
 
   ```bash
 
@@ -20,7 +25,7 @@
 
   ```
 
-- Verify that Res-Edge Data Service is up and running
+## Verify that the data service is running
 
   ```bash
 
@@ -29,13 +34,12 @@
 
   ```
 
-## Create application overlay
+## Create an application overlay
 
 - An overlay is a Kustomization that refers to the base and patches to transform the base when applied
 - Overlays allow you to manage multiple configurations - such as dev, test, staging and prod - by transforming a shared base
-- In this example, we will use an overlay on the IMDb application to define a different version to be deployed to a beta ring of clusters.
-- In this lab, the ResEdge Data Service is set up with a default set of data including 19 clusters where the IMDb application is deployed to.
-- To see which clusters should get updated when this occurs run the following command:
+- In this lab, we will use an overlay on the IMDb application to define a different version to be deployed to the beta `Group`
+- To see the definition of the beta `Group`
 
   ```bash
 
@@ -44,21 +48,21 @@
 
   ```
 
-- You can use the  `kic overlay` command to create the overlay structure
+- Use the `kic overlay` command to create the overlay structure
+  - `imdb` is the application name
+  - `1.0.1` is the new version
 
-- Execute the kic command as presented below where `1.0.1` is the version number and `imdb` is your app name:
+    ```bash
 
-  ```bash
+    kic overlay imdb 1.0.1
 
-  kic overlay imdb 1.0.1
-
-  ```
+    ```
 
 - The `kic overlay imdb 1.0.1` command creates a new `overlays/1.0.1` folder
 - It will also create and open a new kustomization overlay file that references the base kustomization file with the new version defined
 - Update the new `kustomization.yaml` file and set "beta" as the clusters metadata annotation
   - Codespaces saves the changes automatically
-- After the update, your file should look like the yaml sample below:
+- After updating, your file should look like the yaml sample below:
 
   ```yaml
   # change clusters: none to clusters: beta
@@ -78,16 +82,14 @@
 
 ## CICD Dry Run
 
-- To generate and deploy the manifests for the clusters you can use `kic cicd` command
-
-  > Note: kic is context aware so make sure you are running this in the folder where your `clusters` folder resides
+- Use the `kic cicd` command to generate the new manifests
 
   ```bash
 
   # `kic cicd` uses Res-Edge Data Service deployed to Codespaces
   kic cicd
 
-  # Verify that clusters from the beta group were affected by `kic cicd` execution from the previous steps
+  # Verify that the clusters from the beta `Group` were updated by `kic cicd`
   git diff
 
   ```
@@ -136,9 +138,9 @@
             failureThreshold: 10
   ```
 
-## Reset clusters
+## Reset manifests
 
-- To reset the clusters back to the base kustomization, delete the overlay folder and run `kic cicd`
+- To reset the manifests to the base kustomization, delete the overlay folder and run `kic cicd` again
 
   ```bash
 
