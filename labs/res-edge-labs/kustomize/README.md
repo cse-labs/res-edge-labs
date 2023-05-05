@@ -5,6 +5,7 @@ Application teams often want to deploy new versions of their app(s) to a growing
 The `Groups`, `Namespaces`, and `Applications` are entities in the Res-Edge Data Service. Res-Edge provides `GitOps Automation` to merge the entities via `GitOps` (Flux). Kustomize further transforms the manifests used by GitOps for deployment.
 
 ## Kustomize Overview
+
 - Kustomize helps customizing config files without the need of templates
 - Kustomize provides a number of handy methods like generators to make customization easier
 - Kustomize uses overlays to introduce environment specific changes on an already existing standard config file without disturbing it
