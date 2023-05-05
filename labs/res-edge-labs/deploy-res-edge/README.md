@@ -275,26 +275,26 @@ k9s
 
 ### Open Prometheus in Your Browser
 
-> - From the `PORTS` tab, open `Prometheus (30000)`
-> - From the query window, enter `resedge`
->   - This will filter to your custom app metrics
-> - From the query window, enter `webv`
->   - This will filter to the WebV metrics
+- From the `PORTS` tab, open `Prometheus (30000)`
+- From the query window, enter `resedge`
+  - This will filter to your custom app metrics
+- From the query window, enter `webv`
+  - This will filter to the WebV metrics
 
 ### Open Grafana in Your Browser
 
-> - From the `PORTS` tab, open `Grafana (32000)`
->   - Username: admin
->   - Password: cse-labs
-> - Click on "General / Home" at the top of the screen and select "dotnet" to see Res-Edge Data Service health metrics
-> - Click on "General / Home" at the top of the screen and select "Application Dashboard" to see Res-Edge Data Service requests metrics
-> - You should see the Application Dashboard with both WebV and Res-Edge Data Service ("Application")
->   - WebV will have 10 requests per second
->   - Application will have 10.2 requests per second
->     - K8s calls /healthz every minute
->     - Prometheus calls /metrics every 5 seconds
->     - WebV has 10 requests per second
-> - Keep "Application Dashboard" open in a browser tab to monitor Res-Edge Data Service requests metrics for the next section. The version number of Res-Edge Data Service and WebV will appear below "Application" and "WebV" accordingly.
+- From the `PORTS` tab, open `Grafana (32000)`
+  - Username: admin
+  - Password: cse-labs
+- Click on "General / Home" at the top of the screen and select "dotnet" to see Res-Edge Data Service health metrics
+- Click on "General / Home" at the top of the screen and select "Application Dashboard" to see Res-Edge Data Service requests metrics
+- You should see the Application Dashboard with both WebV and Res-Edge Data Service ("Application")
+  - WebV will have 10 requests per second
+  - Application will have 10.2 requests per second
+    - K8s calls /healthz every minute
+    - Prometheus calls /metrics every 5 seconds
+    - WebV has 10 requests per second
+- Keep "Application Dashboard" open in a browser tab to monitor Res-Edge Data Service requests metrics for the next section. The version number of Res-Edge Data Service and WebV will appear below "Application" and "WebV" accordingly.
 
 ### Generate More Requests for Observability using WebV
 
