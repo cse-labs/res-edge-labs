@@ -9,7 +9,7 @@ We have encountered Retail and Manufacturing customers with an inverted challeng
 - Configuration Proliferation - How do we deal with 6M configuration files?
 - Connectivity - How do we deal with unreliable or constrained bandwidth?
 
-Resilient Edge is a composition of tools designed to streamline application manageability across a highly distributed application platform. The objective is to leverage a small platform team to support a highly distributed ecosystem of clusters and apps. We will step through how Resilient Edge (ResEdge) addresses each pressure point listed above.
+Resilient Edge is a composition of tools designed to streamline application manageability across a highly distributed application platform. The objective is to leverage a small platform team to support a highly distributed ecosystem of clusters and apps. We will step through how Resilient Edge (Res-Edge) addresses each pressure point listed above.
 
 ## Cluster Management at Scale
 
@@ -20,7 +20,7 @@ Platform operators with thousands to tens of thousands of clusters need addition
 - Defining policies and assigning them to clusters based on business needs
 - Observing clusters and apps based on business hierarchies
 
-ResEdge plans to address these gaps with the addition of a centralized "Inventory Service" and associated operator workloads running within clusters to provision, manage, apply policy to, and observe clusters in groups instead of individually. A centralized Inventory service will follow standard GitOps patterns, however, these are now orchestrated on groups of clusters providing platform operators the necessary levers needed to operate on many clusters at once instead of individually. 
+Res-Edge plans to address these gaps with the addition of a centralized "Inventory Service" and associated operator workloads running within clusters to provision, manage, apply policy to, and observe clusters in groups instead of individually. A centralized Inventory service will follow standard GitOps patterns, however, these are now orchestrated on groups of clusters providing platform operators the necessary levers needed to operate on many clusters at once instead of individually.
 
 A key capability for cluster groups is the ability for platform operators to define hierarchies that align with business needs or scenarios. Business aligned groups will help platform operators organize infrastructure to match business expectations, and when plumbed into the observability layer, analyzing application and cluster operations by business scenario much easier.
 
@@ -28,7 +28,7 @@ Reducing the overall number of manageability touchpoints for platform operators 
 
 ## Application/Cluster Matching
 
-With clusters now organized into groups to make them more manageable, you now need to be able to deploy application workloads to those clusters. Given the dynamic nature of application requirements, cluster resources, and observability requirements at this scale, ResEdge introduces a centralized "Namespace Service" enabling application and platforms teams to collaborate around ensuring:
+With clusters now organized into groups to make them more manageable, you now need to be able to deploy application workloads to those clusters. Given the dynamic nature of application requirements, cluster resources, and observability requirements at this scale, Res-Edge introduces a centralized "Namespace Service" enabling application and platforms teams to collaborate around ensuring:
 
 - Cluster resources are not over-subscribed by specifying declarative policy
 - Applications with interdependencies are treated as a set
@@ -54,13 +54,13 @@ This Namespace as a Service concept simplifies interactions between platform ope
 
 When dealing with a handful of clusters that are generally highly available and always online, connectivity to clusters is not usually a concern. With many thousands of clusters, even small connectivity blips can result in difficulties when trying to manage application and cluster lifecycle operations at scale. The key to successfully ensuring manageability operations succeed across a diverse set of heterogeneous clusters is by building in resiliency and robust remediation protocols. Additional complexity can come into play if connectivity is permanently constrained such as a boat floating out on the open ocean connecting through spotty satellite coverage.
 
-ResEdge plans to address connectivity lapses and constraints through hardening GitOps infrastructure to ensure eventual consistency of a "last known good" configuration is enforced, ensure unnecessary or duplicated data transfer is avoided or minimized, and caching is enabled where appropriate to minimize disruptions of cluster and application management operations due to connectivity issues.
+Res-Edge plans to address connectivity lapses and constraints through hardening GitOps infrastructure to ensure eventual consistency of a "last known good" configuration is enforced, ensure unnecessary or duplicated data transfer is avoided or minimized, and caching is enabled where appropriate to minimize disruptions of cluster and application management operations due to connectivity issues.
 
 Additional work around observability is necessary to help further improve the signal to noise ratio for traffic relying on connectivity outside of the cluster by employing filtering, prioritization, batching, or fully disconnected capabilities.
 
 ## Configuration Proliferation
 
-Today, most GitOps and CI/CD workflows rely on fully materialized configuration file sets. When dealing with the scale of 100 apps running on 30k clusters, individually managing a configuration file for every app/cluster permutation within source control becomes a scale pressure point as well as a major burden for platform operators. ResEdge plans to minimize the proliferation/explosion of configuration files necessary to operate across many clusters by relying on base configuration files and overlay [kustomizations](https://kustomize.io/) which are leveraged at deployment time to hydrate a fully materialized configuration when deploying an application to a specific cluster. As a result, application owners need only specify a base template for their application which will work across clusters and one kustomization for each change applied across any number of clusters.
+Today, most GitOps and CI/CD workflows rely on fully materialized configuration file sets. When dealing with the scale of 100 apps running on 30k clusters, individually managing a configuration file for every app/cluster permutation within source control becomes a scale pressure point as well as a major burden for platform operators. Res-Edge plans to minimize the proliferation/explosion of configuration files necessary to operate across many clusters by relying on base configuration files and overlay [kustomizations](https://kustomize.io/) which are leveraged at deployment time to hydrate a fully materialized configuration when deploying an application to a specific cluster. As a result, application owners need only specify a base template for their application which will work across clusters and one kustomization for each change applied across any number of clusters.
 
 Key capabilities for configuration templates include:
 
@@ -72,7 +72,7 @@ When dealing with the potential of millions of configuration files, it is impera
 
 ## Summary
 
-ResEdge plans to address the major challenges of operating apps across many clusters by providing a composition of complementary tools:
+Res-Edge plans to address the major challenges of operating apps across many clusters by providing a composition of complementary tools:
 
 1. Inventory
    1. Organize clusters by business hierarchies
@@ -91,7 +91,6 @@ Together these tools address the major paint points we anticipate. For more info
 ## Other Known Approaches
 
 - Azure Fleet Manager, combined with Arc, Azure Monitor Lite, and other offerings, might eventually focus on edge cluster scenarios with a similar approach, particularly use of a custom operator to avoid Configuration Proliferation and GitOps bottlenecks.
-- [Chik-fil-a has tooling](https://medium.com/chick-fil-atech/enterprise-restaurant-compute-f5e2fd63d20f) that distributes each configuration pull request (PR) to the individual GitOps repos for all stores for which the change is intended. 
+- [Chik-fil-a has tooling](https://medium.com/chick-fil-atech/enterprise-restaurant-compute-f5e2fd63d20f) that distributes each configuration pull request (PR) to the individual GitOps repos for all stores for which the change is intended.
 - [Rancher Fleet](https://fleet.rancher.io/) presents a different approach to leverage for large-scale edge cluster management. Rancher Fleet groups allows for managing clusters in groups, makes use of deployment bundles, and uses GateKeeper to simplify application and policy management From the Fleet documentation: "Note that cluster labels and overlays are critical features in Fleet as they determine which clusters will get each part of the bundle."
-- Several crews have tried different things for specific engagements. Here's an example of a crew that built a REST service on top of GitOps to help with a certain amount of edge cluster scale: https://dev.azure.com/CSECodeHub/516879%20-%20BASF%20Pump%20Monitoring/\_wiki/wikis/EFO\_Wiki\_Template/32398/What-we-delivered 
-
+- Several crews have tried different things for specific engagements. Here's an example of a crew that built a REST service on top of GitOps to help with a certain amount of edge cluster scale: https://dev.azure.com/CSECodeHub/516879%20-%20BASF%20Pump%20Monitoring/\_wiki/wikis/EFO\_Wiki\_Template/32398/What-we-delivered

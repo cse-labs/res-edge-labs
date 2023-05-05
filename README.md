@@ -89,7 +89,7 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 
 ## Deploy Data Service
 
-[Resillient Edge (ResEdge)](./docs/Res-Edge-Overview.md) is a composition of tools designed to streamline application manageability across a highly distributed application platform. The objective is to leverage a small platform team to support a highly distributed ecosystem of clusters and apps. We will step through how Resilient Edge (ResEdge) addresses the following capabilities:
+[Resillient Edge (Res-Edge)](./docs/Res-Edge-Overview.md) is a composition of tools designed to streamline application manageability across a highly distributed application platform. The objective is to leverage a small platform team to support a highly distributed ecosystem of clusters and apps. We will step through how Resilient Edge (Res-Edge) addresses the following capabilities:
 
 - Managing Clusters at Scale
 - Matching Applications and Clusters
@@ -102,7 +102,7 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 
 Application teams often want to deploy new versions of their app(s) to a growing subset of clusters. Res-Edge uses [Kustomize](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/), `Groups`, `Namespaces`, and `Applications` to provide `ring deployments`. This lab demonstrates ring deployment using Res-Edge and Kustomize
 
-[Lab](./labs/res-edge-labs/kustomize/README.md#ring-deployment): Ring deployment with ResEdge and Kustomize
+[Lab](./labs/res-edge-labs/kustomize/README.md#ring-deployment): Ring deployment with Res-Edge and Kustomize
 
 ## Support
 
