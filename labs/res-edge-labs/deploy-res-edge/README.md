@@ -113,7 +113,7 @@
 
 ## Query Res-Edge Data Service
 
-> To dive deeper into these commands and learn more about filtering results, go to [Query Res-Edge Data Service](./query-res-edge-data.md)
+> To dive deeper into these commands and learn more about filtering results, go to [Sample Data Service Queries](./sample-queries.md)
 
 - Run `kic [entity-type] list` to query the Res-Edge Data Service and return all entities in this data service
 
