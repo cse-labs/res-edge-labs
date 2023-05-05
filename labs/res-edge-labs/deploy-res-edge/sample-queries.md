@@ -9,7 +9,7 @@
 
 The `Data Service` exposes the following entities via a REST/OData interface
 
-- Application - represents an application `registered` by an app dev team
+- Application - represents an application `registered` by an application development team
   - An Application belongs to zero or one Namespace
 - Cluster - represents a K8s physical cluster
   - Namespaces are assigned to a Cluster directly or via Group membership
