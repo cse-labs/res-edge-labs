@@ -2,11 +2,6 @@
 # Res-Edge commands
 ###
 
-### hide unused commands
-commands:
-  - name: new
-    hidden: true
-
 ### add new commands
 ### bash scripts are in .kic/command/{path}
 scriptCommands:
