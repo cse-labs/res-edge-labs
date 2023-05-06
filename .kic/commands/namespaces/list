@@ -1,3 +1,0 @@
-#!/bin/bash
-
-KIC_RES_EDGE_ENTITYNAME="namespaces" "$CLI_CMD_DIR/res-edge/entity-list" "$@"
