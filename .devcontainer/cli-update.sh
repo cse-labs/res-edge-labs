@@ -10,7 +10,7 @@ mkdir -p "$HOME/bin"
 cd "$HOME/bin" || exit
 
 # remove old CLI
-rm -rf kic .kic
+rm -rf kic .kic flt .flt
 
 # use latest release
 if [ "$tag" = "" ]; then
