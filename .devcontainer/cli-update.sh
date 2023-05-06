@@ -10,7 +10,7 @@ mkdir -p "$HOME/bin"
 cd "$HOME/bin" || exit
 
 # remove old CLI
-rm -rf kic .kic flt .flt
+rm -rf kic .kic flt .flt ds .ds
 
 # use latest release
 if [ "$tag" = "" ]; then
@@ -27,4 +27,18 @@ wget -O flt.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$
 tar -xvzf flt.tar.gz
 rm flt.tar.gz
 
+# install ds
+wget -O ds.tar.gz "https://github.com/kubernetes101/pib-dev/releases/download/$tag/ds-$tag-linux-amd64.tar.gz"
+tar -xvzf ds.tar.gz
+rm ds.tar.gz
+
+# update completions
+kic completion zsh > "$HOME/.oh-my-zsh/completions/_kic"
+flt completion zsh > "$HOME/.oh-my-zsh/completions/_flt"
+ds completion zsh > "$HOME/.oh-my-zsh/completions/_ds"
+
 cd "$OLDPWD" || exit
+
+echo ""
+echo "run compinit to reload CLI completions"
+echo ""
