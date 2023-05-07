@@ -115,53 +115,35 @@
 
 > To dive deeper into these commands and learn more about filtering results, go to [Sample Data Service Queries](./sample-queries.md)
 
-- Run `kic [entity-type] list` to query the Res-Edge Data Service and return all objects in this data service
+## List Objects
 
-  ```bash
+- Return a simple list of Entity ID and Name
 
-  kic applications list
+```bash
 
-  kic clusters list
+ds applications list
+ds clusters list
+ds groups list
+ds namespaces list
+ds policies list
 
-  kic groups list
+```
 
-  kic namespaces list
+## Get Entity by Id
 
-  kic policies list
+- Show the entity values
+  - Result format is json
+  - --id is required
 
-  ```
+    ```bash
 
-- Run `kic [entity-type] list --search [entity-name]` to return a list of objects that have an exact match for the search term on the name, metadata, or tags fields
+    ds applications show --id 3
+    ds clusters show --id 1
+    ds groups show --id 3
+    ds namespaces show --id 3
+    ds policies show --id 1
 
-  ```bash
-
-  kic applications list --search imdb
-
-  kic clusters list --search central-la-nola-2301
-
-  kic groups list --search beta
-
-  kic namespaces list --search imdb
-
-  kic policies list --search dns-ingress
-
-  ```
-
-- Run `kic [entity-type] show --id [entity-id]` to return a specific entity's information
-
-  ```bash
-
-  kic applications show --id 2
-
-  kic clusters show --id 2
-
-  kic groups show --id 2
-
-  kic namespaces show --id 2
-
-  kic policies show --id 2
-
-  ```
+    ```
 
 ## Observability
 
