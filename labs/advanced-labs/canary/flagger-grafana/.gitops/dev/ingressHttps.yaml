@@ -13,9 +13,9 @@ spec:
   tls:
   - secretName: {{gitops.app}}
     hosts:
-    - {{gitops.cluster.domain}}
+    - {{ist.cluster.store.res-edge.com}}
   rules:
-  - host: {{gitops.cluster.domain}}
+  - host: {{ist.cluster.store.res-edge.com}}
     http:
       paths:
       - pathType: Prefix

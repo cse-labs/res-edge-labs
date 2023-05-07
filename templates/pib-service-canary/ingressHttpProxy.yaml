@@ -5,7 +5,7 @@ metadata:
   namespace: {{gitops.namespace}}
 spec:
   virtualhost:
-    fqdn: {{gitops.cluster.domain}}
+    fqdn: {{ist.cluster.store.res-edge.com}}
   includes:
     - name: {{gitops.app}}
       namespace: {{gitops.namespace}}

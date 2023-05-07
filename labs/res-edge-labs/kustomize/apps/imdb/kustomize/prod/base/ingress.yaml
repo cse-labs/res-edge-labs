@@ -13,9 +13,9 @@ spec:
   tls:
   - secretName: imdb
     hosts:
-    - ist.cluster.domain
+    - ist.cluster.store.res-edge.com
   rules:
-  - host: ist.cluster.domain
+  - host: ist.cluster.store.res-edge.com
     http:
       paths:
       - pathType: Prefix

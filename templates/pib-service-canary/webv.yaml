@@ -55,7 +55,7 @@ spec:
           - --run-loop
           - --verbose
           - --server
-          - {{gitops.cluster.ingressType}}://{{gitops.cluster.domain}}
+          - {{gitops.cluster.ingressType}}://{{ist.cluster.store.res-edge.com}}
           - --files
           - imdb-load.json
           - --zone

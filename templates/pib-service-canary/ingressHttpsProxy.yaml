@@ -5,7 +5,7 @@ metadata:
   namespace: imdb
 spec:
   virtualhost:
-    fqdn: {{gitops.cluster.domain}}
+    fqdn: {{ist.cluster.store.res-edge.com}}
     tls:
       secretName: {{gitops.app}}
   includes:
