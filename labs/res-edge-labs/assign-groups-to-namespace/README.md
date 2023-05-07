@@ -58,10 +58,13 @@
 
   ```bash
 
+  # unassign all Groups from the Namespace (optional)
+  curl -i -X PATCH http://localhost:32080/api/v1/namespaces/3 -H 'Content-Type: application/json' -d '{ "expression": null }'
+
+  # assign the stores Group to the Namespace
   curl -i -X PATCH http://localhost:32080/api/v1/namespaces/3 -H 'Content-Type: application/json' -d '{ "expression": "/g/stores" }'
 
-  # to unassign all groups from the namespace
-  # curl -i -X PATCH http://localhost:32080/api/v1/namespaces/3 -H 'Content-Type: application/json' -d '{ "expression": null }'
+  # each command will return a 204 No Content
 
   ```
 
