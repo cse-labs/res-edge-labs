@@ -79,6 +79,15 @@
 
   ```
 
+- todo - change the field name to "expression" and store the expression
+  - new output will look like this
+
+  ```json
+
+  "expression": "/g/stores"
+
+  ```
+
 - Run cicd locally to verify changes
 
   ```bash
