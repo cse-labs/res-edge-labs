@@ -2,6 +2,9 @@
 
 ## This lab is currently in beta
 
+- Currently, you need to create a new cluster and deploy Res-Edge again (using the :beta tags)
+- Before release, this will be converted to use the :0.9 tag
+
 > This lab is a prerequisite for the Kustomization lab
 
 - Application teams need to deploy their applicatons to specific clusters
