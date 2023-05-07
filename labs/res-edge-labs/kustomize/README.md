@@ -18,11 +18,11 @@ The `Groups`, `Namespaces`, and `Applications` are entities in the Res-Edge Data
 - The Res-Edge Data Service needs to be deployed for this lab
   - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge/README.md#inner-loop-with-res-edge) to deploy the data service to the cluster
 
-## Start in this lab directory
+## Start in the repo base directory
 
   ```bash
 
-  cd $REPO_BASE/labs/res-edge-labs/kustomize
+  cd $REPO_BASE
 
   ```
 
