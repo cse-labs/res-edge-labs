@@ -56,7 +56,10 @@
 
   ```bash
 
-  curl -i -X PUT http://localhost:32080/api/v1/namespaces/3/groups?expression=/g/stores
+  curl -i -X PATCH http://localhost:32080/api/v1/namespaces/3 -H 'Content-Type: application/json' -d '{ "expression": "/g/stores" }'
+
+  # to unassign all groups from the namespace
+  # curl -i -X PATCH http://localhost:32080/api/v1/namespaces/3 -H 'Content-Type: application/json' -d '{ "expression": null }'
 
   ```
 
