@@ -2,21 +2,23 @@
 
 ## This lab is currently in beta
 
-- Currently, you need to create a new cluster and deploy Res-Edge again (using the :beta tags)
-- Before release, this will be converted to use the :0.9 tag
-
 > This lab is a prerequisite for the Kustomization lab
 
 - Application teams need to deploy their applicatons to specific clusters
 - The `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data Service
-- Res-Edge provides `GitOps Automation` to merge the objects via `GitOps` (Flux).
+- Res-Edge provides `GitOps Automation` to merge the objects via `GitOps` (Flux)
 
-> In this lab, we will assign the Stores Group to the IMDb Namespace which will result in the IMDb Namespace and Application being deployed to all 18 clusters in the Stores Group via GitOps
+> In this lab, we will assign the `Stores Group` to the `IMDb Namespace` which will result in the IMDb Namespace and Application being deployed to all 18 clusters via GitOps
 
 ## Prerequisites
 
 - The Res-Edge Data Service needs to be deployed for this lab
   - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge/README.md#inner-loop-with-res-edge) to deploy the data service to the cluster
+
+## todo - beta tag
+
+- Currently, you need to create a new cluster and deploy Res-Edge again (using the :beta tags)
+- Before release, this will be converted to use the :0.9 tag
 
 ## Start in the repo base directory
 
@@ -47,7 +49,7 @@
 
 - Get the IMDb Id
   - The ds command will return 3
-    - It is strictly coincidental that the Ids are the same
+    - It is coincidental that the Ids are the same
 
   ```bash
 
@@ -56,8 +58,11 @@
   ```
 
 - Use curl to assign the Group to the Namespace
-  - You can use the Swagger UI instead
+  - You can use the Swagger UI as well
     - From the `ports` tab, open `Res-Edge (32080)`
+      - Navigate to the Namespaces Section
+      - Click on `Patch`
+      - Click on `Try it out`
 
   ```bash
 
