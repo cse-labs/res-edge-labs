@@ -86,17 +86,13 @@ In this lab, we will assign the IMDb Namespace to the Stores Group which will re
   git status
 
   ```
--
+
+- Commit the changes and push to the repo
 
   ```bash
 
-
-
-  ```
--
-
-  ```bash
-
-
+  git add .
+  git commit -am "assigned Stores Group to IMDb Namespace"
+  git push
 
   ```
