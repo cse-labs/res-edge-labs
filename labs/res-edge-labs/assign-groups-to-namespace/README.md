@@ -53,6 +53,8 @@
   ```
 
 - Use curl to assign the Group to the Namespace
+  - You can use the Swagger UI instead
+    - From the `ports` tab, open `Res-Edge (32080)`
 
   ```bash
 
