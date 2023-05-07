@@ -2,7 +2,7 @@
 
 Application teams often want to deploy new versions of their app(s) to a growing subset of clusters. Res-Edge uses [Kustomize](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/), `Groups`, `Namespaces`, and `Applications` to provide `ring deployments`.
 
-The `Groups`, `Namespaces`, and `Applications` are entities in the Res-Edge Data Service. Res-Edge provides `GitOps Automation` to merge the entities via `GitOps` (Flux). Kustomize further transforms the manifests used by GitOps for deployment.
+The `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data Service. Res-Edge provides `GitOps Automation` to merge the objects via `GitOps` (Flux). Kustomize further transforms the manifests used by GitOps for deployment.
 
 ## Kustomize Overview
 

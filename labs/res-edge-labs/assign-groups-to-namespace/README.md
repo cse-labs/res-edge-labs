@@ -1,8 +1,10 @@
 # Assign Groups to Namespace
 
+## This lab is currently in beta
+
 > This lab is a prerequisite for the Kustomization lab
 
-Application teams need to deploy their applicatons to specific clusters. The `Groups`, `Namespaces`, and `Applications` are entities in the Res-Edge Data Service. Res-Edge provides `GitOps Automation` to merge the entities via `GitOps` (Flux).
+Application teams need to deploy their applicatons to specific clusters. The `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data Service. Res-Edge provides `GitOps Automation` to merge the objects via `GitOps` (Flux).
 
 In this lab, we will assign the IMDb Namespace to the Stores Group which will result in the IMDb Namespace and Application being deployed to all 18 clusters in the Stores Group.
 

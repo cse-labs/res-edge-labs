@@ -81,7 +81,7 @@
 
 ## Deploy Res-Edge Data Service
 
-- The data service is a REST/OData API to perform CRUD operations on the Res-Edge entities
+- The data service is a REST/OData API to perform CRUD operations on the Res-Edge objects
 - The data service uses the SQL Server deployed previously for storage
 
   ```bash
@@ -115,7 +115,7 @@
 
 > To dive deeper into these commands and learn more about filtering results, go to [Sample Data Service Queries](./sample-queries.md)
 
-- Run `kic [entity-type] list` to query the Res-Edge Data Service and return all entities in this data service
+- Run `kic [entity-type] list` to query the Res-Edge Data Service and return all objects in this data service
 
   ```bash
 
@@ -131,7 +131,7 @@
 
   ```
 
-- Run `kic [entity-type] list --search [entity-name]` to return a list of entities that have an exact match for the search term on the name, metadata, or tags fields
+- Run `kic [entity-type] list --search [entity-name]` to return a list of objects that have an exact match for the search term on the name, metadata, or tags fields
 
   ```bash
 

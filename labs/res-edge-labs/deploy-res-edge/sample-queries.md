@@ -7,7 +7,7 @@
 
 ## Data Service Objects
 
-The `Data Service` exposes the following entities via a REST/OData interface
+The `Data Service` exposes the following objects via a REST/OData interface
 
 - Application - represents an application `registered` by an application development team
   - An Application belongs to zero or one Namespace
@@ -23,7 +23,7 @@ The `Data Service` exposes the following entities via a REST/OData interface
 - Policy - represents a policy that is stored in the GitOps repo
   - Policies are assigned to Namespaces
 
-## List Entities
+## List Objects
 
 - Return a simple list of Entity ID and Name
 
@@ -45,7 +45,7 @@ kic policies list --order-by name
 
 ```
 
-## Search Entities
+## Search Objects
 
 - Return a simple list of Entity ID and Name where one or more of the following is true
   - `Name` equals search term
