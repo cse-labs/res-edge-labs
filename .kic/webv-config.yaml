@@ -2,7 +2,7 @@
 # webv config
 ###
 
-image: ghcr.io/cse-labs/res-edge-webv:beta
+image: ghcr.io/cse-labs/res-edge-webv:0.8
 server:  "${KIC_DATASERVICE_URL}"
 logformat: TsvMin
 verbose: false
