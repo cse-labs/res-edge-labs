@@ -80,7 +80,7 @@
 
   ```bash
 
-  ds namespaces show --id 3 | grep groupPaths -A 2
+  ds namespaces show --id 3 | grep expression
 
   ```
 
@@ -88,16 +88,7 @@
 
   ```json
 
-  "groupPaths": [ "3" ]
-
-  ```
-
-- todo - change the field name to "expression" and store the expression
-  - new output will look like this
-
-  ```json
-
-  "expression": "/g/stores"
+  "expression": "/g/stores",
 
   ```
 
