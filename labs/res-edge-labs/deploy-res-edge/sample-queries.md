@@ -2,12 +2,12 @@
 
 > The CLI commands are in `preview` and will likely change before final release
 
-- The `kic CLI` implements basic commands to query the `Data Service`
+- The `ds CLI` implements basic commands to query the `Data Service`
 - Additional CLI commands and a web user interface are planned for future releases
 
 ## Data Service Objects
 
-The `Data Service` exposes the following entities via a REST/OData interface
+The `Data Service` exposes the following objects via a REST/OData interface
 
 - Application - represents an application `registered` by an application development team
   - An Application belongs to zero or one Namespace
@@ -23,31 +23,31 @@ The `Data Service` exposes the following entities via a REST/OData interface
 - Policy - represents a policy that is stored in the GitOps repo
   - Policies are assigned to Namespaces
 
-## List Entities
+## List Objects
 
-- Return a simple list of Entity ID and Name
+- Return a simple list of Object Id and Name
 
 ```bash
 
-kic applications list
-kic clusters list
-kic groups list
-kic namespaces list
-kic policies list
+ds applications list
+ds clusters list
+ds groups list
+ds namespaces list
+ds policies list
 
 # order by name
 # default order-by is Id
-kic applications list --order-by name
-kic clusters list --order-by name
-kic groups list --order-by name
-kic namespaces list --order-by name
-kic policies list --order-by name
+ds applications list --order-by name
+ds clusters list --order-by name
+ds groups list --order-by name
+ds namespaces list --order-by name
+ds policies list --order-by name
 
 ```
 
-## Search Entities
+## Search Objects
 
-- Return a simple list of Entity ID and Name where one or more of the following is true
+- Return a simple list of Object Id and Name where one or more of the following is true
   - `Name` equals search term
   - A `Tag` exists that equals the search term
   - A `MetaData Value` exists that equals the search term
@@ -56,27 +56,27 @@ kic policies list --order-by name
 
 ```bash
 
-kic applications list --search imdb
-kic clusters list --search central
-kic groups list --search beta
-kic namespaces list --search imdb
-kic policies list --search no-ingress
+ds applications list --search imdb
+ds clusters list --search central
+ds groups list --search beta
+ds namespaces list --search imdb
+ds policies list --search no-ingress
 
 ```
 
 ## Group Membership
 
-- Return a simple list of Entity ID and Name where the Group is assigned to the entity
+- Return a simple list of Object Id and Name where the Group is assigned to the object
   - Additional parameters are not currently supported
 
 ```bash
 
-kic clusters list --group beta
-kic groups list --group west
+ds clusters list --group beta
+ds groups list --group west
 
 ```
 
-- example output for `kic clusters list --group beta`
+- example output for `ds clusters list --group beta`
 
 ```text
 
@@ -86,33 +86,33 @@ west-ca-sd-2301
 
 ```
 
-## Get Entity by Id
+## Get Object by Id
 
-- Show the entity values
+- Show the object values
   - Result format is json
   - --id is required
 
     ```bash
 
-    kic applications show --id 6
-    kic clusters show --id 2
-    kic groups show --id 2
-    kic namespaces show --id 6
-    kic policies show --id 2
+    ds applications show --id 5
+    ds clusters show --id 2
+    ds groups show --id 2
+    ds namespaces show --id 5
+    ds policies show --id 2
 
     ```
 
-- Output for `kic applications show --id 6`
+- Output for `ds applications show --id 5`
 
   ```json
 
   {
     "@odata.context": "http://localhost:32080/api/v1/$metadata#Applications(namespace())/$entity",
-    "id": 6,
+    "id": 5,
     "name": "tabs-spaces",
     "description": "Can we still be friends?",
     "environment": "Prod",
-    "namespaceId": 6,
+    "namespaceId": 5,
     "repoUrl": "/github.com/cse-labs/test",
     "pat": "/cse-labs",
     "path": "/apps",
@@ -152,7 +152,7 @@ west-ca-sd-2301
       }
     ],
     "namespace": {
-      "id": 6,
+      "id": 5,
       "name": "tabs-spaces",
       "description": "Can we still be friends?",
       "businessUnit": "Platform",

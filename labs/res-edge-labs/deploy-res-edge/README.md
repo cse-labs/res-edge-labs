@@ -45,10 +45,10 @@
   - Res-Edge Data Service requires a SQL Server database
   - This database serves as storage for Applications, Clusters, Groups, Namespaces, and Policies
 - Once the container starts, it will populate the database with sample data
-  - 19 Applications
-  - 19 Clusters
-  - 19 Groups
-  - 19 Namespaces
+  - 5 Applications
+  - 18 Clusters
+  - 18 Groups
+  - 5 Namespaces
   - 3 Policies
 - Run `alias` to view all aliases defined in the Codespace
   - `k` is an alias for `kubectl`
@@ -81,7 +81,7 @@
 
 ## Deploy Res-Edge Data Service
 
-- The data service is a REST/OData API to perform CRUD operations on the Res-Edge entities
+- The data service is a REST/OData API to perform CRUD operations on the Res-Edge objects
 - The data service uses the SQL Server deployed previously for storage
 
   ```bash
@@ -115,53 +115,35 @@
 
 > To dive deeper into these commands and learn more about filtering results, go to [Sample Data Service Queries](./sample-queries.md)
 
-- Run `kic [entity-type] list` to query the Res-Edge Data Service and return all entities in this data service
+## List Objects
 
-  ```bash
+- Return a simple list of Object Id and Name
 
-  kic applications list
+```bash
 
-  kic clusters list
+ds applications list
+ds clusters list
+ds groups list
+ds namespaces list
+ds policies list
 
-  kic groups list
+```
 
-  kic namespaces list
+## Get Object by Id
 
-  kic policies list
+- Show the object values
+  - Result format is json
+  - --id is required
 
-  ```
+    ```bash
 
-- Run `kic [entity-type] list --search [entity-name]` to return a list of entities that have an exact match for the search term on the name, metadata, or tags fields
+    ds applications show --id 3
+    ds clusters show --id 1
+    ds groups show --id 3
+    ds namespaces show --id 3
+    ds policies show --id 1
 
-  ```bash
-
-  kic applications list --search imdb
-
-  kic clusters list --search central-la-nola-2301
-
-  kic groups list --search beta
-
-  kic namespaces list --search imdb
-
-  kic policies list --search dns-ingress
-
-  ```
-
-- Run `kic [entity-type] show --id [entity-id]` to return a specific entity's information
-
-  ```bash
-
-  kic applications show --id 2
-
-  kic clusters show --id 2
-
-  kic groups show --id 2
-
-  kic namespaces show --id 2
-
-  kic policies show --id 2
-
-  ```
+    ```
 
 ## Observability
 
