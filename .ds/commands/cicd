@@ -1,0 +1,60 @@
+#!/bin/bash
+
+RESEDGE_AUTOMATION_DOCKER_IMAGE="ghcr.io/cse-labs/res-edge-automation:beta"
+
+usage() {
+  echo "Usage: kic cicd [--show]"
+  exit 1
+}
+
+# check the number of parameters
+if [ $# -gt 1 ]; then
+  usage
+fi
+
+# extract the first parameter into a variable
+param="$1"
+
+# check if the parameter is valid
+if [ $# -eq 1 ]; then
+  if [[ $param == "--show" ]]; then
+    show_flag=1
+  else
+    usage
+  fi
+fi
+
+# If the flag is set, show a message
+if [[ $show_flag -eq 1 ]]; then
+  cat << EOF
+Default Script
+
+#!/bin/bash
+
+# The following command will execute the ghcr.io/cse-labs/res-edge-automation image in docker
+# and will mount the current directory into a working directory inside the container.
+# The container will retrieve all required information from the dataservice
+# and validate, create and/or update (as necessary) the clusters gitops manifest files
+# in the working directory without pushing changes to remote repository.
+
+docker run -it --rm \\
+  --net host \\
+  -v \$(pwd):/goa \\
+  ${RESEDGE_AUTOMATION_DOCKER_IMAGE} \\
+  -s "${KIC_DATASERVICE_URL}"
+EOF
+  exit
+fi
+
+echo "Running ci-cd locally ..."
+
+# The following command will execute the ghcr.io/cse-labs/res-edge-automation image in docker
+# and will mount the current directory into a working directory inside the container.
+# The container will retrieve all required information from the dataservice
+# and validate, create and/or update (as necessary) the clusters gitops manifest files
+# in the working directory without pushing changes to remote repository.
+docker run -it --rm \
+  --net host \
+  -v "$(pwd)":/goa \
+  ${RESEDGE_AUTOMATION_DOCKER_IMAGE} \
+  -s "${KIC_DATASERVICE_URL}"

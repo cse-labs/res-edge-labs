@@ -1,0 +1,14 @@
+###
+# Res-Edge commands
+###
+
+### add new commands
+### bash scripts are in .kic/command/{path}
+scriptCommands:
+  - name: cicd
+    short: Test ci-cd locally
+    path: cicd
+
+  - name: overlay
+    short: Create new Kustomize overlay
+    path: overlay

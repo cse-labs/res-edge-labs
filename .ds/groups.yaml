@@ -1,0 +1,14 @@
+###
+# Res-Edge Groups commands
+###
+
+commands:
+- name: groups
+  short: Res-Edge Groups commands
+  scriptCommands:
+  - name: show
+    short: Show Group information
+    path: groups/show
+  - name: list
+    short: Search and list Groups
+    path: groups/list
