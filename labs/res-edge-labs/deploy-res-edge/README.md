@@ -45,10 +45,10 @@
   - Res-Edge Data Service requires a SQL Server database
   - This database serves as storage for Applications, Clusters, Groups, Namespaces, and Policies
 - Once the container starts, it will populate the database with sample data
-  - 19 Applications
-  - 19 Clusters
-  - 19 Groups
-  - 19 Namespaces
+  - 5 Applications
+  - 18 Clusters
+  - 18 Groups
+  - 5 Namespaces
   - 3 Policies
 - Run `alias` to view all aliases defined in the Codespace
   - `k` is an alias for `kubectl`
