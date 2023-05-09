@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# delete existing cluster
-# ignore no-cluster error message
-k3d cluster delete
