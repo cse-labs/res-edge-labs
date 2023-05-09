@@ -98,7 +98,7 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 - Configuration Proliferation
 - Connectivity
 
-[Lab](./labs/res-edge-labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
+[Lab](./labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
 
 ## Assign a Group to a Namespace
 
@@ -111,13 +111,13 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
   - Running cicd locally
   - Reviewing, committing, and pushing the changes to your GitHub repo
 
-[Lab](./labs/res-edge-labs/assign-groups-to-namespace/README.md#assign-groups-to-namespace): Assign a Group to a Namespace
+[Lab](./labs/assign-group-to-namespace.md#assign-group-to-namespace): Assign a Group to a Namespace
 
-## Ring Deployment
+## Ring Deployment with Kustomize
 
 Application teams often want to deploy new versions of their app(s) to a growing subset of clusters. Res-Edge uses [Kustomize](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/), `Groups`, `Namespaces`, and `Applications` to provide `ring deployments`. This lab demonstrates ring deployment using Res-Edge and Kustomize
 
-[Lab](./labs/res-edge-labs/kustomize/README.md#ring-deployment): Ring deployment with Res-Edge and Kustomize
+[Lab](./labs/ring-deployment-with-kustomize.md#ring-deployment-with-kustomize): Ring deployment with Res-Edge and Kustomize
 
 ## Support
 
