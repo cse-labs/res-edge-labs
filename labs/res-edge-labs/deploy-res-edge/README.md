@@ -117,7 +117,7 @@
 
 ## List Objects
 
-- Return a simple list of Entity ID and Name
+- Return a simple list of Object Id and Name
 
 ```bash
 
