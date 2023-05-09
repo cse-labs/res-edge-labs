@@ -2,9 +2,10 @@
 
 Application teams often want to deploy new versions of their app(s) to a growing subset of clusters. Res-Edge uses [Kustomize](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/), `Groups`, `Namespaces`, and `Applications` to provide `ring deployments`.
 
-The `Groups`, `Namespaces`, and `Applications` are entities in the Res-Edge Data Service. Res-Edge provides `GitOps Automation` to merge the entities via `GitOps` (Flux). Kustomize further transforms the manifests used by GitOps for deployment.
+The `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data Service. Res-Edge provides `GitOps Automation` to merge the objects via `GitOps` (Flux). Kustomize further transforms the manifests used by GitOps for deployment.
 
 ## Kustomize Overview
+
 - Kustomize helps customizing config files without the need of templates
 - Kustomize provides a number of handy methods like generators to make customization easier
 - Kustomize uses overlays to introduce environment specific changes on an already existing standard config file without disturbing it
@@ -17,11 +18,11 @@ The `Groups`, `Namespaces`, and `Applications` are entities in the Res-Edge Data
 - The Res-Edge Data Service needs to be deployed for this lab
   - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge/README.md#inner-loop-with-res-edge) to deploy the data service to the cluster
 
-## Start in this lab directory
+## Start in the repo base directory
 
   ```bash
 
-  cd $REPO_BASE/labs/res-edge-labs/kustomize
+  cd $REPO_BASE
 
   ```
 
@@ -39,26 +40,26 @@ The `Groups`, `Namespaces`, and `Applications` are entities in the Res-Edge Data
 - An overlay is a Kustomization that refers to the base and patches to transform the base when applied
 - Overlays allow you to manage multiple configurations - such as dev, test, staging and prod - by transforming a shared base
 - In this lab, we will use an overlay on the IMDb application to define a different version to be deployed to the beta `Group`
-- To see the definition of the beta `Group`
+- Use the `ds CLI` to see the definition of the beta `Group`
 
   ```bash
 
   # List all clusters in the group beta
-  kic clusters list --group beta
+  ds clusters list --group beta
 
   ```
 
-- Use the `kic overlay` command to create the overlay structure
+- Use the `ds overlay` command to create the overlay structure
   - `imdb` is the application name
   - `1.0.1` is the new version
 
     ```bash
 
-    kic overlay imdb 1.0.1
+    ds overlay imdb 1.0.1
 
     ```
 
-- The `kic overlay imdb 1.0.1` command creates a new `overlays/1.0.1` folder
+- The `ds overlay imdb 1.0.1` command creates a new `overlays/1.0.1` folder
 - It will also create and open a new kustomization overlay file that references the base kustomization file with the new version defined
 - Update the new `kustomization.yaml` file and set "beta" as the clusters metadata annotation
   - Codespaces saves the changes automatically
@@ -82,14 +83,14 @@ The `Groups`, `Namespaces`, and `Applications` are entities in the Res-Edge Data
 
 ## CICD Dry Run
 
-- Use the `kic cicd` command to generate the new manifests
+- Use the `ds cicd` command to generate the new manifests
 
   ```bash
 
-  # `kic cicd` uses Res-Edge Data Service deployed to Codespaces
-  kic cicd
+  # `ds cicd` uses Res-Edge Data Service deployed to Codespaces
+  ds cicd
 
-  # Verify that the clusters from the beta `Group` were updated by `kic cicd`
+  # Verify that the clusters from the beta `Group` were updated by `ds cicd`
   git diff
 
   ```
@@ -140,7 +141,7 @@ The `Groups`, `Namespaces`, and `Applications` are entities in the Res-Edge Data
 
 ## Reset manifests
 
-- To reset the manifests to the base kustomization, delete the overlay folder and run `kic cicd` again
+- To reset the manifests to the base kustomization, delete the overlay folder and run `ds cicd` again
 
   ```bash
 
@@ -148,7 +149,7 @@ The `Groups`, `Namespaces`, and `Applications` are entities in the Res-Edge Data
   rm -rf ./apps/imdb/kustomize/prod/overlays/1.0.1
 
   # run cicd to reset the imdb.yaml files in the clusters
-  kic cicd
+  ds cicd
 
   # should be up to date
   git status
