@@ -1,12 +1,12 @@
-# Kubernetes in Codespaces
+# Resilient Edge Labs
 
 ## Introduction
 
 Kubernetes is hard. Getting started and set up for the first time can take weeks to get right. Managing deployments on a fleet of Kubernetes clusters on the edge brings even more challenges.
 
-Kubernetes in Codespaces (KiC) is a `game-changer` for the end-to-end Kubernetes app development cycle from a local cluster to deployments on the edge. It reduces the initial friction and empowers the developer to get started and deployed to a dev/test environment within *minutes*. The pre-configured Codespaces environment includes a `Kubernetes` cluster and custom command line interfaces (`kic` and `flt`) that help streamline the initial learning curve to Kubernetes development commands.
+Kubernetes in Codespaces (KiC) is a `game-changer` for the end-to-end Kubernetes development lifecycle from a local cluster to deployments on the edge. KiC reduces the initial friction and empowers the developer to get started and deployed to a dev/test environment within minutes. The pre-configured Codespaces environment includes a `Kubernetes` cluster and a custom CLI (`kic`) that help streamline the initial Kubernetes learning curve.
 
-This repo walks through the rich end-to-end developer experience via a series of labs. The labs start by walking you through creating, building, testing, and deploying an application on a local cluster running inside Codespaces ([inner-loop](./README.md#inner-loop)) with a complete [CNCF observability](https://landscape.cncf.io/card-mode?category=observability-and-analysis&project=graduated,incubating,sandbox) stack ([Grafana](https://grafana.com/), [Prometheus](https://prometheus.io/docs/introduction/overview/), and [Fluent Bit](https://fluentbit.io/)). Then, the labs move on to the next step of deploying the application to a test cluster in the Cloud ([outer-loop](./README.md#outer-loop)). There are also several [advanced labs](./README.md#advanced-labs) that cover centralized monitoring, canary deployments, and targeting different devices.
+These labs walks through the rich end-to-end developer experience of KiC. The labs start by walking you through creating, building, testing, and deploying an application on a local cluster running inside Codespaces ([inner-loop](./README.md#inner-loop)) with a complete [CNCF observability](https://landscape.cncf.io/card-mode?category=observability-and-analysis&project=graduated,incubating,sandbox) stack ([Grafana](https://grafana.com/), [Prometheus](https://prometheus.io/docs/introduction/overview/), and [Fluent Bit](https://fluentbit.io/)).
 
 ## Prerequisites
 
@@ -14,11 +14,6 @@ This repo walks through the rich end-to-end developer experience via a series of
 - An Azure subscription with owner access
   - A [free Azure subscription](https://azure.microsoft.com/en-in/free/) will work for exploration
   - Some advanced scenarios also require AAD permissions
-
-## Notes
-
-- The base Codespaces images recently updated to dotnet core 7
-- Both dotnet core 6 and 7 are installed in the Codespaces image as we migrate to dotnet 7
 
 ## GitHub Codespaces
 
@@ -67,7 +62,7 @@ We use GitHub Codespaces for our `inner-loop` and `outer-loop` Developer Experie
 
 ## Environment variables
 
-Many of these tutorials make use of environment variables, using the export functionality. If you wish, you can also edit the Z shell preferences file to persist exported environment variables across terminal sessions. Just add the same "export FOO=BAR" lines to your .zshrc file.
+Many of these labs use environment variables, using the export functionality. If you wish, you can also edit the Z shell preferences file to persist exported environment variables across terminal sessions. Just add the same "export FOO=BAR" lines to your .zshrc file.
 
 ```bash
 
@@ -75,33 +70,39 @@ code ~/.zshrc
 
 ```
 
-## inner-loop Labs
+## Getting Started
 
-- [Lab 1](./labs/inner-loop.md#inner-loop): Create, build, deploy, and test a new dotnet application and observability stack on your local cluster
-- [Lab 2](./labs/inner-loop-flux.md#create-a-new-cluster): Configure flux to automate the deployment process from Lab 1
-- [Lab 3](./labs/res-edge-labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
-- [Lab 4](./labs/res-edge-labs/kustomize/README.md#ring-deployment): Ring deployment using Res-Edge and Kustomize
+The first lab is an `inner-loop` lab that introduces Codespaces and the various pre-installed components and tools
 
-## outer-loop Labs
+> The lab is the basis for all future labs, so you should go through the lab a few times until you're comfortable with Codespaces and the tools
 
-- [Lab 1](./labs/outer-loop.md#outer-loop): Create a dev/test cluster and manage application deployments on the cluster
-- [Lab 2](./labs/outer-loop-multi-cluster.md#outer-loop-multi-cluster): Manage application deployments on a fleet of multiple clusters
-- [Lab 3](./labs/outer-loop-ring-deployment.md#outer-loop-with-ring-based-deployment): Configure ring based deployments
+- Create a K8s cluster in the Codespace
+- Build, deploy, and test a new application
+- Deploy a CNCF observability stack
+  - Fluent Bit (log forwarding)
+  - Prometheus (metrics)
+  - Grafana (dashboards)
+- Generate and observe synthetic load
+- Run and observe load tests
 
-- [Lab 4](./labs/azure-codespaces-setup.md#azure-subscription-and-codespaces-setup): Set up Azure subscription and Codespaces for advanced configuration
-  - This is a prerequisite for the Advanced Labs
+[Lab](./labs/inner-loop.md#inner-loop): Introduction to Kubernetes in Codespaces
 
-## Advanced Labs
+## Deploy Data Service
 
-- [Arc enabled GitOps Lab](./labs/outer-loop-arc-gitops.md#outer-loop-with-arc-enabled-gitops): Deploy to dev cluster running on an Azure VM with Arc enabled GitOps
-- [Canary Deployment Lab](./labs/advanced-labs/canary/README.md#automated-canary-deployment-using-flagger): Use Flagger to experiment with canary deployments
-- [Centralized Observability Lab](./labs/advanced-labs/monitoring/README.md#centralized-monitoring): Deploy a centralized observability system with Fluent Bit, Prometheus, and Grafana to monitor fleet application deployments
-- [outer-loop with AKS-IoT Lab](./labs/advanced-labs/aks-iot/README.md#outer-loop-to-aks-iot): Deploy to an AKS-IoT cluster running on an Azure VM with Arc enabled GitOps
-- [outer-loop with AKS Lab](./labs/outer-loop-aks-azure.md#outer-loop-to-aks-on-azure): Deploy to an AKS cluster with Arc enabled GitOps
+[Resilient Edge (Res-Edge)](./docs/Res-Edge-Overview.md) is a composition of tools designed to streamline application manageability across a highly distributed application platform. The objective is to leverage a small platform team to support a highly distributed ecosystem of clusters and apps. We will step through how Resilient Edge (Res-Edge) addresses the following capabilities:
 
-## Beta Labs
+- Managing Clusters at Scale
+- Matching Applications and Clusters
+- Configuration Proliferation
+- Connectivity
 
-> These labs are work in progress and may not be fully documented
+[Lab](./labs/res-edge-labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
+
+## Ring Deployment
+
+Application teams often want to deploy new versions of their app(s) to a growing subset of clusters. Res-Edge uses [Kustomize](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/), `Groups`, `Namespaces`, and `Applications` to provide `ring deployments`. This lab demonstrates ring deployment using Res-Edge and Kustomize
+
+[Lab](./labs/res-edge-labs/kustomize/README.md#ring-deployment): Ring deployment with Res-Edge and Kustomize
 
 ## Support
 
