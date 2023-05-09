@@ -104,10 +104,10 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 
 > This lab is a prerequisite for the Kustomize lab
 
-- Res-Edge uses `Groups` to allow applying to multiple clusters at the same time
-- In order for a `Namespace` and associated `Application(s)` to deploy to a Cluster, you must `assign` a Group(s) to the Namespace
+- Res-Edge uses `Groups` to allow applying Kubernetes manifests to multiple `Clusters` at the same time
+- In order for a `Namespace` and associated `Application(s)` to deploy to a `Cluster`, you must `assign` a `Group(s)` to the `Namespace`
 - This lab will demonstrate:
-  - Assigning the `Store Group` to the `imdb Namespace`
+  - Assigning the `store Group` to the `imdb Namespace`
   - Running cicd locally
   - Reviewing, committing, and pushing the changes to your GitHub repo
 

@@ -8,7 +8,7 @@
 - The `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data Service
 - Res-Edge provides `GitOps Automation` to merge the objects via `GitOps` (Flux)
 
-> In this lab, we will assign the `Stores Group` to the `IMDb Namespace` which will result in the IMDb Namespace and Application being deployed to all 18 clusters via GitOps
+> In this lab, we will assign the `stores Group` to the `imdb Namespace` which will result in the IMDb Namespace and Application being deployed to all 18 clusters via GitOps
 
 ## Prerequisites
 
