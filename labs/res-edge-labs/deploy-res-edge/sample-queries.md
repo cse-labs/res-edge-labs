@@ -25,7 +25,7 @@ The `Data Service` exposes the following objects via a REST/OData interface
 
 ## List Objects
 
-- Return a simple list of Entity ID and Name
+- Return a simple list of Object Id and Name
 
 ```bash
 
@@ -47,7 +47,7 @@ ds policies list --order-by name
 
 ## Search Objects
 
-- Return a simple list of Entity ID and Name where one or more of the following is true
+- Return a simple list of Object Id and Name where one or more of the following is true
   - `Name` equals search term
   - A `Tag` exists that equals the search term
   - A `MetaData Value` exists that equals the search term
@@ -66,7 +66,7 @@ ds policies list --search no-ingress
 
 ## Group Membership
 
-- Return a simple list of Entity ID and Name where the Group is assigned to the entity
+- Return a simple list of Object Id and Name where the Group is assigned to the object
   - Additional parameters are not currently supported
 
 ```bash
@@ -86,9 +86,9 @@ west-ca-sd-2301
 
 ```
 
-## Get Entity by Id
+## Get Object by Id
 
-- Show the entity values
+- Show the object values
   - Result format is json
   - --id is required
 
