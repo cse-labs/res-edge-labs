@@ -131,7 +131,7 @@ ds policies list
 
 ## Get Object by Id
 
-- Show the entity values
+- Show the object values
   - Result format is json
   - --id is required
 
