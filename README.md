@@ -89,6 +89,8 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 
 ## Deploy Data Service
 
+> This lab is a prerequisite for the other labs
+
 [Resilient Edge (Res-Edge)](./docs/Res-Edge-Overview.md) is a composition of tools designed to streamline application manageability across a highly distributed application platform. The objective is to leverage a small platform team to support a highly distributed ecosystem of clusters and apps. We will step through how Resilient Edge (Res-Edge) addresses the following capabilities:
 
 - Managing Clusters at Scale
@@ -99,6 +101,8 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 [Lab](./labs/res-edge-labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
 
 ## Assign a Group to a Namespace
+
+> This lab is a prerequisite for the Kustomize lab
 
 - Res-Edge uses `Groups` to allow applying to multiple clusters at the same time
 - In order for a `Namespace` and associated `Application(s)` to deploy to a Cluster, you must `assign` a Group(s) to the Namespace
