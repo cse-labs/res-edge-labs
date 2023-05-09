@@ -47,7 +47,7 @@ ds policies list --order-by name
 
 ## Search Objects
 
-- Return a simple list of Entity ID and Name where one or more of the following is true
+- Return a simple list of Object Id and Name where one or more of the following is true
   - `Name` equals search term
   - A `Tag` exists that equals the search term
   - A `MetaData Value` exists that equals the search term
