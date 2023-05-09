@@ -1,0 +1,71 @@
+#!/bin/bash
+
+set -e
+
+dir=""
+app="apps/$1"
+
+function print_usage
+{
+    echo "Usage: kic overlay <name> <version>"
+}
+
+if [ "$1" = "" ]; then
+    echo "Application name is required."
+    print_usage
+    exit 1;
+fi
+
+if [ "$2" = "" ]; then
+    echo "Version is required."
+    print_usage
+    exit 1;
+fi
+
+if [ ! -d "apps/$1" ]; then
+    echo "App directory '$1' not found.";
+    exit 1;
+fi
+
+if [ ! -f "apps/$1/kustomize/dev/base/kustomization.yaml" ] && [ ! -f "apps/$1/kustomize/test/kustomization.yaml" ] && [ ! -f "apps/$1/kustomize/prod/base/kustomization.yaml" ]; then
+    echo "Base Kustomization file not found for $1.";
+    echo "apps/$1/kustomize/<env>/base/kustomization.yaml must exist where env is dev,test, or prod"
+    exit 1;
+fi
+
+# change to the apps/myapp dir
+cd "$app";
+
+# select the environment
+if [ -d "kustomize/dev" ]; then dir="kustomize/dev"; fi
+if [ -d "kustomize/test" ]; then dir="kustomize/test"; fi
+if [ -d "kustomize/prod" ]; then dir="kustomize/prod"; fi
+
+if [ "$dir" = "" ]; then
+    echo "Kustomize directory not found";
+    exit 1;
+fi
+
+if [ -d "$dir/overlays/$2" ]; then
+    echo "Overlay $2 already exists";
+    exit 1;
+fi
+
+mkdir -p "$dir/overlays/$2"
+
+cat <<EOF > "$dir/overlays/$2/kustomization.yaml"
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  annotations:
+    version: $2
+    clusters: none
+resources:
+- ../../base
+
+images:
+- name: $(cat $dir/base/deployment.yaml|grep image: | cut -d ':' -f 2)
+  newTag: $2
+EOF
+
+code "$dir/overlays/$2/kustomization.yaml"

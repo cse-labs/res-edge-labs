@@ -1,0 +1,112 @@
+#!/bin/bash
+PARENT_COMMAND=$(ps -o comm= $PPID)
+
+usage() {
+  echo "Usage: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} [--search search term] [--order-by name]"
+
+  if [ "${KIC_RES_EDGE_ENTITYNAME}" = "clusters" ] || [ "${KIC_RES_EDGE_ENTITYNAME}" = "groups" ]; then
+    echo "   or: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --group [name]"
+    echo '   --group:  filter clusters by group'
+  fi
+
+  echo "   --search: Search for ${KIC_RES_EDGE_ENTITYNAME} by name, metadata or tag. Optional."
+  echo '   --order-by: Order by name. Optional. Default: id.'
+  exit 1
+}
+
+list_clusters() {
+
+    CLUSTERS=$(curl --silent --show-error "$URL" | jq -r ' .value[] | .clustersTree' )
+
+    if [ "$CLUSTERS" = "" ]; then
+        echo "No clusters found";
+        exit 1;
+    fi
+
+    CLUSTERS=${CLUSTERS:1}
+    CLUSTERS=${CLUSTERS::-1}
+
+    echo "ID      NAME"
+    echo "--      ------"
+    for s in $(echo "{$CLUSTERS}" | sed "s/,/\n/g"); do echo "$s" | sed "s=\/api=${KIC_DATASERVICE_URL}\/api=g" | xargs curl -s | jq -r '([.id, .name]) | @tsv'; done
+}
+
+list() {
+  if [ -n "${GROUP}" ]; then
+    CLUSTERS=$(list_clusters)
+    echo "$CLUSTERS"
+  else
+    response=$(curl --silent --show-error "$URL" | jq -r '["ID","NAME"], ["--","------"], (.value[] | [.id, .name]) | @tsv')
+    echo "$response"
+  fi
+}
+
+if [ -z "${KIC_DATASERVICE_URL}" ]; then
+  echo "Error: KIC_DATASERVICE_URL environment variable is not set"
+fi
+
+for arg in "$@"; do
+  case $arg in
+    --search)
+      set -- "${@/$arg/-s}"
+      ;;
+    --order-by)
+      set -- "${@/$arg/-o}"
+      ;;
+    --group)
+      set -- "${@/$arg/-g}"
+      ;;
+  esac
+done
+
+while getopts ":s:o:g:" f; do
+    case "${f}" in
+        s)
+            SEARCH=$OPTARG ;;
+        o)
+            ORDERBY=$OPTARG ;;
+        g)
+            GROUP=$OPTARG ;;
+        *)
+            usage ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ -n "$ORDERBY" ] && [ "$ORDERBY" != "id" ] && [ "$ORDERBY" != "name" ]; then
+  echo "Error: Order by supports either 'id' or 'name'."
+  usage
+fi
+
+URL_PARAMS=()
+
+if [ -n "${SEARCH}" ]; then
+  URL_PARAMS+=("search=%22$SEARCH%22")
+fi
+
+if [ -n "${ORDERBY}" ]; then
+  URL_PARAMS+=("orderby=${ORDERBY}")
+fi
+
+if [ -n "${GROUP}" ]; then
+  if [ -n "${SEARCH}" ] || [ -n "${ORDERBY}" ]; then
+      usage;
+  fi
+
+  URL_PARAMS+=("filter=name%20eq%20%27${GROUP}%27&select=clustersTree")
+  KIC_RES_EDGE_ENTITYNAME="groups"
+fi
+
+KIC_BASE_URL="${KIC_DATASERVICE_URL}/api/v1/${KIC_RES_EDGE_ENTITYNAME}/"
+
+# Implode the array with the separator "&" to create a single string
+URL_QUERY_STRING=$(printf "&%s" "${URL_PARAMS[@]}")
+URL_QUERY_STRING=${URL_QUERY_STRING:1}
+
+URL="${KIC_BASE_URL}?${URL_QUERY_STRING}"
+
+if ! list; then
+  echo "Error: Failed to retrieve data from $URL"
+  echo "Please check that the Res-Edge server is up and running with: kic check resedge"
+  exit 1
+fi
