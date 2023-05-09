@@ -1,4 +1,4 @@
-# Assign Groups to Namespace
+# Assign Group to Namespace
 
 ## This lab is currently in beta
 
