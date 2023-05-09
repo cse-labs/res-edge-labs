@@ -129,7 +129,7 @@ ds policies list
 
 ```
 
-## Get Entity by Id
+## Get Object by Id
 
 - Show the entity values
   - Result format is json
