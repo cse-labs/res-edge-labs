@@ -98,6 +98,17 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 
 [Lab](./labs/res-edge-labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
 
+## Assign a Group to a Namespace
+
+- Res-Edge uses `Groups` to allow applying to multiple clusters at the same time
+- In order for a `Namespace` and associated `Application(s)` to deploy to a Cluster, you must `assign` a Group(s) to the Namespace
+- This lab will demonstrate:
+  - Assigning the `Store Group` to the `imdb Namespace`
+  - Running cicd locally
+  - Reviewing, committing, and pushing the changes to your GitHub repo
+
+[Lab](./labs/res-edge-labs/assign-groups-to-namespace/README.md#assign-groups-to-namespace): Assign a Group to a Namespace
+
 ## Ring Deployment
 
 Application teams often want to deploy new versions of their app(s) to a growing subset of clusters. Res-Edge uses [Kustomize](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/), `Groups`, `Namespaces`, and `Applications` to provide `ring deployments`. This lab demonstrates ring deployment using Res-Edge and Kustomize
