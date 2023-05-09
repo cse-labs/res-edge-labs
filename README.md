@@ -89,7 +89,7 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 
 ## Deploy Data Service
 
-> This lab is a prerequisite for the other labs
+> This lab is a prerequisite for future labs
 
 [Resilient Edge (Res-Edge)](./docs/Res-Edge-Overview.md) is a composition of tools designed to streamline application manageability across a highly distributed application platform. The objective is to leverage a small platform team to support a highly distributed ecosystem of clusters and apps. We will step through how Resilient Edge (Res-Edge) addresses the following capabilities:
 
