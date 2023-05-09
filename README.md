@@ -89,6 +89,8 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 
 ## Deploy Data Service
 
+> This lab is a prerequisite for future labs
+
 [Resilient Edge (Res-Edge)](./docs/Res-Edge-Overview.md) is a composition of tools designed to streamline application manageability across a highly distributed application platform. The objective is to leverage a small platform team to support a highly distributed ecosystem of clusters and apps. We will step through how Resilient Edge (Res-Edge) addresses the following capabilities:
 
 - Managing Clusters at Scale
@@ -96,13 +98,26 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 - Configuration Proliferation
 - Connectivity
 
-[Lab](./labs/res-edge-labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
+[Lab](./labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
 
-## Ring Deployment
+## Assign a Group to a Namespace
+
+> This lab is a prerequisite for the Kustomize lab
+
+- Res-Edge uses `Groups` to allow applying Kubernetes manifests to multiple `Clusters` at the same time
+- In order for a `Namespace` and associated `Application(s)` to deploy to a `Cluster`, you must `assign` a `Group(s)` to the `Namespace`
+- This lab will demonstrate:
+  - Assigning the `store Group` to the `imdb Namespace`
+  - Running cicd locally
+  - Reviewing, committing, and pushing the changes to your GitHub repo
+
+[Lab](./labs/assign-group-to-namespace.md#assign-group-to-namespace): Assign a Group to a Namespace
+
+## Ring Deployment with Kustomize
 
 Application teams often want to deploy new versions of their app(s) to a growing subset of clusters. Res-Edge uses [Kustomize](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/), `Groups`, `Namespaces`, and `Applications` to provide `ring deployments`. This lab demonstrates ring deployment using Res-Edge and Kustomize
 
-[Lab](./labs/res-edge-labs/kustomize/README.md#ring-deployment): Ring deployment with Res-Edge and Kustomize
+[Lab](./labs/ring-deployment-with-kustomize.md#ring-deployment-with-kustomize): Ring deployment with Res-Edge and Kustomize
 
 ## Support
 
