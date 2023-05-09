@@ -25,7 +25,7 @@ The `Data Service` exposes the following objects via a REST/OData interface
 
 ## List Objects
 
-- Return a simple list of Entity ID and Name
+- Return a simple list of Object Id and Name
 
 ```bash
 
