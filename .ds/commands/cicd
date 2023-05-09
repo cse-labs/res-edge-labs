@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RESEDGE_AUTOMATION_DOCKER_IMAGE="ghcr.io/cse-labs/res-edge-automation0.9"
+RESEDGE_AUTOMATION_DOCKER_IMAGE="ghcr.io/cse-labs/res-edge-automation:0.9"
 
 usage() {
   echo "Usage: kic cicd [--show]"
