@@ -33,3 +33,7 @@ commands:
     - name: flux
       short: Check Flux service
       path: check/flux
+
+    - name: imdb
+      short: Check imdb service
+      path: check/imdb
