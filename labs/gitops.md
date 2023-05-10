@@ -2,12 +2,16 @@
 
 ## Create a new Codespace
 
+- todo - decide how we want the labs to flow
+
 - for testing, you can use the same Codespace
 - if you do, you will need to recreate your cluster
   - deploy res-edge
   - assign group to namespace
   - run `ds cicd`
   - push to git repo
+- we can reorder the labs so you don't have to re-deploy
+- I like the separation of "Res-Edge cluster" and "member cluster" (central-la-nola-2301)
 
 ## Set Personal Access Token
 
@@ -20,6 +24,7 @@ export KIC_PAT=<yourGitHubPAT>
 ## Set environment variables
 
 - Set any of these env vars that are not set correctly
+- todo - we can set everything except PAT in on-create and delete this section
 
 ```bash
 
@@ -66,7 +71,7 @@ flux create secret git flux-system -n flux-system --url "$KIC_FULL_REPO" -u gito
 # create the Flux Source
 kubectl apply -f source.yaml
 
-# check the source and kustomizations
+# check the source
 flux get all
 
 # create the Flux Kustomization
@@ -77,7 +82,7 @@ kubectl apply -f flux-kustomization.yaml
 flux get all
 
 # check the kustomizations
-# todo - change kic check flux to use "flux get all" instead of flux get kustomizations"
+# todo - change kic check flux to use "flux get all" instead of "flux get kustomizations"
 kic check flux
 
 ```
