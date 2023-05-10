@@ -1,0 +1,18 @@
+#!/bin/bash
+
+cd "$REPO_BASE" || exit 1
+
+if [ ! -d deploy/flux ]; then
+    echo "$REPO_BASE/deploy/flux directory not found"
+    exit 1
+fi
+
+cd deploy/flux || exit 1
+
+kubectl apply -f namespace.yaml
+
+flux create secret git flux-system -n flux-system --url "$PIB_FULL_REPO" -u gitops -p "$PIB_PAT"
+
+kubectl apply -f controllers.yaml
+kubectl apply -f source.yaml
+kubectl apply -f kustomization-flux.yaml
