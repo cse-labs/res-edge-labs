@@ -2,6 +2,21 @@
 
 ## Create a new Codespace
 
+- for testing, you can use the same Codespace
+- if you do, you will need to recreate your cluster
+  - deploy res-edge
+  - assign group to namespace
+  - run `ds cicd`
+  - push to git repo
+
+## Set Personal Access Token
+
+```bash
+
+export KIC_PAT=<yourGitHubPAT>
+
+```
+
 ## Create a New Cluster
 
 - Use `kic` to create and verify a new k3d cluster in the new Codespace
@@ -16,9 +31,7 @@ kic pods --watch
 
 ```
 
-## Deploy MyApp and Observability with GitOps (Flux v2)
-
-> Notice you don't have to create or edit K8s YAML files!
+## Deploy GitOps (Flux v2)
 
 - This deploys GitOps (Flux) to your cluster
 
@@ -31,6 +44,7 @@ kic cluster flux-install
 kic pods --watch
 
 # check flux
+# todo - this is currently broken
 kic check flux
 
 ```
@@ -41,11 +55,14 @@ kic check flux
 
 ```bash
 
+# todo - this is currently broken
 kic sync
 
 ```
 
 ## Flux Setup Files
+
+> todo - this needs to be updated
 
 - The Flux setup yaml is located in `apps/myapp/kic-deploy/flux`
   - A `Flux source` is a git repo / branch combination

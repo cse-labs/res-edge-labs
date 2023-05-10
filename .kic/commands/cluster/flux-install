@@ -2,17 +2,24 @@
 
 cd "$REPO_BASE" || exit 1
 
-if [ ! -d deploy/flux ]; then
-    echo "$REPO_BASE/deploy/flux directory not found"
+if [ "$KIC_FULL_REPO" = "" ]; then
+    echo "export KIC_FULL_REPO before running command"
     exit 1
 fi
 
-cd deploy/flux || exit 1
+if [ "$KIC_PAT" = "" ]; then
+    echo "export KIC_PAT before running command"
+    exit 1
+fi
 
-kubectl apply -f namespace.yaml
+if [ "$KIC_BRANCH" = "" ]; then
+    echo "export KIC_BRANCH before running command"
+    exit 1
+fi
 
-flux create secret git flux-system -n flux-system --url "$PIB_FULL_REPO" -u gitops -p "$PIB_PAT"
-
-kubectl apply -f controllers.yaml
-kubectl apply -f source.yaml
-kubectl apply -f kustomization-flux.yaml
+flux bootstrap git \
+  --url "$KIC_FULL_REPO" \
+  --branch "$KIC_BRANCH" \
+  --token-auth \
+  --password "$KIC_PAT" \
+  --path "/clusters/central-la-nola-2301"
