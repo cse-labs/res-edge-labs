@@ -51,7 +51,7 @@ kic pods --watch
 
 ```bash
 
-cd "$REPO_BASE/clusters/central-la-nola-2301/flux-system"
+cd "$REPO_BASE/deploy/central-la-nola-2301/flux-system"
 
 # deploy the Flux components
 kubectl apply -f components.yaml
