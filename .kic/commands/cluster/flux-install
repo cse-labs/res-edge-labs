@@ -17,9 +17,11 @@ if [ "$KIC_BRANCH" = "" ]; then
     exit 1
 fi
 
-flux bootstrap git \
-  --url "$KIC_FULL_REPO" \
-  --branch "$KIC_BRANCH" \
-  --token-auth \
-  --password "$KIC_PAT" \
-  --path "/clusters/central-la-nola-2301"
+cd deploy/flux || exit 1
+
+kubectl apply -f components.yaml
+
+flux create secret git flux-system -n flux-system --url "$KIC_FULL_REPO" -u gitops -p "$KIC_PAT"
+
+kubectl apply -f source.yaml
+kubectl apply -f kustomization-flux.yaml
