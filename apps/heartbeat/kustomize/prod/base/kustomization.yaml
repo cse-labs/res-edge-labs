@@ -6,6 +6,5 @@ metadata:
     clusters: all
 
 resources:
-  - deployment.yaml
   - service.yaml
-  - ingress.yaml
+  - deployment.yaml
