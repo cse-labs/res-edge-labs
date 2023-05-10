@@ -17,6 +17,20 @@ export KIC_PAT=<yourGitHubPAT>
 
 ```
 
+## Set environment variables
+
+- Set any of these env vars that are not set correctly
+
+```bash
+
+echo $KIC_FULL_REPO
+
+echo $KIC_PAT
+
+echo $KIC_BRANCH
+
+```
+
 ## Create a New Cluster
 
 - Use `kic` to create and verify a new k3d cluster in the new Codespace
@@ -37,14 +51,25 @@ kic pods --watch
 
 ```bash
 
-# deploy flux to the cluster
-kic cluster flux-install
+cd "$REPO_BASE/clusters/central-la-nola-2301/flux-system"
 
-# wait for pods to start
-kic pods --watch
+# deploy the Flux components
+kubectl apply -f components.yaml
 
-# check flux
-# todo - this is currently broken
+# create the Flux secret
+flux create secret git flux-system -n flux-system --url "$KIC_FULL_REPO" -u gitops -p "$KIC_PAT"
+
+# create the Flux Source
+kubectl apply -f source.yaml
+
+# create the Flux Kustomization
+kubectl apply -f flux-kustomization.yaml
+
+# check the source and kustomizations
+flux get all
+
+# check the kustomizations
+# todo - change kic check flux to flux get all instead of flux get kustomizations
 kic check flux
 
 ```
@@ -57,6 +82,21 @@ kic check flux
 
 # todo - this is currently broken
 kic sync
+
+```
+
+## Verify Flux Deployment
+
+```bash
+
+# make sure the pods are running
+kic check pods --watch
+
+# check heartbeat
+kic check heartbeat
+
+# check imdb
+kic check imdb
 
 ```
 
