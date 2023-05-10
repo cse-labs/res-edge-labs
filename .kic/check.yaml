@@ -9,18 +9,27 @@ commands:
     - name: resedge
       short: Check ResEdge
       path: check/resedge
+
     - name: webv
       short: Check webv
       path: check/webv
+
     - name: mssql
       short: Check mssql
       path: check/mssql
+
     - name: fluentbit
       short: Check fluentbit
       path: check/fluentbit
+
     - name: grafana
       short: Check Grafana
       path: check/grafana
+
     - name: prometheus
       short: Check Prometheus
       path: check/prometheus
+
+    - name: flux
+      short: Check Flux service
+      path: check/flux
