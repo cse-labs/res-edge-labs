@@ -37,3 +37,7 @@ commands:
     - name: imdb
       short: Check imdb service
       path: check/imdb
+
+    - name: heartbeat
+      short: Check heartbeat service
+      path: check/heartbeat
