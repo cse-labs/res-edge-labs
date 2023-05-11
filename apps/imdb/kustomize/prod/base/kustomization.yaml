@@ -6,8 +6,10 @@ metadata:
     clusters: central, east, west
 
 resources:
+  - namespace.yaml
   - service.yaml
   - deployment.yaml
+
 
 images:
 - name: ghcr.io/cse-labs/imdb

@@ -6,5 +6,6 @@ metadata:
     clusters: central, east, west
 
 resources:
+  - namespace.yaml
   - pvc.yaml
   - redis.yaml
