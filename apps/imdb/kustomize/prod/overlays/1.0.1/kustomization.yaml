@@ -3,7 +3,7 @@ kind: Kustomization
 
 metadata:
   annotations:
-    clusters: central, east, west
+    clusters: central
 
 resources:
   - service.yaml
@@ -11,4 +11,4 @@ resources:
 
 images:
 - name: ghcr.io/cse-labs/imdb
-  newTag: 1.0.0
+  newTag: 1.0.1
