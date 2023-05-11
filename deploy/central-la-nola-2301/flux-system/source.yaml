@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    branch: gitops-lab
+    branch: renato
   secretRef:
     name: flux-system
   url: https://github.com/cse-labs/res-edge-labs

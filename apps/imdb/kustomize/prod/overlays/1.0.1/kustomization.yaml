@@ -6,8 +6,7 @@ metadata:
     clusters: central
 
 resources:
-  - service.yaml
-  - deployment.yaml
+  - ../../base
 
 images:
 - name: ghcr.io/cse-labs/imdb

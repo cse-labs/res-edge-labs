@@ -2,6 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../imdb/kustomize/prod/overlays/1.0.1
-  - ../../redis/kustomize/prod/base
-  - ../../heartbeat/kustomize/prod/base
+  - ../../apps/imdb/kustomize/prod/overlays/1.0.1
+  - ../../apps/redis/kustomize/prod/base
+  - ../../apps/heartbeat/kustomize/prod/base
