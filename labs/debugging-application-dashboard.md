@@ -24,14 +24,6 @@ When the API and WebV are running, the Application Dashboard should appear as be
 
 We are going to first stop the API and WebV deployments we started in the previous lab to reset the metrics.
 
-- Create a new branch
-
-  ```bash
-
-  git checkout -b debug-lab
-
-  ```
-
 - Delete the API deployment
 
   > `kdelf` is an alias for `kubectl delete -f`
