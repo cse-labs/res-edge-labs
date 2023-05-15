@@ -2,22 +2,27 @@
 
 In Grafana, it is important to understand why we are seeing `10.2` requests per second under the Application Dashboard rather than the `10` requests per second we see under WebV.
 
-Kubernetes (K8s) generates a liveness probe to /healthz every 1 min and Promethus "scrapes" every 5 seconds, so the app "responds" with an extra .2 RPS.
+The `10.2` requests per second are calculated from the following:
 
-In this lab we will learn where to look to debug when we see an irregular number in the dashboard.
+- Kubernetes (K8s) generates a liveness probe to /healthz every 1 min
+- Promethus "scrapes" /metrics every 5 seconds, so the app "responds" with an extra .2 RPS
+- WebV sends 10 requests per second to the api
+
+In this lab we will learn how to debug when we see an irregular number in the dashboard by enabling first the `.2 requests per second` and then the `10 requests per second` from WebV.
+
+When the API and WebV are running, the Application Dashboard should appear as below:
+
+![images](./images/correct-app-dashboard.jpg)
 
 ## Prerequisites
 
 - The Res-Edge Data Service needs to be deployed for this lab
   - Go to [Deploy Res-Edge Data Service lab](./deploy-res-edge/README.md#inner-loop-with-res-edge) to deploy the data service to the cluster
 
-## Problem
 
-The Grafana Application Dashboard displays `10.1` requests per second instead of the expected `10.2` requests per second.
+## Stopping the API and WebV deployments
 
-## Resetting Environment to reproduce error
-
-The api needs to be installed with the beta version to reproduce the error.
+We are going to first stop the API and WebV deployments we started in the previous lab to reset the metrics.
 
 - Create a new branch
 
@@ -27,15 +32,21 @@ The api needs to be installed with the beta version to reproduce the error.
 
   ```
 
-- Delete the webv and api deployments
+- Delete the API deployment
+
+  > `kdelf` is an alias for `kubectl delete -f`
 
   ```bash
 
   cd ./deploy-res-edge/api
 
-  # `kdelf` is an alias for `kubectl delete -f`
   kdelf deployment.yaml
 
+  ```
+
+- Delete the WebV deployment
+
+  ```bash
   cd ../webv
 
   kdelf deployment.yaml
@@ -45,79 +56,24 @@ The api needs to be installed with the beta version to reproduce the error.
 
   ```
 
-## Redeploy app with issue
+## Redeploy API
 
-- edit `api/deployment.yaml` to image `ghcr.io/cse-labs/res-edge:beta`
+```bash
 
-  ```yaml
+# return to the deploy-res-edge folder
+cd ..
 
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    name: api
-    namespace: api
-    labels:
-      app: api
-  spec:
-    replicas: 1
-    strategy:
-      type: Recreate
-    selector:
-      matchLabels:
-        app: api
-    template:
-      metadata:
-        labels:
-          app: api
-      spec:
-        terminationGracePeriodSeconds: 30
-        containers:
-        - name: app
-          image: ghcr.io/cse-labs/res-edge:beta # update to image with issue
-          imagePullPolicy: Always
-          ports:
-            - name: http
-              containerPort: 8080
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: http
-            initialDelaySeconds: 5
-            failureThreshold: 10
-            periodSeconds: 60
-          startupProbe:
-            httpGet:
-              path: /readyz
-              port: http
-            initialDelaySeconds: 5
-            failureThreshold: 60
-            periodSeconds: 2
-          resources:
-            limits:
-              memory: 1Gi
-              cpu: 1000m
-            requests:
-              memory: 512Mi
-              cpu: 500m
+# deploy the Res-Edge Data Service
+kak api
 
-  ```
+# "watch" for the api pod to get to 1/1 Running
+# ctl-c to exit
+kic pods --watch
 
-- Deploy api again
+# verify Res-Edge Data Service is `Running`
+kic check resedge
 
-  ```bash
-
-  # deploy the Res-Edge Data Service
-  kak api
-
-  # "watch" for the api pod to get to 1/1 Running
-  # ctl-c to exit
-  kic pods --watch
-
-  # verify Res-Edge Data Service is `Running`
-  kic check resedge
-
-  ```
+```
 
 ## Open Application Dashboard in Grafana
 
@@ -127,8 +83,7 @@ The api needs to be installed with the beta version to reproduce the error.
 - Click on "General / Home" at the top of the screen and select "Application Dashboard" to see a custom application dashboard
 - You should see the Application Dashboard with both WebV and Res-Edge Data Service ("Application")
   - WebV will have `0` requests per second because we stopped the WebV app
-  - Application will have `10.1` requests per second
-  > Remember that we are expecting to see `10.2` requests per second
+  - Application will have `0.2` requests per second
 - Keep "Application Dashboard" open in a browser tab to monitor Res-Edge Data Service requests metrics for the next section
 
 ## Open k9s for Logs
@@ -163,7 +118,17 @@ The api needs to be installed with the beta version to reproduce the error.
 
     ```json
 
-    {"date":"2023-05-12T22:21:10.9878166Z","level":"Information","ElapsedMilliseconds":93.8659,"StatusCode":200,"ContentType":"text/plain","ContentLength":null,"Protocol":"HTTP/1.1","Method":"GET","Scheme":"http","Host":"10.42.0.18:8080","environment":"Development","Path":"/readyz","QueryString":"","zone":"dev","EventId":{"Id":2},"SourceContext":"Microsoft.AspNetCore.Hosting.Diagnostics","region":"dev","RequestPath":"/readyz","version":"0.9.0-0509-1854","node":""}
+    {
+      "date": "2023-05-12T22:21:10.9878166Z",
+      "level": "Information",
+      "ElapsedMilliseconds": 93.8659,
+      "StatusCode": 200,
+      "Method": "GET",
+      "zone": "dev",
+      "region": "dev",
+      "RequestPath": "/readyz",
+      "version": "0.9.0-0509-1854"
+    }
 
     ```
 
@@ -188,9 +153,30 @@ The api needs to be installed with the beta version to reproduce the error.
 
     ```json
 
-    {"date":"2023-05-12T22:05:45.8828087Z","level":"Information","ElapsedMilliseconds":8.0708,"StatusCode":200,"ContentType":"text/plain","ContentLength":null,"Protocol":"HTTP/1.1","Method":"GET","Scheme":"http","Host":"10.42.0.16:8080","environment":"Development","Path":"/healthz","QueryString":"","zone":"dev","EventId":{"Id":2},"SourceContext":"Microsoft.AspNetCore.Hosting.Diagnostics","region":"dev","RequestPath":"/healthz","version":"0.9.0-0509-1854","node":""}
+    // notice the timestamp between the two logs are 60 seconds between each other
+    {
+      "date": "2023-05-12T22:05:45.8828087Z",
+      "level": "Information",
+      "ElapsedMilliseconds": 8.0708,
+      "StatusCode": 200,
+      "Method": "GET",
+      "zone": "dev",
+      "region": "dev",
+      "RequestPath": "/healthz",
+      "version": "0.9.0-0509-1854"
+    }
 
-    {"date":"2023-05-12T22:06:45.8839286Z","level":"Information","ElapsedMilliseconds":8.4692,"StatusCode":200,"ContentType":"text/plain","ContentLength":null,"Protocol":"HTTP/1.1","Method":"GET","Scheme":"http","Host":"10.42.0.16:8080","environment":"Development","Path":"/healthz","QueryString":"","zone":"dev","EventId":{"Id":2},"SourceContext":"Microsoft.AspNetCore.Hosting.Diagnostics","region":"dev","RequestPath":"/healthz","version":"0.9.0-0509-1854","node":""}
+    {
+      "date": "2023-05-12T22:06:45.8839286Z",
+      "level": "Information",
+      "ElapsedMilliseconds": 8.4692,
+      "StatusCode": 200,
+      "Method": "GET",
+      "zone": "dev",
+      "region": "dev",
+      "RequestPath": "/healthz",
+      "version": "0.9.0-0509-1854"
+    }
 
     ```
 
@@ -213,18 +199,66 @@ The api needs to be installed with the beta version to reproduce the error.
 
     ```json
 
-    {"date":"2023-05-12T22:06:39.7438317Z","level":"Information","ElapsedMilliseconds":4.3562,"StatusCode":200,"ContentType":"application/openmetrics-text; version=1.0.0; charset=utf-8","ContentLength":null,"Protocol":"HTTP/1.1","Method":"GET","Scheme":"http","Host":"api.api.svc.cluster.local:8080","environment":"Development","Path":"/metrics","QueryString":"","zone":"dev","EventId":{"Id":2},"SourceContext":"Microsoft.AspNetCore.Hosting.Diagnostics","region":"dev","RequestPath":"/metrics","version":"0.9.0-0509-1854","node":""}
+    // notice the timestamp between the two logs are 5 seconds between each other
+    {
+      "date": "2023-05-12T22:06:39.7438317Z",
+      "level": "Information",
+      "ElapsedMilliseconds": 4.3562,
+      "StatusCode": 200,
+      "Method": "GET",
+      "zone": "dev",
+      "region": "dev",
+      "RequestPath": "/metrics",
+      "version": "0.9.0-0509-1854"
+    }
 
-    {"date":"2023-05-12T22:06:44.7434026Z","level":"Information","ElapsedMilliseconds":3.8298,"StatusCode":200,"ContentType":"application/openmetrics-text; version=1.0.0; charset=utf-8","ContentLength":null,"Protocol":"HTTP/1.1","Method":"GET","Scheme":"http","Host":"api.api.svc.cluster.local:8080","environment":"Development","Path":"/metrics","QueryString":"","zone":"dev","EventId":{"Id":2},"SourceContext":"Microsoft.AspNetCore.Hosting.Diagnostics","region":"dev","RequestPath":"/metrics","version":"0.9.0-0509-1854","node":""}
+    {
+      "date": "2023-05-12T22:06:44.7434026Z",
+      "level": "Information",
+      "ElapsedMilliseconds": 3.8298,
+      "StatusCode": 200,
+      "Method": "GET",
+      "zone": "dev",
+      "region": "dev",
+      "RequestPath": "/metrics",
+      "version": "0.9.0-0509-1854"
+    }
 
     ```
 
-- **WebV Logs**
+## Redeploy WebV
 
-  When we have WebV running, we will see 10 GET requests per second on top of our other api logs. These will appear as follows:
+When we have WebV running, we will see the 10 GET requests per second on top of our other api logs in the Application Dashboard in Grafana.
+
+```bash
+
+# deploy WebV
+kak webv
+
+# "watch" for the webv pod to get to 1/1 Running
+# ctl-c to exit
+kic pods --watch
+
+# verify WebV is `Running`
+kic check webv
+
+```
+
+- In k9s, these logs will appear as follows:
 
   ```json
 
-  {"date":"2023-05-12T22:58:51.6861887Z","level":"Information","ElapsedMilliseconds":9.5128,"StatusCode":200,"ContentType":"application/json; odata.metadata=minimal; odata.streaming=true; charset=utf-8","ContentLength":null,"Protocol":"HTTP/1.1","Method":"GET","Scheme":"http","Host":"api.api.svc.cluster.local:8080","environment":"Development","Path":"/api/v1/clusters/17","QueryString":"?$select=id,name,description,environment,gitOpsRepo,gitOpsBranch,tags,metadata,capacity,namespaces&$expand=namespaces($expand=applications($select=id,name,description,tags,metadata,environment,namespaceId,pat,path,businessUnit,owner,capacity);$select=id,name,description,tags,metadata,environment,businessUnit,capacity)","zone":"dev","EventId":{"Id":2},"SourceContext":"Microsoft.AspNetCore.Hosting.Diagnostics","region":"dev","RequestPath":"/api/v1/clusters/17","version":"0.9.0-0509-1854","node":""}
+  {
+    "date": "2023-05-12T22:58:51.6861887Z",
+    "level": "Information",
+    "ElapsedMilliseconds": 9.5128,
+    "StatusCode": 200,
+    "Method": "GET",
+    "QueryString": "?$select=id,name,description,environment,gitOpsRepo,gitOpsBranch,tags,metadata,capacity,namespaces&$expand=namespaces($expand=applications($select=id,name,description,tags,metadata,environment,namespaceId,pat,path,businessUnit,owner,capacity);$select=id,name,description,tags,metadata,environment,businessUnit,capacity)",
+    "zone": "dev",
+    "region": "dev",
+    "RequestPath": "/api/v1/clusters/17",
+    "version": "0.9.0-0509-1854"
+  }
 
   ```
