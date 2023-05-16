@@ -296,3 +296,10 @@ k9s
   kic test all
 
   ```
+
+## Next steps
+
+Continue learning about the Res-Edge Data Service:
+
+- To learn more about deploying to your clusters, see [Ring Deployment with Kustomize lab](../ring-deployment-with-kustomize.md)
+- To learn more about the Grafana custom dashboards, see [Debugging Application Dashboard lab](../debugging-application-dashboard.md)

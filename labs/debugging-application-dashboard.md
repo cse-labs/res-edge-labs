@@ -24,39 +24,34 @@ When the API and WebV are running, the Application Dashboard should appear as be
 
 We are going to first stop the API and WebV deployments we started in the previous lab to reset the metrics.
 
-- Delete the API deployment
-
-  > `kdelf` is an alias for `kubectl delete -f`
-
-  ```bash
-
-  cd ./deploy-res-edge/api
-
-  kdelf deployment.yaml
-
-  ```
+> `kdelf` is an alias for `kubectl delete -f`
 
 - Delete the WebV deployment
 
   ```bash
-  cd ../webv
+  cd $REPO_BASE/labs/deploy-res-edge
 
-  kdelf deployment.yaml
+  kdelf webv/deployment.yaml
+
+  ```
+
+- Delete the API deployment
+
+  ```bash
+
+  kdelf api/deployment.yaml
 
   # should no longer see webv or api pods
   kic pods
-
   ```
+
 
 ## Redeploy API
 
 ```bash
 
-# return to the deploy-res-edge folder
-cd ..
-
 # deploy the Res-Edge Data Service
-kak api
+kak api/deployment.yaml
 
 # "watch" for the api pod to get to 1/1 Running
 # ctl-c to exit
@@ -67,12 +62,9 @@ kic check resedge
 
 ```
 
-## Open Application Dashboard in Grafana
+## View Application Dashboard in Grafana
 
-- From the `PORTS` tab, open `Grafana (32000)`
-  - Username: admin
-  - Password: cse-labs
-- Click on "General / Home" at the top of the screen and select "Application Dashboard" to see a custom application dashboard
+- Go to the Grafana Application Dashboard we opened in the Deploy Res-Edge lab
 - You should see the Application Dashboard with both WebV and Res-Edge Data Service ("Application")
   - WebV will have `0` requests per second because we stopped the WebV app
   - Application will have `0.2` requests per second
