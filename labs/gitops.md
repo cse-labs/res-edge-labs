@@ -1,45 +1,48 @@
-# GitOps
+# GitOps Lab
 
-## Flux Setup Files
-
-- The Flux setup yaml is located in `clusters/central-la-nola-2301/flux-system`
-  - A `Flux source` is a git repo / branch combination
-  - A `Flux kustomization` is a directory within the source
-    - flux-kustomization watches the flux-system and flux-system/listeners directories
-    - You want to have multiple kustomizations
-      - When a kustomization fails, the entire process is aborted
-        - This lets "your app" break "my app"
-      - We create a kustomization per Namespace as part of Res-Edge-Automation (`ds cicd`)
-- You can use any cluster in the clusters directory
+- In this lab, we will use GitOps (Flux) to deploy the Namespaces and Applications assigned to a Cluster
+  - We refer to this Cluster as a "member cluster"
+    - Member clusters can be listed with the `ds clusters list` command
+    - We will use `central-la-nola-2301` as our member cluster name
+      - You can use any cluster in the list
 
 ## Prerequisites
 
 - Deploy the Res-Edge [data service](./deploy-res-edge/README.md)
 - Assign a Group to the [imdb Namespace](./assign-group-to-namespace.md)
 
-## Create a new Codespace
+## Flux Setup Files
 
-- Create a new Codespace that will be a "member cluster"
-- We will use GitOps to deploy workloads to the cluster in the new Codespace
+- The Flux setup yaml is located in `clusters/central-la-nola-2301/flux-system`
+  - A `Flux source` is a git repo / branch combination
+  - A `Flux kustomization` is a directory within the source (flux-system in our case)
+    - flux-kustomization watches the flux-system and flux-system/listeners directories
+    - You want to have multiple kustomizations in your deployment
+      - When a kustomization fails, the entire process is aborted
+        - This lets "your app" break "my app" if we use the same kustomization
+      - We create a kustomization per Namespace as part of Res-Edge-Automation (`ds cicd`)
 
-## In the new Codespace
+## Setup Member Cluster
 
-- Verify the K8s cluster is running
+- Normally, the "member cluster" would be a separate cluster from the cluster running the data service
+  - For simplicty, we are going to run our current cluster in both modes
+  - Optionally, you can create a new Codespace that will be a "member cluster"
+
+## Getting started
+
+- Verify the data service is running
 
   ```bash
 
-  kic pods --watch
+  kic check resedge
 
   ```
 
 ## Set Env Vars
 
-- We use the GITHUB_TOKEN for convenience
-  - Your GITHUB_TOKEN will expire after about a week
+- We use the GITHUB_TOKEN for Flux connectivity for convenience
+  - The GITHUB_TOKEN will expire about a week after the Codespace is created
   - GitOps will fail once the token expires
-
-- For long running GitOps, you need to create a GitHub Personal Access Token (PAT)
-  - `export KIC_PAT=<YourGitHubPat>`
 
 ```bash
 
@@ -53,6 +56,9 @@ fi
 env | grep KIC_
 
 ```
+
+- For long running GitOps, you need to create a GitHub Personal Access Token (PAT)
+  - `export KIC_PAT=<YourGitHubPat>`
 
 ## Update Flux Template
 
@@ -71,6 +77,7 @@ env | grep KIC_
 
 ```bash
 
+# change central-la-nola-2301 to deploy additional member clusters
 cd "$REPO_BASE/clusters/central-la-nola-2301/flux-system"
 
 # create the namespace
@@ -98,26 +105,38 @@ kic check flux
 
 - After making changes, you can force Flux to sync (reconcile)
 
-```bash
+  ```bash
 
-kic sync
+  kic sync
 
-```
+  ```
 
 ## Verify Flux Deployment
 
+- Flux should create 3 new Namespaces
+  - heartbeat
+  - imdb
+  - redis
+
 ```bash
 
-# make sure the pods Flux deployed are running
+# make sure the pods are running
 kic check pods --watch
 
 # check heartbeat
 kic check heartbeat
 
-# check redis
-kic check redis
-
 # check imdb
 kic check imdb
 
+# check redis
+kic check redis
+
 ```
+
+## Additional Member Clusters
+
+- You can create additional Codespaces as member clusters
+- Use a different Cluster name / directory for each cluster
+
+> On the [GitHub Codespaces page](https://github.com/codespaces), you can change the name of the Codespace by clicking the `...`
