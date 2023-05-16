@@ -26,11 +26,11 @@ spec:
           imagePullPolicy: Always
           args:
           - key1
-          - rea.app.Choice1
+          - rea.application.Choice1
           - key2
-          - rea.app.Choice2
+          - rea.application.Choice2
           - title
-          - rea.app.Title
+          - rea.application.Title
           ports:
             - name: http
               containerPort: 8080
