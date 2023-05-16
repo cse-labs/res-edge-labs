@@ -28,22 +28,27 @@
 
   ```bash
 
-  kic pods
+  kic pods --watch
 
   ```
 
-## Set Personal Access Token
+## Set Env Vars
 
 - For long running GitOps, you need to create a GitHub Personal Access Token (PAT)
+- We use the GITHUB_TOKEN for convenience
   - Your GITHUB_TOKEN will expire after about a week
-  - You can use GITHUB_TOKEN as your PAT but GitOps will eventually fail because the token is expired
+  - GitOps will fail once the token is expires
 
 ```bash
 
-export KIC_PAT=<yourGitHubPAT>
+export KIC_FULL_REPO=$(git remote get-url --push origin)
+export KIC_BRANCH=$(git branch --show-current)
 
-# (optional) temporary token (expires in about a week)
-# export KIC_PAT=$GITHUB_TOKEN
+if [ "$KIC_PAT" = "" ]; then
+  export KIC_PAT=$GITHUB_TOKEN
+fi
+
+env | grep KIC_
 
 ```
 
@@ -61,6 +66,7 @@ export KIC_PAT=<yourGitHubPAT>
 ## Deploy GitOps (Flux v2)
 
 - This deploys GitOps (Flux) to your cluster
+- todo - use kustomize.yaml to add the secret
 
 ```bash
 
