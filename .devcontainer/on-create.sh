@@ -11,9 +11,6 @@ sudo chsh --shell /bin/zsh vscode
 # restore the project to avoid errors
 dotnet restore labs/advanced-labs/cli/myapp/src
 
-export KIC_FULL_REPO=$(git remote get-url --push origin)
-export KIC_BRANCH=$(git branch --show-current)
-
 {
     echo ""
 
@@ -26,24 +23,19 @@ export KIC_BRANCH=$(git branch --show-current)
     echo "export KIC_BASE=$PWD"
     echo "export REPO_BASE=$PWD"
     echo "export MSSQL_SA_PASSWORD=Res-Edge23"
-    echo "export KIC_FULL_REPO=$KIC_FULL_REPO"
-    echo "export KIC_BRANCH=$KIC_BRANCH"
     echo ""
 
-    echo "if [ -z $KIC_DATASERVICE_URL ]"
-    echo "then"
+    echo "if [ -z \$KIC_DATASERVICE_URL ]; then"
     echo "    export KIC_DATASERVICE_URL=http://localhost:32080"
     echo "fi"
     echo ""
 
-    echo "if [ \"\$KIC_PAT\" != \"\" ]"
-    echo "then"
+    echo "if [ \"\$KIC_PAT\" != \"\" ]; then"
     echo "    export GITHUB_TOKEN=\$KIC_PAT"
     echo "fi"
     echo ""
 
-    echo "if [ \"\$PAT\" != \"\" ]"
-    echo "then"
+    echo "if [ \"\$PAT\" != \"\" ]; then"
     echo "    export GITHUB_TOKEN=\$PAT"
     echo "fi"
     echo ""
