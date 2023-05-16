@@ -26,11 +26,11 @@ spec:
           imagePullPolicy: Always
           args:
           - key1
-          - tabs
+          - ist.app.Choice1
           - key2
-          - spaces
+          - ist.app.Choice2
           - title
-          - Can we still be friends?
+          - ist.app.Title
           ports:
             - name: http
               containerPort: 8080

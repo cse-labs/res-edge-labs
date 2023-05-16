@@ -26,11 +26,11 @@ spec:
           imagePullPolicy: Always
           args:
           - key1
-          - Dogs
+          - ist.app.Choice1
           - key2
-          - Cats
+          - ist.app.Choice2
           - title
-          - Dogs Rule!
+          - ist.app.Title
           ports:
             - name: http
               containerPort: 8080
