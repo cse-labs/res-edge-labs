@@ -12,13 +12,17 @@
       - We create a kustomization per Namespace as part of Res-Edge-Automation (`ds cicd`)
 - You can use any cluster in the clusters directory
 
+## Prerequisites
+
+- Deploy the Res-Edge [data service](./deploy-res-edge/README.md)
+- Assign a Group to the [imdb Namespace](./assign-group-to-namespace.md)
+
 ## Create a new Codespace
 
-- for testing, you can use the same Codespace
-- if you do, you will need to recreate your cluster
-  - deploy res-edge
-  - run `ds cicd`
-  - push to git repo
+- Create a new Codespace that will be a "member cluster"
+- We will use GitOps to deploy workloads to the cluster in the new Codespace
+
+## In the new Codespace
 
 - Verify the K8s cluster is running
 
@@ -37,6 +41,9 @@
 ```bash
 
 export KIC_PAT=<yourGitHubPAT>
+
+# (optional) temporary token (expires in about a week)
+# export KIC_PAT=$GITHUB_TOKEN
 
 ```
 
@@ -106,32 +113,6 @@ kic check heartbeat
 # check redis
 # todo - need to implement
 kic check redis
-
-```
-
-## Deploy IMDb App
-
-- If you are using the same Res-Edge from previous labs, IMDb will be deployed as part of the previous step
-  - You can skip this section
-
-```bash
-
-# assign the stores Group to the Namespace
-curl -i -X PATCH http://localhost:32080/api/v1/namespaces/3 -H 'Content-Type: application/json' -d '{ "expression": "/g/stores" }'
-
-# run cicd
-ds cicd
-
-# check changes into git
-git add .
-git commit -am "deployed imdb"
-git push
-
-# force flux to sync
-kic sync
-
-# wait for imdb pod (this takes about 60 seconds)
-kic pods --watch
 
 ```
 
