@@ -58,7 +58,6 @@ kic pods --watch
 ## Deploy GitOps (Flux v2)
 
 - This deploys GitOps (Flux) to your cluster
-- todo - flux get all isn't working
 
 ```bash
 
@@ -87,7 +86,6 @@ kubectl apply -f flux-kustomization.yaml
 flux get all
 
 # check the kustomizations
-# todo - change kic check flux to use "flux get all" instead of "flux get kustomizations"
 kic check flux
 
 ```
@@ -98,10 +96,7 @@ kic check flux
 
 ```bash
 
-# todo - this is currently broken
 kic sync
-
-flux reconcile source git gitops
 
 ```
 
@@ -115,11 +110,34 @@ kic check pods --watch
 # check heartbeat
 kic check heartbeat
 
-# check imdb
-kic check imdb
-
 # check redis
 # todo - need to implement
 kic check redis
+
+```
+
+## Deploy IMDb App
+
+```bash
+
+# assign the stores Group to the Namespace
+curl -i -X PATCH http://localhost:32080/api/v1/namespaces/3 -H 'Content-Type: application/json' -d '{ "expression": "/g/stores" }'
+
+# run cicd
+ds cicd
+
+# check changes into git
+git add .
+git commit -am "deployed imdb"
+git push
+
+# force flux to sync
+kic sync
+
+# wait for imdb pod
+kic pods --watch
+
+# check imdb
+kic check imdb
 
 ```
