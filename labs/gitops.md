@@ -38,6 +38,35 @@
 
   ```
 
+## Update Flux Template
+
+- Edit apps/flux-system/source.yaml
+  - Update `url:` and `branch:`
+
+    ```bash
+
+    code apps/flux-system/source.yaml
+
+    ```
+
+## Run ci-cd
+
+- Run ci-cd locally and check in any changes
+
+  ```bash
+
+  ds cicd
+
+  # check git
+  git status
+
+  # update if necessary
+  git add .
+  git commit -am "ds ci-cd"
+  git push
+
+  ```
+
 ## Set Env Vars
 
 - We use the GITHUB_TOKEN for Flux connectivity for convenience
@@ -59,17 +88,6 @@ env | grep KIC_
 
 - For long running GitOps, you need to create a GitHub Personal Access Token (PAT)
   - `export KIC_PAT=<YourGitHubPat>`
-
-## Update Flux Template
-
-- Edit apps/flux-system/source.yaml
-  - Update `url:` and `branch:`
-
-    ```bash
-
-    code apps/flux-system/source.yaml
-
-    ```
 
 ## Deploy GitOps (Flux v2)
 
