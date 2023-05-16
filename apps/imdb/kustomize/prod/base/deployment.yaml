@@ -27,9 +27,9 @@ spec:
           args:
             - --in-memory
             - --region
-            - ist.cluster.region
+            - rea.cluster.region
             - --zone
-            - ist.cluster.zone
+            - rea.cluster.zone
           ports:
             - name: http
               containerPort: 8080

@@ -12,9 +12,9 @@ spec:
   tls:
   - secretName: heartbeat
     hosts:
-    - ist.cluster.store.res-edge.com
+    - rea.cluster.store.res-edge.com
   rules:
-  - host: ist.cluster.store.res-edge.com
+  - host: rea.cluster.store.res-edge.com
     http:
       paths:
       - pathType: Prefix

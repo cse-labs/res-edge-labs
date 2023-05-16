@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./clusters/ist.cluster.store
+  path: ./clusters/rea.cluster.store
   prune: true
   sourceRef:
     kind: GitRepository
