@@ -1,8 +1,19 @@
 # GitOps
 
-## Create a new Codespace
+## Flux Setup Files
 
-- todo - decide how we want the labs to flow
+- The Flux setup yaml is located in `clusters/central-la-nola-2301/flux-system`
+  - A `Flux source` is a git repo / branch combination
+  - A `Flux kustomization` is a directory within the source
+    - We have 3 kustomizations
+      - flux-kustomization watches the flux-system/listeners directory
+      - Res-Edge-Automation creates listeners for each Namespace in this directory
+    - You want to have multiple kustomizations (or helm)
+      - When a kustomization fails, the entire process is aborted
+        - This lets "your app" break "my app"
+      - We create a kustomization per Namespace as part of Res-Edge-Automation (`ds cicd`)
+
+## Create a new Codespace
 
 - for testing, you can use the same Codespace
 - if you do, you will need to recreate your cluster
@@ -10,8 +21,6 @@
   - assign group to namespace
   - run `ds cicd`
   - push to git repo
-- we can reorder the labs so you don't have to re-deploy
-- I like the separation of "Res-Edge cluster" and "member cluster" (central-la-nola-2301)
 
 ## Set Personal Access Token
 
@@ -53,17 +62,17 @@ kic pods --watch
 ## Deploy GitOps (Flux v2)
 
 - This deploys GitOps (Flux) to your cluster
+- todo - flux get all isn't working
 
 ```bash
 
-# todo - move this to /clusters
-# note: currently, the repo and branch are hard-coded in the yaml
-# you will need to edit source.yaml to use a different repo / branch
+cd "$REPO_BASE/clusters/central-la-nola-2301/flux-system"
 
-cd "$REPO_BASE/deploy/central-la-nola-2301/flux-system"
+# create the namespace
+kubectl apploy -f namespace.yaml
 
-# deploy the Flux components
-kubectl apply -f components.yaml
+# deploy the Flux controllers
+kubectl apply -f controllers.yaml
 
 # create the Flux secret
 flux create secret git flux-system -n flux-system --url "$KIC_FULL_REPO" -u gitops -p "$KIC_PAT"
@@ -116,18 +125,3 @@ kic check imdb
 kic check redis
 
 ```
-
-## Flux Setup Files
-
-> todo - need to add the flux app and generate in ci-cd
-
-- The Flux setup yaml is located in `deploy/central-la-nola-2301/flux-system`
-  - A `Flux source` is a git repo / branch combination
-  - A `Flux kustomization` is a directory within the source
-    - We have 3 kustomizations
-      - flux-kustomization watches the flux-system/listeners directory
-      - Res-Edge-Automation creates listeners for each Namespace in this directory
-    - You want to have multiple kustomizations (or helm)
-      - When a kustomization fails, the entire process is aborted
-        - This lets "your app" break "my app"
-      - We create a kustomization per Namespace as part of Res-Edge-Automation (`ds cicd`)
