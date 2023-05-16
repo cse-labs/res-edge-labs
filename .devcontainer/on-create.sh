@@ -11,6 +11,9 @@ sudo chsh --shell /bin/zsh vscode
 # restore the project to avoid errors
 dotnet restore labs/advanced-labs/cli/myapp/src
 
+export KIC_FULL_REPO=$(git remote get-url --push origin)
+export KIC_BRANCH=$(git branch --show-current)
+
 {
     echo ""
 
@@ -20,8 +23,11 @@ dotnet restore labs/advanced-labs/cli/myapp/src
 
     # add cli to path
     echo "export PIB_BASE=$PWD"
+    echo "export KIC_BASE=$PWD"
     echo "export REPO_BASE=$PWD"
     echo "export MSSQL_SA_PASSWORD=Res-Edge23"
+    echo "export KIC_FULL_REPO=$KIC_FULL_REPO"
+    echo "export KIC_BRANCH=$KIC_BRANCH"
     echo ""
 
     echo "if [ -z $KIC_DATASERVICE_URL ]"
@@ -30,9 +36,9 @@ dotnet restore labs/advanced-labs/cli/myapp/src
     echo "fi"
     echo ""
 
-    echo "if [ \"\$PIB_PAT\" != \"\" ]"
+    echo "if [ \"\$KIC_PAT\" != \"\" ]"
     echo "then"
-    echo "    export GITHUB_TOKEN=\$PIB_PAT"
+    echo "    export GITHUB_TOKEN=\$KIC_PAT"
     echo "fi"
     echo ""
 
@@ -42,7 +48,7 @@ dotnet restore labs/advanced-labs/cli/myapp/src
     echo "fi"
     echo ""
 
-    echo "export PIB_PAT=\$GITHUB_TOKEN"
+    echo "export KIC_PAT=\$GITHUB_TOKEN"
     echo "export PAT=\$GITHUB_TOKEN"
     echo ""
 
@@ -87,15 +93,13 @@ echo "dowloading kic and flt CLI"
 .devcontainer/cli-update.sh
 
 echo "generating completions"
-kic completion zsh > "$HOME/.oh-my-zsh/completions/_kic"
-flt completion zsh > "$HOME/.oh-my-zsh/completions/_flt"
 gh completion -s zsh > ~/.oh-my-zsh/completions/_gh
 kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
 k3d completion zsh > "$HOME/.oh-my-zsh/completions/_k3d"
 kustomize completion zsh > "$HOME/.oh-my-zsh/completions/_kustomize"
 
-echo "installing dotnet 6"
-sudo apt-get install -y dotnet-sdk-6.0
+#echo "installing dotnet 6"
+#sudo apt-get install -y dotnet-sdk-6.0
 
 echo "create local registry"
 docker network create k3d
@@ -106,8 +110,8 @@ echo "kic cluster create"
 kic cluster create
 
 echo "Pulling docker images"
-docker pull mcr.microsoft.com/dotnet/sdk:6.0
-docker pull mcr.microsoft.com/dotnet/aspnet:6.0-alpine
+docker pull mcr.microsoft.com/dotnet/sdk:7.0
+docker pull mcr.microsoft.com/dotnet/aspnet:7.0-alpine
 docker pull ghcr.io/cse-labs/res-edge-webv:0.9
 docker pull ghcr.io/cse-labs/res-edge-automation:0.9
 

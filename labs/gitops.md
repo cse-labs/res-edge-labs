@@ -30,20 +30,16 @@ export KIC_PAT=<yourGitHubPAT>
 
 ```
 
-## Set environment variables
+## Update Flux Template
 
-- Set any of these env vars that are not set correctly
-- todo - we can set everything except PAT in on-create and delete this section
+- Edit apps/flux-system/source.yaml
+  - Update `url:` and `branch:`
 
-```bash
+  ```bash
 
-echo $KIC_FULL_REPO
+  code apps/flux-system/source.yaml
 
-echo $KIC_PAT
-
-echo $KIC_BRANCH
-
-```
+  ```
 
 ## Create a New Cluster
 
