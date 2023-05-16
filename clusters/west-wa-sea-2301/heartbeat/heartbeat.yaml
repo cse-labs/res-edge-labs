@@ -6,13 +6,12 @@ metadata:
 spec:
   ports:
   - name: http
-    nodePort: 30088
     port: 8080
     protocol: TCP
     targetPort: http
   selector:
     app: heartbeat
-  type: NodePort
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -65,3 +64,29 @@ spec:
           requests:
             cpu: 200m
             memory: 64Mi
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/ingress.class: contour
+  name: heartbeat
+  namespace: heartbeat
+spec:
+  rules:
+  - host: west-wa-sea-2301.res-edge.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: heartbeat
+            port:
+              number: 8080
+        path: /heartbeat
+        pathType: Prefix
+  tls:
+  - hosts:
+    - west-wa-sea-2301.res-edge.com
+    secretName: heartbeat
