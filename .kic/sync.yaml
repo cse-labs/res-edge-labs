@@ -1,0 +1,8 @@
+###
+# flux sync command
+###
+
+scriptCommands:
+  - name: sync
+    short: Force Flux reconcile
+    path: sync

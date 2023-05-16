@@ -41,3 +41,7 @@ commands:
     - name: heartbeat
       short: Check heartbeat service
       path: check/heartbeat
+
+    - name: redis
+      short: Check redis service
+      path: check/redis
