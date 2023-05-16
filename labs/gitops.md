@@ -105,6 +105,8 @@ kic check flux
 # todo - this is currently broken
 kic sync
 
+flux reconcile source git gitops
+
 ```
 
 ## Verify Flux Deployment
