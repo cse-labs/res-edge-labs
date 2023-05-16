@@ -69,13 +69,13 @@ kic pods --watch
 cd "$REPO_BASE/clusters/central-la-nola-2301/flux-system"
 
 # create the namespace
-kubectl apploy -f namespace.yaml
-
-# deploy the Flux controllers
-kubectl apply -f controllers.yaml
+kubectl apply -f namespace.yaml
 
 # create the Flux secret
 flux create secret git flux-system -n flux-system --url "$KIC_FULL_REPO" -u gitops -p "$KIC_PAT"
+
+# deploy the Flux components
+kubectl apply -f components.yaml
 
 # create the Flux Source
 kubectl apply -f source.yaml
