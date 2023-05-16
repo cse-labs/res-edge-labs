@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./clusters/central-la-nola-2301
+  path: ./clusters/ist.cluster.store
   prune: true
   sourceRef:
     kind: GitRepository
