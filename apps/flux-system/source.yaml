@@ -1,4 +1,4 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
   name: gitops
@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    branch: ist.cluster.gitops-branch
+    branch: gitops-lab
   secretRef:
     name: flux-system
-  url: ist.cluster.gitops-repo
+  url: https://github.com/cse-labs/res-edge-labs
