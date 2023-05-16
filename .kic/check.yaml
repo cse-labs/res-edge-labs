@@ -45,3 +45,11 @@ commands:
     - name: redis
       short: Check redis service
       path: check/redis
+
+    - name: dogs-cats
+      short: Check dogs-cats service
+      path: check/dogs-cats
+
+    - name: tabs-spaces
+      short: Check tabs-spaces service
+      path: check/tabs-spaces
