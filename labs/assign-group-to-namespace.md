@@ -162,7 +162,7 @@
   ```
 
 - Results
-  - 3 files will be removed from each cluster NOT in the beta or pilot Groups (12 clusters)
+  - 3 files will be deleted from each cluster not in the beta or pilot Groups (12 clusters)
     - The IMDb Namespace
     - The IMDb Application
     - The `Flux listener` for GitOps
@@ -179,5 +179,5 @@
 
   # no files should be dirty
   git status
-  
+
   ```
