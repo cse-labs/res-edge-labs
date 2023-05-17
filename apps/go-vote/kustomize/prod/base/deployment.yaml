@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dogs-cats
-  namespace: dogs-cats
+  name: rea.application.name
+  namespace: rea.namespace.name
   labels:
-    app.kubernetes.io/name: dogs-cats
+    app.kubernetes.io/name: rea.application.name
 spec:
   replicas: 1
   strategy:
@@ -14,11 +14,11 @@ spec:
        maxUnavailable: 1
   selector:
     matchLabels:
-      app: dogs-cats
+      app: rea.application.name
   template:
     metadata:
       labels:
-        app: dogs-cats
+        app: rea.application.name
     spec:
       containers:
         - name: app
@@ -26,11 +26,11 @@ spec:
           imagePullPolicy: Always
           args:
           - key1
-          - rea.application.Choice1
+          - rea.application.choice1
           - key2
-          - rea.application.Choice2
+          - rea.application.choice2
           - title
-          - rea.application.Title
+          - rea.application.title
           ports:
             - name: http
               containerPort: 8080
