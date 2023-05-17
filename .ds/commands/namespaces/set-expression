@@ -23,6 +23,13 @@ shift
 # build the json payload from remaining args
 json="{ \"expression\": \"$*\" }"
 
+# handle null expression
+if [ "$1" = "null" ]; then
+  json="{ \"expression\": null }"
+fi
+
+echo "$json"
+
 # update the data service with curl
 curl -i \
   -X PATCH \

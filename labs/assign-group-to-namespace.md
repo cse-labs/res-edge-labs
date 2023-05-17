@@ -60,10 +60,10 @@
   ```bash
 
   # unassign all Groups from the Namespace (optional)
-  curl -i -X PATCH http://localhost:32080/api/v1/namespaces/3 -H 'Content-Type: application/json' -d '{ "expression": null }'
+  ds namespaces set-expression --id 3 --expression null
 
   # assign the stores Group to the Namespace
-  curl -i -X PATCH http://localhost:32080/api/v1/namespaces/3 -H 'Content-Type: application/json' -d '{ "expression": "/g/stores" }'
+  ds namespaces set-expression --id 3 --expression /g/stores
 
   # each command will return a 204 No Content
 
@@ -115,4 +115,69 @@
   git commit -am "assigned Stores Group to IMDb Namespace"
   git push
 
+  ```
+
+## Assign multiple Groups to IMDb Namespace
+
+- Assign the following Groups to the IMDb Namespace
+  - beta
+  - pilot
+
+```bash
+  # assign the Groups to the Namespace
+  ds namespaces set-expression --id 3 --expression /g/beta or /g/pilot
+
+  ```
+
+- Verify the Groups were added to the Namespace
+
+  ```bash
+
+  ds namespaces show --id 3 | grep expression
+
+  ```
+
+- Output should look like this
+
+  ```json
+
+  "expression": "/g/beta or /g/pilot",
+
+  ```
+
+- Run cicd locally to verify changes
+
+  ```bash
+
+  ds cicd
+
+  ```
+
+- Check the status with git
+
+  ```bash
+
+  git status
+
+  ```
+
+- Results
+  - 3 files will be removed from each cluster NOT in the beta or pilot Groups (12 clusters)
+    - The IMDb Namespace
+    - The IMDb Application
+    - The `Flux listener` for GitOps
+
+- Reset the deployment
+
+  ```bash
+
+  # update the data service
+  ds namespaces set-expression --id 3 --expression /g/stores
+
+  # run ci-cd locally
+  ds cicd
+
+  # no files should be dirty
+  git status
+  
   ```
