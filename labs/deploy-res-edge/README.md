@@ -16,7 +16,7 @@
 
   ```bash
 
-  cd $REPO_BASE/labs/res-edge-labs/deploy-res-edge
+  cd $REPO_BASE/labs/deploy-res-edge
 
   ```
 
