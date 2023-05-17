@@ -124,7 +124,7 @@
 
   ```
 
-## Next steps
+## Next Lab
 
 - Next we will learn how to deploy to the IMDb app to all the clusters in the Stores Group
   - Go to the [Ring Deployment with Kustomize lab](../labs/ring-deployment-with-kustomize.md)
