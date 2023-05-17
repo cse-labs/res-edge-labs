@@ -167,7 +167,7 @@
     - The IMDb Application
     - The `Flux listener` for GitOps
 
-- Reset the deployment
+- Reset the expression
 
   ```bash
 
