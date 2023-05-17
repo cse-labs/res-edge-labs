@@ -76,7 +76,7 @@ metadata:
   namespace: heartbeat
 spec:
   rules:
-  - host: central-tx-atx-2301.res-edge.com
+  - host: ist.cluster.store.res-edge.com
     http:
       paths:
       - backend:
@@ -88,5 +88,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - central-tx-atx-2301.res-edge.com
+    - ist.cluster.store.res-edge.com
     secretName: heartbeat
