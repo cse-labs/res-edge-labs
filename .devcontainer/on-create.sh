@@ -8,8 +8,12 @@ echo "$(date +'%Y-%m-%d %H:%M:%S')    on-create start" >> "$HOME/status"
 # Change shell to zsh for vscode
 sudo chsh --shell /bin/zsh vscode
 
-# restore the project to avoid errors
-dotnet restore labs/advanced-labs/cli/myapp/src
+{
+    echo ""
+    echo "source \$HOME/kic.env"
+    echo ""
+    echo "compinit"
+} >> "$HOME/.zshrc"
 
 {
     echo ""
@@ -19,14 +23,12 @@ dotnet restore labs/advanced-labs/cli/myapp/src
     echo ""
 
     # add cli to path
-    echo "export PIB_BASE=$PWD"
     echo "export KIC_BASE=$PWD"
-    echo "export REPO_BASE=$PWD"
     echo "export MSSQL_SA_PASSWORD=Res-Edge23"
     echo ""
 
-    echo "if [ -z \$KIC_DATASERVICE_URL ]; then"
-    echo "    export KIC_DATASERVICE_URL=http://localhost:32080"
+    echo "if [ -z \$DS_URL ]; then"
+    echo "    export DS_URL=http://localhost:32080"
     echo "fi"
     echo ""
 
@@ -45,22 +47,10 @@ dotnet restore labs/advanced-labs/cli/myapp/src
     echo ""
 
     echo "export MY_BRANCH=\$(echo \$GITHUB_USER | tr '[:upper:]' '[:lower:]')"
-    echo ""
-
-    echo "compinit"
-} >> "$HOME/.zshrc"
+} > "$HOME/kic.env"
 
 {
     echo "defaultIPs: $PWD/ips"
-    echo "reservedClusterPrefixes:"
-    echo "  - corp-monitoring"
-    echo "  - central-mo-kc"
-    echo "  - central-tx-austin"
-    echo "  - east-ga-atlanta"
-    echo "  - east-nc-raleigh"
-    echo "  - west-ca-sd"
-    echo "  - west-wa-redmond"
-    echo "  - west-wa-seattle"
 } > "$HOME/.flt"
 
 # create sql helper command
@@ -81,7 +71,7 @@ git config --global diff.colorMoved zebra
 git config --global devcontainers-theme.show-dirty 1
 git config --global core.editor "nano -w"
 
-echo "dowloading kic and flt CLI"
+echo "dowloading kic and ds CLIs"
 .devcontainer/cli-update.sh
 
 echo "generating completions"
