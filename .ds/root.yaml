@@ -6,3 +6,7 @@ scriptCommands:
   - name: env
     short: Display CLI environment variables
     path: env
+
+  - name: reload
+    short: Reload the SQL database with default sample data (Destructive!)
+    path: reload

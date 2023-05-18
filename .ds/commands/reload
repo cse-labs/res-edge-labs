@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# get the pod name
+pod=$(kic pods | grep mssql | awk '{print $2}')
+
+if [ "$pod" = "" ]; then
+    echo "Unable to find mssql pod"
+    exit 1
+fi
+
+# a little protection
+if [ "$1" != "--force" ]; then
+    echo ""
+    echo "This is a destructive command that resets your database to the default sample data"
+    echo ""
+    echo "Usage: ds reload --force"
+    echo ""
+    exit 1
+fi
+
+# execute the load script
+kubectl exec -n api "$pod" -- /home/mssql/5/load.sh
