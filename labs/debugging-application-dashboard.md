@@ -28,6 +28,7 @@ We are going to first stop the API and WebV deployments we started in the previo
 - Delete the WebV deployment
 
   ```bash
+
   cd $KIC_BASE/labs/deploy-res-edge
 
   kdelf webv/deployment.yaml
@@ -42,6 +43,7 @@ We are going to first stop the API and WebV deployments we started in the previo
 
   # should no longer see webv or api pods
   kic pods
+
   ```
 
 ## Redeploy API
