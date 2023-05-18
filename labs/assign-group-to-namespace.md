@@ -59,13 +59,9 @@
 
   ```bash
 
-  # unassign all Groups from the Namespace (optional)
-  ds namespaces set-expression --id 3 --expression null
-
   # assign the stores Group to the Namespace
+  # command will return a 204
   ds namespaces set-expression --id 3 --expression /g/stores
-
-  # each command will return a 204 No Content
 
   ```
 
@@ -117,15 +113,19 @@
 
   ```
 
-## Assign multiple Groups to IMDb Namespace
+## Assign Groups to Namespaces
 
-- Assign the following Groups to the IMDb Namespace
-  - beta
-  - pilot
+- Assign the following Groups to the dogs-cats Namespace
+  - atx (8)
+  - sea (18)
+- Assign the following Groups to the tabs-spaces Namespace
+  - beta (1)
+  - pilot (2)
 
 ```bash
   # assign the Groups to the Namespace
-  ds namespaces set-expression --id 3 --expression /g/beta or /g/pilot
+  ds namespaces set-expression --id 4 --expression /g/stores/central/tx/atx or /g/stores/west/wa/sea
+  ds namespaces set-expression --id 5 --expression /g/beta or /g/pilot
 
   ```
 
@@ -133,15 +133,8 @@
 
   ```bash
 
-  ds namespaces show --id 3 | grep expression
-
-  ```
-
-- Output should look like this
-
-  ```json
-
-  "expression": "/g/beta or /g/pilot",
+  ds namespaces show --id 4 | grep expression
+  ds namespaces show --id 5 | grep expression
 
   ```
 
@@ -162,17 +155,16 @@
   ```
 
 - Results
-  - 3 files will be deleted from each cluster not in the beta or pilot Groups (12 clusters)
-    - The IMDb Namespace
-    - The IMDb Application
-    - The `Flux listener` for GitOps
+  - 6 clusters will have the dogs-cats Namespace
+  - 6 clusters will have the tabs-spaces Namespace
 
-- Reset the expression
+- Remove Groups from Namespaces
 
   ```bash
 
-  # update the data service
-  ds namespaces set-expression --id 3 --expression /g/stores
+  # unassign Groups from dog-cats and tabs-spaces Namespaces
+  ds namespaces set-expression --id 4 --expression null
+  ds namespaces set-expression --id 5 --expression null
 
   # run ci-cd locally
   ds cicd
