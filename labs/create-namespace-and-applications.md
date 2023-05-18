@@ -7,6 +7,9 @@
 # This will delete any existing data changes and they are not recoverable
 ds reload --force
 
+# (optional) redeploy IMDb
+ds namespaces set-expression --id 3 --expression /g/stores
+
 # run ci-cd locally
 ds cicd
 
