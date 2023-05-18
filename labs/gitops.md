@@ -84,6 +84,7 @@ kic env
 
 - For long running GitOps, you need to create a GitHub Personal Access Token (PAT)
   - `export KIC_PAT=<YourGitHubPat>`
+- Update `$HOME/kic.env` to make your GitHub PAT persistent across shells
 
 ## Deploy GitOps (Flux v2)
 
