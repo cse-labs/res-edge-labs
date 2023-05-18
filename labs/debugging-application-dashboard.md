@@ -8,7 +8,7 @@ The `10.2` requests per second are calculated from the following:
 - Promethus "scrapes" /metrics every 5 seconds, so the app "responds" with an extra .2 RPS
 - WebV sends 10 requests per second to the api
 
-In this lab we will learn how to debug when we see an irregular number in the dashboard by enabling first the `.2 requests per second` and then the `10 requests per second` from WebV.
+In this lab we will learn how to stop and restart a deployment and debug when we see an irregular number in the dashboard by enabling first the `.2 requests per second` from the API and then the `10 requests per second` from WebV.
 
 When the API and WebV are running, the Application Dashboard should appear as below:
 
@@ -51,7 +51,7 @@ We are going to first stop the API and WebV deployments we started in the previo
 ```bash
 
 # deploy the Res-Edge Data Service
-kak api/deployment.yaml
+kak api
 
 # "watch" for the api pod to get to 1/1 Running
 # ctl-c to exit
@@ -66,7 +66,7 @@ kic check resedge
 
 - Go to the Grafana Application Dashboard we opened in the Deploy Res-Edge lab
 - You should see the Application Dashboard with both WebV and Res-Edge Data Service ("Application")
-  - WebV will have `0` requests per second because we stopped the WebV app
+  - WebV will have `0` requests per second because we stopped the WebV app (WebV takes some time to wind down so you may not see this right away)
   - Application will have `0.2` requests per second
 - Keep "Application Dashboard" open in a browser tab to monitor Res-Edge Data Service requests metrics for the next section
 
@@ -115,10 +115,18 @@ kic check resedge
 
     ```
 
+  - Alternatively, in the cli we can run the following command to just return the `readyz` logs:
+
+    ```bash
+
+    kic logs resedge | grep readyz
+
+    ```
+
 - **K8s Healthcheck every minute**
 
   - Another setting we have in the [api/deployment.yaml](./deploy-res-edge/api/deployment.yaml) is set a `livenessProbe` to call `/healthz` after a specified interval.
-    - `periodSeconds` tells the api to run a GET call to `/healthz` every `60` seconds
+    - `periodSeconds` configures the api to run a GET call to `/healthz` every `60` seconds
 
     ```yaml
 
@@ -163,11 +171,19 @@ kic check resedge
 
     ```
 
+  - Alternatively, in the cli we can run the following command to just return the `healthz` logs:
+
+    ```bash
+
+    kic logs resedge | grep healthz
+
+    ```
+
 - **Prometheus Scrape and Export**
 
   - We know by looking at the [prometheus/2-config-map.yaml](./deploy-res-edge/monitoring/prometheus/2-config-map.yaml) file under the `global` section that Prometheus scrapes /metrics for logs and exports them to Grafana during a specified interval.
-    - `scrap_interval` tells Promethus to scrape `/metrics` every `5` seconds
-    - `evaluation_interval` tells Promethus to export the metrics to Grafana every `5` seconds
+    - `scrape_interval` configures Promethus to scrape `/metrics` every `5` seconds
+    - `evaluation_interval` configures Promethus to export the metrics to Grafana every `5` seconds
 
   ```yaml
 
@@ -209,6 +225,14 @@ kic check resedge
 
     ```
 
+  - Alternatively, in the cli we can run the following command to just return the `metrics` logs:
+
+    ```bash
+
+    kic logs resedge | grep metrics
+
+    ```
+
 ## Redeploy WebV
 
 When we have WebV running, we will see the 10 GET requests per second on top of our other api logs in the Application Dashboard in Grafana.
@@ -243,5 +267,13 @@ kic check webv
     "RequestPath": "/api/v1/clusters/17",
     "version": "0.9.0-0509-1854"
   }
+
+  ```
+
+- Alternatively, in the cli we can run the following command to return the `webv` logs:
+
+  ```bash
+
+  kic logs webv
 
   ```
