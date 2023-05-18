@@ -45,7 +45,7 @@
 
     ```bash
 
-    code apps/flux-system/source.yaml
+    code "$KIC_BASE/apps/flux-system/source.yaml"
 
     ```
 
@@ -55,6 +55,9 @@
 
   ```bash
 
+  # change to the root of the repo
+  cd "$KIC_BASE"
+
   ds cicd
 
   # check git
@@ -62,7 +65,7 @@
 
   # update if necessary
   git add .
-  git commit -am "ds ci-cd"
+  git commit -am "Res-Edge Automation"
   git push
 
   ```

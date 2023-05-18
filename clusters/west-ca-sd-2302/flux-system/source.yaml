@@ -9,4 +9,4 @@ spec:
     name: flux-system
   url: https://github.com/cse-labs/res-edge-labs
   ref:
-    branch: main
+    branch: bartr
