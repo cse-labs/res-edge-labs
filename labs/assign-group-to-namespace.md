@@ -123,6 +123,7 @@
   - pilot (2)
 
 ```bash
+
   # assign the Groups to the Namespace
   ds namespaces set-expression --id 4 --expression /g/stores/central/tx/atx or /g/stores/west/wa/sea
   ds namespaces set-expression --id 5 --expression /g/beta or /g/pilot
