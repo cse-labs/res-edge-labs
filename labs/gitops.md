@@ -55,18 +55,11 @@
 
   ```bash
 
-  # change to the root of the repo
-  cd "$KIC_BASE"
-
+  # run ci-cd locally
   ds cicd
 
-  # check git
-  git status
-
-  # update if necessary
-  git add .
-  git commit -am "Res-Edge Automation"
-  git push
+  # update GitHub if necessary
+  ds deploy
 
   ```
 
