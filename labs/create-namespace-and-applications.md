@@ -20,12 +20,12 @@ ds deploy
 - Create a new Namespace
 - Assign the beta Group to the Namespace
 - Note the Id of the Namespace as you'll need that later
-  - It should be 20 (unless you have created other Namespaces)
+  - It should be 20
 
 - todo - fix expression bug
 - "expression": "/g/beta",
 - for now, run `ds namespaces set-expression --id 20 --expression /g/beta`
-- after you create the ns
+  - after you create the ns
 
 - Open the Res-Edge app from the `Ports` tab
   - Expand Namespaces
@@ -39,21 +39,21 @@ ds deploy
     ```json
 
     {
-    "name": "go-vote",
-    "description": "go-vote namespace (demonstrates multiple apps in a ns)",
-    "tags": [ "go-vote" ],
-    "businessUnit": "Platform",
-    "environment": "Prod",
-    "capacity": {
-        "memoryLimit": 512,
-        "cpuLimit": 1.0
-    },
-    "metadata": [
-        {
-        "key": "type",
-        "value": "go-vote"
-        }
-    ]
+        "name": "go-vote",
+        "description": "go-vote namespace (demonstrates multiple apps in a ns)",
+        "tags": [ "go-vote" ],
+        "businessUnit": "Platform",
+        "environment": "Prod",
+        "capacity": {
+            "memoryLimit": 512,
+            "cpuLimit": 1.0
+        },
+        "metadata": [
+            {
+            "key": "type",
+            "value": "go-vote"
+            }
+        ]
     }
 
     ```
@@ -180,5 +180,8 @@ ds cicd
 
 # check the changes
 git status
+
+# deploy the Cluster manifest
+ds deploy
 
 ```
