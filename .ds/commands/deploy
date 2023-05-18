@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ $(git status "$KIC_BASE/clusters" --porcelain | wc -l ) = 0 ]]; then
+  echo "No updates to deploy"
+  exit 0
+fi
+
+git add "$KIC_BASE/clusters"
+git commit -m "Res-Edge Automation"
+git push
