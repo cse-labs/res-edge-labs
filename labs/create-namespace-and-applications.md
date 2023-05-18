@@ -1,46 +1,79 @@
 # Create a new Namespace and Applications
 
-## Curl commands
+## Setup a clean environment
 
 ```bash
 
+# This will delete any existing data changes and they are not recoverable
+ds reload --force
+
+# run ci-cd locally
+ds cicd
+
+# deploy the clusters directory changes
+ds deploy
+
 ```
 
-## Namespace json
+## Create a Namespace
 
 - Create a new Namespace
-- Assign the beta Group to the Nsmespace
+- Assign the beta Group to the Namespace
 - Note the Id of the Namespace as you'll need that later
   - It should be 20 (unless you have created other Namespaces)
 
-```json
+- todo - fix expression bug
+- "expression": "/g/beta",
+- for now, run `ds namespaces set-expression --id 20 --expression /g/beta`
+- after you create the ns
 
-{
-  "expression": "/g/beta",
-  "name": "go-vote",
-  "description": "go-vote namespace (demonstrates multiple apps in a ns)",
-  "tags": [ "go-vote" ],
-  "businessUnit": "Platform",
-  "environment": "Prod",
-  "capacity": {
-    "memoryLimit": 512,
-    "cpuLimit": 1.0
-  },
-  "metadata": [
+- Open the Res-Edge app from the `Ports` tab
+  - Expand Namespaces
+  - Click on Post
+  - Click on Try it out
+  - Replace the sample json with the below json
+  - Click Execute
+  - Verify a 201 response code
+  - Note the Id from the location header
+
+    ```json
+
     {
-      "key": "type",
-      "value": "go-vote"
+    "name": "go-vote",
+    "description": "go-vote namespace (demonstrates multiple apps in a ns)",
+    "tags": [ "go-vote" ],
+    "businessUnit": "Platform",
+    "environment": "Prod",
+    "capacity": {
+        "memoryLimit": 512,
+        "cpuLimit": 1.0
+    },
+    "metadata": [
+        {
+        "key": "type",
+        "value": "go-vote"
+        }
+    ]
     }
-  ]
-}
 
-```
+    ```
 
-## Application1 json
+## Add Applications
 
 - Update namespaceId to the go-vote ns Id if necessary
 - NodePort must be unique and between 30081 and 30087 to deploy
 - You can change the name, description, and metadata to create your own "this-or-that" app
+
+- Open the Res-Edge app from the `Ports` tab
+  - Expand Applications
+  - Click on Post
+  - Click on Try it out
+  - Replace the sample json with the below json
+  - Click Execute
+  - Verify a 201 response code
+  - Repeat for Application 2
+
+## Application 1
 
 ```json
 
@@ -89,11 +122,7 @@
 
 ```
 
-## Application2 json
-
-- Update namespaceId to the go-vote ns Id if necessary
-- NodePort must be unique and between 30081 and 30087 to deploy
-- You can change the name, description, and metadata to create your own "this-or-that" app
+## Application 2
 
 ```json
 
@@ -139,5 +168,17 @@
     }
   ]
 }
+
+```
+
+## Generate the Cluster manifests
+
+```bash
+
+# run ci-cd locally
+ds cicd
+
+# check the changes
+git status
 
 ```
