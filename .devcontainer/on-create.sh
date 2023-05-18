@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# if you change this, you will have to update the sql and api containers as well
+export MSSQL_SA_PASSWORD=Res-Edge23
+
 # this runs as part of pre-build
 
 echo "on-create start"
@@ -26,7 +29,7 @@ sudo chsh --shell /bin/zsh vscode
     echo "export KIC_BASE=$PWD"
     echo "export KIC_FULL_REPO=\$(git remote get-url --push origin)"
     echo "export KIC_BRANCH=\$(git branch --show-current)"
-    echo "export MSSQL_SA_PASSWORD=Res-Edge23"
+    echo "export MSSQL_SA_PASSWORD=$MSSQL_SA_PASSWORD"
     echo ""
 
     echo "if [ -z \$DS_URL ]; then"
@@ -50,10 +53,6 @@ sudo chsh --shell /bin/zsh vscode
 
     echo "export MY_BRANCH=\$(echo \$GITHUB_USER | tr '[:upper:]' '[:lower:]')"
 } > "$HOME/kic.env"
-
-{
-    echo "defaultIPs: $PWD/ips"
-} > "$HOME/.flt"
 
 # create sql helper command
 {
