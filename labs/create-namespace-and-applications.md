@@ -144,7 +144,7 @@ ds deploy
   "metadata": [
     {
       "key": "choice1",
-      "value": "Longhors"
+      "value": "Longhorns"
     },
     {
       "key": "choice2",
