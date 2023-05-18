@@ -4,7 +4,7 @@
 - `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data Service
 - Res-Edge provides `GitOps Automation` to merge the objects via `GitOps` (Flux)
 
-> In this lab, we will assign the create a new Namespace and two new Applications
+> In this lab, we will assign a new Namespace and two new Applications to the Data Service
 
 - This lab introduces the `Swagger UI` to update the data service
 
