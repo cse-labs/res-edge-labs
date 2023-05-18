@@ -28,7 +28,7 @@ list_clusters() {
 
     echo "ID      NAME"
     echo "--      ------"
-    for s in $(echo "{$CLUSTERS}" | sed "s/,/\n/g"); do echo "$s" | sed "s=\/api=${KIC_DATASERVICE_URL}\/api=g" | xargs curl -s | jq -r '([.id, .name]) | @tsv'; done
+    for s in $(echo "{$CLUSTERS}" | sed "s/,/\n/g"); do echo "$s" | sed "s=\/api=${DS_URL}\/api=g" | xargs curl -s | jq -r '([.id, .name]) | @tsv'; done
 }
 
 list() {
@@ -41,8 +41,8 @@ list() {
   fi
 }
 
-if [ -z "${KIC_DATASERVICE_URL}" ]; then
-  echo "Error: KIC_DATASERVICE_URL environment variable is not set"
+if [ -z "${DS_URL}" ]; then
+  echo "Error: DS_URL environment variable is not set"
 fi
 
 for arg in "$@"; do
@@ -97,7 +97,7 @@ if [ -n "${GROUP}" ]; then
   KIC_RES_EDGE_ENTITYNAME="groups"
 fi
 
-KIC_BASE_URL="${KIC_DATASERVICE_URL}/api/v1/${KIC_RES_EDGE_ENTITYNAME}/"
+KIC_BASE_URL="${DS_URL}/api/v1/${KIC_RES_EDGE_ENTITYNAME}/"
 
 # Implode the array with the separator "&" to create a single string
 URL_QUERY_STRING=$(printf "&%s" "${URL_PARAMS[@]}")

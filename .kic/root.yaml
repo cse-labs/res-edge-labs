@@ -3,6 +3,10 @@
 ###
 
 scriptCommands:
+  - name: env
+    short: Display CLI environment variables
+    path: env
+
   - name: sync
     short: Force Flux reconcile
     path: sync

@@ -3,7 +3,7 @@
 ###
 
 image: ghcr.io/cse-labs/res-edge-webv:0.9
-server:  "${KIC_DATASERVICE_URL}"
+server:  "${DS_URL}"
 logformat: TsvMin
 verbose: false
 verboseerrors: false
