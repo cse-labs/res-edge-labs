@@ -96,7 +96,7 @@ env | grep KIC_
 ```bash
 
 # change central-la-nola-2301 to deploy additional member clusters
-cd "$REPO_BASE/clusters/central-la-nola-2301/flux-system"
+cd "$KIC_BASE/clusters/central-la-nola-2301/flux-system"
 
 # create the namespace
 kubectl apply -f namespace.yaml

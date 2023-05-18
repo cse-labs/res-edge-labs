@@ -24,7 +24,7 @@ The `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data 
 
   ```bash
 
-  cd $REPO_BASE
+  cd $KIC_BASE
 
   ```
 

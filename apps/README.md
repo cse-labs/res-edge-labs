@@ -6,6 +6,6 @@
 
   ```bash
 
-  rm -rf "$REPO_BASE/apps/flux-system"
+  rm -rf "$KIC_BASE/apps/flux-system"
 
   ```

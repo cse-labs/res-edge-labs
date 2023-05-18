@@ -29,7 +29,7 @@ We are going to first stop the API and WebV deployments we started in the previo
 - Delete the WebV deployment
 
   ```bash
-  cd $REPO_BASE/labs/deploy-res-edge
+  cd $KIC_BASE/labs/deploy-res-edge
 
   kdelf webv/deployment.yaml
 

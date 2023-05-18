@@ -62,11 +62,14 @@ We use GitHub Codespaces for our `inner-loop` and `outer-loop` Developer Experie
 
 ## Environment variables
 
-Many of these labs use environment variables, using the export functionality. If you wish, you can also edit the Z shell preferences file to persist exported environment variables across terminal sessions. Just add the same "export FOO=BAR" lines to your .zshrc file.
+Many of these labs use environment variables, using the export functionality. If you wish, you can edit the kic.env file to persist exported environment variables across terminal sessions. Just add the same "export FOO=BAR" lines to your kic.env file.
 
 ```bash
 
-code ~/.zshrc
+code ~/kic.env
+
+# reload kic.env
+source "$HOME/kic.env"
 
 ```
 

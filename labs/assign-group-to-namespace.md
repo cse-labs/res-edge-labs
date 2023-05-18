@@ -17,7 +17,7 @@
 
   ```bash
 
-  cd $REPO_BASE
+  cd $KIC_BASE
 
   ```
 
