@@ -174,3 +174,8 @@
   git status
 
   ```
+
+## Next Lab
+
+- The next lab demonstrates ring deployment using Res-Edge and Kustomize
+  - Go to the [Ring Deployment with Kustomize lab](../labs/ring-deployment-with-kustomize.md)

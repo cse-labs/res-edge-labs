@@ -16,7 +16,7 @@
 
   ```bash
 
-  cd $REPO_BASE/labs/res-edge-labs/deploy-res-edge
+  cd $REPO_BASE/labs/deploy-res-edge
 
   ```
 
@@ -177,6 +177,8 @@ ds policies list
   - Tracks cluster metrics and displays logs of deployed applications
 - See the [K9s documentation](https://k9scli.io/topics/commands/) for more information on K9s
 
+> To learn how to debug using the Grafana Application Dashboard and k9s, see [Debugging the Application Dashboard Lab](../debugging-application-dashboard.md).
+
 ## Deploy Observability
 
 ```bash
@@ -294,3 +296,8 @@ k9s
   kic test all
 
   ```
+
+## Next Lab
+
+- Next we will learn how to assign a Group to a Namespace
+  - Go to the [Assign Group to Namespace lab](../labs/assign-group-to-namespace.md)
