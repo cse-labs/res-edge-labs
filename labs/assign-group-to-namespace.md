@@ -1,8 +1,6 @@
 # Assign Group to Namespace
 
-## This lab is currently in beta
-
-> This lab is a prerequisite for the Kustomization lab
+> This lab is a prerequisite for the Kustomization and GitOps labs
 
 - Application teams need to deploy their applicatons to specific clusters
 - The `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data Service
@@ -14,11 +12,6 @@
 
 - The Res-Edge Data Service needs to be deployed for this lab
   - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge/README.md#inner-loop-with-res-edge) to deploy the data service to the cluster
-
-## todo - beta tag
-
-- Currently, you need to create a new cluster and deploy Res-Edge again (using the :beta tags)
-- Before release, this will be converted to use the :0.9 tag
 
 ## Start in the repo base directory
 
@@ -66,13 +59,9 @@
 
   ```bash
 
-  # unassign all Groups from the Namespace (optional)
-  curl -i -X PATCH http://localhost:32080/api/v1/namespaces/3 -H 'Content-Type: application/json' -d '{ "expression": null }'
-
   # assign the stores Group to the Namespace
-  curl -i -X PATCH http://localhost:32080/api/v1/namespaces/3 -H 'Content-Type: application/json' -d '{ "expression": "/g/stores" }'
-
-  # each command will return a 204 No Content
+  # command will return a 204
+  ds namespaces set-expression --id 3 --expression /g/stores
 
   ```
 
@@ -121,6 +110,68 @@
   git add .
   git commit -am "assigned Stores Group to IMDb Namespace"
   git push
+
+  ```
+
+## Assign Groups to Namespaces
+
+- Assign the following Groups to the dogs-cats Namespace
+  - atx (8)
+  - sea (18)
+- Assign the following Groups to the tabs-spaces Namespace
+  - beta (1)
+  - pilot (2)
+
+```bash
+
+  # assign the Groups to the Namespace
+  ds namespaces set-expression --id 4 --expression /g/stores/central/tx/atx or /g/stores/west/wa/sea
+  ds namespaces set-expression --id 5 --expression /g/beta or /g/pilot
+
+  ```
+
+- Verify the Groups were added to the Namespace
+
+  ```bash
+
+  ds namespaces show --id 4 | grep expression
+  ds namespaces show --id 5 | grep expression
+
+  ```
+
+- Run cicd locally to verify changes
+
+  ```bash
+
+  ds cicd
+
+  ```
+
+- Check the status with git
+
+  ```bash
+
+  git status
+
+  ```
+
+- Results
+  - 6 clusters will have the dogs-cats Namespace
+  - 6 clusters will have the tabs-spaces Namespace
+
+- Remove Groups from Namespaces
+
+  ```bash
+
+  # unassign Groups from dog-cats and tabs-spaces Namespaces
+  ds namespaces set-expression --id 4 --expression null
+  ds namespaces set-expression --id 5 --expression null
+
+  # run ci-cd locally
+  ds cicd
+
+  # no files should be dirty
+  git status
 
   ```
 

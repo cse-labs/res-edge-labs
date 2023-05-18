@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: dogs-cats
-  namespace: dogs-cats
+  name: rea.application.name
+  namespace: rea.namespace.name
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -11,17 +11,17 @@ metadata:
 
 spec:
   tls:
-  - secretName: dogs-cats
+  - secretName: rea.application.name
     hosts:
-    - ist.cluster.store.res-edge.com
+    - rea.cluster.store.res-edge.com
   rules:
-  - host: ist.cluster.store.res-edge.com
+  - host: rea.cluster.store.res-edge.com
     http:
       paths:
       - pathType: Prefix
-        path: /dogs-cats
+        path: /rea.application.name
         backend:
           service:
-            name: dogs-cats
+            name: rea.application.name
             port:
               number: 8080

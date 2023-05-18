@@ -9,6 +9,11 @@ commands:
   - name: show
     short: Show Namespace information
     path: namespaces/show
+
   - name: list
     short: Search and list Namespaces
     path: namespaces/list
+
+  - name: set-expression
+    short: Set the expression that assigns groups and clusters
+    path: namespaces/set-expression

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# verify command line
+# --id value --expression value [value ...]
+if [ "$#" -lt "4" ]; then
+	echo "Usage: ds namespaces set-expression --id 4 --expression /g/stores/central/la"
+	exit 1
+fi
+
+if [ "$1" != "--id" ] || [ "$3" != "--expression" ]; then
+	echo "Usage: ds namespaces set-expression --id 4 --expression /g/stores/central/la"
+	exit 1
+fi
+
+# get the namespace id from command line
+shift
+url="http://localhost:32080/api/v1/namespaces/$1"
+
+# skip id and --expression
+shift
+shift
+
+# build the json payload from remaining args
+json="{ \"expression\": \"$*\" }"
+
+# handle null expression
+if [ "$1" = "null" ]; then
+  json="{ \"expression\": null }"
+fi
+
+# update the data service with curl
+curl -i \
+  -X PATCH \
+  -H 'Content-Type: application/json' \
+  -d "$json" \
+  "$url"

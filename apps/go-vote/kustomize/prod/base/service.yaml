@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: heartbeat
-  namespace: heartbeat
+  name: rea.application.name
+  namespace: rea.namespace.name
 spec:
   selector:
-    app: heartbeat
+    app: rea.application.name
 
   type: NodePort
   ports:
     - port: 8080
-      nodePort: 30088
+      nodePort: rea.application.nodePort
       targetPort: http
       protocol: TCP
       name: http
