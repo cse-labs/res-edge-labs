@@ -27,7 +27,7 @@ sudo chsh --shell /bin/zsh vscode
 
     # add cli to path
     echo "export KIC_BASE=$PWD"
-    echo "export KIC_FULL_REPO=\$(git remote get-url --push origin)"
+    echo "export KIC_REPO_FULL=\$(git remote get-url --push origin)"
     echo "export KIC_BRANCH=\$(git branch --show-current)"
     echo "export MSSQL_SA_PASSWORD=$MSSQL_SA_PASSWORD"
     echo ""
