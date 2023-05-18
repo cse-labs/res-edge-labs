@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tabs-spaces
+  namespace: tabs-spaces
+spec:
+  ports:
+  - name: http
+    nodePort: 32088
+    port: 8080
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: tabs-spaces
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: tabs-spaces
+  name: tabs-spaces
+  namespace: tabs-spaces
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tabs-spaces
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: tabs-spaces
+    spec:
+      containers:
+      - args:
+        - key1
+        - Tabs
+        - key2
+        - Spaces
+        - title
+        - Can we still be friends?
+        image: ghcr.io/cse-labs/go-vote:latest
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 60
+        name: app
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /readyz
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 60
+        resources:
+          limits:
+            cpu: 400m
+            memory: 128Mi
+          requests:
+            cpu: 200m
+            memory: 64Mi
