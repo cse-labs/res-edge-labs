@@ -10,3 +10,7 @@ scriptCommands:
   - name: reload
     short: Reload the SQL database with default sample data (Destructive!)
     path: reload
+
+  - name: deploy
+    short: Deploy the Res-Edge Automation changes to clusters
+    path: deploy

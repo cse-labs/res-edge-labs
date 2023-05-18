@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# "ds overlay <name> <version>" will create a new Kustomize overlay for the application
+# The overlay will set the new version to <version>
+
 set -e
 
 dir=""
