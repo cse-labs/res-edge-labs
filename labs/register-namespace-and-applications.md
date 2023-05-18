@@ -31,12 +31,7 @@ ds namespaces set-expression --id 3 --expression /g/stores
 ds cicd
 
 # deploy the clusters directory changes
-#ds deploy
-
-# todo - until the PR is merged, use these commands
-git add "$KIC_BASE/clusters"
-git commit -m "Res-Edge Automation (GitOps)"
-git push
+ds deploy
 
 ```
 
