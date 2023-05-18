@@ -1,3 +1,5 @@
 #!/bin/bash
 
+# "ds policies show --id <id>" displays a json object from the Res-Edge data service
+
 KIC_RES_EDGE_ENTITYNAME="policies" "$CLI_CMD_DIR/res-edge/entity-show" "$@"

@@ -45,7 +45,7 @@
 
     ```bash
 
-    code apps/flux-system/source.yaml
+    code "$KIC_BASE/apps/flux-system/source.yaml"
 
     ```
 
@@ -55,15 +55,11 @@
 
   ```bash
 
+  # run ci-cd locally
   ds cicd
 
-  # check git
-  git status
-
-  # update if necessary
-  git add .
-  git commit -am "ds ci-cd"
-  git push
+  # update GitHub if necessary
+  ds deploy
 
   ```
 
@@ -88,6 +84,7 @@ kic env
 
 - For long running GitOps, you need to create a GitHub Personal Access Token (PAT)
   - `export KIC_PAT=<YourGitHubPat>`
+- Update `$HOME/kic.env` to make your GitHub PAT persistent across shells
 
 ## Deploy GitOps (Flux v2)
 
