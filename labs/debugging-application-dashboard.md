@@ -126,7 +126,7 @@ kic check resedge
 - **K8s Healthcheck every minute**
 
   - Another setting we have in the [api/deployment.yaml](./deploy-res-edge/api/deployment.yaml) is set a `livenessProbe` to call `/healthz` after a specified interval.
-    - `periodSeconds` tells the api to run a GET call to `/healthz` every `60` seconds
+    - `periodSeconds` configures the api to run a GET call to `/healthz` every `60` seconds
 
     ```yaml
 
@@ -182,8 +182,8 @@ kic check resedge
 - **Prometheus Scrape and Export**
 
   - We know by looking at the [prometheus/2-config-map.yaml](./deploy-res-edge/monitoring/prometheus/2-config-map.yaml) file under the `global` section that Prometheus scrapes /metrics for logs and exports them to Grafana during a specified interval.
-    - `scrape_interval` tells Promethus to scrape `/metrics` every `5` seconds
-    - `evaluation_interval` tells Promethus to export the metrics to Grafana every `5` seconds
+    - `scrape_interval` configures Promethus to scrape `/metrics` every `5` seconds
+    - `evaluation_interval` configures Promethus to export the metrics to Grafana every `5` seconds
 
   ```yaml
 
