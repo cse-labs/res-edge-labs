@@ -1,10 +1,27 @@
-# Create a new Namespace and Applications
+# Register a new Namespace and Applications
+
+- Application teams need to register new Namespaces and Applications in the Res-Edge Data Service
+- `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data Service
+- Res-Edge provides `GitOps Automation` to merge the objects via `GitOps` (Flux)
+
+> In this lab, we will assign the create a new Namespace and two new Applications
+
+- This lab introduces the `Swagger UI` to update the data service
+
+## Prerequisites
+
+- The Res-Edge Data Service needs to be deployed for this lab
+  - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge/README.md#inner-loop-with-res-edge) to deploy the data service to the cluster
 
 ## Setup a clean environment
 
 ```bash
 
-# This will delete any existing data changes and they are not recoverable
+# start in the repo base directory
+cd "$KIC_BASE"
+
+
+# Warning: this will delete any existing data changes and they are not recoverable
 ds reload --force
 
 # (optional) redeploy IMDb
@@ -14,7 +31,12 @@ ds namespaces set-expression --id 3 --expression /g/stores
 ds cicd
 
 # deploy the clusters directory changes
-ds deploy
+#ds deploy
+
+# todo - until the PR is merged, use these commands
+git add "$KIC_BASE/clusters"
+git commit -m "Res-Edge Automation (GitOps)"
+git push
 
 ```
 
