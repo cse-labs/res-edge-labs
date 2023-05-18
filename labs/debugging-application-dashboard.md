@@ -19,7 +19,6 @@ When the API and WebV are running, the Application Dashboard should appear as be
 - The Res-Edge Data Service needs to be deployed for this lab
   - Go to [Deploy Res-Edge Data Service lab](./deploy-res-edge/README.md#inner-loop-with-res-edge) to deploy the data service to the cluster
 
-
 ## Stopping the API and WebV deployments
 
 We are going to first stop the API and WebV deployments we started in the previous lab to reset the metrics.
@@ -44,7 +43,6 @@ We are going to first stop the API and WebV deployments we started in the previo
   # should no longer see webv or api pods
   kic pods
   ```
-
 
 ## Redeploy API
 
@@ -78,7 +76,6 @@ kic check resedge
   - Let the logs run for about 2 mins
 - Press `s` to turn off `autoscroll`
 - Press `w` to turn on `wrap` for better visibility
-
 
 ## Diving deeper into the Logs
 
@@ -118,20 +115,20 @@ kic check resedge
 
 - **K8s Healthcheck every minute**
 
-  Another setting we have in the [api/deployment.yaml](./deploy-res-edge/api/deployment.yaml) is set a `livenessProbe` to call `/healthz` after a specified interval.
+  - Another setting we have in the [api/deployment.yaml](./deploy-res-edge/api/deployment.yaml) is set a `livenessProbe` to call `/healthz` after a specified interval.
     - `periodSeconds` tells the api to run a GET call to `/healthz` every `60` seconds
 
-  ```yaml
+    ```yaml
 
-  livenessProbe:
-    httpGet:
-      path: /healthz
-      port: http
-    initialDelaySeconds: 5
-    failureThreshold: 10
-    periodSeconds: 60
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: http
+      initialDelaySeconds: 5
+      failureThreshold: 10
+      periodSeconds: 60
 
-  ```
+    ```
 
   - In k9s, these logs will appear as follows:
 
@@ -166,7 +163,7 @@ kic check resedge
 
 - **Prometheus Scrape and Export**
 
-  We know by looking at the [prometheus/2-config-map.yaml](./deploy-res-edge/monitoring/prometheus/2-config-map.yaml) file under the `global` section that Prometheus scrapes /metrics for logs and exports them to Grafana during a specified interval.
+  - We know by looking at the [prometheus/2-config-map.yaml](./deploy-res-edge/monitoring/prometheus/2-config-map.yaml) file under the `global` section that Prometheus scrapes /metrics for logs and exports them to Grafana during a specified interval.
     - `scrap_interval` tells Promethus to scrape `/metrics` every `5` seconds
     - `evaluation_interval` tells Promethus to export the metrics to Grafana every `5` seconds
 
