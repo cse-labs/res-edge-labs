@@ -41,7 +41,7 @@ docker run -it --rm \\
   --net host \\
   -v \$(pwd):/goa \\
   ${RESEDGE_AUTOMATION_DOCKER_IMAGE} \\
-  -s "${KIC_DATASERVICE_URL}"
+  -s "${DS_URL}"
 EOF
   exit
 fi
@@ -57,4 +57,4 @@ docker run -it --rm \
   --net host \
   -v "$(pwd)":/goa \
   ${RESEDGE_AUTOMATION_DOCKER_IMAGE} \
-  -s "${KIC_DATASERVICE_URL}"
+  -s "${DS_URL}"

@@ -7,8 +7,8 @@ usage() {
   exit 1
 }
 
-if [ -z "${KIC_DATASERVICE_URL}" ]; then
-  echo "Error: KIC_DATASERVICE_URL environment variable is not set"
+if [ -z "${DS_URL}" ]; then
+  echo "Error: DS_URL environment variable is not set"
 fi
 
 
@@ -30,7 +30,7 @@ if [ -z "$id" ]; then
   usage
 fi
 
-url="${KIC_DATASERVICE_URL}/api/v1/${KIC_RES_EDGE_ENTITYNAME}/${id}"
+url="${DS_URL}/api/v1/${KIC_RES_EDGE_ENTITYNAME}/${id}"
 
 response=$(curl --silent --show-error "$url")
 
