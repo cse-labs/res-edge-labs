@@ -1,10 +1,14 @@
 #!/bin/bash
 
+# "ds cicd" uses Res-Edge Automation to update the Cluster manifests in the "clusters" directory
+# "ds deploy" will commit and push any changes to the "clusters" directory tree to GitHub
+# It will not push changes outside the clusters directory
+
 if [[ $(git status "$KIC_BASE/clusters" --porcelain | wc -l ) = 0 ]]; then
   echo "No updates to deploy"
   exit 0
 fi
 
 git add "$KIC_BASE/clusters"
-git commit -m "Res-Edge Automation"
+git commit -m "Res-Edge Automation via ds cicd"
 git push
