@@ -63,16 +63,29 @@
     # deploy SQL Server with sample data
     kak mssql
 
-    # "watch" for the mssql pod to get to 1/1 Running
-    # ctl-c to exit
-    kic pods --watch
+    echo
+    echo 'waiting for mssql pod to start'
 
-    # view K8s logs
-    kic logs mssql
+    # wait for pod to start
+    kubectl wait pod --all --for condition=ready -n api --timeout 60s
 
-    # "follow" the mssql logs until the sample data loads with "# rows affected"
-    # ctl-c to exit
-    kic logs mssql --follow
+    echo
+    echo 'waiting for database recovery'
+
+    # give SQL Server time to recover databases
+    sleep 20
+
+    # get the pod name
+    pod=$(kic pods | grep mssql | awk '{print $2}')
+
+    echo
+    echo 'loading sample data'
+
+    # create the database
+    kubectl exec -n api "$pod" -- sqlcmd -U sa -P "$MSSQL_SA_PASSWORD" -Q "if db_id('IST') is null create database ist;"
+
+    # load the sample data
+    ds reload --force
 
     # Verify mssql is running and the sample data is loaded
     kic check mssql
@@ -89,9 +102,11 @@
   # deploy the Res-Edge Data Service
   kak api
 
-  # "watch" for the api pod to get to 1/1 Running
-  # ctl-c to exit
-  kic pods --watch
+  echo
+  echo 'waiting for api pod to start'
+
+  # wait for pod to start
+  kubectl wait pod --all --for condition=ready -n api --timeout 60s
 
   # verify Res-Edge Data Service is `Running`
   kic check resedge
