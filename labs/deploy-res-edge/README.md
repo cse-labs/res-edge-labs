@@ -65,24 +65,14 @@
 
     echo
     echo 'waiting for mssql pod to start'
-
-    # wait for pod to start
     kubectl wait pod --all --for condition=ready -n api --timeout 60s
 
     echo
     echo 'waiting for database recovery'
-
-    # give SQL Server time to recover databases
     sleep 20
-
-    # get the pod name
-    pod=$(kic pods | grep mssql | awk '{print $2}')
 
     echo
     echo 'loading sample data'
-
-    # create the database
-    kubectl exec -n api "$pod" -- sqlcmd -U sa -P "$MSSQL_SA_PASSWORD" -Q "if db_id('IST') is null create database ist;"
 
     # load the sample data
     ds reload --force
