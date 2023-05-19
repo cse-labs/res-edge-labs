@@ -50,6 +50,10 @@ ds deploy
     - Note the Id from the location header as you'll need that later
       - It should be `20`
 
+- todo - fix expression bug
+- "expression": "/g/beta",
+- for now, run `ds namespaces set-expression --id 20 --expression /g/beta` after you create the ns
+
 ## Sample Namespace
 
 ```json
