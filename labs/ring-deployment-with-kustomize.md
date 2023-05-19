@@ -37,6 +37,29 @@ The `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data 
 
   ```
 
+## Setup a clean environment
+
+```bash
+
+# start in the repo base directory
+cd "$KIC_BASE"
+
+
+# Warning: this will delete any existing data changes and they are not recoverable
+ds reload --force
+
+# redeploy IMDb
+# will return 204 No Content
+ds namespaces set-expression --id 3 --expression /g/stores
+
+# run ci-cd locally
+ds cicd
+
+# deploy the clusters directory changes
+ds deploy
+
+```
+
 ## Create an application overlay
 
 - An overlay is a Kustomization that refers to the base and patches to transform the base when applied
