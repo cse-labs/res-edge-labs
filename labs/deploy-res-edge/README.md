@@ -300,4 +300,4 @@ k9s
 ## Next Lab
 
 - Next we will learn how to assign a Group to a Namespace
-  - Go to the [Assign Group to Namespace lab](../labs/assign-group-to-namespace.md)
+  - Go to the [Assign Group to Namespace lab](../assign-group-to-namespace.md)
