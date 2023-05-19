@@ -1,3 +1,0 @@
-#!/bin/zsh
-
-tail -n1 status
