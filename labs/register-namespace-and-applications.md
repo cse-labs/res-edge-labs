@@ -4,7 +4,7 @@
 - `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data Service
 - Res-Edge provides `GitOps Automation` to merge the objects via `GitOps` (Flux)
 
-> In this lab, we will assign a new Namespace and two new Applications to the Data Service
+> In this lab, we will register a new Namespace and two new Applications to the Data Service
 
 - This lab introduces the `Swagger UI` to update the data service
 
@@ -36,9 +36,9 @@ ds deploy
 
 ```
 
-## Create a Namespace
+## Register a Namespace
 
-- Create a new Namespace
+- Register a new Namespace in the Data Service
 
   - Open the Res-Edge app from the `Ports` tab
     - Expand Namespaces
@@ -75,11 +75,10 @@ ds deploy
 
 ```
 
-## Add Applications
+## Register Applications
 
-- Update namespaceId to the go-vote ns Id if necessary
-- NodePort must be unique and between 30081 and 30087 to deploy
 - You can change the name, description, and metadata to create your own "this-or-that" app
+  - NodePort must be unique and between 30081 and 30087 to deploy
 
 - Open the Res-Edge app from the `Ports` tab
   - Expand Applications
@@ -198,7 +197,7 @@ ds cicd
 # check the changes
 git status
 
-# deploy the Cluster manifest
+# deploy the Cluster manifest via GitOps
 ds deploy
 
 ```
