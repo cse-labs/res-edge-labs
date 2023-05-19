@@ -50,7 +50,7 @@ ds deploy
     - Note the Id from the location header as you'll need that later
       - It should be `20`
 
-## Sample Namespace
+## Namespace json
 
 ```json
 
@@ -100,7 +100,7 @@ ds deploy
   - Verify a 201 response code
   - Repeat for Application 2
 
-## Sample Application 1
+## Application json
 
 ```json
 
@@ -149,7 +149,7 @@ ds deploy
 
 ```
 
-## Sample Application 2
+## Application 2 json
 
 ```json
 
