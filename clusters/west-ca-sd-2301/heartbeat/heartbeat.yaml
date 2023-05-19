@@ -37,7 +37,7 @@ spec:
         app: heartbeat
     spec:
       containers:
-      - image: ghcr.io/cse-labs/heartbeat:latest
+      - image: ghcr.io/cse-labs/heartbeat:0.1.0
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 10
