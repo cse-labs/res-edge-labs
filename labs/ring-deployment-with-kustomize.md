@@ -20,23 +20,6 @@ The `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data 
 - Groups need to be assigned to a Namespace for this lab
   - Go to [Assign Group to Namespace lab](../labs/assign-group-to-namespace.md) to assign stores Group to imdb Namespace
 
-## Start in the repo base directory
-
-  ```bash
-
-  cd $KIC_BASE
-
-  ```
-
-## Verify that the data service is running
-
-  ```bash
-
-  # check api version to verify Res-Edge Data Service is `Running`
-  kic check resedge
-
-  ```
-
 ## Setup a clean environment
 
 ```bash
@@ -59,6 +42,15 @@ ds cicd
 ds deploy
 
 ```
+
+## Verify that the data service is running
+
+  ```bash
+
+  # check api version to verify Res-Edge Data Service is `Running`
+  kic check resedge
+
+  ```
 
 ## Create an application overlay
 
