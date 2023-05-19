@@ -191,9 +191,12 @@ ds policies list
 # deploy observability
 kak monitoring
 
-# "watch" for the prometheus, fluentbit, and grafana pods to get to 1/1 Running
-# ctl-c to exit
-kic pods --watch
+  echo
+  echo "Waiting for pods to start"
+  kubectl wait pod --all --for condition=ready -n logging --timeout 60s
+  kubectl wait pod --all --for condition=ready -n monitoring --timeout 30s
+  sleep 5
+  echo
 
 # check to verify prometheus, fluentbit, and grafana are running
 kic check prometheus
@@ -214,9 +217,10 @@ kic check grafana
   # deploy webv
   kak webv
 
-  # "watch" for the webv pod to get to 1/1 Running
-  # ctl-c to exit
-  kic pods --watch
+  echo
+  echo "Waiting for WebV to start"
+  kubectl wait pod --all --for condition=ready -n api --timeout 60s
+  echo
 
   # check to verify webv is running
   kic check webv
