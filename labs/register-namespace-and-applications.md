@@ -57,6 +57,7 @@ ds deploy
 {
     "name": "go-vote",
     "description": "go-vote namespace (demonstrates multiple apps in a ns)",
+    "expression": "/g/beta",
     "tags": [ "go-vote" ],
     "businessUnit": "Platform",
     "environment": "Prod",
@@ -73,17 +74,6 @@ ds deploy
 }
 
 ```
-
-- Assign the `beta` Group to the Namespace
-  - todo - fix expression bug
-  - "expression": "/g/beta",
-  - for now, run `ds namespaces set-expression --id 20 --expression /g/beta` after you create the ns
-
-  ```bash
-
-  ds namespaces set-expression --id 20 --expression /g/beta
-
-  ```
 
 ## Add Applications
 
