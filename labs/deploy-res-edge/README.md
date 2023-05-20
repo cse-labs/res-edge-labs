@@ -12,14 +12,6 @@
 
 > The k3d cluster will run `in` the Codespace - no need for an external cluster
 
-- Start in this lab directory
-
-  ```bash
-
-  cd $KIC_BASE/labs/deploy-res-edge
-
-  ```
-
 - Use the `kic CLI` to create and verify a new k3d cluster
 
   ```bash
@@ -57,6 +49,9 @@
 
     ```bash
 
+    # start in this directory
+    cd "$KIC_BASE/labs/deploy-res-edge" || exit 1
+
     # create the namespace
     kaf ns.yaml
 
@@ -69,7 +64,7 @@
 
     echo
     echo 'waiting for database recovery'
-    sleep 20
+    sleep 30
 
     echo
     echo 'loading sample data'
@@ -191,12 +186,12 @@ ds policies list
 # deploy observability
 kak monitoring
 
-  echo
-  echo "Waiting for pods to start"
-  kubectl wait pod --all --for condition=ready -n logging --timeout 60s
-  kubectl wait pod --all --for condition=ready -n monitoring --timeout 30s
-  sleep 5
-  echo
+echo
+echo "Waiting for pods to start"
+kubectl wait pod --all --for condition=ready -n logging --timeout 60s
+kubectl wait pod --all --for condition=ready -n monitoring --timeout 30s
+sleep 5
+echo
 
 # check to verify prometheus, fluentbit, and grafana are running
 kic check prometheus
