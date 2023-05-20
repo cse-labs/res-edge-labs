@@ -1,21 +1,35 @@
 #!/bin/bash
+
 PARENT_COMMAND=$(ps -o comm= $PPID)
 
 usage() {
-  echo "Usage: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} [--search search term] [--order-by name]"
+  echo
 
-  if [ "${KIC_RES_EDGE_ENTITYNAME}" = "clusters" ] || [ "${KIC_RES_EDGE_ENTITYNAME}" = "groups" ]; then
-    echo "   or: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --group [name]"
+  if [ "${KIC_RES_EDGE_ENTITYNAME}" = "groups" ]; then
+    echo "Usage: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} [--search 'search term'] [--order-by id | name | path]"
+  else
+    echo "Usage: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} [--search 'search term'] [--order-by id | name]"
+  fi
+
+  if [ "${KIC_RES_EDGE_ENTITYNAME}" = "clusters" ]; then
+    echo "   or: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --group name"
     echo '   --group:  filter clusters by group'
   fi
 
-  echo "   --search: Search for ${KIC_RES_EDGE_ENTITYNAME} by name, metadata or tag. Optional."
-  echo '   --order-by: Order by name. Optional. Default: id.'
+  echo "   --search: Search ${KIC_RES_EDGE_ENTITYNAME} by name, metadata or tag (optional)"
+
+  if [ "${KIC_RES_EDGE_ENTITYNAME}" = "groups" ]; then
+    echo '   --order-by: id | name | path (default: id)'
+  else
+    echo '   --order-by: id | name (default: id)'
+  fi
+
+  echo
+
   exit 1
 }
 
 list_clusters() {
-
     CLUSTERS=$(curl --silent --show-error "$URL" | jq -r ' .value[] | .clustersTree' )
 
     if [ "$CLUSTERS" = "" ]; then
@@ -26,18 +40,19 @@ list_clusters() {
     CLUSTERS=${CLUSTERS:1}
     CLUSTERS=${CLUSTERS::-1}
 
-    echo "ID      NAME"
-    echo "--      ------"
     for s in $(echo "{$CLUSTERS}" | sed "s/,/\n/g"); do echo "$s" | sed "s=\/api=${DS_URL}\/api=g" | xargs curl -s | jq -r '([.id, .name]) | @tsv'; done
 }
 
 list() {
   if [ -n "${GROUP}" ]; then
     CLUSTERS=$(list_clusters)
-    echo "$CLUSTERS"
+    echo "$CLUSTERS" | column -t -s $'\t' -N Id,Name -R Id -o '   '
+  elif [ "${KIC_RES_EDGE_ENTITYNAME}" = "groups" ]; then
+    response=$(curl --silent --show-error "$URL" | jq -r '(.value[] | [.id, .name, .namePath]) | @tsv')
+    echo "$response" | column -t -s $'\t' -N Id,Name,Path -R Id -o '   '
   else
-    response=$(curl --silent --show-error "$URL" | jq -r '["ID","NAME"], ["--","------"], (.value[] | [.id, .name]) | @tsv')
-    echo "$response"
+    response=$(curl --silent --show-error "$URL" | jq -r '(.value[] | [.id, .name]) | @tsv')
+    echo "$response" | column -t -s $'\t' -N Id,Name -R Id -o '   '
   fi
 }
 
@@ -54,7 +69,14 @@ for arg in "$@"; do
       set -- "${@/$arg/-o}"
       ;;
     --group)
-      set -- "${@/$arg/-g}"
+      if [ "${KIC_RES_EDGE_ENTITYNAME}" = "clusters" ]; then
+        set -- "${@/$arg/-g}"
+      else
+        echo
+        echo "Error: --group is not a valid parameter"
+        echo
+        usage
+      fi
       ;;
   esac
 done
@@ -73,8 +95,15 @@ while getopts ":s:o:g:" f; do
 done
 shift $((OPTIND-1))
 
-if [ -n "$ORDERBY" ] && [ "$ORDERBY" != "id" ] && [ "$ORDERBY" != "name" ]; then
-  echo "Error: Order by supports either 'id' or 'name'."
+if [ "$KIC_RES_EDGE_ENTITYNAME" = "groups" ]; then
+  if [ "$KIC_RES_EDGE_ENTITYNAME" = "groups" ] && [ -n "$ORDERBY" ] && [ "$ORDERBY" != "id" ] && [ "$ORDERBY" != "name" ] && [ "$ORDERBY" != "path" ]; then
+    echo
+    echo "Error: Order by supports either 'id' 'name' or 'path'"
+    usage
+  fi
+elif [ -n "$ORDERBY" ] && [ "$ORDERBY" != "id" ] && [ "$ORDERBY" != "name" ]; then
+  echo
+  echo "Error: Order by supports either 'id' or 'name'"
   usage
 fi
 
@@ -85,7 +114,11 @@ if [ -n "${SEARCH}" ]; then
 fi
 
 if [ -n "${ORDERBY}" ]; then
-  URL_PARAMS+=("orderby=${ORDERBY}")
+  if [ "$ORDERBY" = "path" ]; then
+    URL_PARAMS+=("orderby=namePath")
+  else
+    URL_PARAMS+=("orderby=${ORDERBY}")
+  fi
 fi
 
 if [ -n "${GROUP}" ]; then
@@ -106,7 +139,10 @@ URL_QUERY_STRING=${URL_QUERY_STRING:1}
 URL="${KIC_BASE_URL}?${URL_QUERY_STRING}"
 
 if ! list; then
+  echo
   echo "Error: Failed to retrieve data from $URL"
   echo "Please check that the Res-Edge server is up and running with: kic check resedge"
+  echo
+
   exit 1
 fi

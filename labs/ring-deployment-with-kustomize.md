@@ -16,17 +16,32 @@ The `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data 
 ## Prerequisites
 
 - The Res-Edge Data Service needs to be deployed for this lab
-  - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge/README.md#inner-loop-with-res-edge) to deploy the data service to the cluster
+  - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge.md#inner-loop-with-res-edge) to deploy the data service to the cluster
 - Groups need to be assigned to a Namespace for this lab
   - Go to [Assign Group to Namespace lab](../labs/assign-group-to-namespace.md) to assign stores Group to imdb Namespace
 
-## Start in the repo base directory
+## Setup a clean environment
 
-  ```bash
+```bash
 
-  cd $KIC_BASE
+# start in the repo base directory
+cd "$KIC_BASE"
 
-  ```
+
+# Warning: this will delete any existing data changes and they are not recoverable
+ds reload --force
+
+# redeploy IMDb
+# will return 204 No Content
+ds namespaces set-expression --id 3 --expression /g/stores
+
+# run ci-cd locally
+ds cicd
+
+# deploy the clusters directory changes
+ds deploy
+
+```
 
 ## Verify that the data service is running
 

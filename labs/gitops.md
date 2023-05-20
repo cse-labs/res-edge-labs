@@ -8,8 +8,31 @@
 
 ## Prerequisites
 
-- Deploy the Res-Edge [data service](./deploy-res-edge/README.md)
+- Deploy the Res-Edge [data service](./deploy-res-edge.md)
 - Assign a Group to the [imdb Namespace](./assign-group-to-namespace.md)
+
+## Setup a clean environment
+
+```bash
+
+# start in the repo base directory
+cd "$KIC_BASE"
+
+
+# Warning: this will delete any existing data changes and they are not recoverable
+ds reload --force
+
+# redeploy IMDb
+# will return 204 No Content
+ds namespaces set-expression --id 3 --expression /g/stores
+
+# run ci-cd locally
+ds cicd
+
+# deploy the clusters directory changes
+ds deploy
+
+```
 
 ## Flux Setup Files
 

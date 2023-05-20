@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/cse-labs/go-vote:latest
+          image: ghcr.io/cse-labs/go-vote:0.2.0
           imagePullPolicy: Always
           args:
           - key1

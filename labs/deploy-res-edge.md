@@ -12,14 +12,6 @@
 
 > The k3d cluster will run `in` the Codespace - no need for an external cluster
 
-- Start in this lab directory
-
-  ```bash
-
-  cd $KIC_BASE/labs/deploy-res-edge
-
-  ```
-
 - Use the `kic CLI` to create and verify a new k3d cluster
 
   ```bash
@@ -57,22 +49,28 @@
 
     ```bash
 
+    # start in the deploy directory
+    cd "$KIC_BASE/deploy" || exit 1
+
     # create the namespace
     kaf ns.yaml
 
     # deploy SQL Server with sample data
     kak mssql
 
-    # "watch" for the mssql pod to get to 1/1 Running
-    # ctl-c to exit
-    kic pods --watch
+    echo
+    echo 'waiting for mssql pod to start'
+    kubectl wait pod --all --for condition=ready -n api --timeout 60s
 
-    # view K8s logs
-    kic logs mssql
+    echo
+    echo 'waiting for database recovery'
+    sleep 30
 
-    # "follow" the mssql logs until the sample data loads with "# rows affected"
-    # ctl-c to exit
-    kic logs mssql --follow
+    echo
+    echo 'loading sample data'
+
+    # load the sample data
+    ds reload --force
 
     # Verify mssql is running and the sample data is loaded
     kic check mssql
@@ -89,9 +87,11 @@
   # deploy the Res-Edge Data Service
   kak api
 
-  # "watch" for the api pod to get to 1/1 Running
-  # ctl-c to exit
-  kic pods --watch
+  echo
+  echo 'waiting for api pod to start'
+
+  # wait for pod to start
+  kubectl wait pod --all --for condition=ready -n api --timeout 60s
 
   # verify Res-Edge Data Service is `Running`
   kic check resedge
@@ -186,9 +186,12 @@ ds policies list
 # deploy observability
 kak monitoring
 
-# "watch" for the prometheus, fluentbit, and grafana pods to get to 1/1 Running
-# ctl-c to exit
-kic pods --watch
+echo
+echo "Waiting for pods to start"
+kubectl wait pod --all --for condition=ready -n logging --timeout 60s
+kubectl wait pod --all --for condition=ready -n monitoring --timeout 30s
+sleep 5
+echo
 
 # check to verify prometheus, fluentbit, and grafana are running
 kic check prometheus
@@ -209,9 +212,10 @@ kic check grafana
   # deploy webv
   kak webv
 
-  # "watch" for the webv pod to get to 1/1 Running
-  # ctl-c to exit
-  kic pods --watch
+  echo
+  echo "Waiting for WebV to start"
+  kubectl wait pod --all --for condition=ready -n api --timeout 60s
+  echo
 
   # check to verify webv is running
   kic check webv
@@ -300,4 +304,4 @@ k9s
 ## Next Lab
 
 - Next we will learn how to assign a Group to a Namespace
-  - Go to the [Assign Group to Namespace lab](../labs/assign-group-to-namespace.md)
+  - Go to the [Assign Group to Namespace lab](../assign-group-to-namespace.md)

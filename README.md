@@ -101,7 +101,7 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 - Configuration Proliferation
 - Connectivity
 
-[Lab](./labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
+[Lab](./labs/deploy-res-edge.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
 
 ## Assign a Group to a Namespace
 
@@ -121,6 +121,22 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 Application teams often want to deploy new versions of their app(s) to a growing subset of clusters. Res-Edge uses [Kustomize](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/), `Groups`, `Namespaces`, and `Applications` to provide `ring deployments`. This lab demonstrates ring deployment using Res-Edge and Kustomize.
 
 [Lab](./labs/ring-deployment-with-kustomize.md#ring-deployment-with-kustomize): Ring deployment with Res-Edge and Kustomize
+
+## Register new Namespace and Applications
+
+Application teams need to register new Namespaces and Applications in the Res-Edge Data Service in order to deploy their apps.
+
+- In this lab, we will register a new Namespace and two new Applications to the Data Service
+
+[Lab](./labs/register-namespace-and-applications.md#register-a-new-namespace-and-applications): Register a new Namespace and Applications
+
+## Deploy via GitOps (Flux)
+
+## GitOps Lab
+
+- In this lab, we will use GitOps (Flux) to deploy the Namespaces and Applications assigned to a Cluster
+
+[Lab](./labs/gitops.md#gitops-lab): Deploy via GitOps
 
 ## Support
 
