@@ -122,6 +122,22 @@ Application teams often want to deploy new versions of their app(s) to a growing
 
 [Lab](./labs/ring-deployment-with-kustomize.md#ring-deployment-with-kustomize): Ring deployment with Res-Edge and Kustomize
 
+## Register new Namespace and Applications
+
+Application teams need to register new Namespaces and Applications in the Res-Edge Data Service in order to deploy their apps.
+
+- In this lab, we will register a new Namespace and two new Applications to the Data Service
+
+[Lab](./labs/register-namespace-and-applications.md#register-a-new-namespace-and-applications): Register a new Namespace and Applications
+
+## Deploy via GitOps (Flux)
+
+## GitOps Lab
+
+- In this lab, we will use GitOps (Flux) to deploy the Namespaces and Applications assigned to a Cluster
+
+[Lab](./labs/gitops.md#gitops-lab): Deploy via GitOps
+
 ## Support
 
 This project uses GitHub Issues to track bugs and feature requests. Please search the existing issues before filing new issues to avoid duplicates.  For new issues, file your bug or feature request as a new issue.
