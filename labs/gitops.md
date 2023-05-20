@@ -8,7 +8,7 @@
 
 ## Prerequisites
 
-- Deploy the Res-Edge [data service](./deploy-res-edge/README.md)
+- Deploy the Res-Edge [data service](./deploy-res-edge.md)
 - Assign a Group to the [imdb Namespace](./assign-group-to-namespace.md)
 
 ## Setup a clean environment

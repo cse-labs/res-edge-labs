@@ -11,7 +11,7 @@
 ## Prerequisites
 
 - The Res-Edge Data Service needs to be deployed for this lab
-  - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge/README.md#inner-loop-with-res-edge) to deploy the data service to the cluster
+  - Go to [Deploy Res-Edge Data Service lab](../deploy-res-edge.md#inner-loop-with-res-edge) to deploy the data service to the cluster
 
 ## Setup a clean environment
 

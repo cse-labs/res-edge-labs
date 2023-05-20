@@ -49,8 +49,8 @@
 
     ```bash
 
-    # start in this directory
-    cd "$KIC_BASE/labs/deploy-res-edge" || exit 1
+    # start in the deploy directory
+    cd "$KIC_BASE/deploy" || exit 1
 
     # create the namespace
     kaf ns.yaml
