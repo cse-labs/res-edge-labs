@@ -101,7 +101,7 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 - Configuration Proliferation
 - Connectivity
 
-[Lab](./labs/deploy-res-edge/README.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
+[Lab](./labs/deploy-res-edge.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
 
 ## Assign a Group to a Namespace
 

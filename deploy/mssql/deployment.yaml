@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mssql
+  namespace: api
+  labels:
+    app: mssql
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mssql
+  template:
+    metadata:
+      labels:
+        app: mssql
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: mssql
+        image: ghcr.io/cse-labs/res-edge-sql:0.9
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 1433
+        volumeMounts:
+        - name: mssql
+          mountPath: /var/opt/mssql
+        resources:
+          limits:
+            memory: 2Gi
+            cpu: 1000m
+          requests:
+            memory: 2Gi
+            cpu: 500m
+      volumes:
+      - name: mssql
+        persistentVolumeClaim:
+          claimName: mssql
