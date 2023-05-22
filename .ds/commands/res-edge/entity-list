@@ -37,7 +37,7 @@ usage() {
 list() {
   # handle clusters --group
   if [ -n "${GROUP}" ]; then
-    response=$(curl --silent --show-error "$URL" | jq -r '(.[] | [.id, .name]) | @tsv')
+    response=$(curl --silent --show-error "$URL" | jq -r '(.clusters[] | [.id, .name]) | @tsv')
     echo "$response" | column -t -s $'\t' -N Id,Name -R Id -o '   '
 
   # handle groups (3 columns)
@@ -124,7 +124,7 @@ if [ -n "${GROUP}" ]; then
       usage;
   fi
 
-  KIC_BASE_URL+="group/${GROUP}"
+  KIC_BASE_URL="${DS_URL}/api/v1/groups/${GROUP}"
 fi
 
 # Implode the array with the separator "&" to create a single string
