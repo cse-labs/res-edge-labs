@@ -13,5 +13,5 @@ echo "Running ci-cd locally ..."
 docker run -it --rm \
   --net host \
   -v "$KIC_BASE":/goa \
-  ghcr.io/cse-labs/res-edge-automation:0.9 \
+  ghcr.io/cse-labs/res-edge-automation:beta \
   -s "${DS_URL}"
