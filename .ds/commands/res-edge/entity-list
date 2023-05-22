@@ -2,6 +2,11 @@
 
 PARENT_COMMAND=$(ps -o comm= $PPID)
 
+if [ -z "${DS_URL}" ]; then
+  echo "Error: DS_URL environment variable is not set"
+  exit 1
+fi
+
 usage() {
   echo
 
@@ -12,7 +17,7 @@ usage() {
   fi
 
   if [ "${KIC_RES_EDGE_ENTITYNAME}" = "clusters" ]; then
-    echo "   or: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --group name"
+    echo "   or: kic ${KIC_RES_EDGE_ENTITYNAME} ${PARENT_COMMAND} --group id | path"
     echo '   --group:  filter clusters by group'
   fi
 
@@ -29,36 +34,23 @@ usage() {
   exit 1
 }
 
-list_clusters() {
-    CLUSTERS=$(curl --silent --show-error "$URL" | jq -r ' .value[] | .clustersTree' )
-
-    if [ "$CLUSTERS" = "" ]; then
-        echo "No clusters found";
-        exit 1;
-    fi
-
-    CLUSTERS=${CLUSTERS:1}
-    CLUSTERS=${CLUSTERS::-1}
-
-    for s in $(echo "{$CLUSTERS}" | sed "s/,/\n/g"); do echo "$s" | sed "s=\/api=${DS_URL}\/api=g" | xargs curl -s | jq -r '([.id, .name]) | @tsv'; done
-}
-
 list() {
+  # handle clusters --group
   if [ -n "${GROUP}" ]; then
-    CLUSTERS=$(list_clusters)
-    echo "$CLUSTERS" | column -t -s $'\t' -N Id,Name -R Id -o '   '
+    response=$(curl --silent --show-error "$URL" | jq -r '(.[] | [.id, .name]) | @tsv')
+    echo "$response" | column -t -s $'\t' -N Id,Name -R Id -o '   '
+
+  # handle groups (3 columns)
   elif [ "${KIC_RES_EDGE_ENTITYNAME}" = "groups" ]; then
     response=$(curl --silent --show-error "$URL" | jq -r '(.value[] | [.id, .name, .namePath]) | @tsv')
     echo "$response" | column -t -s $'\t' -N Id,Name,Path -R Id -o '   '
+
+  # handle everything else
   else
     response=$(curl --silent --show-error "$URL" | jq -r '(.value[] | [.id, .name]) | @tsv')
     echo "$response" | column -t -s $'\t' -N Id,Name -R Id -o '   '
   fi
 }
-
-if [ -z "${DS_URL}" ]; then
-  echo "Error: DS_URL environment variable is not set"
-fi
 
 for arg in "$@"; do
   case $arg in
@@ -93,8 +85,10 @@ while getopts ":s:o:g:" f; do
             usage ;;
     esac
 done
+
 shift $((OPTIND-1))
 
+# validate --order-by param
 if [ "$KIC_RES_EDGE_ENTITYNAME" = "groups" ]; then
   if [ "$KIC_RES_EDGE_ENTITYNAME" = "groups" ] && [ -n "$ORDERBY" ] && [ "$ORDERBY" != "id" ] && [ "$ORDERBY" != "name" ] && [ "$ORDERBY" != "path" ]; then
     echo
@@ -107,6 +101,10 @@ elif [ -n "$ORDERBY" ] && [ "$ORDERBY" != "id" ] && [ "$ORDERBY" != "name" ]; th
   usage
 fi
 
+# base URL
+KIC_BASE_URL="${DS_URL}/api/v1/${KIC_RES_EDGE_ENTITYNAME}/"
+
+# add params if present
 URL_PARAMS=()
 
 if [ -n "${SEARCH}" ]; then
@@ -126,17 +124,18 @@ if [ -n "${GROUP}" ]; then
       usage;
   fi
 
-  URL_PARAMS+=("filter=name%20eq%20%27${GROUP}%27&select=clustersTree")
-  KIC_RES_EDGE_ENTITYNAME="groups"
+  KIC_BASE_URL+="group/${GROUP}"
 fi
-
-KIC_BASE_URL="${DS_URL}/api/v1/${KIC_RES_EDGE_ENTITYNAME}/"
 
 # Implode the array with the separator "&" to create a single string
 URL_QUERY_STRING=$(printf "&%s" "${URL_PARAMS[@]}")
 URL_QUERY_STRING=${URL_QUERY_STRING:1}
 
-URL="${KIC_BASE_URL}?${URL_QUERY_STRING}"
+URL="${KIC_BASE_URL}"
+
+if [ "$URL_QUERY_STRING" != "" ]; then
+  URL+="?${URL_QUERY_STRING}"
+fi
 
 if ! list; then
   echo
