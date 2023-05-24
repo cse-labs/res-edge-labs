@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# "ds env" will display a sorted list of environment variables used by the CLIs
-
-env | grep -e "^CLI_" -e "^DS_" -e "^KIC_" | sort
