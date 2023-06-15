@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./clusters/west-wa-sea-2303
+  path: ./clusters/west-wa-sea-2303/flux-system/listeners
   prune: true
   sourceRef:
     kind: GitRepository
