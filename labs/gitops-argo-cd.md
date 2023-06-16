@@ -10,6 +10,7 @@
 
 - You must use the :beta docker image tags for this lab
   - `.devcontainer/deploy-res-edge.sh --force` will deploy correctly and meets the pre-reqs
+- Create a branch from this branch before running the lab!
 
 ## Prerequisites
 
@@ -28,6 +29,7 @@ ds reload --force
 
 # redeploy IMDb
 # will return 204 No Content
+### todo - should we move this to after we get GitOps, heartbeat, and redis deployed?
 ds set-expression --id 3 --expression /g/stores
 
 # update GitOpsRepo and Branch
@@ -77,6 +79,8 @@ ds deploy
   - GitOps will fail once the token expires
 
 ```bash
+
+### todo - do we still need this?
 
 export KIC_REPO_FULL=$(git remote get-url --push origin)
 export KIC_BRANCH=$(git branch --show-current)
