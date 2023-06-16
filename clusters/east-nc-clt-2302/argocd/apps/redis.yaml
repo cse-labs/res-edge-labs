@@ -11,7 +11,7 @@ spec:
   source:
     path: clusters/east-nc-clt-2302/redis
     repoURL: 'https://github.com/cse-labs/res-edge-labs'
-    targetRevision: bartr
+    targetRevision: main
   project: default
   syncPolicy:
     automated:

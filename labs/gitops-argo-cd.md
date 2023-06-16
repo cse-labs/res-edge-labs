@@ -112,6 +112,9 @@ kubectl apply -k .
 
 ```bash
 
+# check for ArgoCD "Applications"
+kubectl get application -n argocd
+
 # make sure the pods are running
 kic pods --watch
 
