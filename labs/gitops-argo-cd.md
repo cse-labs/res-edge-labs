@@ -123,6 +123,9 @@ kubectl apply -k clusters/central-la-nola-2301/argocd
 # check for ArgoCD "Applications"
 kubectl get application -n argocd
 
+# force argo to sync
+# todo - figure out the best way to do this
+
 # make sure the pods are running
 kic pods --watch
 
