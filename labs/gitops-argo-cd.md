@@ -104,10 +104,10 @@ kic env
 ```bash
 
 # change central-la-nola-2301 to deploy additional member clusters
-cd "$KIC_BASE/clusters/central-la-nola-2301/argocd"
+cd "$KIC_BASE"
 
 # deploy argo
-kubectl apply -k .
+kubectl apply -k clusters/central-la-nola-2301/argocd
 
 ```
 
