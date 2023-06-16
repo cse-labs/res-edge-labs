@@ -18,7 +18,6 @@
 # start in the repo base directory
 cd "$KIC_BASE"
 
-
 # Warning: this will delete any existing data changes and they are not recoverable
 ds reload --force
 
