@@ -6,6 +6,11 @@
     - We will use `central-la-nola-2301` as our member cluster name
       - You can use any cluster in the list
 
+## Work in Progress
+
+- You must use the :beta docker image tags for this lab
+  - `.devcontainer/deploy-res-edge.sh --force` will deploy correctly and meets the pre-reqs
+
 ## Prerequisites
 
 - Deploy the Res-Edge [data service](./deploy-res-edge.md)
