@@ -11,7 +11,7 @@ spec:
   source:
     path: clusters/west-ca-sd-2301/redis
     repoURL: 'https://github.com/cse-labs/res-edge-labs'
-    targetRevision: main
+    targetRevision: bartr
   project: default
   syncPolicy:
     automated:
