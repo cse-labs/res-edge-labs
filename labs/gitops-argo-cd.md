@@ -29,10 +29,6 @@
   - Click on `Codespaces` in the lower left corner of this window
   - Rebuild Codespace
 
-- Install Res-Edge Data Service
-  - This satisfies the prerequisites
-  - `.devcontainer/deploy-res-edge.sh --force`
-
 - Verify `kic` and `ds` versions are 0.12.0
 
   ```bash
@@ -41,6 +37,10 @@
   ds -v
 
   ```
+
+- Install Res-Edge Data Service
+  - This satisfies the prerequisites
+  - `.devcontainer/deploy-res-edge.sh --force`
 
 ## Prerequisites
 
