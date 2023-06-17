@@ -53,6 +53,8 @@ sudo chsh --shell /bin/zsh vscode
 
     echo "export MY_BRANCH=\$(echo \$GITHUB_USER | tr '[:upper:]' '[:lower:]')"
 
+    # use local CLI
+    # todo - comment / uncomment as needed
     echo "export PATH=$PWD/cli:\$PATH"
 } > "$HOME/kic.env"
 
