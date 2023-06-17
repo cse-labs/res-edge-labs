@@ -79,11 +79,17 @@ git config --global core.editor "nano -w"
 echo "dowloading kic and ds CLIs"
 .devcontainer/cli-update.sh
 
+echo "installing ArgoCD"
+curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+rm argocd-linux-amd64
+
 echo "generating completions"
 gh completion -s zsh > ~/.oh-my-zsh/completions/_gh
 kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
 k3d completion zsh > "$HOME/.oh-my-zsh/completions/_k3d"
 kustomize completion zsh > "$HOME/.oh-my-zsh/completions/_kustomize"
+argocd completion zsh > "$HOME/.oh-my-zsh/completions/_argocd"
 
 echo "create local registry"
 docker network create k3d
