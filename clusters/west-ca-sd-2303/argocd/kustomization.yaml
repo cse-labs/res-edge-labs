@@ -7,9 +7,8 @@ resources:
 - namespace.yaml
 - argocd.yaml
 #- https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.5/manifests/install.yaml
-- all-apps.yaml
+- naas.yaml
 
-## changes to config maps
+## changes to config maps and NodePort
 patches:
-- path: argocd-cmd-params-cm-patch.yaml
-- path: argocd-server-nodeport-patch.yaml
+- path: patches.yaml
