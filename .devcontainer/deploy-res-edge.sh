@@ -10,7 +10,7 @@
 if [ "$1" != "--force" ]; then
     echo ""
     echo "This is a destructive command that deletes your current cluster"
-    econ "and creates a new cluster with Res-Edge Data Service deployed"
+    echo "and creates a new cluster with Res-Edge Data Service deployed"
     echo ""
     echo "Usage: .devcontainer/deploy-res-edge.sh --force"
     echo ""
