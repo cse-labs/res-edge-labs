@@ -11,7 +11,7 @@ spec:
   source:
     path: clusters/central-tx-atx-2302/heartbeat
     repoURL: 'https://github.com/cse-labs/res-edge-labs'
-    targetRevision: bartr
+    targetRevision: argo
   project: default
   syncPolicy:
     automated:

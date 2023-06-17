@@ -10,7 +10,7 @@ spec:
   source:
     path: clusters/east-nc-clt-2301/argocd/apps
     repoURL: 'https://github.com/cse-labs/res-edge-labs'
-    targetRevision: bartr
+    targetRevision: argo
   project: default
   syncPolicy:
     automated:
@@ -31,7 +31,7 @@ spec:
   source:
     path: clusters/east-nc-clt-2301/namespaces
     repoURL: 'https://github.com/cse-labs/res-edge-labs'
-    targetRevision: bartr
+    targetRevision: argo
   project: default
   syncPolicy:
     automated:
