@@ -2,7 +2,14 @@
 # argo commands
 ###
 
-scriptCommands:
-  - name: argo-password
-    short: Display initial Argo admin password
-    path: argo-password
+commands:
+  - name: argo
+    short: ArgoCD commands
+    scriptCommands:
+      - name: get-password
+        short: Display initial Argo admin password
+        path: argo/get-password
+
+      - name: login
+        short: Login to Argo CLI
+        path: argo/login
