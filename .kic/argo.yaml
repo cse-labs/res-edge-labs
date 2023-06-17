@@ -13,3 +13,11 @@ commands:
       - name: login
         short: Login to Argo CLI
         path: argo/login
+
+      - name: list
+        short: List Argo Application objects
+        path: argo/list
+
+      - name: sync
+        short: Sync Argo Applications
+        path: argo/sync
