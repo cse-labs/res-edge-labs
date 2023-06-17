@@ -49,7 +49,8 @@
 		31088,
 		32000,
 		32080,
-		32088
+		32088,
+		32089
 	],
 
 	// add labels
@@ -61,7 +62,8 @@
 		"31088": { "label": "dogs-cats" },
 		"32000": { "label": "Grafana" },
 		"32080": { "label": "Res-Edge" },
-		"32088": { "label": "tabs-spaces" }
+		"32088": { "label": "tabs-spaces" },
+		"32089": { "label": "ArgoCD-dashboard" }
 	},
 
 	"waitFor": "postCreateCommand",

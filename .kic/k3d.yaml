@@ -51,6 +51,9 @@ ports:
 - nodeFilters:
   - server:0
   port: 32088:32088
+- nodeFilters:
+  - server:0
+  port: 32089:32089
 registries: {}
 servers: 1
 volumes:
