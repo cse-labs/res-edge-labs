@@ -4,11 +4,12 @@
   - We refer to this Cluster as a "member cluster"
     - Member clusters can be listed with the `ds clusters list` command
     - We will use `central-la-nola-2301` as our member cluster name
-      - You can use any cluster in the
+      - You can use any cluster in the data service
 - The default deployment will include
   - ArgoCD
   - heartbeat
   - redis
+  - heartbeat and redis are deployed by ArgoCD based on the data service settings
 
 ## Work in Progress
 
@@ -24,7 +25,6 @@
 
   ```
 
-- todo - add CLI to branch / setup
 - Rebuild your Codespace
   - Click on `Codespaces` in the lower left corner of this window
   - Rebuild Codespace
@@ -33,7 +33,7 @@
   - This satisfies the prerequisites
   - `.devcontainer/deploy-res-edge.sh --force`
 
-- Verify `kic` and `ds` versions are 0.12.x
+- Verify `kic` and `ds` versions are 0.12.0
 
   ```bash
 
@@ -45,6 +45,16 @@
 ## Prerequisites
 
 - Deploy the Res-Edge [data service](./deploy-res-edge.md)
+
+## Getting started
+
+- Verify the data service is running
+
+  ```bash
+
+  kic check resedge
+
+  ```
 
 ## Setup a clean environment
 
@@ -85,16 +95,6 @@ ds deploy
 - Normally, the "member cluster" would be a separate cluster from the cluster running the data service
   - For simplicty, we are going to run our current cluster in both modes
   - Optionally, you can create a new Codespace that will be a "member cluster"
-
-## Getting started
-
-- Verify the data service is running
-
-  ```bash
-
-  kic check resedge
-
-  ```
 
 ## Deploy GitOps (ArgoCD)
 
