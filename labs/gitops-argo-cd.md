@@ -4,18 +4,47 @@
   - We refer to this Cluster as a "member cluster"
     - Member clusters can be listed with the `ds clusters list` command
     - We will use `central-la-nola-2301` as our member cluster name
-      - You can use any cluster in the list
+      - You can use any cluster in the
+- The default deployment will include
+  - ArgoCD
+  - heartbeat
+  - redis
 
 ## Work in Progress
 
-- You must use the :beta docker image tags for this lab
-  - `.devcontainer/deploy-res-edge.sh --force` will deploy correctly and meets the pre-reqs
-- Create a branch from this branch before running the lab!
+- Create a branch from the argo branch before running the lab
+
+  ```bash
+
+  git pull
+  git checkout argo
+  git pull
+  git checkout -b $MY_BRANCH
+  git push -u origin $MY_BRANCH
+
+  ```
+
+- todo - add CLI to branch / setup
+- Rebuild your Codespace
+  - Click on `Codespaces` in the lower left corner of this window
+  - Rebuild Codespace
+
+- Install Res-Edge Data Service
+  - This satisfies the prerequisites
+  - `.devcontainer/deploy-res-edge.sh --force`
+
+- Verify `kic` and `ds` versions are 0.12.x
+
+  ```bash
+
+  kic -v
+  ds -v
+
+  ```
 
 ## Prerequisites
 
 - Deploy the Res-Edge [data service](./deploy-res-edge.md)
-- Assign a Group to the [imdb Namespace](./assign-group-to-namespace.md)
 
 ## Setup a clean environment
 
@@ -27,14 +56,9 @@ cd "$KIC_BASE"
 # Warning: this will delete any existing data changes and they are not recoverable
 ds reload --force
 
-# redeploy IMDb
-# will return 204 No Content
-### todo - should we move this to after we get GitOps, heartbeat, and redis deployed?
-ds set-expression --id 3 --expression /g/stores
-
 # update GitOpsRepo and Branch
-# todo - use the API
-sql -Q "update Clusters set GitOpsRepo='$KIC_REPO_FULL', GitOpsBranch = '$KIC_BRANCH'; select GitOpsRepo, GitOpsBranch from Clusters"
+# todo - make this part of reload
+ds update-gitops
 
 # run ci-cd locally
 ds cicd
@@ -72,31 +96,6 @@ ds deploy
 
   ```
 
-## Set Env Vars
-
-- We use the GITHUB_TOKEN for Flux connectivity for convenience
-  - The GITHUB_TOKEN will expire about a week after the Codespace is created
-  - GitOps will fail once the token expires
-
-```bash
-
-### todo - do we still need this?
-
-export KIC_REPO_FULL=$(git remote get-url --push origin)
-export KIC_BRANCH=$(git branch --show-current)
-
-if [ "$KIC_PAT" = "" ]; then
-  export KIC_PAT=$GITHUB_TOKEN
-fi
-
-kic env
-
-```
-
-- For long running GitOps, you need to create a GitHub Personal Access Token (PAT)
-  - `export KIC_PAT=<YourGitHubPat>`
-- Update `$HOME/kic.env` to make your GitHub PAT persistent across shells
-
 ## Deploy GitOps (ArgoCD)
 
 - This deploys GitOps (ArgoCD) to your cluster
@@ -113,30 +112,47 @@ kubectl apply -k clusters/central-la-nola-2301/argocd
 
 ## Verify ArgoCD Deployment
 
-- Argo should create 3 new Namespaces
+- Argo should create 2 new Namespaces
   - heartbeat
-  - imdb
   - redis
 
 ```bash
 
 # check for ArgoCD "Applications"
-kubectl get application -n argocd
+kic check argo
 
 # force argo to sync
-# todo - figure out the best way to do this
+kic argo sync
 
 # make sure the pods are running
-kic pods --watch
+kic pods
 
 # check heartbeat
 kic check heartbeat
 
-# check imdb
-kic check imdb
-
 # check redis
 kic check redis
+
+```
+
+## Deploy IMDb
+
+```bash
+
+# add imdb app to NOLA stores (clusters)
+# will return 204 No Content
+ds set-expression --id 3 --expression /g/stores/central/la/nola
+
+# run ci-cd locally
+ds cicd
+
+# deploy the clusters directory changes
+ds deploy
+
+### todo - add steps to check for argo updates and pods
+
+# check imdb
+kic check imdb
 
 ```
 

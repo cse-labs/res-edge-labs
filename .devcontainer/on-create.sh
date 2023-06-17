@@ -52,6 +52,8 @@ sudo chsh --shell /bin/zsh vscode
     echo ""
 
     echo "export MY_BRANCH=\$(echo \$GITHUB_USER | tr '[:upper:]' '[:lower:]')"
+
+    echo "export PATH=$PWD/cli:\$PATH"
 } > "$HOME/kic.env"
 
 # create sql helper command
