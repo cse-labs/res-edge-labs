@@ -12,4 +12,4 @@ resources:
 ## changes to config maps
 patches:
 - path: argocd-cmd-params-cm-patch.yaml
-- path: nodeport-patch.yaml
+- path: argocd-server-nodeport-patch.yaml
