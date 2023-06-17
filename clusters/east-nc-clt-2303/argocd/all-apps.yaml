@@ -8,7 +8,7 @@ spec:
     namespace: argocd
     server: 'https://kubernetes.default.svc'
   source:
-    path: clusters/central-la-nola-2301/argocd/apps
+    path: clusters/east-nc-clt-2303/argocd/apps
     repoURL: 'https://github.com/cse-labs/res-edge-labs'
     targetRevision: bartr
   project: default
@@ -29,7 +29,7 @@ spec:
     namespace: argocd
     server: 'https://kubernetes.default.svc'
   source:
-    path: clusters/central-la-nola-2301/namespaces
+    path: clusters/east-nc-clt-2303/namespaces
     repoURL: 'https://github.com/cse-labs/res-edge-labs'
     targetRevision: bartr
   project: default

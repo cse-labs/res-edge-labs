@@ -8,9 +8,9 @@ spec:
     namespace: argocd
     server: 'https://kubernetes.default.svc'
   source:
-    path: clusters/central-la-nola-2301/argocd/apps
-    repoURL: 'https://github.com/cse-labs/res-edge-labs'
-    targetRevision: bartr
+    path: clusters/rea.cluster.store/argocd/apps
+    repoURL: 'rea.cluster.gitOpsRepo'
+    targetRevision: rea.cluster.gitOpsBranch
   project: default
   syncPolicy:
     automated:
@@ -29,9 +29,9 @@ spec:
     namespace: argocd
     server: 'https://kubernetes.default.svc'
   source:
-    path: clusters/central-la-nola-2301/namespaces
-    repoURL: 'https://github.com/cse-labs/res-edge-labs'
-    targetRevision: bartr
+    path: clusters/rea.cluster.store/namespaces
+    repoURL: 'rea.cluster.gitOpsRepo'
+    targetRevision: rea.cluster.gitOpsBranch
   project: default
   syncPolicy:
     automated:
