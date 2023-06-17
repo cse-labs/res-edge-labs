@@ -38,15 +38,15 @@
 
   ```
 
-- Install Res-Edge Data Service
-  - This satisfies the prerequisites
-  - `.devcontainer/deploy-res-edge.sh --force`
-
 ## Prerequisites
 
-- Deploy the Res-Edge [data service](./deploy-res-edge.md)
+- Deploy the Res-Edge Data Service
 
-## Getting started
+  ```bash
+
+  .devcontainer/deploy-res-edge.sh --force
+
+  ```
 
 - Verify the data service is running
 
@@ -56,18 +56,14 @@
 
   ```
 
-## Setup a clean environment
+## Update Data Service data
 
 ```bash
 
 # start in the repo base directory
 cd "$KIC_BASE"
 
-# Warning: this will delete any existing data changes and they are not recoverable
-ds reload --force
-
 # update GitOpsRepo and Branch
-# todo - make this part of reload
 ds update-gitops
 
 # run ci-cd locally
@@ -77,18 +73,6 @@ ds cicd
 ds deploy
 
 ```
-
-## ArgoCD Setup Files
-
-- todo - update this
-- The Flux setup yaml is located in `clusters/central-la-nola-2301/flux-system`
-  - A `Flux source` is a git repo / branch combination
-  - A `Flux kustomization` is a directory within the source (flux-system in our case)
-    - flux-kustomization watches the flux-system and flux-system/listeners directories
-    - You want to have multiple kustomizations in your deployment
-      - When a kustomization fails, the entire process is aborted
-        - This lets "your app" break "my app" if we use the same kustomization
-      - We create a kustomization per Namespace as part of Res-Edge-Automation (`ds cicd`)
 
 ## Setup Member Cluster
 
@@ -112,7 +96,8 @@ kubectl apply -k clusters/central-la-nola-2301/argocd
 
 ## Verify ArgoCD Deployment
 
-- Argo should create 2 new Namespaces
+- Argo should create 3 new Namespaces
+  - argocd
   - heartbeat
   - redis
 
@@ -121,17 +106,20 @@ kubectl apply -k clusters/central-la-nola-2301/argocd
 # check for ArgoCD "Applications"
 kic check argo
 
+# login to argo CLI
+kic argo login
+
 # force argo to sync
 kic argo sync
 
 # make sure the pods are running
 kic pods
 
-# check heartbeat
-kic check heartbeat
-
 # check redis
 kic check redis
+
+# check heartbeat
+kic check heartbeat
 
 ```
 
@@ -155,6 +143,16 @@ ds deploy
 kic check imdb
 
 ```
+
+## ArgoCD Dashboard
+
+- `kic argo get-password`
+  - copy the results to login to the dashboard
+- Click on Ports tab
+- Open ArgoCD-dashboard
+- Login
+  - admin
+  - password from above
 
 ## Additional Member Clusters
 
