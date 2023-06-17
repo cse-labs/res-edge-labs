@@ -137,7 +137,14 @@ ds cicd
 # deploy the clusters directory changes
 ds deploy
 
-### todo - add steps to check for argo updates and pods
+# force argo to sync
+kic argo sync
+
+# check for ArgoCD "Applications"
+kic check argo
+
+# wait for pods to start
+kic pods
 
 # check imdb
 kic check imdb
