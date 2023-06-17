@@ -11,4 +11,5 @@ resources:
 
 ## changes to config maps and NodePort
 patches:
-- path: patches.yaml
+- path: argo-cmd-params-cm-patch.yaml
+- path: argo-server-svc-patch.yaml
