@@ -52,6 +52,7 @@
 
   ```bash
 
+  # version should be 0.12.*
   kic check resedge
 
   ```
@@ -102,6 +103,9 @@ kubectl apply -k clusters/central-la-nola-2301/argocd
   - redis
 
 ```bash
+
+# wait for pods to start
+kic pods
 
 # check for ArgoCD "Applications"
 kic check argo
