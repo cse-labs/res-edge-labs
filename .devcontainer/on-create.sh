@@ -53,9 +53,11 @@ sudo chsh --shell /bin/zsh vscode
 
     echo "export MY_BRANCH=\$(echo \$GITHUB_USER | tr '[:upper:]' '[:lower:]')"
 
-    # use local CLI
-    # todo - comment / uncomment as needed
-    echo "export PATH=$PWD/cli:\$PATH"
+    # clone cli repo to /workspaces/cli to build
+    echo "mk='cd /workspaces/cli/src/kic && make build; cd \$OLDPWD'"
+
+    # use local CLI if present
+    echo "export PATH=/workspaces/cli/cli:$PWD/cli:\$PATH"
 } > "$HOME/kic.env"
 
 # create sql helper command
