@@ -1,0 +1,28 @@
+###
+# Res-Edge Show commands
+###
+
+commands:
+- name: show
+  short: Res-Edge Show commands
+
+  scriptCommands:
+  - name: application
+    short: Show Application JSON
+    path: show/application
+
+  - name: cluster
+    short: Show Cluster JSON
+    path: show/cluster
+
+  - name: group
+    short: Show Group JSON
+    path: show/group
+
+  - name: namespace
+    short: Show Namespace JSON
+    path: show/namespace
+
+  - name: policy
+    short: Show Policy JSON
+    path: show/policy
