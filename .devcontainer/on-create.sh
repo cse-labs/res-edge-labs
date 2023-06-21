@@ -86,12 +86,18 @@ curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/lat
 sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
 rm argocd-linux-amd64
 
+echo "installing vcluster CLI"
+curl -L -o vcluster "https://github.com/loft-sh/vcluster/releases/latest/download/vcluster-linux-amd64"
+sudo install -c -m 0755 vcluster /usr/local/bin
+rm -f vcluster
+
 echo "generating completions"
 gh completion -s zsh > ~/.oh-my-zsh/completions/_gh
 kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
 k3d completion zsh > "$HOME/.oh-my-zsh/completions/_k3d"
 kustomize completion zsh > "$HOME/.oh-my-zsh/completions/_kustomize"
 argocd completion zsh > "$HOME/.oh-my-zsh/completions/_argocd"
+vcluster completion zsh > "$HOME/.oh-my-zsh/completions/_vcluster"
 
 echo "create local registry"
 docker network create k3d
