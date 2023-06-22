@@ -1,4 +1,4 @@
-# Virtual Cluster Spike
+# Virtual Cluster Lab
 
 > Work in Progress
 
