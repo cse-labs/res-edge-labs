@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m0s
-  path: ./clusters/east-ga-atl-2301/dogs-cats
+  path: ./clusters/east-nc-clt-2301/dogs-cats
   prune: true
   sourceRef:
     kind: GitRepository

@@ -9,7 +9,7 @@ spec:
     namespace: argocd
     server: 'https://kubernetes.default.svc'
   source:
-    path: clusters/central-la-nola-2301/dogs-cats
+    path: clusters/west-wa-sea-2301/dogs-cats
     repoURL: 'https://github.com/cse-labs/res-edge-labs'
     targetRevision: bartr
   project: default

@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m0s
-  path: ./clusters/central-la-nola-2301/dogs-cats
+  path: ./clusters/west-wa-sea-2301/dogs-cats
   prune: true
   sourceRef:
     kind: GitRepository
