@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: redis
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: clusters/west-wa-sea-2303/redis
+    repoURL: 'https://github.com/cse-labs/res-edge-labs'
+    targetRevision: bartr
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

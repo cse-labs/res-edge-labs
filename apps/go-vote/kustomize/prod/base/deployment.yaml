@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rea.application.name
+  namespace: rea.namespace.name
+  labels:
+    app.kubernetes.io/name: rea.application.name
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+       maxSurge: 1
+       maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: rea.application.name
+  template:
+    metadata:
+      labels:
+        app: rea.application.name
+    spec:
+      containers:
+        - name: app
+          image: ghcr.io/cse-labs/go-vote:0.2.0
+          imagePullPolicy: Always
+          args:
+          - key1
+          - rea.application.choice1
+          - key2
+          - rea.application.choice2
+          - title
+          - rea.application.title
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 5
+            failureThreshold: 10
+            periodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: http
+            initialDelaySeconds: 5
+            failureThreshold: 10
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 200m
+              memory: 64Mi
+            limits:
+              cpu: 400m
+              memory: 128Mi

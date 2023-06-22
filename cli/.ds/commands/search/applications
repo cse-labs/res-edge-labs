@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# "ds applications list" queries the Res-Edge data service and displays a list of Applications
+
+KIC_RES_EDGE_ENTITYNAME="applications" "$CLI_CMD_DIR/res-edge/entity-list" "$@"

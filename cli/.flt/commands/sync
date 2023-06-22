@@ -1,0 +1,14 @@
+#!/bin/bash
+
+KUBECONFIG=$HOME/.kube/central-la-nola-2301.yaml kic sync &
+KUBECONFIG=$HOME/.kube/central-la-nola-2302.yaml kic sync &
+KUBECONFIG=$HOME/.kube/central-tx-atx-2301.yaml kic sync &
+KUBECONFIG=$HOME/.kube/central-tx-atx-2302.yaml kic sync &
+KUBECONFIG=$HOME/.kube/east-ga-atl-2301.yaml kic sync &
+KUBECONFIG=$HOME/.kube/east-ga-atl-2302.yaml kic sync &
+KUBECONFIG=$HOME/.kube/east-nc-clt-2301.yaml kic sync &
+KUBECONFIG=$HOME/.kube/east-nc-clt-2302.yaml kic sync &
+KUBECONFIG=$HOME/.kube/west-ca-sd-2301.yaml kic sync &
+KUBECONFIG=$HOME/.kube/west-ca-sd-2302.yaml kic sync &
+KUBECONFIG=$HOME/.kube/west-wa-sea-2301.yaml kic sync &
+KUBECONFIG=$HOME/.kube/west-wa-sea-2302.yaml kic sync

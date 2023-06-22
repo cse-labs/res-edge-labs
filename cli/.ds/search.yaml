@@ -1,0 +1,28 @@
+###
+# Res-Edge Search commands
+###
+
+commands:
+- name: search
+  short: Res-Edge Search commands
+
+  scriptCommands:
+  - name: applications
+    short: Search Applications
+    path: search/applications
+
+  - name: clusters
+    short: Search Clusters
+    path: search/clusters
+
+  - name: groups
+    short: Search Groups
+    path: search/groups
+
+  - name: namespaces
+    short: Search Namespaces
+    path: search/namespaces
+
+  - name: policies
+    short: Search Policies
+    path: search/policies

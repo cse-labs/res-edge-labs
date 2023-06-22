@@ -1,0 +1,8 @@
+###
+# root commands
+###
+
+scriptCommands:
+  - name: update-gitops
+    short: Update GitOpsRepo and GitOpsBranch in Data Service
+    path: update-gitops
