@@ -1,6 +1,13 @@
 # Virtual Cluster Spike
 
-- Work in Progress
+> Work in Progress
+
+## Setup
+
+- Create a 16 core Codespace
+- Checkout this branch
+- Create your branch
+- Rebuild your Codespace
 
 ```bash
 
@@ -18,7 +25,14 @@ rm -f vcluster
 
 ```bash
 
-# update Flux source
+# start in this directory
+cd "$KIC_BASE/vfleet"
+
+```
+
+```bash
+
+# update Flux source to your repo / branch
 code "$KIC_BASE/apps/flux-system/source.yaml"
 
 # update data service
@@ -32,12 +46,9 @@ ds deploy
 
 ```bash
 
-# start in this directory
-cd "$KIC_BASE/vfleet"
-
 # create your virtual fleet
 # set the NodePort to 32100 + cluster ID
-# on a 16 core CS, you can create 12 clusters
+# on a 16 core CS, you can create 12 clusters, maybe 14
 ./create.sh 32101 central-la-nola-2301 &
 ./create.sh 32104 central-tx-atx-2301 &
 ./create.sh 32107 east-ga-atl-2301 &
@@ -60,6 +71,13 @@ cd "$KIC_BASE/vfleet"
 
 # wait for pods
 kic pods --watch
+
+# list virtual clusters
+vcluster list
+
+```
+
+```bash
 
 # deploy flux
 ./vflux.sh central-la-nola-2301 &
@@ -96,6 +114,9 @@ flt check redis
 ```
 
 ```bash
+
+# list applications from the data service
+ds list applications
 
 # deploy dogs-cats and tabs-spaces
 ds set-expression --id 4 --expression /g/stores/central/tx
