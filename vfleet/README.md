@@ -158,8 +158,10 @@ ds list applications
 # list groups from the data service
 ds list groups
 
-# deploy dogs-cats and tabs-spaces
+# deploy dogs-cats
 ds set-expression --id 4 --expression /g/stores/central/tx
+
+# deploy tabs-spaces
 ds set-expression --id 5 --expression /g/stores/west/wa
 
 # run cicd and deploy
