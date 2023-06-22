@@ -30,5 +30,3 @@ spec:
 EOF
 
 vcluster connect $2 -n vfleet --kube-config ~/.kube/$2.yaml --update-current=false --server=https://127.0.0.1:$1
-
-KUBECONFIG=~/.kube/$2.yaml kubectl get ns
