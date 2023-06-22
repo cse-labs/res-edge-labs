@@ -49,6 +49,9 @@ vcluster connect central-la-nola-2301 &
 kic pods
 kic sync
 
+# disconnect from vCluster
+vcluster disconnect
+
 # delete your fleet
 vcluster delete central-la-nola-2301
 vcluster delete central-tx-atx-2301
