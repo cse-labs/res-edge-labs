@@ -22,42 +22,53 @@ rm -f vcluster
 cd "$KIC_BASE/vfleet"
 
 # create your virtual fleet
-vcluster create central-la-nola-2301 --connect=false
-vcluster create central-tx-atx-2301 --connect=false
-vcluster create east-ga-atl-2301 --connect=false
-vcluster create east-nc-clt-2301 --connect=false
-vcluster create west-ca-sd-2301 --connect=false
-vcluster create west-wa-sea-2301 --connect=false
+# set the NodePort to 32100 + cluster ID
+./create.sh 32101 central-la-nola-2301 &
+./create.sh 32104 central-tx-atx-2301 &
+./create.sh 32107 east-ga-atl-2301 &
+./create.sh 32110 east-nc-clt-2301 &
+./create.sh 32113 west-ca-sd-2301 &
+./create.sh 32116 west-wa-sea-2301
 
 # wait for pods
 kic pods --watch
 
 # deploy flux
-./vflux.sh central-la-nola-2301
-./vflux.sh central-tx-atx-2301
-./vflux.sh east-ga-atl-2301
-./vflux.sh east-nc-clt-2301
-./vflux.sh west-ca-sd-2301
+./vflux.sh central-la-nola-2301 &
+./vflux.sh central-tx-atx-2301 &
+./vflux.sh east-ga-atl-2301 &
+./vflux.sh east-nc-clt-2301 &
+./vflux.sh west-ca-sd-2301 &
 ./vflux.sh west-wa-sea-2301
 
-# connect to a cluster
-# this runs port forwarding in the background
-# kubectl config is updated to the vCluster
-vcluster connect central-la-nola-2301 &
+# wait for all jobs to finish
+jobs
 
-# run kic
-kic pods
-kic sync
+# force Flux to sync
+KUBECONFIG=$HOME/.kube/central-la-nola-2301.yaml kic sync &
+KUBECONFIG=$HOME/.kube/central-tx-atx-2301.yaml kic sync &
+KUBECONFIG=$HOME/.kube/east-ga-atl-2301.yaml kic sync &
+KUBECONFIG=$HOME/.kube/east-nc-clt-2301.yaml kic sync &
+KUBECONFIG=$HOME/.kube/west-ca-sd-2301.yaml kic sync &
+KUBECONFIG=$HOME/.kube/west-wa-sea-2301.yaml kic sync
 
-# disconnect from vCluster
-vcluster disconnect
+# check the pods on each cluster
+echo "central-la-nola-2301" && KUBECONFIG=$HOME/.kube/central-la-nola-2301.yaml kic pods && echo ""
+echo "central-tx-atx-2301" && KUBECONFIG=$HOME/.kube/central-tx-atx-2301.yaml kic pods && echo ""
+echo "east-ga-atl-2301" && KUBECONFIG=$HOME/.kube/east-ga-atl-2301.yaml kic pods && echo ""
+echo "east-nc-clt-2301" && KUBECONFIG=$HOME/.kube/east-nc-clt-2301.yaml kic pods && echo ""
+echo "west-ca-sd-2301" && KUBECONFIG=$HOME/.kube/west-ca-sd-2301.yaml kic pods && echo ""
+echo "west-wa-sea-2301" && KUBECONFIG=$HOME/.kube/west-wa-sea-2301.yaml kic pods && echo ""
 
 # delete your fleet
-vcluster delete central-la-nola-2301
-vcluster delete central-tx-atx-2301
-vcluster delete east-ga-atl-2301
-vcluster delete east-nc-clt-2301
-vcluster delete west-ca-sd-2301
+vcluster delete central-la-nola-2301 &
+vcluster delete central-tx-atx-2301 &
+vcluster delete east-ga-atl-2301 &
+vcluster delete east-nc-clt-2301 &
+vcluster delete west-ca-sd-2301 &
 vcluster delete west-wa-sea-2301
+
+# wait for clusters to delete
+kic pods --watch
 
 ```
