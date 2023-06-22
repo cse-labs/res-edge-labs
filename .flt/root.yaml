@@ -1,0 +1,38 @@
+###
+# root description and commands
+###
+
+name: flt
+short: Virtual Fleet CLI
+long: "Virtual Fleet CLI\n\n  A dynamic CLI to manage a Virtual Fleet"
+hidden: true
+
+scriptCommands:
+  - name: sync
+    short: Force Flux to sync
+    path: sync
+
+commands:
+- name: check
+  short: Check apps
+
+  bashCommands:
+    - name: heartbeat
+      short: Check heartbeat pods
+      command: kic pods | grep x-heartbeat
+
+    - name: redis
+      short: Check redis pods
+      command: kic pods | grep x-redis
+
+    - name: imdb
+      short: Check imdb pods
+      command: kic pods | grep x-imdb
+
+    - name: dogs-cats
+      short: Check dogs-cats pods
+      command: kic pods | grep x-dogs-cats
+
+    - name: tabs-spaces
+      short: Check tabs-spaces pods
+      command: kic pods | grep x-tabs-spaces

@@ -2,14 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: imdb
+  name: dogs-cats
   namespace: argocd
 spec:
   destination:
     namespace: argocd
     server: 'https://kubernetes.default.svc'
   source:
-    path: clusters/central-tx-atx-2303/imdb
+    path: clusters/central-la-nola-2301/dogs-cats
     repoURL: 'https://github.com/cse-labs/res-edge-labs'
     targetRevision: bartr
   project: default
