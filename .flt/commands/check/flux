@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "central-la-nola-2301" && KUBECONFIG=$HOME/.kube/central-la-nola-2301.yaml flux get kustomizations && echo ""
+echo "central-la-nola-2302" && KUBECONFIG=$HOME/.kube/central-la-nola-2302.yaml flux get kustomizations && echo ""
+echo "central-tx-atx-2301" && KUBECONFIG=$HOME/.kube/central-tx-atx-2301.yaml flux get kustomizations && echo ""
+echo "central-tx-atx-2302" && KUBECONFIG=$HOME/.kube/central-tx-atx-2302.yaml flux get kustomizations && echo ""
+echo "east-ga-atl-2301" && KUBECONFIG=$HOME/.kube/east-ga-atl-2301.yaml flux get kustomizations && echo ""
+echo "east-ga-atl-2302" && KUBECONFIG=$HOME/.kube/east-ga-atl-2302.yaml flux get kustomizations && echo ""
+echo "east-nc-clt-2301" && KUBECONFIG=$HOME/.kube/east-nc-clt-2301.yaml flux get kustomizations && echo ""
+echo "east-nc-clt-2302" && KUBECONFIG=$HOME/.kube/east-nc-clt-2302.yaml flux get kustomizations && echo ""
+echo "west-ca-sd-2301" && KUBECONFIG=$HOME/.kube/west-ca-sd-2301.yaml flux get kustomizations && echo ""
+echo "west-ca-sd-2302" && KUBECONFIG=$HOME/.kube/west-ca-sd-2302.yaml flux get kustomizations && echo ""
+echo "west-wa-sea-2301" && KUBECONFIG=$HOME/.kube/west-wa-sea-2301.yaml flux get kustomizations && echo ""
+echo "west-wa-sea-2302" && KUBECONFIG=$HOME/.kube/west-wa-sea-2302.yaml flux get kustomizations && echo ""
