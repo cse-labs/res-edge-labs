@@ -12,7 +12,7 @@
 ```bash
 
 # start in this directory
-cd "$KIC_BASE/vfleet"
+cd "$KIC_BASE/labs/vfleet"
 
 ```
 
