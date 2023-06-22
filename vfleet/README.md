@@ -52,7 +52,7 @@ code "$KIC_BASE/apps/flux-system/source.yaml"
 # update data service
 ds update-gitops
 
-# run cicd and deploy (if needed)
+# run cicd and deploy
 ds cicd
 ds deploy
 
