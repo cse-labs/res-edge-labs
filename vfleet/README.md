@@ -18,6 +18,20 @@ cd "$KIC_BASE/vfleet"
 
 ```bash
 
+# deploy Res-Edge Data Service
+"$KIC_BASE/.devcontainer/deploy-res-edge.sh"
+
+# wait for pods
+kic pods --watch
+
+# check data service
+ds list applications
+ds list groups
+
+```
+
+```bash
+
 # make sure vcluster CLI is installed
 vcluster -v
 
