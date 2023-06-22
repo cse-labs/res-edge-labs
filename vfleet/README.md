@@ -24,6 +24,10 @@ cd "$KIC_BASE/vfleet"
 # wait for pods
 kic pods --watch
 
+```
+
+```bash
+
 # check data service
 ds list applications
 ds list groups
@@ -48,6 +52,10 @@ rm -f vcluster
 
 # update Flux source to your repo / branch
 code "$KIC_BASE/apps/flux-system/source.yaml"
+
+```
+
+```bash
 
 # update data service
 ds update-gitops
@@ -86,6 +94,10 @@ ds deploy
 # wait for pods
 kic pods --watch
 
+```
+
+```bash
+
 # list virtual clusters
 vcluster list
 
@@ -114,12 +126,23 @@ vcluster list
 # ./vflux.sh west-ca-sd-2303 &
 # ./vflux.sh west-wa-sea-2303
 
+```
+
+```bash
+
 # wait for all jobs to finish
 jobs
+
+```
+
+```bash
 
 # force Flux to sync
 flt sync
 
+```
+
+```bash
 # check the pods on each cluster
 flt check flux
 flt check heartbeat
@@ -132,6 +155,9 @@ flt check redis
 # list applications from the data service
 ds list applications
 
+# list groups from the data service
+ds list groups
+
 # deploy dogs-cats and tabs-spaces
 ds set-expression --id 4 --expression /g/stores/central/tx
 ds set-expression --id 5 --expression /g/stores/west/wa
@@ -140,8 +166,16 @@ ds set-expression --id 5 --expression /g/stores/west/wa
 ds cicd
 ds deploy
 
+```
+
+```bash
+
 # force Flux to sync
 flt sync
+
+```
+
+```bash
 
 # check apps
 flt check dogs-cats
@@ -159,8 +193,16 @@ ds set-expression --id 5 --expression null
 ds cicd
 ds deploy
 
+```
+
+```bash
+
 # force Flux to sync
 flt sync
+
+```
+
+```bash
 
 # check apps
 flt check dogs-cats
