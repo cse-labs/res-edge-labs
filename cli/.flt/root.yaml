@@ -2,17 +2,13 @@
 # root description and commands
 ###
 
-name: flt
-short: Virtual Fleet CLI
-long: "Virtual Fleet CLI\n\n  A dynamic CLI to manage a Virtual Fleet"
-hidden: true
-
 scriptCommands:
   - name: sync
-    short: Force Flux to sync
+    short: Force Flux to sync each vCluster
     path: sync
 
 commands:
+## check commands
 - name: check
   short: Check apps
 
