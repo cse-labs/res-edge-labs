@@ -24,9 +24,7 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 1433
-        volumeMounts:
-        - name: mssql
-          mountPath: /var/opt/mssql
+
         resources:
           limits:
             memory: 2Gi
@@ -34,7 +32,12 @@ spec:
           requests:
             memory: 2Gi
             cpu: 500m
-      volumes:
-      - name: mssql
-        persistentVolumeClaim:
-          claimName: mssql
+
+        # volumeMounts:
+        # - name: mssql
+        #   mountPath: /var/opt/mssql
+
+      # volumes:
+      # - name: mssql
+      #   persistentVolumeClaim:
+      #     claimName: mssql
