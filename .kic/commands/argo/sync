@@ -1,3 +1,0 @@
-#!/bin/bash
-
-argocd app sync --project default

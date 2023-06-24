@@ -1,4 +1,0 @@
-#!/bin/bash
-
-pwd=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
-argocd login --insecure --plaintext --grpc-web localhost:32089 --username admin --password "$pwd"
