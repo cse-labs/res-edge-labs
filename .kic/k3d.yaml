@@ -29,16 +29,10 @@ ports:
   port: 30000:30000
 - nodeFilters:
   - server:0
-  port: 30080:30080
+  port: 30080-30089:30080-30089
 - nodeFilters:
   - server:0
-  port: 30088:30088
-- nodeFilters:
-  - server:0
-  port: 31080:31080
-- nodeFilters:
-  - server:0
-  port: 31088:31088
+  port: 31080-31089:31080-31089
 - nodeFilters:
   - server:0
   port: 31433:31433
@@ -47,13 +41,7 @@ ports:
   port: 32000:32000
 - nodeFilters:
   - server:0
-  port: 32080:32080
-- nodeFilters:
-  - server:0
-  port: 32088:32088
-- nodeFilters:
-  - server:0
-  port: 32089:32089
+  port: 32080-32089:32080-32089
 - nodeFilters:
   - server:0
   port: 32101-32199:32101-32199
