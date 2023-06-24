@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: mssql
-        image: ghcr.io/cse-labs/res-edge-sql0.12
+        image: ghcr.io/cse-labs/res-edge-sql:0.12
         imagePullPolicy: Always
         ports:
         - containerPort: 1433
