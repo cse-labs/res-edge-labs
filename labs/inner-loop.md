@@ -84,7 +84,7 @@ kic svc
 # create a new app from the dotnet web api template
 # use the dotnet7 branch
 cd apps
-kic new dotnet-webapi MyApp --branch dotnet7
+kic new dotnet-webapi MyApp
 
 # this is important as the CLI is "context aware"
 cd myapp
