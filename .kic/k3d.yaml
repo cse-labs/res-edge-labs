@@ -26,25 +26,16 @@ options:
 ports:
 - nodeFilters:
   - server:0
-  port: 30000:30000
+  port: 30000-30099:30000-30099
 - nodeFilters:
   - server:0
-  port: 30080-30089:30080-30089
-- nodeFilters:
-  - server:0
-  port: 31080-31089:31080-31089
+  port: 31000-31099:31000-31099
 - nodeFilters:
   - server:0
   port: 31433:31433
 - nodeFilters:
   - server:0
-  port: 32000:32000
-- nodeFilters:
-  - server:0
-  port: 32080-32089:32080-32089
-- nodeFilters:
-  - server:0
-  port: 32101-32199:32101-32199
+  port: 32000-32099:32000-32099
 registries: {}
 servers: 1
 volumes:
