@@ -81,6 +81,9 @@ git config --global core.editor "nano -w"
 echo "dowloading kic and ds CLIs"
 .devcontainer/cli-update.sh
 
+echo "installing dotnet coverage tool"
+dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.22
+
 echo "installing ArgoCD CLI"
 curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
 sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
