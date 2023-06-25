@@ -34,10 +34,6 @@ commands:
       short: Check Flux service
       path: check/flux
 
-    - name: argo
-      short: Check ArgoCD service
-      path: check/argo
-
     - name: imdb
       short: Check imdb service
       path: check/imdb
