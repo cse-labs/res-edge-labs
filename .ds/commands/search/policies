@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# "ds policies list" queries the Res-Edge data service and displays a list of Policies
-
-KIC_RES_EDGE_ENTITYNAME="policies" "$CLI_CMD_DIR/res-edge/entity-list" "$@"
