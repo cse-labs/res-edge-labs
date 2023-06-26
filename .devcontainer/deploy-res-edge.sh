@@ -17,9 +17,9 @@ if [ "$1" != "--force" ]; then
     exit 1
 fi
 
-set -e
+cd "$(dirname "$0")/../deploy" || exit 1
 
-cd "$KIC_BASE/deploy" || exit 1
+set -e
 
 # delete and create a new cluster
 kic cluster create
