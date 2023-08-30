@@ -47,17 +47,17 @@ ds deploy
 
   ```bash
 
-  ds search groups stores
+  ds search groups --query stores
 
   ```
 
 - Get the dogs-cats Id
-  - The ds command will return 3
+  - The ds command will return 4
     - It is coincidental that the Ids are the same
 
   ```bash
 
-  ds search namespaces dogs-cats
+  ds search namespaces --query dogs-cats
 
   ```
 
@@ -72,7 +72,7 @@ ds deploy
 
   # assign the stores Group to the Namespace
   # command will return a 204
-  ds namespaces set-expression --id 3 --expression /g/stores
+  ds set-expression --id 4 --expression /g/stores
 
   ```
 
@@ -80,7 +80,7 @@ ds deploy
 
   ```bash
 
-  ds namespaces show --id 3 | grep expression
+  ds show namespace --id 4 | grep expression
 
   ```
 
@@ -118,25 +118,19 @@ ds deploy
 
   ```bash
 
-  git add .
-  git commit -am "assigned Stores Group to dogs-cats Namespace"
-  git push
+  ds deploy
 
   ```
 
 ## Assign Groups to Namespaces
 
 - Assign the following Groups to the tabs-spaces Namespace
-  - atx (8)
-  - sea (18)
-- Assign the following Groups to the shaken-stirred Namespace
-  - beta (1)
-  - pilot (2)
+  - beta
+  - pilot
 
 ```bash
 
   # assign the Groups to the Namespace
-  ds set-expression --id 4 --expression '/g/stores/central/tx/atx or /g/stores/west/wa/sea'
   ds set-expression --id 5 --expression '/g/beta or /g/pilot'
 
   ```
@@ -145,7 +139,6 @@ ds deploy
 
   ```bash
 
-  ds show namespace --id 4 | grep expression
   ds show namespace --id 5 | grep expression
 
   ```
@@ -167,8 +160,7 @@ ds deploy
   ```
 
 - Results
-  - 4 clusters will have the tabs-spaces Namespace
-  - 6 clusters will have the shaken-stirred Namespace
+  - 6 clusters will have the tabs-spaces Namespace
 
 - Remove Groups from Namespaces
 
