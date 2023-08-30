@@ -39,7 +39,10 @@ kubectl wait pod --all --for condition=ready -n api --timeout 60s
 
 echo
 echo 'waiting for database recovery'
-sleep 30
+sleep 20
+
+# load the data
+ds reload --force
 
 # deploy the Res-Edge Data Service
 kubectl apply -k api
