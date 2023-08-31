@@ -75,11 +75,26 @@ git config --global core.editor "nano -w"
 echo "dowloading kic and ds CLIs"
 .devcontainer/cli-update.sh
 
+echo "installing dotnet coverage tool"
+dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.22
+
+echo "installing ArgoCD CLI"
+curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+rm argocd-linux-amd64
+
+echo "installing vcluster CLI"
+curl -L -o vcluster "https://github.com/loft-sh/vcluster/releases/latest/download/vcluster-linux-amd64"
+sudo install -c -m 0755 vcluster /usr/local/bin
+rm -f vcluster
+
 echo "generating completions"
 gh completion -s zsh > ~/.oh-my-zsh/completions/_gh
 kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
 k3d completion zsh > "$HOME/.oh-my-zsh/completions/_k3d"
 kustomize completion zsh > "$HOME/.oh-my-zsh/completions/_kustomize"
+argocd completion zsh > "$HOME/.oh-my-zsh/completions/_argocd"
+vcluster completion zsh > "$HOME/.oh-my-zsh/completions/_vcluster"
 
 echo "create local registry"
 docker network create k3d
@@ -92,8 +107,8 @@ kic cluster create
 echo "Pulling docker images"
 docker pull mcr.microsoft.com/dotnet/sdk:7.0
 docker pull mcr.microsoft.com/dotnet/aspnet:7.0-alpine
-docker pull ghcr.io/cse-labs/res-edge-webv:0.9
-docker pull ghcr.io/cse-labs/res-edge-automation:0.9
+docker pull ghcr.io/cse-labs/res-edge-webv:0.12
+docker pull ghcr.io/cse-labs/res-edge-automation:0.12
 
 sudo apt-get update
 

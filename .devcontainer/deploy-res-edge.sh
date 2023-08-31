@@ -10,16 +10,16 @@
 if [ "$1" != "--force" ]; then
     echo ""
     echo "This is a destructive command that deletes your current cluster"
-    econ "and creates a new cluster with Res-Edge Data Service deployed"
+    echo "and creates a new cluster with Res-Edge Data Service deployed"
     echo ""
     echo "Usage: .devcontainer/deploy-res-edge.sh --force"
     echo ""
     exit 1
 fi
 
-set -e
+cd "$(dirname "$0")/../deploy" || exit 1
 
-cd "$KIC_BASE/deploy" || exit 1
+set -e
 
 # delete and create a new cluster
 kic cluster create
@@ -39,7 +39,10 @@ kubectl wait pod --all --for condition=ready -n api --timeout 60s
 
 echo
 echo 'waiting for database recovery'
-sleep 30
+sleep 20
+
+# load the data
+ds reload --force
 
 # deploy the Res-Edge Data Service
 kubectl apply -k api

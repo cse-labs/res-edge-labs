@@ -6,7 +6,7 @@
 - The `Groups`, `Namespaces`, and `Applications` are objects in the Res-Edge Data Service
 - Res-Edge provides `GitOps Automation` to merge the objects via `GitOps` (Flux)
 
-> In this lab, we will assign the `stores Group` to the `imdb Namespace` which will result in the IMDb Namespace and Application being deployed to all 18 clusters via GitOps
+> In this lab, we will assign the `stores Group` to the `dogs-cats Namespace` which will result in the dogs-cats Namespace and Application being deployed to all 12 clusters via GitOps
 
 ## Prerequisites
 
@@ -40,24 +40,24 @@ ds deploy
 
   ```
 
-## Assign the Stores Group to the IMDb Namespace
+## Assign the Stores Group to the dogs-cats Namespace
 
 - Get the Stores Group Id
   - The ds command will return 3
 
   ```bash
 
-  ds groups list --search stores
+  ds search groups --query stores
 
   ```
 
-- Get the IMDb Id
-  - The ds command will return 3
+- Get the dogs-cats Id
+  - The ds command will return 4
     - It is coincidental that the Ids are the same
 
   ```bash
 
-  ds namespaces list --search imdb
+  ds search namespaces --query dogs-cats
 
   ```
 
@@ -72,7 +72,7 @@ ds deploy
 
   # assign the stores Group to the Namespace
   # command will return a 204
-  ds namespaces set-expression --id 3 --expression /g/stores
+  ds set-expression --id 4 --expression /g/stores
 
   ```
 
@@ -80,7 +80,7 @@ ds deploy
 
   ```bash
 
-  ds namespaces show --id 3 | grep expression
+  ds show namespace --id 4 | grep expression
 
   ```
 
@@ -104,40 +104,34 @@ ds deploy
 
   ```bash
 
-  git status
+  git status clusters
 
   ```
 
 - Results
   - 3 files will be added to each cluster
-    - The IMDb Namespace
-    - The IMDb Application
+    - The dogs-cats Namespace
+    - The dogs-cats Application
     - The `Flux listener` for GitOps
 
 - Commit the changes and push to the repo
 
   ```bash
 
-  git add .
-  git commit -am "assigned Stores Group to IMDb Namespace"
-  git push
+  ds deploy
 
   ```
 
 ## Assign Groups to Namespaces
 
-- Assign the following Groups to the dogs-cats Namespace
-  - atx (8)
-  - sea (18)
 - Assign the following Groups to the tabs-spaces Namespace
-  - beta (1)
-  - pilot (2)
+  - beta
+  - pilot
 
 ```bash
 
   # assign the Groups to the Namespace
-  ds namespaces set-expression --id 4 --expression /g/stores/central/tx/atx or /g/stores/west/wa/sea
-  ds namespaces set-expression --id 5 --expression /g/beta or /g/pilot
+  ds set-expression --id 5 --expression '/g/beta or /g/pilot'
 
   ```
 
@@ -145,8 +139,7 @@ ds deploy
 
   ```bash
 
-  ds namespaces show --id 4 | grep expression
-  ds namespaces show --id 5 | grep expression
+  ds show namespace --id 5 | grep expression
 
   ```
 
@@ -162,12 +155,11 @@ ds deploy
 
   ```bash
 
-  git status
+  git status clusters
 
   ```
 
 - Results
-  - 6 clusters will have the dogs-cats Namespace
   - 6 clusters will have the tabs-spaces Namespace
 
 - Remove Groups from Namespaces
@@ -175,14 +167,14 @@ ds deploy
   ```bash
 
   # unassign Groups from dog-cats and tabs-spaces Namespaces
-  ds namespaces set-expression --id 4 --expression null
-  ds namespaces set-expression --id 5 --expression null
+  ds set-expression --id 4 --expression null
+  ds set-expression --id 5 --expression null
 
   # run ci-cd locally
   ds cicd
 
   # no files should be dirty
-  git status
+  git status clusters
 
   ```
 

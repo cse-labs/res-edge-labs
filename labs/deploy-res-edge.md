@@ -121,11 +121,11 @@
 
 ```bash
 
-ds applications list
-ds clusters list
-ds groups list
-ds namespaces list
-ds policies list
+ds list applications
+ds list clusters
+ds list groups
+ds list namespaces
+ds list policies
 
 ```
 
@@ -137,11 +137,11 @@ ds policies list
 
     ```bash
 
-    ds applications show --id 3
-    ds clusters show --id 1
-    ds groups show --id 3
-    ds namespaces show --id 3
-    ds policies show --id 1
+    ds show applications --id 3
+    ds show clusters --id 1
+    ds show groups --id 3
+    ds show namespaces --id 3
+    ds show policies --id 1
 
     ```
 
