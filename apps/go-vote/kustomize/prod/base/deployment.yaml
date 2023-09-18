@@ -24,13 +24,18 @@ spec:
         - name: app
           image: ghcr.io/cse-labs/go-vote:0.2.0
           imagePullPolicy: Always
-          args:
-          - key1
-          - rea.application.choice1
-          - key2
-          - rea.application.choice2
-          - title
-          - rea.application.title
+
+          env:
+          - name: REGION
+            value: rea.cluster.region
+          - name: ZONE
+            value: rea.cluster.zone
+          - name: TITLE
+            value: rea.application.title
+          - name: KEY1
+            value: rea.application.choice1
+          - name: KEY2
+            value: rea.application.choice2
           ports:
             - name: http
               containerPort: 8080
