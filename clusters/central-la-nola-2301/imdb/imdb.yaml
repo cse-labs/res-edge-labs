@@ -1,30 +1,31 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: dogs-cats
-  namespace: dogs-cats
+  name: imdb
+  namespace: imdb
 spec:
   ports:
   - name: http
+    nodePort: 31080
     port: 8080
     protocol: TCP
     targetPort: http
   selector:
-    app: dogs-cats
+    app: imdb
   type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/name: dogs-cats
-  name: dogs-cats
-  namespace: dogs-cats
+    app.kubernetes.io/name: imdb
+  name: imdb
+  namespace: imdb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dogs-cats
+      app: imdb
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -33,17 +34,16 @@ spec:
   template:
     metadata:
       labels:
-        app: dogs-cats
+        app: imdb
     spec:
       containers:
       - args:
-        - key1
-        - Dogs
-        - key2
-        - Cats
-        - title
-        - Dogz RULE!
-        image: ghcr.io/cse-labs/go-vote:0.2.0
+        - --in-memory
+        - --region
+        - central
+        - --zone
+        - central-la
+        image: ghcr.io/cse-labs/imdb:1.0.0
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 10
@@ -66,8 +66,8 @@ spec:
           periodSeconds: 5
         resources:
           limits:
-            cpu: 400m
-            memory: 128Mi
+            cpu: 1000m
+            memory: 2048Mi
           requests:
-            cpu: 200m
-            memory: 64Mi
+            cpu: 500m
+            memory: 1024Mi
