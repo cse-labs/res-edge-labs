@@ -220,20 +220,16 @@ kic check grafana
   # check to verify webv is running
   kic check webv
 
-  # check the logs, you should see requests logs
-  # alternatively, you can use k9s
-  kic logs webv
-  kic logs resedge
-
   ```
 
 ### Observability in Action
 
 #### View Logs in K9s
 
+- Start `k9s` from the Codespace terminal
+
 ```bash
 
-# Start `k9s` from the Codespace terminal
 k9s
 
 ```
