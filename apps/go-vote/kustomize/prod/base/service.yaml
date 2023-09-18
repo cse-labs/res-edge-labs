@@ -10,7 +10,7 @@ spec:
   type: NodePort
   ports:
     - port: 8080
-      # nodePort: rea.application.nodePort
+      nodePort: rea.application.nodePort
       targetPort: http
       protocol: TCP
       name: http
