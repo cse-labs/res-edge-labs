@@ -39,7 +39,7 @@ kubectl wait pod --all --for condition=ready -n api --timeout 60s
 
 echo
 echo 'waiting for database recovery'
-sleep 20
+sleep 30
 
 # load the data
 ds reload --force
