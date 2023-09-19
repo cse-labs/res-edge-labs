@@ -24,10 +24,6 @@ cd "$KIC_BASE"
 # Warning: this will delete any existing data changes and they are not recoverable
 ds reload --force
 
-# (optional) redeploy IMDb
-# will return 204 No Content
-ds namespaces set-expression --id 3 --expression /g/stores
-
 # run ci-cd locally
 ds cicd
 
@@ -43,7 +39,6 @@ ds deploy
   - Open the Res-Edge app from the `Ports` tab
     - Expand Namespaces
     - Click on Post
-    - Click on Try it out
     - Replace the sample json with the below json
     - Click Execute
     - Verify a 201 response code
@@ -83,7 +78,6 @@ ds deploy
 - Open the Res-Edge app from the `Ports` tab
   - Expand Applications
   - Click on Post
-  - Click on Try it out
   - Replace the sample json with the below json
   - Click Execute
   - Verify a 201 response code
