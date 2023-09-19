@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# todo - use the API
+sql -Q "update Clusters set GitOpsRepo='$KIC_REPO_FULL', GitOpsBranch = '$KIC_BRANCH';"
+sql -Q "select GitOpsRepo, GitOpsBranch from Clusters;"
