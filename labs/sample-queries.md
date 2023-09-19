@@ -29,19 +29,19 @@ The `Data Service` exposes the following objects via a REST/OData interface
 
 ```bash
 
-ds applications list
-ds clusters list
-ds groups list
-ds namespaces list
-ds policies list
+ds list applications
+ds list clusters
+ds list groups
+ds list namespaces
+ds list policies
 
 # order by name
 # default order-by is Id
-ds applications list --order-by name
-ds clusters list --order-by name
-ds groups list --order-by name
-ds namespaces list --order-by name
-ds policies list --order-by name
+ds list applications --order-by name
+ds list clusters --order-by name
+ds list groups --order-by name
+ds list namespaces --order-by name
+ds list policies --order-by name
 
 ```
 
@@ -56,11 +56,11 @@ ds policies list --order-by name
 
 ```bash
 
-ds applications list --search imdb
-ds clusters list --search central
-ds groups list --search beta
-ds namespaces list --search imdb
-ds policies list --search no-ingress
+ds search applications --query imdb
+ds search clusters --query central
+ds search groups --query beta
+ds search namespaces --query imdb
+ds search policies --query no-ingress
 
 ```
 
@@ -71,18 +71,18 @@ ds policies list --search no-ingress
 
 ```bash
 
-ds clusters list --group beta
-ds groups list --group west
+ds list clusters --group-id 1
 
 ```
 
-- example output for `ds clusters list --group beta`
+- example output for `ds list clusters --group-id 1`
 
 ```text
 
-central-la-nola-2301
-east-ga-atl-2301
-west-ca-sd-2301
+Id   Name
+ 1   central-la-nola-2301
+ 5   east-ga-atl-2301
+ 9   west-ca-sd-2301
 
 ```
 
@@ -94,15 +94,15 @@ west-ca-sd-2301
 
     ```bash
 
-    ds applications show --id 5
-    ds clusters show --id 2
-    ds groups show --id 2
-    ds namespaces show --id 5
-    ds policies show --id 2
+    ds show application --id 5
+    ds show cluster --id 2
+    ds show group --id 2
+    ds show namespace --id 5
+    ds show policy --id 2
 
     ```
 
-- Output for `ds applications show --id 5`
+- Output for `ds show applications --id 5`
 
   ```json
 
