@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# "ds overlay --app-name <name> --version <version>" will create a new Kustomize overlay for the application
+# The overlay will set the new version to <version>
+
+set -e
+
+dir=""
+app="apps/$DS_APP_NAME"
+
+if [ ! -d "apps/$DS_APP_NAME" ]; then
+        echo "App directory '$DS_APP_NAME' not found.";
+        exit 1;
+fi
+
+if [ ! -f "apps/$DS_APP_NAME/kustomize/dev/base/kustomization.yaml" ] && [ ! -f "apps/$DS_APP_NAME/kustomize/test/kustomization.yaml" ] && [ ! -f "apps/$DS_APP_NAME/kustomize/prod/base/kustomization.yaml" ]; then
+        echo "Base Kustomization file not found for $DS_APP_NAME";
+        echo "apps/$DS_APP_NAME/kustomize/<env>/base/kustomization.yaml must exist where env is dev,test, or prod"
+        exit 1;
+fi
+
+# change to the apps/myapp dir
+cd "$app";
+
+# select the environment
+if [ -d "kustomize/dev" ]; then dir="kustomize/dev"; fi
+if [ -d "kustomize/test" ]; then dir="kustomize/test"; fi
+if [ -d "kustomize/prod" ]; then dir="kustomize/prod"; fi
+
+if [ "$dir" = "" ]; then
+        echo "Kustomize directory not found";
+        exit 1;
+fi
+
+if [ -d "$dir/overlays/$DS_APP_VERSION" ]; then
+        echo "Overlay $DS_APP_VERSION already exists";
+        exit 1;
+fi
+
+mkdir -p "$dir/overlays/$DS_APP_VERSION"
+
+cat <<EOF > "$dir/overlays/$DS_APP_VERSION/kustomization.yaml"
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  annotations:
+    version: $DS_APP_VERSION
+    clusters: none
+resources:
+- ../../base
+
+images:
+- name: $(cat $dir/base/deployment.yaml|grep image: | cut -d ':' -f 2)
+  newTag: $DS_APP_VERSION
+EOF
+
+code "$dir/overlays/$DS_APP_VERSION/kustomization.yaml"
