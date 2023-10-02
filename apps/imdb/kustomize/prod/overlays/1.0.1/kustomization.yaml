@@ -3,7 +3,7 @@ kind: Kustomization
 metadata:
   annotations:
     version: 1.0.1
-    clusters: beta
+    clusters: beta, pilot
 resources:
 - ../../base
 
