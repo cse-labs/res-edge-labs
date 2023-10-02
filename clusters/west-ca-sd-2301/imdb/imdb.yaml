@@ -43,7 +43,7 @@ spec:
         - west
         - --zone
         - west-ca
-        image: ghcr.io/cse-labs/imdb:1.0.1
+        image: ghcr.io/cse-labs/imdb:1.0.0
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 10
