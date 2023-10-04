@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: app
-        image: ghcr.io/cse-labs/res-edge:0.13
+        image: ghcr.io/cse-labs/res-edge:0.14
         imagePullPolicy: Always
         ports:
           - name: http

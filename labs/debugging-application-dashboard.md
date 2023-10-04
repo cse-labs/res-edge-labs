@@ -59,7 +59,7 @@ kak api
 kic pods --watch
 
 # verify Res-Edge Data Service is `Running`
-kic check resedge
+ds check resedge
 
 ```
 
@@ -120,7 +120,7 @@ kic check resedge
 
     ```bash
 
-    kic logs resedge | grep readyz
+    ds logs resedge | grep readyz
 
     ```
 
@@ -176,7 +176,7 @@ kic check resedge
 
     ```bash
 
-    kic logs resedge | grep healthz
+    ds logs resedge | grep healthz
 
     ```
 
@@ -230,7 +230,7 @@ kic check resedge
 
     ```bash
 
-    kic logs resedge | grep metrics
+    ds logs resedge | grep metrics
 
     ```
 
@@ -248,7 +248,7 @@ kak webv
 kic pods --watch
 
 # verify WebV is `Running`
-kic check webv
+ds check webv
 
 ```
 
@@ -275,6 +275,6 @@ kic check webv
 
   ```bash
 
-  kic logs webv
+  ds logs webv
 
   ```
