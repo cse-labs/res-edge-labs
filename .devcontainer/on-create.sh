@@ -107,8 +107,8 @@ kic cluster create
 echo "Pulling docker images"
 docker pull mcr.microsoft.com/dotnet/sdk:7.0
 docker pull mcr.microsoft.com/dotnet/aspnet:7.0-alpine
-docker pull ghcr.io/cse-labs/res-edge-webv:beta
-docker pull ghcr.io/cse-labs/res-edge-automation:beta
+docker pull ghcr.io/cse-labs/res-edge-webv:0.14
+docker pull ghcr.io/cse-labs/res-edge-automation:0.14
 
 sudo apt-get update
 
