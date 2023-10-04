@@ -73,7 +73,7 @@
     ds reload --force
 
     # Verify mssql is running and the sample data is loaded
-    kic check mssql
+    ds check mssql
 
     ```
 
@@ -94,20 +94,20 @@
   kubectl wait pod --all --for condition=ready -n api --timeout 60s
 
   # verify Res-Edge Data Service is `Running`
-  kic check resedge
+  ds check resedge
 
   ```
 
 ## Test Res-Edge Data Service
 
 - To validate the Res-Edge Data Service is working properly, we will use `kic test` to generate 200, 300, 400, and 404 responses
-  - `kic test` uses `WebValidate` (WebV) which is installed in the Codespace
+  - `ds test` uses `WebValidate` (WebV) which is installed in the Codespace
     - For more information on WebV, see [here](https://github.com/microsoft/webvalidate)
   - "Errors 0" in the summary line indicates all tests passed
 
     ```bash
 
-    kic test all
+    ds test all
 
     ```
 
@@ -194,9 +194,9 @@ sleep 5
 echo
 
 # check to verify prometheus, fluentbit, and grafana are running
-kic check prometheus
-kic check fluentbit
-kic check grafana
+ds check prometheus
+ds check fluentbit
+ds check grafana
 
 ```
 
@@ -218,7 +218,7 @@ kic check grafana
   echo
 
   # check to verify webv is running
-  kic check webv
+  ds check webv
 
   ```
 
@@ -287,7 +287,7 @@ k9s
   ```bash
 
   // make the load test smaller for now
-  kic test load --duration 5 --sleep 200
+  ds test load
 
   ```
 
@@ -296,7 +296,7 @@ k9s
 
   ```bash
 
-  kic test all
+  ds test all
 
   ```
 

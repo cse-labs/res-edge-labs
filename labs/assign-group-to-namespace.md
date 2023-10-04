@@ -36,7 +36,7 @@ ds deploy
 
   ```bash
 
-  kic check resedge
+  ds check resedge
 
   ```
 

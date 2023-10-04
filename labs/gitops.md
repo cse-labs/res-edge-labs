@@ -57,7 +57,7 @@ ds deploy
 
   ```bash
 
-  kic check resedge
+  ds check resedge
 
   ```
 
@@ -101,7 +101,7 @@ if [ "$KIC_PAT" = "" ]; then
   export KIC_PAT=$GITHUB_TOKEN
 fi
 
-kic env
+ds env
 
 ```
 
@@ -141,10 +141,10 @@ kubectl apply -f flux-kustomization.yaml
 
   ```bash
 
-  kic sync
+  ds sync
 
   # check flux
-  kic check flux
+  ds check flux
 
   ```
 
@@ -161,13 +161,13 @@ kubectl apply -f flux-kustomization.yaml
 kic pods --watch
 
 # check heartbeat
-kic check heartbeat
+ds check heartbeat
 
 # check imdb
-kic check imdb
+ds check imdb
 
 # check redis
-kic check redis
+ds check redis
 
 ```
 
