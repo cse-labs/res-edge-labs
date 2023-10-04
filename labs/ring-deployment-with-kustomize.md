@@ -42,7 +42,7 @@ ds reload --force
 
 # redeploy IMDb
 # will return 204 No Content
-ds set-expression --id 3 --expression /g/stores
+ds update namespace --id 3 --expression /g/stores
 
 # run ci-cd locally
 ds cicd

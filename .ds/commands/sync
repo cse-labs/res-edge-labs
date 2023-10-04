@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# "ds sync" runs an immediate "Flux reconcile"
+# This improves debugging as you don't have to wait for the scheduled flux reconcile to run
+
+flux reconcile source git gitops

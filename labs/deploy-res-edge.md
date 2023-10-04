@@ -73,7 +73,7 @@
     ds reload --force
 
     # Verify mssql is running and the sample data is loaded
-    kic check mssql
+    ds check mssql
 
     ```
 
@@ -94,20 +94,20 @@
   kubectl wait pod --all --for condition=ready -n api --timeout 60s
 
   # verify Res-Edge Data Service is `Running`
-  kic check resedge
+  ds check resedge
 
   ```
 
 ## Test Res-Edge Data Service
 
 - To validate the Res-Edge Data Service is working properly, we will use `kic test` to generate 200, 300, 400, and 404 responses
-  - `kic test` uses `WebValidate` (WebV) which is installed in the Codespace
+  - `ds test` uses `WebValidate` (WebV) which is installed in the Codespace
     - For more information on WebV, see [here](https://github.com/microsoft/webvalidate)
   - "Errors 0" in the summary line indicates all tests passed
 
     ```bash
 
-    kic test all
+    ds test all
 
     ```
 
@@ -137,11 +137,11 @@ ds list policies
 
     ```bash
 
-    ds show applications --id 3
-    ds show clusters --id 1
-    ds show groups --id 3
-    ds show namespaces --id 3
-    ds show policies --id 1
+    ds show application --id 3
+    ds show cluster --id 1
+    ds show group --id 3
+    ds show namespace --id 3
+    ds show policy --id 1
 
     ```
 
@@ -194,9 +194,9 @@ sleep 5
 echo
 
 # check to verify prometheus, fluentbit, and grafana are running
-kic check prometheus
-kic check fluentbit
-kic check grafana
+ds check prometheus
+ds check fluentbit
+ds check grafana
 
 ```
 
@@ -218,7 +218,7 @@ kic check grafana
   echo
 
   # check to verify webv is running
-  kic check webv
+  ds check webv
 
   ```
 
@@ -281,10 +281,13 @@ k9s
 ### Generate more requests for the dashboards
 
 - Run a 30 second load test in the background to generate 60 req/sec
+  - There is currently a bug in Codespaces where the forwarded port will quit working if too many requests are sent
+  - We are working with the GitHub team to resolve
 
   ```bash
 
-  kic test load &
+  // make the load test smaller for now
+  ds test load
 
   ```
 
@@ -293,7 +296,7 @@ k9s
 
   ```bash
 
-  kic test all
+  ds test all
 
   ```
 
