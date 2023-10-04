@@ -137,11 +137,11 @@ ds list policies
 
     ```bash
 
-    ds show applications --id 3
-    ds show clusters --id 1
-    ds show groups --id 3
-    ds show namespaces --id 3
-    ds show policies --id 1
+    ds show application --id 3
+    ds show cluster --id 1
+    ds show group --id 3
+    ds show namespace --id 3
+    ds show policy --id 1
 
     ```
 
@@ -281,10 +281,13 @@ k9s
 ### Generate more requests for the dashboards
 
 - Run a 30 second load test in the background to generate 60 req/sec
+  - There is currently a bug in Codespaces where the forwarded port will quit working if too many requests are sent
+  - We are working with the GitHub team to resolve
 
   ```bash
 
-  kic test load &
+  // make the load test smaller for now
+  kic test load --duration 5 --sleep 200
 
   ```
 
