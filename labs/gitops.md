@@ -24,7 +24,7 @@ ds reload --force
 
 # redeploy IMDb
 # will return 204 No Content
-ds namespaces set-expression --id 3 --expression /g/stores
+ds update namespace --id 3 --expression /g/stores
 
 # run ci-cd locally
 ds cicd
@@ -94,7 +94,7 @@ ds deploy
 
 ```bash
 
-export KIC_REPO_FULL=$(git remote get-url --push origin)
+export KIC_FULL_REPO=$(git remote get-url --push origin)
 export KIC_BRANCH=$(git branch --show-current)
 
 if [ "$KIC_PAT" = "" ]; then
@@ -122,7 +122,7 @@ cd "$KIC_BASE/clusters/central-la-nola-2301/flux-system"
 kubectl apply -f namespace.yaml
 
 # create the Flux secret
-flux create secret git flux-system -n flux-system --url "$KIC_REPO_FULL" -u gitops -p "$KIC_PAT"
+flux create secret git flux-system -n flux-system --url "$KIC_FULL_REPO" -u gitops -p "$KIC_PAT"
 
 # deploy the Flux components
 kubectl apply -f components.yaml
