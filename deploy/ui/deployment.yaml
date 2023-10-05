@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ui
-  namespace: api
+  namespace: res-edge
   labels:
     app: ui
 spec:

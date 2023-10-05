@@ -60,7 +60,7 @@
 
     echo
     echo 'waiting for mssql pod to start'
-    kubectl wait pod --all --for condition=ready -n api --timeout 60s
+    kubectl wait pod --all --for condition=ready -n res-edge --timeout 60s
 
     echo
     echo 'waiting for database recovery'
@@ -91,7 +91,7 @@
   echo 'waiting for api pod to start'
 
   # wait for pod to start
-  kubectl wait pod --all --for condition=ready -n api --timeout 60s
+  kubectl wait pod --all --for condition=ready -n res-edge --timeout 60s
 
   # verify Res-Edge Data Service is `Running`
   ds check resedge
@@ -214,7 +214,7 @@ ds check grafana
 
   echo
   echo "Waiting for WebV to start"
-  kubectl wait pod --all --for condition=ready -n api --timeout 60s
+  kubectl wait pod --all --for condition=ready -n res-edge --timeout 60s
   echo
 
   # check to verify webv is running
