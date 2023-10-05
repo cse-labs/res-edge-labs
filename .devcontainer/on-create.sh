@@ -58,7 +58,7 @@ sudo chsh --shell /bin/zsh vscode
 {
     echo '#!/bin/zsh'
     echo ""
-    echo '/opt/mssql-tools/bin/sqlcmd -d ist -S localhost,31433 -U sa -P $MSSQL_SA_PASSWORD "$@"'
+    echo '/opt/mssql-tools/bin/sqlcmd -d ist -S localhost,31433 -U sa -P "$MSSQL_SA_PASSWORD" "$@"'
 } > "$HOME/bin/sql"
 chmod +x "$HOME/bin/sql"
 

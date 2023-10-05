@@ -2,7 +2,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: mssql
-  namespace: api
+  namespace: res-edge
 spec:
   accessModes:
   - ReadWriteOnce
