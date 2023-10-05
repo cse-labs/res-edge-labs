@@ -53,6 +53,9 @@ echo 'waiting for api pod to start'
 # wait for pod to start
 kubectl wait pod --all --for condition=ready -n api --timeout 60s
 
+# deploy ui
+kubectl apply -k ui
+
 # deploy webv
 kubectl apply -k webv
 

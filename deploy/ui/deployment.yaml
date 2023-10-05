@@ -23,8 +23,8 @@ spec:
         image: ghcr.io/cse-labs/res-edge-ui:0.14
         imagePullPolicy: Always
         env:
-          - DATA_SERVICE_URL
-          - http://api:8080
+          - name: DATA_SERVICE_URL
+            value: http://api:8080
         ports:
           - name: http
             containerPort: 8088
