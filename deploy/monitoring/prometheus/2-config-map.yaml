@@ -107,7 +107,7 @@ data:
       - job_name: 'ui'
         metrics_path: '/metrics'
         static_configs:
-          - targets: [ 'ui.res-edge.svc.cluster.local:8080' ]
+          - targets: [ 'ui.res-edge.svc.cluster.local:8088' ]
 
       - job_name: 'webv'
         static_configs:
