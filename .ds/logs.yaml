@@ -7,8 +7,12 @@ commands:
   short: View logs
   scriptCommands:
     - name: resedge
-      short: View ResEdge logs
+      short: View ResEdge API logs
       path: logs/base-log -l app=api -n res-edge
+
+    - name: ui
+      short: View ResEdge UI logs
+      path: logs/base-log -l app=ui -n res-edge
 
     - name: webv
       short: View WebV logs
