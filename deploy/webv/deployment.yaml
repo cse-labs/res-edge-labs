@@ -54,7 +54,7 @@ spec:
           - "100"
           - --run-loop
           - --server
-          - http://api.api.svc.cluster.local:8080
+          - http://api:8080
           - --files
           - load.json
           - --zone
