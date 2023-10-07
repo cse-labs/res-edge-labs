@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webv
-  namespace: api
+  namespace: res-edge
   labels:
     app.kubernetes.io/name: webv
 spec:
@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/cse-labs/res-edge-webv:beta
+          image: ghcr.io/cse-labs/res-edge-webv:0.14
           imagePullPolicy: Always
           ports:
             - name: http
@@ -54,7 +54,7 @@ spec:
           - "100"
           - --run-loop
           - --server
-          - http://api.api.svc.cluster.local:8080
+          - http://api:8080
           - --files
           - load.json
           - --zone

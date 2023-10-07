@@ -3,7 +3,7 @@ kind: Kustomization
 
 metadata:
   annotations:
-    clusters: central, east, west
+    clusters: stores
 
 resources:
   - service.yaml

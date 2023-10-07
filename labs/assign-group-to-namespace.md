@@ -36,7 +36,7 @@ ds deploy
 
   ```bash
 
-  kic check resedge
+  ds check resedge
 
   ```
 
@@ -71,8 +71,8 @@ ds deploy
   ```bash
 
   # assign the stores Group to the Namespace
-  # command will return a 204
-  ds set-expression --id 4 --expression /g/stores
+  # command will return a 200
+  ds update namespace --id 4 --expression /g/stores
 
   ```
 
@@ -131,7 +131,7 @@ ds deploy
 ```bash
 
   # assign the Groups to the Namespace
-  ds set-expression --id 5 --expression '/g/beta or /g/pilot'
+  ds update namespace --id 5 --expression '/g/beta or /g/pilot'
 
   ```
 
@@ -167,8 +167,8 @@ ds deploy
   ```bash
 
   # unassign Groups from dog-cats and tabs-spaces Namespaces
-  ds set-expression --id 4 --expression null
-  ds set-expression --id 5 --expression null
+  ds update namespace --id 4 --expression null
+  ds update namespace --id 5 --expression null
 
   # run ci-cd locally
   ds cicd

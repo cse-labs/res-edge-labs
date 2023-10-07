@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mssql
-  namespace: api
+  namespace: res-edge
   labels:
     app: mssql
 spec:
@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: mssql
-        image: ghcr.io/cse-labs/res-edge-sql:0.13
+        image: ghcr.io/cse-labs/res-edge-sql:0.14
         imagePullPolicy: Always
         ports:
         - containerPort: 1433

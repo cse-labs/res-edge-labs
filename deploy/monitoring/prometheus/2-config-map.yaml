@@ -102,11 +102,16 @@ data:
       - job_name: 'resedge'
         metrics_path: '/metrics'
         static_configs:
-          - targets: [ 'api.api.svc.cluster.local:8080' ]
+          - targets: [ 'api.res-edge.svc.cluster.local:8080' ]
+
+      - job_name: 'ui'
+        metrics_path: '/metrics'
+        static_configs:
+          - targets: [ 'ui.res-edge.svc.cluster.local:8088' ]
 
       - job_name: 'webv'
         static_configs:
-          - targets: [ 'webv.api.svc.cluster.local:8080' ]
+          - targets: [ 'webv.res-edge.svc.cluster.local:8080' ]
 
       - job_name: 'kubernetes-cadvisor'
 
