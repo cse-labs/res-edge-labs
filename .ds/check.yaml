@@ -7,8 +7,12 @@ commands:
   short: Check local apps
   scriptCommands:
     - name: resedge
-      short: Check ResEdge
+      short: Check Res-Edge
       path: check/resedge
+
+    - name: ui
+      short: Check Res-Edge UI
+      path: check/ui
 
     - name: webv
       short: Check webv

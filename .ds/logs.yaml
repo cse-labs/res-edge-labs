@@ -7,16 +7,20 @@ commands:
   short: View logs
   scriptCommands:
     - name: resedge
-      short: View ResEdge logs
-      path: logs/base-log -l app=api -n api
+      short: View ResEdge API logs
+      path: logs/base-log -l app=api -n res-edge
+
+    - name: ui
+      short: View ResEdge UI logs
+      path: logs/base-log -l app=ui -n res-edge
 
     - name: webv
       short: View WebV logs
-      path: logs/base-log -l app=webv -n api
+      path: logs/base-log -l app=webv -n res-edge
 
     - name: mssql
       short: View MSSQL logs
-      path: logs/base-log -l app=mssql -n api
+      path: logs/base-log -l app=mssql -n res-edge
 
     - name: fluentbit
       short: View Fluent Bit logs
