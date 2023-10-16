@@ -103,6 +103,8 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 
 [Lab](./labs/deploy-res-edge.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
 
+![License](docs/images/res-edge-diagram.drawio.png)
+
 ## Assign a Group to a Namespace
 
 > This lab is a prerequisite for the Kustomize lab
