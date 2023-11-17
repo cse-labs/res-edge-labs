@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/cse-labs/res-edge-webv:0.14
+          image: ghcr.io/cse-labs/res-edge-webv:0.15
           imagePullPolicy: Always
           ports:
             - name: http
