@@ -46,19 +46,37 @@ We use GitHub Codespaces for our `inner-loop` and `outer-loop` Developer Experie
 
 ## Create a new Repo
 
+> If you are a member of the CSE-Labs org, skip this step
+
 - Click `Use this template`
   - Select `Create a new repository`
 
 ## Create a Codespace
 
-- Create a Codespace from the repo you created. You can use the same Codespace for any of the labs.
-
-> Note: make sure you create a codespace from the created repo, not the template repo.
+- If you are a member of the CSE-Labs org
+  - Create a Codespace from this repo
+- Otherwise
+  - Create a Codespace from the repo you created above
+- You can use the same Codespace for any of the labs
 
 - Click the `<> Code` button
   - Make sure the Codespaces tab is active
 - Click `Create Codespace on main`
 - After about 5 minutes, you will have a GitHub Codespace running with a complete Kubernetes Developer Experience!
+
+## Working Branch
+
+> This is required if you are using the CSE-Labs org
+
+- Create and push a working branch
+
+  ```bash
+
+  # MY_BRANCH is lower case GITHUB_USER
+  git checkout -b $MY_BRANCH
+  git push -u origin $MY_BRANCH
+
+  ```
 
 ## Environment variables
 
