@@ -1,4 +1,4 @@
-# Resilient Edge Labs
+# Res-Edge Labs
 
 ## Introduction
 
@@ -11,9 +11,8 @@ These labs walks through the rich end-to-end developer experience of KiC. The la
 ## Prerequisites
 
 - GitHub Codespaces access
-- An Azure subscription with owner access
-  - A [free Azure subscription](https://azure.microsoft.com/en-in/free/) will work for exploration
-  - Some advanced scenarios also require AAD permissions
+  - You should have this as a member of cse-labs/res-edge-labs
+  - Ping bartr if you have access issues
 
 ## GitHub Codespaces
 
@@ -43,11 +42,6 @@ We use GitHub Codespaces for our `inner-loop` and `outer-loop` Developer Experie
   - Generally `outer-loop` happens on shared compute outside of the developer workstation
   - For KiC, outer-loop uses a combination of Codespaces and `dev/test clusters` in Azure
 - As part of KiC, we have automated the creation of dev/test clusters using a repeatable, consistent, Infrastructure as Code approach
-
-## Create a new Repo
-
-- Click `Use this template`
-  - Select `Create a new repository`
 
 ## Create a Codespace
 
@@ -103,7 +97,16 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
 
 [Lab](./labs/deploy-res-edge.md#inner-loop-with-res-edge): Deploy Resilient Edge Data Service to Codespaces
 
-![Res-Edge](docs/images/res-edge-diagram.drawio.png)
+![Res-Edge](./docs/images/res-edge-diagram.drawio.png)
+
+## Deploy Data Service and UI
+
+- This is work in progress
+  - run `.devcontainer/deploy-res-edge.sh --force` from the root of the repo
+  - Click on the `Ports` tab
+  - Open port 30080 in your browser
+  - Login with any valid username and the password `bar`
+    - Login will eventually be integraded with Active Directory
 
 ## Assign a Group to a Namespace
 
@@ -115,6 +118,8 @@ The first lab is an `inner-loop` lab that introduces Codespaces and the various 
   - Assigning the `store Group` to the `imdb Namespace`
   - Running cicd locally
   - Reviewing, committing, and pushing the changes to your GitHub repo
+
+> You can do this from the UI by updating the `expression` on the `imdb Namespace` to `/g/stores`
 
 [Lab](./labs/assign-group-to-namespace.md#assign-group-to-namespace): Assign a Group to a Namespace
 

@@ -37,33 +37,29 @@
 	},
 
 	"hostRequirements": {
-		"cpus": 4
+		"cpus": 8
 	},
 
 	// forward ports for the app
 	"forwardPorts": [
 		30000,
 		30080,
-		30088,
 		31080,
 		31088,
 		32000,
 		32080,
-		32088,
-		32089
+		32088
 	],
 
 	// add labels
 	"portsAttributes": {
 		"30000": { "label": "Prometheus" },
-		"30080": { "label": "MyApp" },
-		"30088": { "label": "heartbeat" },
+		"30080": { "label": "Res-Edge-UI" },
 		"31080": { "label": "IMDb" },
 		"31088": { "label": "dogs-cats" },
 		"32000": { "label": "Grafana" },
-		"32080": { "label": "Res-Edge" },
-		"32088": { "label": "tabs-spaces" },
-		"32089": { "label": "ArgoCD-dashboard" }
+		"32080": { "label": "Res-Edge-Api" },
+		"32088": { "label": "tabs-spaces" }
 	},
 
 	"waitFor": "postCreateCommand",

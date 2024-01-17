@@ -81,7 +81,7 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(ResEdgeDuration_bucket[$interval])) by (le)",
+              "expr": "sum(increase(ResEdgeApi_Duration_bucket[$interval])) by (le)",
               "format": "heatmap",
               "interval": "",
               "intervalFactor": 1,

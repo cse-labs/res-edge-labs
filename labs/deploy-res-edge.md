@@ -31,6 +31,43 @@
 
   ```
 
+## Deploy Res-Edge Namespace
+
+- Run `alias` to view all aliases defined in the Codespace
+  - `k` is an alias for `kubectl`
+  - `kaf` is an alias for `kubectl apply -f`, where `-f` is the manifest file to apply
+  - `kak` is an alias for `kubectl apply -k`, where `-k` is the path that contains kustomization.yaml
+
+```bash
+
+# start in the deploy directory
+cd "$KIC_BASE/deploy" || exit 1
+
+# create the namespace
+kaf ns.yaml
+
+```
+
+## Deploy Secrets
+
+```bash
+
+kubectl create secret generic mssql -n res-edge \
+    --from-literal=MSSQL_SA_PASSWORD="$MSSQL_SA_PASSWORD"
+
+kubectl create secret generic api -n res-edge \
+    --from-literal=SQL_CONN_STRING="Server=mssql;Database=ist;UID=sa;Password=$MSSQL_SA_PASSWORD;TrustServerCertificate=True;" \
+    --from-literal=GIT_OPS_PAT="$PAT"
+
+# note - this is to support an easy inner-loop
+#        production should be integrated with AD, OpenId, or other SSO provider
+kubectl create secret generic ui -n res-edge \
+    --from-literal=DATA_SERVICE_URL="http://api:8080" \
+    --from-literal=USER_PWD="Res-Edge-User" \
+    --from-literal=ADMIN_PWD="Res-Edge-Admin"
+
+```
+
 ## Deploy SQL Server
 
 - In this section, we will deploy SQL Server to the local K8s cluster
@@ -42,18 +79,8 @@
   - 18 Groups
   - 5 Namespaces
   - 3 Policies
-- Run `alias` to view all aliases defined in the Codespace
-  - `k` is an alias for `kubectl`
-  - `kaf` is an alias for `kubectl apply -f`, where `-f` is the manifest file to apply
-  - `kak` is an alias for `kubectl apply -k`, where `-k` is the path that contains kustomization.yaml
 
     ```bash
-
-    # start in the deploy directory
-    cd "$KIC_BASE/deploy" || exit 1
-
-    # create the namespace
-    kaf ns.yaml
 
     # deploy SQL Server with sample data
     kak mssql
@@ -303,4 +330,4 @@ k9s
 ## Next Lab
 
 - Next we will learn how to assign a Group to a Namespace
-  - Go to the [Assign Group to Namespace lab](../assign-group-to-namespace.md)
+  - Go to the [Assign Group to Namespace lab](./assign-group-to-namespace.md)

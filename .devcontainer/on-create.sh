@@ -23,6 +23,7 @@ sudo chsh --shell /bin/zsh vscode
 
     #shellcheck disable=2016,2028
     echo 'hsort() { read -r; printf "%s\\n" "$REPLY"; sort }'
+    echo "alias kuse='kubectl config use-context'"
     echo ""
 
     # add cli to path
@@ -107,8 +108,8 @@ kic cluster create
 echo "Pulling docker images"
 docker pull mcr.microsoft.com/dotnet/sdk:7.0
 docker pull mcr.microsoft.com/dotnet/aspnet:7.0-alpine
-docker pull ghcr.io/cse-labs/res-edge-webv:0.15
-docker pull ghcr.io/cse-labs/res-edge-automation:0.15
+docker pull ghcr.io/cse-labs/res-edge-webv:0.16
+docker pull ghcr.io/cse-labs/res-edge-automation:0.16
 
 sudo apt-get update
 

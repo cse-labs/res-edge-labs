@@ -45,7 +45,7 @@ kind: Kustomization
 metadata:
   annotations:
     version: $DS_APP_VERSION
-    clusters: none
+    expression: none
 resources:
 - ../../base
 

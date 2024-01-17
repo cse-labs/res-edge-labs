@@ -6,9 +6,11 @@ resources:
   - fluentbit/daemonset.yaml
   - fluentbit/log.yaml
   - fluentbit/stdout-config.yaml
-  - prometheus/1-clusterRole.yaml
-  - prometheus/2-config-map.yaml
-  - prometheus/3-prometheus-deployment.yaml
+  - prometheus/pvc.yaml
+  - prometheus/clusterRole.yaml
+  - prometheus/config-map.yaml
+  - prometheus/deployment.yaml
+  - grafana/pvc.yaml
   - grafana/dashboard-provider.yaml
   - grafana/datasource.yaml
   - grafana/deployment.yaml

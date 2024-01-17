@@ -27,6 +27,21 @@ kic cluster create
 # create the namespace
 kubectl apply -f ns.yaml
 
+# create secrets
+kubectl create secret generic mssql -n res-edge \
+    --from-literal=MSSQL_SA_PASSWORD="$MSSQL_SA_PASSWORD"
+
+kubectl create secret generic api -n res-edge \
+    --from-literal=SQL_CONN_STRING="Server=mssql;Database=ist;UID=sa;Password=$MSSQL_SA_PASSWORD;TrustServerCertificate=True;" \
+    --from-literal=GIT_OPS_PAT="$PAT"
+
+# note - this is to support an easy inner-loop
+#        production should be integrated with AD, OpenId, or other SSO provider
+kubectl create secret generic ui -n res-edge \
+    --from-literal=DATA_SERVICE_URL="http://api:8080" \
+    --from-literal=USER_PWD="Res-Edge-User" \
+    --from-literal=ADMIN_PWD="Res-Edge-Admin"
+
 # deploy SQL Server with sample data
 kubectl apply -k mssql
 

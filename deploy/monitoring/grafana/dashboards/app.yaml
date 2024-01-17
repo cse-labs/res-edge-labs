@@ -110,7 +110,7 @@ data:
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(ResEdgeDuration_count[1m]))",
+              "expr": "sum(rate(ResEdgeApi_Duration_count[1m]))",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -193,7 +193,7 @@ data:
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(ResEdgeDuration_count[1m]))",
+              "expr": "sum(rate(ResEdgeApi_Duration_count[1m]))",
               "instant": false,
               "interval": "",
               "legendFormat": "",
@@ -320,7 +320,7 @@ data:
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(increase(ResEdgeDuration_bucket[1m])) by (le)",
+              "expr": "sum(increase(ResEdgeApi_Duration_bucket[1m])) by (le)",
               "format": "heatmap",
               "instant": false,
               "interval": "5m",
@@ -430,7 +430,7 @@ data:
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(ResEdgeDuration_count{code != \"OK\"}[1m]))",
+              "expr": "sum(rate(ResEdgeApi_Duration_count{code != \"OK\"}[1m]))",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
