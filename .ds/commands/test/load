@@ -5,7 +5,7 @@ echo "Running integration tests on the cluster with failing requests (400 and 40
 #!/bin/bash
 
 docker run --net host --rm \
-    ghcr.io/cse-labs/res-edge-webv:0.15 \
+    ghcr.io/cse-labs/res-edge-webv:0.16 \
     --server "${DS_URL}" \
     --log-format TsvMin \
     --timeout 5 \

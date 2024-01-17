@@ -20,8 +20,27 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: app
-        image: ghcr.io/cse-labs/res-edge-api:0.15
+        image: ghcr.io/cse-labs/res-edge-api:0.16
         imagePullPolicy: Always
+        args:
+          - --run-automation
+          - --git-ops-repo
+          - github.com/bartr/gitopsrepo
+          - --git-ops-branch
+          - aks
+          - --sleep
+          - "60"
+        env:
+          - name: SQL_CONN_STRING
+            valueFrom:
+              secretKeyRef:
+                name: api
+                key: SQL_CONN_STRING
+          - name: GIT_OPS_PAT
+            valueFrom:
+              secretKeyRef:
+                name: api
+                key: GIT_OPS_PAT
         ports:
           - name: http
             containerPort: 8080
@@ -47,3 +66,10 @@ spec:
           requests:
             memory: 512Mi
             cpu: 500m
+        volumeMounts:
+          - name: gitopsrepo
+            mountPath: /app/gitopsrepo
+      volumes:
+        - name: gitopsrepo
+          hostPath:
+            path: /gitopsrepo

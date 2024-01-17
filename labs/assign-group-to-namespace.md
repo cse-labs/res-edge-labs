@@ -167,8 +167,8 @@ ds deploy
   ```bash
 
   # unassign Groups from dog-cats and tabs-spaces Namespaces
-  ds update namespace --id 4 --expression null
-  ds update namespace --id 5 --expression null
+  ds update namespace --id 4 --expression none
+  ds update namespace --id 5 --expression none
 
   # run ci-cd locally
   ds cicd

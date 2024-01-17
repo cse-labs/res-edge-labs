@@ -56,7 +56,4 @@ servers: 1
 volumes:
 - nodeFilters:
   - server:0
-  volume: /prometheus:/prometheus
-- nodeFilters:
-  - server:0
-  volume: /grafana:/grafana
+  volume: $KIC_BASE/gitopsrepo:/gitopsrepo

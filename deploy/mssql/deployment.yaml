@@ -20,11 +20,16 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: mssql
-        image: ghcr.io/cse-labs/res-edge-sql:0.15
+        image: ghcr.io/cse-labs/res-edge-sql:0.16
         imagePullPolicy: Always
         ports:
         - containerPort: 1433
-
+        env:
+          - name: MSSQL_SA_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mssql
+                key: MSSQL_SA_PASSWORD
         resources:
           limits:
             memory: 2Gi
