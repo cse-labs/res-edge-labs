@@ -18,7 +18,7 @@ As an example, the Domino's Pizza Tracker automatically updates during the deliv
 
 # Res-Edge System Diagram
 
-![image](./images/res-edge-diagram.drawio.png)
+![image](/docs/images/res-edge-diagram.drawio.png)
 
 - Res-Edge Data Service
   - The Data Service is a REST API and is the core of the system
