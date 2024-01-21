@@ -1,4 +1,4 @@
-﻿# Resilient Edge - Overview
+﻿# Resilient Edge Whitepaper
 
 Customers are applying DevOps patterns to build and evolve platforms for scalable application development. Customers often begin with organizing an application platform for many applications around a few larger clusters on premises and/or hosted with one or more cloud providers. Typically, these customers are managing around 1,000 applications on fewer than 10 clusters and these are the target customers for [Azure Fleet Manager](https://learn.microsoft.com/en-us/azure/kubernetes-fleet/overview).
 
