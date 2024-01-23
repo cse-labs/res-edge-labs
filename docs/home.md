@@ -1,7 +1,5 @@
 # Resilent Edge Overview
 
-This is a test
-
 Resilient Edge (Res-Edge) is a composition of tools designed to streamline application manageability across a highly distributed application platform. The objective is to leverage a small platform team to support a highly distributed ecosystem of clusters and apps.
 
 - Developer Productivity
