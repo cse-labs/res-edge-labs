@@ -1,4 +1,4 @@
-# Res-Edge Labs
+# Pizza Labs
 
 ## Introduction
 
@@ -11,7 +11,7 @@ These labs walks through the rich end-to-end developer experience of KiC. The la
 ## Prerequisites
 
 - GitHub Codespaces access
-  - You should have this as a member of cse-labs/res-edge-labs
+  - You should have this as a member of cse-labs/pizza-labs
   - Ping bartr if you have access issues
 
 ## GitHub Codespaces

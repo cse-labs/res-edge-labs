@@ -20,12 +20,13 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: app
-        image: ghcr.io/cse-labs/res-edge-api:0.16
+        image: ghcr.io/cse-labs/res-edge-api:0.17
         imagePullPolicy: Always
         args:
           - --run-automation
+          - --no-git
           - --git-ops-repo
-          - github.com/bartr/gitopsrepo
+          - github.com/cse-labs/res-edge-labs
           - --git-ops-branch
           - aks
           - --sleep

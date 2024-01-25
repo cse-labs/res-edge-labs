@@ -115,10 +115,10 @@ ds deploy
 - Expected output
 
   ```diff
-  diff --git a/labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml b/labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
+  diff --git a/labs/pizza-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml b/labs/pizza-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
   index 76073ba..4db8893 100644
-  --- a/labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
-  +++ b/labs/res-edge-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
+  --- a/labs/pizza-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
+  +++ b/labs/pizza-labs/kustomize/clusters/central-la-nola-2301/imdb/imdb.yaml
   @@ -40,7 +40,7 @@ spec:
           - central
           - --zone
@@ -128,10 +128,10 @@ ds deploy
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10
-  diff --git a/labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml b/labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
+  diff --git a/labs/pizza-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml b/labs/pizza-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
   index 5547a84..405973e 100644
-  --- a/labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
-  +++ b/labs/res-edge-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
+  --- a/labs/pizza-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
+  +++ b/labs/pizza-labs/kustomize/clusters/east-ga-atl-2301/imdb/imdb.yaml
   @@ -40,7 +40,7 @@ spec:
           - east
           - --zone
@@ -141,10 +141,10 @@ ds deploy
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 10
-  diff --git a/labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml b/labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
+  diff --git a/labs/pizza-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml b/labs/pizza-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
   index 882d7b0..290195a 100644
-  --- a/labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
-  +++ b/labs/res-edge-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
+  --- a/labs/pizza-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
+  +++ b/labs/pizza-labs/kustomize/clusters/west-ca-sd-2301/imdb/imdb.yaml
   @@ -40,7 +40,7 @@ spec:
           - west
           - --zone

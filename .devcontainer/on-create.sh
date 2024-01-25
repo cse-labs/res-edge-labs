@@ -1,12 +1,11 @@
 #!/bin/bash
 
-# if you change this, you will have to update the sql and api containers as well
-export MSSQL_SA_PASSWORD=Res-Edge23
-
 # this runs as part of pre-build
 
 echo "on-create start"
 echo "$(date +'%Y-%m-%d %H:%M:%S')    on-create start" >> "$HOME/status"
+
+export MSSQL_NAME=localhost,31433
 
 # Change shell to zsh for vscode
 sudo chsh --shell /bin/zsh vscode
@@ -30,7 +29,7 @@ sudo chsh --shell /bin/zsh vscode
     echo "export KIC_BASE=$PWD"
     echo "export KIC_REPO_FULL=\$(git remote get-url --push origin)"
     echo "export KIC_BRANCH=\$(git branch --show-current)"
-    echo "export MSSQL_SA_PASSWORD=$MSSQL_SA_PASSWORD"
+    echo "export MSSQL_NAME=$MSSQL_NAME"
     echo ""
 
     echo "if [ -z \$DS_URL ]; then"
@@ -59,7 +58,7 @@ sudo chsh --shell /bin/zsh vscode
 {
     echo '#!/bin/zsh'
     echo ""
-    echo '/opt/mssql-tools/bin/sqlcmd -d ist -S localhost,31433 -U sa -P "$MSSQL_SA_PASSWORD" "$@"'
+    echo '/opt/mssql-tools/bin/sqlcmd -d ist -S "$MSSQL_NAME" -U sa -P "$MSSQL_SA_PASSWORD" "$@"'
 } > "$HOME/bin/sql"
 chmod +x "$HOME/bin/sql"
 
@@ -108,8 +107,8 @@ kic cluster create
 echo "Pulling docker images"
 docker pull mcr.microsoft.com/dotnet/sdk:7.0
 docker pull mcr.microsoft.com/dotnet/aspnet:7.0-alpine
-docker pull ghcr.io/cse-labs/res-edge-webv:0.16
-docker pull ghcr.io/cse-labs/res-edge-automation:0.16
+docker pull ghcr.io/cse-labs/res-edge-webv:0.17
+docker pull ghcr.io/cse-labs/res-edge-automation:0.17
 
 sudo apt-get update
 

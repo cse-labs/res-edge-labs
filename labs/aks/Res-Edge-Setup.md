@@ -19,10 +19,32 @@ kubectl apply -k cert-manager
 
 ```
 
+## Deploy External-DNS
+
+```bash
+
+# Create namespace for external-dns
+kubectl create ns external-dns
+
+# Create secret needed for external-dns to configure Azure DNS
+kubectl create secret generic azure-config-file -n external-dns --from-literal=azure.json="$(echo -n '{
+  "tenantId": "'"$(az account show --query tenantId -o tsv)"'",
+  "subscriptionId": "'"$(az account show --query id -o tsv)"'",
+  "resourceGroup": "'"$REZ_DNS_RG"'",
+  "aadClientId": "'"$REZ_EXT_DNS_APP_ID"'",
+  "aadClientSecret": "'"$REZ_EXT_DNS_PASSWORD"'"
+}')"
+
+# Deploy external-dns
+kubectl apply -k external-dns
+```
+
 ## Setup Let's Encrypt (optional)
 
 - Be careful not to exceed the Let's Encrypt rate limits while testing
-  - You need to change all of the ingress rules in `GitOps Repo Applications`
+  - Update the e-mail address for Let's Encrypt under `lets-encrypt/lets-encrypt.yaml`
+  - In some scenarios, you might choose to use Let's Encrypt staging environment. Update accordingly
+- If you change the DNS Zone (e.g. res-edge.com), update the `ingress.yaml` under `ui` and `api` to include your correct dns
 
 ```bash
 
@@ -42,6 +64,7 @@ code api/deployment.yaml
 
 - Create Secrets
   - Make sure the `PAT` environment variable is set and has permissions to the GitOps Repo
+  - Note: Codespaces `PAT` expire, it is reccomended to create and assign your own `PAT`
 
 ```bash
 
@@ -88,47 +111,14 @@ kubectl get pods -A
 
 ```
 
-## Setup DNS
-
-- Get the Load Balancer public IP
+## Check DNS
 
 ```bash
 
-# get the public load balancer IP
-export REZ_IP=$(kubectl get svc -n ingress-nginx ingress-nginx-controller -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-
-# check the env vars
-env | grep ^REZ_
-
-```
-
-- Create a DNS A Record in Azure DNS
-
-```bash
-
-# set naked domain (for UI)
-az network dns record-set a add-record \
--g "$REZ_DNS_RG" \
--z "$REZ_DNS_ZONE" \
--n "@" \
--a "$REZ_IP" \
---ttl 10 \
--o table
-
-# set api.domain
-az network dns record-set a add-record \
--g "$REZ_DNS_RG" \
--z "$REZ_DNS_ZONE" \
--n "api" \
--a "$REZ_IP" \
---ttl 10 \
--o table
-
-# Check DNS
 http https://$REZ_DNS_ZONE/version
 http https://api.$REZ_DNS_ZONE/version
 
-  ```
+```
 
 ## Cleanup
 
@@ -141,25 +131,5 @@ kubectl config delete-context $REZ_AKS_NAME
 # todo - delete cluster
 #az group delete -y --no-wait -g $REZ_AKS_RG
 #az group list -o table
-
-```
-
-- Delete the A record(s)
-
-```bash
-
-az network dns record-set a remove-record \
--g "$REZ_DNS_RG" \
--z "$REZ_DNS_ZONE" \
--n "@" \
--a "$REZ_IP" \
--o table
-
-az network dns record-set a remove-record \
--g "$REZ_DNS_RG" \
--z "$REZ_DNS_ZONE" \
--n "api" \
--a "$REZ_IP" \
--o table
 
 ```

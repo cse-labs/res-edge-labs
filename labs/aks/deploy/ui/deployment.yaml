@@ -20,9 +20,13 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: app
-        image: ghcr.io/cse-labs/res-edge-ui:0.16
+        image: ghcr.io/cse-labs/res-edge-ui:0.17
         imagePullPolicy: Always
         env:
+          - name: CONTENT_REPO
+            value: cse-labs/res-edge-labs
+          - name: CONTENT_BRANCH
+            value: bartr
           - name: DATA_SERVICE_URL
             valueFrom:
               secretKeyRef:

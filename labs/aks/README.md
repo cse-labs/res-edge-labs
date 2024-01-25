@@ -1,10 +1,11 @@
 # Deploy Res-Edge to AKS
 
-This lab is designed to help you securely expose your Kubernetes services over HTTPS and deploy multiple applications using `path-based` and `host-based` routing. This can be useful if you have multiple applications running on your cluster and want to ensure that each one is accessible via its own unique and HTTPS secured URL. This lab uses:
+This lab is designed to help you securely expose your Kubernetes services over HTTPS and to deploy multiple applications using `path-based` and `host-based` routing. This can be useful if you have multiple applications running on your cluster and want to ensure that each one is accessible via its own unique and HTTPS secured URL. This lab uses:
 
 - [AKS Cluster](https://learn.microsoft.com/en-us/azure/aks/): Azure Kubernetes Service to deploy and manage cloud native applications in Azure
 - [NGINX](https://nginx.org/): An ingress controller for Kubernetes that works by deploying the Envoy proxy as a reverse proxy and load balancer
 - [cert-manager](https://cert-manager.io/docs/): A Certificate Controller to provision and manage TLS certifications from `Let's Encrypt` or any other issuer
+- [External-DNS](https://kubernetes-sigs.github.io/external-dns): An open-source Kubernetes project that automatically synchronizes exposed Kubernetes services and ingresses with Azure DNS, as well as with other providers
 - [Let's Encrypt (optional)](https://letsencrypt.org/about/): A Certificate Authority (CA) to get a certificate for your domain
 
 ## Prerequisites
@@ -16,7 +17,7 @@ This lab is designed to help you securely expose your Kubernetes services over H
 
 ## Getting Started
 
-- Create / checkout a GitOps repo and branch
+- Create / checkout a GitOps repo and branch to be used for our application deployment
 
 ```bash
 
@@ -36,7 +37,7 @@ cd .gitops
 
 ```
 
-- Create a new branch
+- Create a new branch from existing aks branch
 
 ```bash
   git checkout aks
@@ -52,7 +53,7 @@ cd .gitops
 
 ```bash
 
-# use a device code or service principle from Codespaces
+# Use a device code or service principal from Codespaces
 az login [--use-device-code]
 
 ```
@@ -71,8 +72,8 @@ az provider register --wait --consent-to-permissions --namespace Microsoft.Exten
 
 ```
 
-- Set env variables
-  - If you change the DNS Zone, make sure to update all ingress rules!
+- Set environment variables
+  - If you change the DNS Zone (e.g. res-edge.com), update the `ingress.yaml` under `aks/deploy/ui` and `aks/deploy/api` to include your correct dns
 
 ```bash
 
@@ -84,6 +85,26 @@ export REZ_DNS_RG=tld
 export REZ_REPO="$KIC_REPO_FULL"
 export REZ_BRANCH=aks-$MY_BRANCH
 export REZ_LOCATION=eastus
+
+# External-DNS will connect to Azure DNS to modify its configuration, requiring a single service principal for authentication across each cluster.
+
+# Create the service principal
+export REZ_EXT_DNS_SP_NAME="res-edge-ext-dns-sp"
+export REZ_EXT_DNS_SP=$(az ad sp create-for-rbac --name $REZ_EXT_DNS_SP_NAME)
+export REZ_EXT_DNS_APP_ID=$(echo $REZ_EXT_DNS_SP | jq -r '.appId')
+export REZ_EXT_DNS_PASSWORD=$(echo $REZ_EXT_DNS_SP | jq -r '.password')
+
+# Grant access to Azure DNS zone for the service principal.
+export REZ_DNS_ID=$(az network dns zone show -n $REZ_DNS_ZONE -g $REZ_DNS_RG --query "id" -o tsv)
+export REZ_DNS_RG_ID=$(az group show -g $REZ_DNS_RG --query "id" -o tsv)
+
+# Assign reader to the resource group
+az role assignment create --role "Reader" --assignee $REZ_EXT_DNS_APP_ID --scope $REZ_DNS_RG_ID
+
+# Assign contributor to DNS Zone
+az role assignment create --role "DNS Zone Contributor" --assignee $REZ_EXT_DNS_APP_ID --scope $REZ_DNS_RG_ID
+
+# Important: Choose one of the following REZ_AKS_NAME variables, depending which type of cluster you are creating
 
 # Res-Edge cluster
 export REZ_AKS_NAME=res-edge
@@ -97,9 +118,6 @@ export REZ_AKS_NAME=west-ca-sd-2301
 export REZ_AKS_NAME=central-tx-atx-2301
 export REZ_AKS_NAME=east-nc-clt-2301
 export REZ_AKS_NAME=west-wa-sea-2301
-
-# select one of the clusters from above
-export REZ_AKS_NAME=central-la-nola-2301
 
 # Set Location and Resource Group names
 export REZ_AKS_NODE_RG=nodes-${REZ_AKS_NAME}
@@ -177,10 +195,12 @@ echo $REZ_ARC_TOKEN
 
 ```
 
+Now that the cluster has been created, choose one of the following sets of instructions, depending on the type of cluster, to guide you on how to configure it.
+
 ## Deploy Res-Edge
 
-- Res-Edge Setup - 'Res-Edge-Setup.md'
+- [Res-Edge Setup](Res-Edge-Setup.md)
 
-## Deploy `Member Cluster(s)`
+## Deploy Member Cluster(s)
 
-- Member Cluster Setup - `Member-Cluster-Setup.md`
+- [Member Cluster Setup](Member-Cluster-Setup.md)
