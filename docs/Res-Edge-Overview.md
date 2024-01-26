@@ -1,24 +1,18 @@
-﻿# Resilient Edge - Overview
+﻿# Res-Edge (Resilient Edge) - Overview
 
-Customers are applying DevOps patterns to build and evolve platforms for scalable application development. Customers often begin with organizing an application platform for many applications around a few larger clusters on premises and/or hosted with one or more cloud providers. Typically, these customers are managing around 1,000 applications on fewer than 10 clusters and these are the target customers for [Azure Fleet Manager](https://learn.microsoft.com/en-us/azure/kubernetes-fleet/overview).
+Res-edge is a system that facilitates managing application deployments to fleet or fleets of Kubernetes clusters by leveraging [GitOps principles](/docs/gitops.md). Res-edge is designed to simplify the process of managing what applications are deployed to an individual cluster or multiple clusters in the fleet(s).
 
-We have encountered Retail and Manufacturing customers with an inverted challenge: having a small set (tens to hundreds) of applications that need to operate across a large number (many thousands) of edge clusters. For example, a customer has thousands of store locations to which they need to deploy a set of in-store applications. The scale of cluster management and associated application deployment stresses the typical cluster and application management tooling with which we have become familiar. New pressure points introduced by the inversion include:
+By using GitOps principles, Res-Edge provides a reliable and scalable way to manage a fleet or fleets of Kubernetes clusters and applications. The system ensures that the desired state of each cluster (what applications are deployed to the cluster) is always maintained, and that the deployments are performed in a consistent and repeatable manner. GitOps principles ensure that there is a picture of what is currently deployed and an audit history of what has previously been deployed to what cluster(s).  GitOps also provides the ability to revert the cluster to a prior state.
 
-- Managing Clusters at Scale - How can we configure and observe 30k clusters?
-- Matching Applications and Clusters - Which apps are or should be running where?
-- Configuration Proliferation - How do we deal with 6M configuration files?
-- Connectivity - How do we deal with unreliable or constrained bandwidth?
+*The name Res-Edge comes from the initial use case for the project, which was to help manage edge nodes for retail use cases, where the number of clusters in the fleet requires massive scale.  This though does not preclude Res-Edge from being extremely useful in a non-edge environment.*
 
-Resilient Edge is a composition of tools designed to streamline application manageability across a highly distributed application platform. The objective is to leverage a small platform team to support a highly distributed ecosystem of clusters and apps. We will step through how Resilient Edge (Res-Edge) addresses each pressure point listed above.
+## Res-Edge Features
 
-## Cluster Management at Scale
-
-Platform operators with thousands to tens of thousands of clusters need additional tooling to reduce the complexity of managing those clusters and the applications running on them:
+Res-Edge is designed to address the following needs when used in conjunction with a GitOps tool/operator like [Flux](https://fluxcd.io) or [Argo CD](https://fluxcd.io/):
 
 - Maintaining an inventory of clusters
-- Organizing clusters into groups, in particular groups related to business hierarchies like geography or business units
-- Defining policies and assigning them to clusters based on business needs
-- Observing clusters and apps based on business hierarchies
+- Maintaining an inventory of applications
+- Manage which applications are deployed to which clusters
 
 Res-Edge plans to address these gaps with the addition of a centralized "Inventory Service" and associated operator workloads running within clusters to provision, manage, apply policy to, and observe clusters in groups instead of individually. A centralized Inventory service will follow standard GitOps patterns, however, these are now orchestrated on groups of clusters providing platform operators the necessary levers needed to operate on many clusters at once instead of individually.
 
@@ -93,4 +87,3 @@ Together these tools address the major paint points we anticipate. For more info
 - Azure Fleet Manager, combined with Arc, Azure Monitor Lite, and other offerings, might eventually focus on edge cluster scenarios with a similar approach, particularly use of a custom operator to avoid Configuration Proliferation and GitOps bottlenecks.
 - [Chik-fil-a has tooling](https://medium.com/chick-fil-atech/enterprise-restaurant-compute-f5e2fd63d20f) that distributes each configuration pull request (PR) to the individual GitOps repos for all stores for which the change is intended.
 - [Rancher Fleet](https://fleet.rancher.io/) presents a different approach to leverage for large-scale edge cluster management. Rancher Fleet groups allows for managing clusters in groups, makes use of deployment bundles, and uses GateKeeper to simplify application and policy management From the Fleet documentation: "Note that cluster labels and overlays are critical features in Fleet as they determine which clusters will get each part of the bundle."
-- Several crews have tried different things for specific engagements. Here's an example of a crew that built a REST service on top of GitOps to help with a certain amount of edge cluster scale: https://dev.azure.com/CSECodeHub/516879%20-%20BASF%20Pump%20Monitoring/\_wiki/wikis/EFO\_Wiki\_Template/32398/What-we-delivered
