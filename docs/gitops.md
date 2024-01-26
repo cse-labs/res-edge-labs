@@ -10,4 +10,4 @@ When dealing with a large number of clusters or applications, managing GitOps re
 
 ## GitOps Flow With Res-Edge
 
-![Gitops Process Diagram](images/gitops.jpeg "GitOps Flow")
+![Gitops Process Diagram](/docs/images/gitops.jpeg "GitOps Flow")
