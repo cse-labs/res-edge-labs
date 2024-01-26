@@ -1,4 +1,6 @@
-﻿# Res-Edge (Resilient Edge) - Overview
+﻿# Res-Edge (Resilient Edge)
+
+## Overview
 
 Res-edge is a system that facilitates managing application deployments to fleet or fleets of Kubernetes clusters by leveraging [GitOps principles](/docs/gitops.md). Res-edge is designed to simplify the process of managing what applications are deployed to an individual cluster or multiple clusters in the fleet(s).
 
@@ -10,15 +12,15 @@ By using GitOps principles, Res-Edge provides a reliable and scalable way to man
 
 Res-Edge is designed to address the following needs when used in conjunction with a GitOps tool/operator like [Flux](https://fluxcd.io) or [Argo CD](https://fluxcd.io/):
 
-1. Inventory
-   1. Organize clusters by business hierarchies
-   1. Manage and track application deployments to clusters
-1. Namespace as a Service
-   1. Simplify app team interface to platform
-   1. Scalable policy management
-1. Configuration Service
-   1. Scale GitOps via business hierarchies and kustomize
-1. CLI
+- Inventory
+  - Organize clusters by business hierarchies
+  - Manage and track application deployments to clusters
+- Namespace as a Service
+  - Simplify app team interface to platform
+  - Scalable policy management
+- Configuration Service
+  - Scale GitOps via business hierarchies and kustomize
+- CLI
 
 ## Other Known Approaches
 
