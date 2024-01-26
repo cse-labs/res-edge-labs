@@ -17,10 +17,6 @@ Res-Edge is designed to address the following needs when used in conjunction wit
 - [Configuration Service](/docs/configuration_service.md) - uses applications, namespaces, clusters, and policies to maintain a GitOps repository.
 - [CLI](/docs/cli.md) - a CLI is provided for expediency and to enable automation/scripting
 
-## Other Known Approaches
+## GitOps With Res-Edge
 
-- Azure Fleet Manager, combined with Arc, Azure Monitor Lite, and other offerings, might eventually focus on edge cluster scenarios with a similar approach, particularly use of a custom operator to avoid Configuration Proliferation and GitOps bottlenecks.
-- [Chik-fil-a has tooling](https://medium.com/chick-fil-atech/enterprise-restaurant-compute-f5e2fd63d20f) that distributes each configuration pull request (PR) to the individual GitOps repos for all stores for which the change is intended.
-- [Rancher Fleet](https://fleet.rancher.io/) presents a different approach to leverage for large-scale edge cluster management. Rancher Fleet groups allows for managing clusters in groups, makes use of deployment bundles, and uses GateKeeper to simplify application and policy management From the Fleet documentation: "Note that cluster labels and overlays are critical features in Fleet as they determine which clusters will get each part of the bundle."
-
-*The name Res-Edge comes from the initial use case for the project, which was to help manage edge nodes for retail use cases, where the number of clusters in the fleet requires massive scale.  This though does not preclude Res-Edge from being extremely useful in a non-edge environment.*
+![Gitops Process Diagram](/docs/images/res-edge-gitops.png "GitOps Flow")
