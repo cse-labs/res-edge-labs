@@ -13,7 +13,9 @@ By using GitOps principles, Res-Edge provides a reliable and scalable way to man
 - [Create Namespace(s)](/docs/namespaces.md)
 - [Create Application(s) and Assign to a Namespace](/docs/applications.md)
 
-Res-Edge will create/maintain the GitOps directory structure for the clusters based on the items created above.
+The Res-Edge data service will create/maintain the GitOps directory structure for the clusters based on the items created above.
+
+> **NOTE:** Res-Edge relies on a GitOps tool to synchronize the k8s cluster state to the state described in the GitOps directory structure.
 
 ## GitOps With Res-Edge
 
