@@ -2,20 +2,18 @@
 
 ## Overview
 
-Res-edge is a system that facilitates managing application deployments to fleet or fleets of Kubernetes clusters by leveraging [GitOps principles](/docs/gitops.md). Res-edge is designed to simplify the process of managing what applications are deployed to an individual cluster or multiple clusters in the fleet(s).
+Res-edge is a system that facilitates managing application deployments to a fleet or fleets of Kubernetes clusters by leveraging [GitOps principles](/docs/gitops.md). Res-edge is designed to simplify the process of managing what applications are deployed to an individual cluster or multiple clusters in the fleet(s).
 
 By using GitOps principles, Res-Edge provides a reliable and scalable way to manage a fleet or fleets of Kubernetes clusters and applications. The system ensures that the desired state of each cluster (what applications are deployed to the cluster) is always maintained, and that the deployments are performed in a consistent and repeatable manner. GitOps principles ensure that there is a picture of what is currently deployed and an audit history of what has previously been deployed to what cluster(s).  GitOps also provides the ability to revert the cluster to a prior state.
 
-## Res-Edge Features
+## Res-Edge Process Overview
 
-Res-Edge is designed to address the following needs when used in conjunction with a GitOps tool/operator like [Flux](https://fluxcd.io) or [Argo CD](https://fluxcd.io/):
+- [Create Application Deployment Template Directory](/docs/deployment_template.md)
+- [Create Cluster Definition(s)](/docs/clusters.md) and [Cluster Group(s)/Hierarchies](/docs/groups.md)
+- [Create Namespace(s)](/docs/namespaces.md) Objects in Res-Edge
+- [Create Application(s) and Assign to a Namespace](/docs/applications.md)
 
-- [Applications](/docs/applications.md) - an application represents a workload that can be deployed to one or more clusters.
-- [Clusters](/docs/clusters.md) - a cluster is a representation of a kubernetes cluster
-- [Groups](/docs/groups.md) - a group provides a mechanism for grouping clusters and creating hierarchies of these grouped clusters.
-- [Namsespaces](/docs/namespaces.md) - a namespace provides a mechanism for enabling a business organization to control which apps are able to be deployed by that business organization.
-- [Configuration Service](/docs/configuration_service.md) - uses applications, namespaces, clusters, and policies to maintain a GitOps repository.
-- [CLI](/docs/cli.md) - a CLI is provided for expediency and to enable automation/scripting
+Res-Edge will create/maintain the GitOps directory structure for the clusters based on the items created above.
 
 ## GitOps With Res-Edge
 

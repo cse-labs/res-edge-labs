@@ -17,7 +17,5 @@ An application represents a workload that can be deployed to one or more cluster
 |Gitops Repo Path|Desc|
 |Gitops PAT|Desc|
 |Metadata|Desc|
-|Cores Allocated|Desc|
-|Memory Allocated|Desc|
 
 ## Functionality
