@@ -10,7 +10,7 @@ By using GitOps principles, Res-Edge provides a reliable and scalable way to man
 
 - [Create Application Deployment Template Directory](/docs/deployment_template.md)
 - [Create Cluster Definition(s)](/docs/clusters.md) and [Cluster Group(s)/Hierarchies](/docs/groups.md)
-- [Create Namespace(s)](/docs/namespaces.md) Objects in Res-Edge
+- [Create Namespace(s)](/docs/namespaces.md)
 - [Create Application(s) and Assign to a Namespace](/docs/applications.md)
 
 Res-Edge will create/maintain the GitOps directory structure for the clusters based on the items created above.

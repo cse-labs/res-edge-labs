@@ -19,8 +19,8 @@ Example yaml template with placeholders
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: rea.application.name
-  namespace: rea.namespace.name
+  name: rea.application.name #Application metadata placeholder
+  namespace: rea.namespace.name #Namespace metadata placeholder
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     ingress.kubernetes.io/force-ssl-redirect: "false"
@@ -29,14 +29,14 @@ metadata:
 
 spec:
   rules:
-  - host: rea.application.name.rea.cluster.name.res-edge.com
+  - host: rea.application.name.rea.cluster.name.res-edge.com #This placeholder containes both application metadata and cluster metadata within placeholder
     http:
       paths:
       - pathType: Prefix
         path: /
         backend:
           service:
-            name: rea.application.name
+            name: rea.application.name #Application metadata placeholder
             port:
               number: 8080
 ```
