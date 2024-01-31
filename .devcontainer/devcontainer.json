@@ -1,5 +1,5 @@
 {
-	"name": "Pizza-Labs",
+	"name": "Res-Edge-Labs",
 	"dockerFile": "Dockerfile",
 
 	// do not change these if you want Docker in Docker support

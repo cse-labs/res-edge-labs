@@ -12,6 +12,6 @@ spec:
 # run "ds cicd" to update the Cluster manifests
 # run "ds deploy" to push the GitOps changes to GitHub
 
-  url: https://github.com/cse-labs/pizza-labs
+  url: https://github.com/cse-labs/res-edge-labs
   ref:
     branch: main

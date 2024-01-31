@@ -14,7 +14,7 @@ spec:
         fsGroup: 1001
       containers:
       - name: load-data
-        image: ghcr.io/cse-labs/res-edge-sql:0.17
+        image: ghcr.io/cse-labs/res-edge-sql:0.18
         imagePullPolicy: IfNotPresent
         command:
         - bash

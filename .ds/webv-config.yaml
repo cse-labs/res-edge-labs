@@ -2,7 +2,7 @@
 # webv config
 ###
 
-image: ghcr.io/cse-labs/res-edge-webv:0.17
+image: ghcr.io/cse-labs/res-edge-webv:0.18
 server:  "${DS_URL}"
 logformat: TsvMin
 verbose: false
