@@ -29,7 +29,7 @@ spec:
             - --region
             - central
             - --zone
-            - rea.cluster.zone
+            - central-tx
           ports:
             - name: http
               containerPort: 8080
