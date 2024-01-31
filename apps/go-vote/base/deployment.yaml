@@ -29,7 +29,7 @@ spec:
           - name: REGION
             value: rea.cluster.region
           - name: ZONE
-            value: rea.cluster.zone
+            value: rea.cluster.state
           - name: TITLE
             value: rea.application.title
           - name: KEY1
