@@ -29,7 +29,7 @@ spec:
             - --region
             - west
             - --zone
-            - west-ca
+            - ca
           ports:
             - name: http
               containerPort: 8080
