@@ -6,8 +6,10 @@ metadata:
     expression: none
 
 resources:
-  # - pvc.yaml
-  # - redis.yaml
   - service.yaml
   - ingress.yaml
   - deployment.yaml
+
+images:
+- name: ghcr.io/cse-labs/imdb
+  newTag: 1.0.0

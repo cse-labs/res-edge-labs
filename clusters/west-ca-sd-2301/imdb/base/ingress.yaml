@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: dogs-cats
-  namespace: dogs-cats
+  name: imdb
+  namespace: imdb
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     ingress.kubernetes.io/force-ssl-redirect: "false"
@@ -11,17 +11,17 @@ metadata:
 
 spec:
   # tls:
-  # - secretName: dogs-cats
+  # - secretName: imdb
   #   hosts:
-  #   - dogs-cats.east-ga-atl-2301.res-edge.com
+  #   - west-ca-sd-2301.res-edge.com
   rules:
-  - host: dogs-cats.east-ga-atl-2301.res-edge.com
+  - host: west-ca-sd-2301.res-edge.com
     http:
       paths:
       - pathType: Prefix
         path: /
         backend:
           service:
-            name: dogs-cats
+            name: imdb
             port:
               number: 8080

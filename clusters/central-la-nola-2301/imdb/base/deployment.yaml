@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dogs-cats
-  namespace: dogs-cats
+  name: imdb
+  namespace: imdb
   labels:
-    app.kubernetes.io/name: dogs-cats
+    app.kubernetes.io/name: imdb
 spec:
   replicas: 1
   strategy:
@@ -14,31 +14,22 @@ spec:
        maxUnavailable: 1
   selector:
     matchLabels:
-      app: dogs-cats
+      app: imdb
   template:
     metadata:
       labels:
-        app: dogs-cats
+        app: imdb
     spec:
       containers:
         - name: app
-          image: ghcr.io/cse-labs/go-vote:0.3.0
+          image: ghcr.io/cse-labs/imdb:1.0.0
           imagePullPolicy: Always
-
-          env:
-          - name: REGION
-            value: east
-          - name: ZONE
-            value: east-ga
-          - name: TITLE
-            value: Dogz RULE!
-          - name: KEY1
-            value: Dogs
-          - name: KEY2
-            value: Cats
-          - name: REDIS
-            value: ''
-            # value: redis:6379
+          args:
+            - --in-memory
+            - --region
+            - central
+            - --zone
+            - central-la
           ports:
             - name: http
               containerPort: 8080
@@ -58,9 +49,9 @@ spec:
             failureThreshold: 10
             periodSeconds: 5
           resources:
-            requests:
-              cpu: 200m
-              memory: 64Mi
             limits:
-              cpu: 400m
-              memory: 128Mi
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 500m
+              memory: 1024Mi
