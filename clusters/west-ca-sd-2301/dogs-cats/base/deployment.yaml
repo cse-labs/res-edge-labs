@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: heartbeat
-  namespace: heartbeat
+  name: dogs-cats
+  namespace: dogs-cats
   labels:
-    app.kubernetes.io/name: heartbeat
+    app.kubernetes.io/name: dogs-cats
 spec:
   replicas: 1
   strategy:
@@ -14,16 +14,31 @@ spec:
        maxUnavailable: 1
   selector:
     matchLabels:
-      app: heartbeat
+      app: dogs-cats
   template:
     metadata:
       labels:
-        app: heartbeat
+        app: dogs-cats
     spec:
       containers:
         - name: app
-          image: ghcr.io/cse-labs/heartbeat:0.1.0
+          image: ghcr.io/cse-labs/go-vote:0.3.0
           imagePullPolicy: Always
+
+          env:
+          - name: REGION
+            value: west
+          - name: ZONE
+            value: ca
+          - name: TITLE
+            value: Dogz RULE!
+          - name: KEY1
+            value: Dogs
+          - name: KEY2
+            value: Cats
+          - name: REDIS
+            value: ''
+            # value: redis:6379
           ports:
             - name: http
               containerPort: 8080

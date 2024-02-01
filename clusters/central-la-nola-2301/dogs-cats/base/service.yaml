@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: heartbeat
-  namespace: heartbeat
+  name: dogs-cats
+  namespace: dogs-cats
 spec:
   selector:
-    app: heartbeat
+    app: dogs-cats
 
   type: ClusterIP
   ports:

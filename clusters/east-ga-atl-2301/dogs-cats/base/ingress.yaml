@@ -1,26 +1,27 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: heartbeat
-  namespace: heartbeat
+  name: dogs-cats
+  namespace: dogs-cats
   annotations:
-    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
     ingress.kubernetes.io/force-ssl-redirect: "false"
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
 
 spec:
   # tls:
-  # - secretName: heartbeat
+  # - secretName: dogs-cats
   #   hosts:
-  #   - lab-001.res-edge.com
+  #   - dogs-cats.east-ga-atl-2301.res-edge.com
   rules:
-  - host: lab-001.res-edge.com
+  - host: dogs-cats.east-ga-atl-2301.res-edge.com
     http:
       paths:
       - pathType: Prefix
-        path: /heartbeat
+        path: /
         backend:
           service:
-            name: heartbeat
+            name: dogs-cats
             port:
               number: 8080

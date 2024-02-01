@@ -6,6 +6,8 @@ metadata:
     expression: none
 
 resources:
+  # - pvc.yaml
+  # - redis.yaml
   - service.yaml
   - ingress.yaml
   - deployment.yaml
