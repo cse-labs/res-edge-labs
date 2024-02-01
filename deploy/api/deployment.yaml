@@ -28,7 +28,7 @@ spec:
           - --git-ops-repo
           - github.com/cse-labs/res-edge-labs
           - --git-ops-branch
-          - aks
+          - main
           - --sleep
           - "60"
         env:

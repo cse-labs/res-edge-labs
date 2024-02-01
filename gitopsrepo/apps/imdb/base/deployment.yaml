@@ -29,7 +29,7 @@ spec:
             - --region
             - rea.cluster.region
             - --zone
-            - rea.cluster.zone
+            - rea.cluster.state
           ports:
             - name: http
               containerPort: 8080
