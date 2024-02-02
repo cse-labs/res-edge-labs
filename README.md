@@ -50,10 +50,6 @@ This lab walks user through the process of deploying Flux to a non-arc enabled c
     # create the namespace
     kubectl apply -f namespace.yaml
 
-    # create the Flux secret (substitute $PAT)
-    # the PAT must have permissions to the repo
-    flux create secret git flux-system -n flux-system --url https://github.com/cse-labs/res-edge-labs -u gitops -p $PAT
-
     # deploy the Flux components
     kubectl apply -f components.yaml
 
