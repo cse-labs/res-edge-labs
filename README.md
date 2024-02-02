@@ -4,10 +4,10 @@ This lab walks user through the process of deploying Flux to a non-arc enabled c
 
 ## Prerequisites
 
-This lab can be executed from any system that can access <https://github.com/cse-labs/res-edge-labs>, and <https://res-edge.com>
-This lab requires kubectl [Installation Instructions](https://kubernetes.io/docs/tasks/tools/#kubectl)
-This lab requires the Flux CLI - [Installation Instructions](https://fluxcd.io/flux/installation/#install-the-flux-cli)
-This lab requires an existing k8s cluster with kubectl set to work on that cluster. Setting up such cluster is out of scope for this lab.
+- This lab can be executed from any system that can access <https://github.com/cse-labs/res-edge-labs>, and <https://res-edge.com>
+- his lab requires kubectl [Installation Instructions](https://kubernetes.io/docs/tasks/tools/#kubectl)
+- This lab requires the Flux CLI - [Installation Instructions](https://fluxcd.io/flux/installation/#install-the-flux-cli)
+- This lab requires an existing k8s cluster with kubectl set to work on that cluster. Setting up such cluster is out of scope for this lab.
 
 ## Steps
 
