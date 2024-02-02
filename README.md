@@ -18,6 +18,7 @@ This lab walks user through the process of deploying Flux to a non-arc enabled c
     - Click on Clusters [direct link](https://res-edge.com/clusters)
     - Click on New Cluster
     - Fill out the information
+    - Select group /stores/ to add the cluster to the stores group during cluster creation time (this can be after the fact as well from the group edit screen as well)
     - Note the following Metadata fields are required and are case sensitive
       - region: [central, east, west]
       - state: [valid lower case state abbreviation]
@@ -25,7 +26,6 @@ This lab walks user through the process of deploying Flux to a non-arc enabled c
       - type: store
       - ring: [beta, pilot, or prod]
     - Click Save
-    - Add cluster to the stores group by navigating to Groups and clicking the edit icon on the /stores/ group [direct link](https://res-edge.com/group?id=4)
     - Click on Logs - make sure automation was successful - you may have to refresh
 
 2. Checkout gitops repo
