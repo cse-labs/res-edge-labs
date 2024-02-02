@@ -14,12 +14,11 @@ This lab walks user through the process of deploying Flux to a non-arc enabled c
 1. Create a new cluster in Res-Edge
 
     - Open <https://res-edge.com>
-    - Login as above
+    - Login
     - Click on Clusters [direct link](https://res-edge.com/clusters)
     - Click on New Cluster
     - Fill out the information
     - Note the following Metadata fields are required and are case sensitive
-      - name: your-cluster-name
       - region: [central, east, west]
       - state: [valid lower case state abbreviation]
       - city: [valid lower case city abbreviation]
