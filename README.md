@@ -72,7 +72,7 @@ This lab walks user through the process of deploying Flux to a non-arc enabled c
 
 4. Deploy Workloads
     - Go to <https://res-edge.com>
-    - Login with your GitHub name and Res-Edge-Admin
+    - Login
     - Open Namespaces
     - Open IMDb
     - Change the Expression to `/g/stores`
