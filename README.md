@@ -32,7 +32,7 @@ This lab walks user through the process of deploying Flux to a non-arc enabled c
 
     ```bash
     # clone this repo (substitute $PAT)
-    git clone https://$PAT@github.com/cse-labs/res-edge-labs gitopsrepo
+    git clone https://github.com/cse-labs/res-edge-labs gitopsrepo
     cd gitopsrepo
     git pull
 
