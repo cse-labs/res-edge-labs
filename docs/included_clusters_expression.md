@@ -5,8 +5,12 @@ Groups and Namespaces have a field called Included Clusters Expression that when
 ## Format
 
 /\<entity-char\>/\<expression-vallue\>
-entity-char - can be g for group, n for namespace, or c for cluster
-expression-value - the name or id of a cluster, namespace, or group - for a group the name has to include the value of the entire tree i.e. in a group structure where ther is a group hierarchy with country>state>city, for a group representing the city of Round Rock, the value would need to be /usa/texas/round_rock
+
+- entity-char - can be:
+  - g for group
+  - n for namespace
+  - c for cluster
+- expression-value - the name or id of a cluster, namespace, or group - for a group the name has to include the value of the entire tree i.e. in a group structure where ther is a group hierarchy with country>state>city, for a group representing the city of Round Rock, the value would need to be /usa/texas/round_rock
 
 ## Operators
 
