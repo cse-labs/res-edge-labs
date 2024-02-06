@@ -13,14 +13,27 @@ rea.namespace.(metadata-key-name)
 rea.application.(metadata-key-name)
 rea.cluster.(metadata-key-name)
 
+There are also certain fields for Applications, Namespaces, and Clusters that are added to the metadata collection. The fields in the table below are added to the metadata collection.
+
+| Application | Cluster | Namespace |
+| ----------- | ------- | --------- |
+| id | id | id |
+| name | name | name |
+| description | description | description |
+| businessUnit | | gitOpsBraanch |
+| owner | | gitOpsRepo |
+| pat | | |
+| path | | |
+| repoUrl | | |
+
 Example yaml template with placeholders
 
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: rea.application.name #Application metadata placeholder
-  namespace: rea.namespace.name #Namespace metadata placeholder
+  name: rea.application.name #Application field placeholder
+  namespace: rea.namespace.name #Namespace field placehoder
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     ingress.kubernetes.io/force-ssl-redirect: "false"
@@ -36,14 +49,14 @@ spec:
         path: /
         backend:
           service:
-            name: rea.application.name #Application metadata placeholder
+            name: rea.application.name #Application field placeholder
             port:
-              number: 8080
+              number: rea.application.port #Application metadata placeholder
 ```
 
 ## Directory Structure for Deployment Template
 
-The following is an illustration of what a deployment template directory might look like.  Overlays are not required and Res-Edge will apply the overlay with the highest version.
+The following is an illustration of what a deployment template directory might look like.  Overlays are not required and Res-Edge will apply the overlay with the highest version in the kustomization.yaml file.
 
 ```bash
 Application
