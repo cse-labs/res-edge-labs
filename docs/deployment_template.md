@@ -20,7 +20,7 @@ There are also certain fields for Applications, Namespaces, and Clusters that ar
 | id | id | id |
 | name | name | name |
 | description | description | description |
-| businessUnit | | gitOpsBraanch |
+| businessUnit | | gitOpsBranch |
 | owner | | gitOpsRepo |
 | pat | | |
 | path | | |
