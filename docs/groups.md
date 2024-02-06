@@ -2,9 +2,7 @@
 
 ## Overview
 
-Groups provide a mechanism for grouping clusters and creating hierarchies of these grouped clusters.  Cluster groups and their hierarchies are optional and not required in order to deploy an application to a cluster.
-
-
+Groups provide a mechanism for grouping clusters and creating hierarchies of these grouped clusters.  Cluster groups are optional and not required in order to deploy an application to a cluster.
 
 ## Properties
 
