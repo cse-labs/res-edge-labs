@@ -15,5 +15,3 @@ An application represents a workload that can be deployed to one or more cluster
 |Gitops Repo Path|Path to the application deployment template directory in the GitOps repo|
 |Gitops PAT||
 |Metadata|This field holds a collection of key/value pairs that can be used as substitute values in deployment template files|
-
-## Functionality
