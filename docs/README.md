@@ -2,7 +2,7 @@
 
 ## Overview
 
-Res-Edge is a system designed to facilitate the management of application deployments across one or multiple Kubernetes clusters by leveraging GitOps principles(/docs/gitops.md). It aims to simplify the process of controlling which applications are deployed to each cluster within the fleet(s).
+Res-Edge is a system designed to facilitate the management of application deployments across one or multiple Kubernetes clusters by leveraging [GitOps principles](/docs/gitops.md). It aims to simplify the process of controlling which applications are deployed to each cluster within the fleet(s).
 
 Res-Edge features two primary components:
 
