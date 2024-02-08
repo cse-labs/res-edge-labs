@@ -22,7 +22,7 @@ Maintaining an accurate inventory of clusters, applications, and their relations
 
 Once applications, namespaces, and clusters/cluster groups have been defined, the automation step will maintain the GitOps repository. It accomplishes this by:
 
-- Generating application manifests with template placeholders substituted by values from the application.
+- Generating application manifests from templates, during generation value placeholders are substituted by values from the application.
 - Placing these manifests in the correct GitOps repository location.
 
 The Res-Edge data service will create and maintain the GitOps directory structure for the clusters based on the items created above.
