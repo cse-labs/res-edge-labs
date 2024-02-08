@@ -10,11 +10,9 @@ Namespaces are designed to give a business entity control of what applications a
 
 |Name|Description|
 |----|-----------|
-|Name|Desc|
-|Description|Desc|
-|Included Clusters Expression|Desc|
-|Override Deployment Window|Desc|
-|Owners|Desc|
-|Metadata|Desc|
-
-## Functionality
+|Name|Name of the namespace|
+|Description|Description of the namespace|
+|Included Clusters Expression|Spefifies what clusters are associated with this namespace - expression is always evaluated at run time meaning the list of clusters associated with the namespace is dynamic based on inventory setup at time of evalutation|
+|Override Deployment Window|used to overwrite deployment windows set at the cluster level|
+|Owners|Owners of the namespace|
+|Metadata|Kev value pairs available for usage in deployment templates|
