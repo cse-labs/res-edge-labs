@@ -22,16 +22,19 @@ As an example, the Domino's Pizza Tracker automatically updates during the deliv
 
 - Res-Edge Data Service
   - The Data Service is a REST API and is the core of the system
-  - The Data Service is flexible enough to promote additional scenarios and rigid enough to be repeatable
-  - The CLI, Dashboard, and GitHub Actions use the Data Service
+  - The Data Service is flexible enough to enable additional scenarios and rigid enough to be repeatable
+  - The CLI, Dashboard, and Automation use the Data Service
   - We expect customers will build tools that use the Data Service
 - SQL Azure
-  - SQL Azure is used to store the Res-Edge data
-- GitOps
-  - The GitHub Action is used for GitOps CI-CD
-  - The Action combines the values from the Data Service with the GitOps repo to create Kubernetes manifests for each cluster
+  - SQL Server is used to store the data
+- Automation
+  - Automation combines the values from the Data Service with the GitOps repo to create the appropriate Kubernetes manifests for each cluster
   - These manifests are applied by Flux running on each Cluster
 - Res-Edge Dashboard
   - The Dashboard is a Web UI used by the Platform and Application teams
 - CLI
   - The CLI is used by advanced users and for automation
+- Arc Enabled Store
+  - Each store runs one or more Kubernetes clusters
+  - Arc Enabled GitOps is used to deploy the Automation results to each store
+  - Arc Enabled GitOps uses Flux which is a pull model
