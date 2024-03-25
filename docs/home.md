@@ -4,19 +4,16 @@ Resilient Edge (Res-Edge) is a composition of tools designed to streamline appli
 
 - Developer Productivity
   - Enable inner-loop and outer-loop development processes that provide a robust and low-friction way to manage the full code lifecycle which allows customers to evolve their SDLC to meet their business needs.
-  - Res-Edge inner-loop is an extension of the Kubernetes in Codespaces inner-loop that we have been successful with for over 3 years now. The main extension is the ability to deploy, test, and observe Res-Edge within a developer's Codespace. This allows the Platform Team to get Res-Edge running with minimal friction - often within an hour.
+  - Res-Edge inner-loop is an extension of the Kubernetes in Codespaces inner-loop that we have been successful with for over 3 years. The main extension is the ability to deploy, test, and observe Res-Edge within a developer's Dev Box, Codespace, or Windows machine. This allows the Platform Team to get Res-Edge running with minimal friction - usually in under an hour.
 - Scalable Operations on the Edge
   - Enable customers to manage their distributed environments across geographies, franchisees, and stores in a way that maximizes flexibility, resiliency, and velocity while minimizing costs.
-  - Res-Edge builds on top of concepts from Coral and PiB and also addresses the scale issues that both encountered. Specifically, the growth in config files as clusters * applications grows to 1M or more.
-  - Res-Edge is the next step in getting to one platform. PiB is already retired in lieu of Res-Edge.
+  - Res-Edge use Arc enabled GitOps as a pull model for deploying the correct workloads to the correct clusters while protecting against "drift".
 
-The Edge brings unique challenges. One of the first challenges is rather than a few large clusters the Edge has 10s of thousands of small clusters connected by a mostly reliable network. As examples, Chick-fil-A has 2500 stores, Walmart has 11K, Domino's has 30K, McDonald's has 39K, and Yum has over 60K. Our current, and immediate future, tooling is not designed to handle 30K clusters. Rather, it is targeted at 10s of clusters running in Azure.
+The Edge brings unique challenges. One of the first challenges is rather than a few large clusters the Edge has 10s of thousands of small clusters connected by a mostly reliable network. Our large retail customers have up to 60K stores. Our current tooling is not designed to handle thousands of clusters.
 
 Retailers like Walmart and CFA deploy multiple times per day to the Edge. This is a key differentiator vs. other industries like Manufacturing. Retail also has a constant stream of data flowing back to the Data Center.
 
-As an example, the Domino's Pizza Tracker automatically updates during the delivery experience. The customer gets notified when the store gets the order, begins making the order, begins baking the order, sends the order for delivery, a 2 minute warning, driver arrived, and delivery completed. If any step doesn't meet the Domino's SLA, the customer gets an email with an apology and an offer for a discount or additional loyalty points. This requires near real-time data flows between the stores and the e-commerce system.
-
-# Res-Edge System Diagram
+## Res-Edge System Diagram
 
 ![image](/docs/images/res-edge-diagram.drawio.png)
 
@@ -38,3 +35,55 @@ As an example, the Domino's Pizza Tracker automatically updates during the deliv
   - Each store runs one or more Kubernetes clusters
   - Arc Enabled GitOps is used to deploy the Automation results to each store
   - Arc Enabled GitOps uses Flux which is a pull model
+
+## Key Requirements
+
+- Security
+  - RBAC or similar controls
+  - Definable sign-off processes
+  - Audit
+  - Policies
+- Observability
+  - Logs, metrics, and traces
+  - Granular control over what gets shipped to the cloud as well as when
+- Automation
+  - Maintaining "millions" of GitOps files in the GitOps repo is error prone and doesn't scale
+  - Verifying what is running in the store with what should be running
+  - Ensuring an application isn't deployed where local law prohibits
+  - Support a "pull model" for network QoS and availability
+  - Support "last known good" in the event of a natural disaster without a reliable network
+    - Maximize the "time to open after an event"
+- Centralized Configuration
+  - Enforce standards and reusability
+- Rich Deployment Selection
+  - "deploy to all of the company owned, large stores in the northeastern US that have a multi-lane divethrough and an Acme3000 or Acme3001 smart grill"
+- Deployment Windows
+  - Retailers need to be able to schedule deployments on a store by store basis based on operating hours
+  - The Platform Team needs to be able to implement "deployment freezes" for events like Black Friday
+  - With the proper sign-off, both must be able to be over-ridden
+    - At the Cluster (store) level or at the Application level
+- Ring Based Deployments
+  - Define and deploy to rings (beta, pilot, etc)
+  - Configurable authorization workflows
+  - Automatically deploy to the next ring if the current deployment is stable for a time quantum
+    - This requires integration with Observability
+- Multiple, Jagged Business Grouping
+  - Most Retailers have multiple Business groups that they want to represent
+    - Geographic is the most common
+      - /stores/us/central/tx/austin
+    - Franchisee
+      - Corporate store
+      - Franchise 123
+      - Master Franchise 456
+    - Marketing
+      - Language and demographics
+      - Local channels (with language)
+    - Plan-o-Gram
+      - Swimsuit section in Florida vs. Alaska
+      - "McRib" in the South
+    - Presence of IoT Devices
+      - Cameras
+      - Smart grills, ovens, fryers, soda fountains, shake machines
+      - Food assembly devices
+    - Delivery
+      - Uber Eats, GrubHub, store, curbside
