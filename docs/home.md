@@ -25,7 +25,7 @@ As an example, the Domino's Pizza Tracker automatically updates during the deliv
   - The Data Service is flexible enough to enable additional scenarios and rigid enough to be repeatable
   - The CLI, Dashboard, and Automation use the Data Service
   - We expect customers will build tools that use the Data Service
-- SQL Azure
+- Data Storage
   - SQL Server is used to store the data
 - Automation
   - Automation combines the values from the Data Service with the GitOps repo to create the appropriate Kubernetes manifests for each cluster
