@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui
+  namespace: res-edge
+spec:
+  type: ClusterIP
+  selector:
+    app: ui
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8088
+      targetPort: 8088

@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana
+  namespace: monitoring
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "false"
+
+spec:
+  ingressClassName: nginx
+  tls:
+  - secretName: grafana
+    hosts:
+    - res-edge.com
+  rules:
+  - host: res-edge.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /grafana
+        backend:
+          service:
+            name: grafana
+            port:
+              number: 3000

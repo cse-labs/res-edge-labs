@@ -1,12 +1,7 @@
 #!/bin/bash
 
-function webv_check {
-    kubectl exec -it jumpbox -- http webv.res-edge.svc.cluster.local:8080/version
-}
+echo "Checking WebV"
 
+kubectl get pods -n res-edge -l app=webv
 
-if ! webv_check; then
-    echo "WebV is not Running";
-else
-    echo "WebV is Running";
-fi
+echo

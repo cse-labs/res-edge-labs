@@ -2,17 +2,20 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - namespaces.yaml
-  - fluentbit/account.yaml
-  - fluentbit/daemonset.yaml
-  - fluentbit/log.yaml
-  - fluentbit/stdout-config.yaml
+  # - fluentbit/account.yaml
+  # - fluentbit/daemonset.yaml
+  # - fluentbit/log.yaml
+  # - fluentbit/stdout-config.yaml
   - prometheus/pvc.yaml
   - prometheus/clusterRole.yaml
   - prometheus/config-map.yaml
+  - prometheus/service.yaml
   - prometheus/deployment.yaml
   - grafana/pvc.yaml
+  - grafana/service.yaml
   - grafana/dashboard-provider.yaml
   - grafana/datasource.yaml
-  - grafana/deployment.yaml
   - grafana/dashboards/app.yaml
   - grafana/dashboards/dotnet.yaml
+  - grafana/dashboards/ns.yaml
+  - grafana/deployment.yaml

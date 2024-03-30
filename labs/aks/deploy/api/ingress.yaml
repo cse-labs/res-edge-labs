@@ -12,13 +12,13 @@ spec:
   tls:
   - secretName: api
     hosts:
-    - api.res-edge.com
+    - res-edge.com
   rules:
-  - host: api.res-edge.com
+  - host: res-edge.com
     http:
       paths:
       - pathType: Prefix
-        path: /
+        path: /api
         backend:
           service:
             name: api

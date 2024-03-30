@@ -31,8 +31,33 @@ rm ds.tar.gz
 kic completion zsh > "$HOME/.oh-my-zsh/completions/_kic"
 ds completion zsh > "$HOME/.oh-my-zsh/completions/_ds"
 
+# update sql command
+sed -i 's/31433/1433/g' $HOME/bin/sql
+
 cd "$OLDPWD" || exit
 
 echo ""
 echo "run compinit to reload CLI completions"
 echo ""
+
+# copy CLI customizations
+if [ "$KIC_BASE" == "" ]; then
+    KIC_BASE=$(kic env KIC_BASE)
+fi
+
+if [ "$KIC_BASE" != "" ]; then
+    if [ -f "$KIC_BASE/k3d.yaml" ]; then
+        cp -r "$KIC_BASE/k3d.yaml" "$HOME/bin"
+    fi
+
+    if [ -d "$KIC_BASE/.kic" ]; then
+        rm -rf "$HOME/bin/.kic"
+        cp -r "$KIC_BASE/.kic" "$HOME/bin"
+    fi
+
+    if [ -d "$KIC_BASE/.ds" ]; then
+        rm -rf "$HOME/bin/.ds"
+        cp -r "$KIC_BASE/.ds" "$HOME/bin"
+    fi
+fi
+

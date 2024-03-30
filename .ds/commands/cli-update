@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd "$KIC_BASE/.devcontainer" || exit 1
+
+./cli-update.sh

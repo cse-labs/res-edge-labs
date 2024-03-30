@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ "$1" != "--watch" ]; then
+        kubectl get events --all-namespaces --sort-by='.metadata.creationTimestamp'
+else
+        kubectl get events --all-namespaces --watch
+fi

@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+  namespace: monitoring
+data:
+  grafana.ini:  |
+    [security]
+    admin_user = admin
+    admin_password = Res-Edge
+
+    [server]
+    domain = localhost
+    root_url = http://localhost/grafana/
+    serve_from_sub_path = true
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      name: grafana
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana:8.1.1
+        ports:
+        - name: grafana
+          containerPort: 3000
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: 500m
+
+        volumeMounts:
+          # - name: grafana-storage
+          #   mountPath: /var/lib/grafana
+
+          - name: grafana-datasources
+            mountPath: /etc/grafana/provisioning/datasources
+            readOnly: false
+
+          - name: grafana-config
+            mountPath: /etc/grafana/grafana.ini
+            subPath: grafana.ini
+
+          - name: grafana-dashboard-provider
+            mountPath: /etc/grafana/provisioning/dashboards/dashboardProvider.yaml
+            subPath: dashboardProvider.yaml
+
+          - name: dashboards-resedge
+            mountPath: /var/lib/grafana/dashboards/resedge
+
+          - name: dashboards-dotnet
+            mountPath: /var/lib/grafana/dashboards/dotnet
+
+          - name: dashboards-ns
+            mountPath: /var/lib/grafana/dashboards/ns
+
+      volumes:
+        # - name: grafana-storage
+        #   persistentVolumeClaim:
+        #     claimName: grafana-storage
+
+        - name: grafana-datasources
+          configMap:
+              defaultMode: 420
+              name: grafana-datasources
+
+        - name: grafana-config
+          configMap:
+            name: grafana-config
+
+        - name: grafana-dashboard-provider
+          configMap:
+            name: grafana-dashboard-provider
+
+        - name: dashboards-resedge
+          configMap:
+            name: grafana-dashboards-resedge
+
+        - name: dashboards-dotnet
+          configMap:
+            name: grafana-dashboards-dotnet
+
+        - name: dashboards-ns
+          configMap:
+            name: grafana-dashboards-ns

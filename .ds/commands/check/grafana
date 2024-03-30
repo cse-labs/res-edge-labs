@@ -1,11 +1,5 @@
 #!/bin/bash
 
-function grafana_check {
-    http localhost:32000/healthz
-}
+echo "Checking Grafana"
 
-if ! grafana_check; then
-    echo "Grafana is not Running";
-else
-    echo "Grafana is Running";
-fi
+http localhost:3000/healthz

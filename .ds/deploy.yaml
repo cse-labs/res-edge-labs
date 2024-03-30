@@ -1,0 +1,11 @@
+###
+# deploy commands
+###
+
+commands:
+- name: deploy
+  short: Deploy apps to K3d cluster
+  scriptCommands:
+    - name: res-edge
+      short: Deploy Res-Edge locally
+      path: deploy/res-edge

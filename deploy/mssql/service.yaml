@@ -4,11 +4,10 @@ metadata:
   name: mssql
   namespace: res-edge
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: mssql
   ports:
     - protocol: TCP
       port: 1433
       targetPort: 1433
-      nodePort: 31433

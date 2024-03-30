@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Warning: this is a destructive command
+
+# This script will create a new cluster and deploy Res-Edge Data Service
+# Any prior data service changes will be overwritten and are not recoverable
+# Use the --force flag to make the database changes
+
+# a little protection
+if [ "$1" != "--force" ]; then
+    echo
+    echo "This is a destructive command that deletes your current cluster"
+    echo "and creates a new cluster with Res-Edge Data Service deployed"
+    echo
+    echo "Usage: ds deploy res-edge --force"
+    echo
+    exit 1
+fi
+
+if [ "$KIC_BASE" == "" ]; then
+    echo
+    echo "Error: KIC_BASE is not set"
+    echo
+    exit 1
+fi
+
+cd "$KIC_BASE/deploy" || exit 1
+
+./deploy-res-edge.sh --force

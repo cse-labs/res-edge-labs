@@ -24,33 +24,24 @@ options:
   runtime:
     HostPidMode: false
 ports:
-- nodeFilters:
-  - server:0
-  port: 30000:30000
-- nodeFilters:
-  - server:0
-  port: 30080:30080
-- nodeFilters:
-  - server:0
-  port: 30088:30088
-- nodeFilters:
-  - server:0
-  port: 31080:31080
-- nodeFilters:
-  - server:0
-  port: 31088:31088
-- nodeFilters:
-  - server:0
-  port: 31433:31433
-- nodeFilters:
-  - server:0
-  port: 32000:32000
-- nodeFilters:
-  - server:0
-  port: 32080:32080
-- nodeFilters:
-  - server:0
-  port: 32088:32088
+- port: 80:80
+  nodeFilters:
+  - loadbalancer
+- port: 8080:8080
+  nodeFilters:
+  - loadbalancer
+- port: 8088:8088
+  nodeFilters:
+  - loadbalancer
+- port: 1433:1433
+  nodeFilters:
+  - loadbalancer
+- port: 3000:3000
+  nodeFilters:
+  - loadbalancer
+- port: 9090:9090
+  nodeFilters:
+  - loadbalancer
 registries: {}
 servers: 1
 volumes:

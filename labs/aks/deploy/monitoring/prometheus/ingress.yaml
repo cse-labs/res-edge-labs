@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prometheus
+  namespace: monitoring
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+
+spec:
+  ingressClassName: nginx
+  tls:
+  - secretName: prometheus
+    hosts:
+    - res-edge.com
+  rules:
+  - host: res-edge.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /prom
+        backend:
+          service:
+            name: prometheus
+            port:
+              number: 9090
