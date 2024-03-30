@@ -1,0 +1,8 @@
+###
+# update command
+###
+
+scriptCommands:
+  - name: cli-update
+    short: Update KiC CLI
+    path: cli-update

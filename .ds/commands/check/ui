@@ -1,11 +1,5 @@
 #!/bin/bash
 
-set -e
+echo "Checking UI"
 
-function check {
-    http http://localhost:30080/version
-}
-
-if ! check; then
-    echo "Res-Edge UI is not Running";
-fi
+http http://localhost/version

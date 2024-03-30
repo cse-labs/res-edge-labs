@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Checking Res-Edge"
+
+set -e
+
+if [ -z "${DS_URL}" ]; then
+    DS_URL=http://localhost:8080
+fi
+
+http "${DS_URL}"/api/version

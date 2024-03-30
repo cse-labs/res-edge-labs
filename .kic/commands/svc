@@ -1,0 +1,14 @@
+#!/bin/bash
+
+hdrsort()
+{
+    read -r
+    printf "%s\\n" "$REPLY"
+    sort
+}
+
+if [ "$1" != "--watch" ]; then
+        kubectl get svc -A | hdrsort
+else
+        kubectl get svc -A --watch
+fi

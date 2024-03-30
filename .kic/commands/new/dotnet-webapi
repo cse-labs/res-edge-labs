@@ -1,0 +1,41 @@
+#!/bin/bash
+
+if [ "$APP_NAME" == "" ]; then
+  echo
+  echo "APP_NAME is not set"
+  exit 1
+fi
+
+if [ "$APP_LOWER" == "" ]; then
+  echo
+  echo "APP_LOWER is not set"
+  exit 1
+fi
+
+set -e
+
+git clone https://github.com/bartr/webapi $APP_LOWER
+cd $APP_LOWER || exit 1
+
+# checkout the branch if specified
+if [ "$APP_BRANCH" != "" ] && [ "$APP_BRANCH" != "main" ]; then
+  git checkout $APP_BRANCH
+  git pull
+fi
+
+# remove unused files
+rm -rf .devcontainer
+rm -rf .git
+rm -rf .github
+rm -f .gitignore
+rm -f LICENSE
+rm -f curl.sh
+
+# rename project
+mv src/KubeApp.csproj "src/$APP_NAME.csproj"
+
+# replace KubeApp and kubeapp
+find . -type f -exec sed -i "s/KubeApp/$APP_NAME/g" {} \;
+find . -type f -exec sed -i "s/kubeapp/$APP_LOWER/g" {} \;
+
+dotnet restore src
