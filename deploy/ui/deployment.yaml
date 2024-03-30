@@ -1,10 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
   name: ui
   namespace: res-edge
   labels:
     app: ui
+
 spec:
   replicas: 1
   strategy:
@@ -12,16 +14,20 @@ spec:
   selector:
     matchLabels:
       app: ui
+
   template:
+
     metadata:
       labels:
         app: ui
+
     spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: app
-        image: ghcr.io/cse-labs/res-edge-ui:0.16
+        image: ghcr.io/cse-labs/res-edge-ui:0.20
         imagePullPolicy: Always
+
         env:
           - name: DATA_SERVICE_URL
             valueFrom:
@@ -38,24 +44,20 @@ spec:
               secretKeyRef:
                 name: ui
                 key: ADMIN_PWD
+
         ports:
           - name: http
             containerPort: 8088
             protocol: TCP
+
         livenessProbe:
           httpGet:
             path: /healthz
             port: http
-          initialDelaySeconds: 5
+          initialDelaySeconds: 2
           failureThreshold: 10
-          periodSeconds: 60
-        startupProbe:
-          httpGet:
-            path: /readyz
-            port: http
-          initialDelaySeconds: 5
-          failureThreshold: 60
-          periodSeconds: 2
+          periodSeconds: 10
+
         resources:
           limits:
             memory: 1Gi

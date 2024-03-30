@@ -20,9 +20,13 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: app
-        image: ghcr.io/cse-labs/res-edge-ui:0.16
+        image: ghcr.io/cse-labs/res-edge-ui:0.20
         imagePullPolicy: Always
         env:
+          - name: CONTENT_REPO
+            value: cse-labs/res-edge-labs
+          - name: CONTENT_BRANCH
+            value: labs
           - name: DATA_SERVICE_URL
             valueFrom:
               secretKeyRef:
@@ -49,13 +53,6 @@ spec:
           initialDelaySeconds: 5
           failureThreshold: 10
           periodSeconds: 60
-        startupProbe:
-          httpGet:
-            path: /readyz
-            port: http
-          initialDelaySeconds: 5
-          failureThreshold: 60
-          periodSeconds: 2
         resources:
           limits:
             memory: 1Gi

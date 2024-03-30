@@ -4,22 +4,15 @@ metadata:
   name: api
   namespace: res-edge
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    ingress.kubernetes.io/force-ssl-redirect: "true"
-    kubernetes.io/ingress.class: contour
-    kubernetes.io/tls-acme: "true"
+    ingress.kubernetes.io/force-ssl-redirect: "false"
 
 spec:
-  tls:
-  - secretName: api
-    hosts:
-    - api.res-edge.net
+  ingressClassName: nginx
   rules:
-  - host: api.res-edge.net
-    http:
+  - http:
       paths:
       - pathType: Prefix
-        path: /
+        path: /api
         backend:
           service:
             name: api

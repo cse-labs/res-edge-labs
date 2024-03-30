@@ -44,6 +44,7 @@
 	"forwardPorts": [
 		30000,
 		30080,
+		30088,
 		31080,
 		31088,
 		32000,
@@ -55,11 +56,12 @@
 	"portsAttributes": {
 		"30000": { "label": "Prometheus" },
 		"30080": { "label": "Res-Edge-UI" },
-		"31080": { "label": "IMDb" },
-		"31088": { "label": "dogs-cats" },
+		"30088": { "label": "Config" },
+		"31080": { "label": "POS" },
+		"31088": { "label": "Merchandising" },
 		"32000": { "label": "Grafana" },
 		"32080": { "label": "Res-Edge-Api" },
-		"32088": { "label": "tabs-spaces" }
+		"32088": { "label": "Loyalty" }
 	},
 
 	"waitFor": "postCreateCommand",

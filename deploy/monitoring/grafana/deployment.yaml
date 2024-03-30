@@ -7,7 +7,12 @@ data:
   grafana.ini:  |
     [security]
     admin_user = admin
-    admin_password = cse-labs
+    admin_password = Res-Edge
+
+    [server]
+    domain = localhost
+    root_url = http://localhost/grafana/
+    serve_from_sub_path = true
 
 ---
 
@@ -37,9 +42,7 @@ spec:
           limits:
             memory: 512Mi
             cpu: 500m
-          requests:
-            memory: 256Mi
-            cpu: 200m
+
         volumeMounts:
           - name: grafana-storage
             mountPath: /var/lib/grafana
@@ -61,6 +64,9 @@ spec:
 
           - name: dashboards-dotnet
             mountPath: /var/lib/grafana/dashboards/dotnet
+
+          - name: dashboards-ns
+            mountPath: /var/lib/grafana/dashboards/ns
       volumes:
         - name: grafana-storage
           persistentVolumeClaim:
@@ -87,21 +93,6 @@ spec:
           configMap:
             name: grafana-dashboards-dotnet
 
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: grafana
-  namespace: monitoring
-  annotations:
-      prometheus.io/scrape: 'true'
-      prometheus.io/port:   '3000'
-spec:
-  selector:
-    app: grafana
-  type: NodePort
-  ports:
-    - port: 3000
-      targetPort: 3000
-      nodePort: 32000
+        - name: dashboards-ns
+          configMap:
+            name: grafana-dashboards-ns

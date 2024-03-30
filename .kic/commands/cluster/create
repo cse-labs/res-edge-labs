@@ -33,7 +33,7 @@ kubectl apply -f namespace.yaml
 
 # create the Flux secret
 # the PAT must have permissions to the repo
-flux create secret git flux-system -n flux-system --url https://github.com/cse-labs/pizza-labs -u gitops -p $PAT
+flux create secret git flux-system -n flux-system --url https://github.com/cse-labs/res-edge-labs -u gitops -p $PAT
 
 # deploy the Flux components
 kubectl apply -f components.yaml
